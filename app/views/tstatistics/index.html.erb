@@ -1,0 +1,29 @@
+<h1>Listing tstatistics</h1>
+
+<table>
+  <tr>
+    <th>Total baojia</th>
+    <th>Total xunjia</th>
+    <th>Total match</th>
+    <th>Total click</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tstatistics.each do |tstatistic| %>
+  <tr>
+    <td><%= tstatistic.total_baojia %></td>
+    <td><%= tstatistic.total_xunjia %></td>
+    <td><%= tstatistic.total_match %></td>
+    <td><%= tstatistic.total_click %></td>
+    <td><%= link_to 'Show', tstatistic %></td>
+    <td><%= link_to 'Edit', edit_tstatistic_path(tstatistic) %></td>
+    <td><%= link_to 'Destroy', tstatistic, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tstatistic', new_tstatistic_path %>

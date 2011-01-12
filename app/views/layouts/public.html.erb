@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+  <%=render "shared/html_header"%>
+  </head>
+  <body>
+   <%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
+
+    <div id="sheader">
+      <img src="/images/6376313.gif" alt="Icon" align="left" />
+      <div id="ghead">
+        <div id="guser" >
+          <a  href="/" >首页</a>
+            <%if user.nil?%>
+            | <a  href="/users/login" >登录</a>
+            | <a  href="/users/new" >快速注册</a>
+           <%else%>
+            | <a  href="/users/logout" >登出</a>
+            <span>欢迎您!<%=user.name||user.email%></span>
+           <%end%>
+            <%time=Time.now%>
+             <span>今天是<%=time.year%>年<%=time.month%>月<%=time.day%>日,星期<%=$week_day[time.wday.to_i]%></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="main">
+      <div id="navi">
+       <%=render "shared/navibar"%>
+      </div>
+
+
+      <div id="content">
+        <!--
+        <div id="scontroll">
+          <div id="line">
+            <div style="display: inline">
+              <label>出发地</label>
+              <a  class="data_load"  href="/cities">杭州市</a>
+              <span class="data_list" style="display:none"></span>
+              <input name="city_from" type="hidden" value="330100000000"/>
+            </div>
+
+            <div style="display: inline">
+              <label >到达地</label>
+              <a class="data_load"  href="/cities" >上海市</a>
+              <span class="data_list" style="display:none"></span>
+              <input name="city_to" type="hidden" value="330100000000"/>
+            </div>
+          </div>
+           <span id="line_tree_list" style="display:none"></span>
+        </div>
+        -->
+        <div id="show">
+          <%= yield %>
+
+        </div>
+
+      </div>
+
+    </div>
+
+<%=render "shared/float_show"%>
+
+    <%=flash[:notice]%>
+    
+    <div class="footer">
+      <span>
+      <a href="">关于物流零距离</a>|
+      <a href="">免责声明</a>|
+     <a href="">联系我们</a>
+      </span>
+      <p>@2010-2011 www.w090.com 杭州全聚通网络技术有限公司</p>
+    </div>
+  </body>
+</html>
+
+

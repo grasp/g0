@@ -1,0 +1,51 @@
+<div  style="margin: 2px; width:600px;">
+  
+<p id="notice"><%= notice %></p>
+
+<div class="list_close"><a href="">关闭</a></div>
+
+<div style="margin: 0px; padding: 0px;width:40%;float:left;">
+
+     <ul style="margin: 2px;">大类
+    <%$cargo_category_one.each do |code,name|  %>
+       <li>
+        <%= link_to name,"/cargo_categories/show/#{code}"%>
+       </li>
+
+    <%end%>
+     </ul>
+
+</div>
+<div style="margin: 2px; width:30%;float:left;">
+<ul style="margin: 2px;">子类
+    <%  if not @cargo_category_two.nil?%>
+      <% @cargo_category_two.each do |code,name|  %>
+        <li>
+          <%= link_to name,"/cargo_categories/show/#{code}"%>
+        </li>
+      <%end%>
+    <%end%>
+ </ul>
+</div>
+
+<div style="margin: 2px; width:20%;float:left;">
+ <ul style="margin: 2px;">小类
+  <%  if not @cargo_category_three.nil?%>
+    <% @cargo_category_three.each do |code,name|  %>
+    <li>
+      <%= link_to name,"/cargo_categories/show/#{code}"%>
+    </li>
+    <%end%>
+  <%else%>
+   
+  <%end%>
+ </ul>
+</div>
+
+
+
+<!--
+<%#= link_to 'Edit', edit_cargo_category_path(@cargo_category) %> |
+<%#= link_to 'Back', cargo_categories_path %>
+-->
+</div>

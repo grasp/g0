@@ -1,0 +1,63 @@
+<div class="show_header">
+  <h2><%=@stock_truck.paizhao%>详细信息</h2>
+</div>
+<div class="stock_truck_show">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>牌照:</b>
+  <%= @stock_truck.paizhao %>
+</p>
+
+<p>
+  <b>吨位:</b>
+  <%= @stock_truck.dun_wei %>
+</p>
+
+<p>
+  <b>车长:</b>
+  <%= @stock_truck.che_length %>
+</p>
+
+<p>
+  <b>用途:</b>
+  <%= $truck_usage[@stock_truck.truck_usage] %>
+</p>
+
+<p>
+  <b>车厢结构:</b>
+  <%= $truck_shape[@stock_truck.truck_shape] %>
+</p>
+
+<p>
+  <b>有无gps:</b>
+  <%= @stock_truck.truck_gps %>
+</p>
+
+<p>
+  <b>随车电话:</b>
+  <%= @stock_truck.car_phone %>
+</p>
+
+
+<p>
+  <b>车辆品牌:</b>
+  <%= $truck_pinpai[@stock_truck.truck_pinpai]%>
+</p>
+
+<p>
+  <b>卡车型号:</b>
+  <%= @stock_truck.truck_xinghao %>
+</p>
+
+<p>
+  <b>购买年份:</b>
+  <%= @stock_truck.truck_year %>
+</p>
+
+</div>
+
+<!--
+<%#= link_to 'Edit', edit_stock_truck_path(@stock_truck) %> |
+<%#= link_to 'Back', stock_trucks_path %>
+-->

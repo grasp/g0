@@ -1,0 +1,44 @@
+
+<%#= form_for(@quote,@cargo,@truck,:as=>:quote,:html => {:class => "show_form"}) do |f| %>
+<%= form_for(@quote,:as=>:quote,:html => {:class => "show_form"}) do |f| %>
+  <% if @quote.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@quote.errors.count, "error") %> prohibited this quote from being saved:</h2>
+
+      <ul>
+      <% @quote.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :报价 %>
+    <%= f.text_field :price %>
+   <label  style="width:20px;">面议</label><input  style="width:20px;" id="mianyi" name="mianyi" type="checkbox"></input>
+  </div>
+ 
+<!--
+  <div class="field">
+    <%= f.label :备注 %>
+    <%= f.text_field :comments %>
+  </div>
+
+
+-->
+    <%= f.hidden_field :cargo_id %>
+    <%= f.hidden_field :user_id %>
+
+  <div class="field">
+    <%= f.label :我的车辆和线路 %>
+    <%#= f.text_field :truck_id %>
+     <%= f.select(:truck_id,options_for_select(@mytruck.to_a,@quote.truck_id) ) %>
+  </div>  
+
+
+
+  <div class="actions">
+    <%= f.submit("确定") %>
+  </div>
+<% end %>

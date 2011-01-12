@@ -1,0 +1,69 @@
+<%= form_for(@truck,@stock_truck,:as=>:truck,:html => {:class => "show_form"}) do |f| %>
+  <% if @truck.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@truck.errors.count, "error") %> prohibited this truck from being saved:</h2>
+
+      <ul>
+      <% @truck.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+    <div class="line" >
+
+  <!-- do not change below  format -->
+      <label style="margin-left:10px;" class="line_from_label" >出发地:</label>
+      <a id="from_data_load"  href="/cities/from"><%=(@truck.fcity_name.nil?||@truck.fcity_name.empty?) ?"请选择出发地":@truck.fcity_name%></a>
+      <%= f.hidden_field(:fcity_code) %>
+      <%= f.hidden_field(:fcity_name) %>
+      <label style="margin-left:50px;" class="line_to_label " >到达地:</label>
+       <a  style="margin-right:10px;" id="to_data_load"   href="/cities/to" ><%=(@truck.tcity_name.nil?||@truck.tcity_name.empty?) ?"请选择到达地":@truck.tcity_name%></a>
+      <%= f.hidden_field(:tcity_code) %>
+      <%= f.hidden_field(:tcity_name) %>
+  <!-- do not change this format -->
+</div>
+
+
+
+
+    <%=f.hidden_field(:stock_truck_id) %>
+    <%= f.hidden_field(:user_id)%>
+    <%= f.hidden_field(:company_id)%>
+   <%= f.hidden_field :user_contact_id%>
+
+ <%= f.hidden_field :paizhao%>
+ <%= f.hidden_field :dunwei%>
+ <%= f.hidden_field :length%>
+ <%= f.hidden_field :usage%>
+ <%= f.hidden_field :shape%>
+ <%= f.hidden_field :usage%>
+ <%= f.hidden_field :driver_name%>
+ <%= f.hidden_field :driver_phone%>
+ <%= f.hidden_field :car_phone%>
+
+<%= f.hidden_field :status%>
+  
+  <div class="field">
+ <%= f.label :有效天数 %>
+   <%= f.select(:send_date,options_for_select([["一天","1"],["二天","2"],["三天","3"]],@truck.send_date) )%>
+  </div>
+
+<div class="field">
+   <%=f.label :回程或本地车 %>
+   <%= f.select(:huicheng,options_for_select($truck_huicheng_reverse.to_a,@truck.huicheng) ) %>
+
+</div>
+
+
+  <div class="field">
+    <label for="comments">备注：</label>
+    <%= f.select(:comments,options_for_select($habit_word_reverse.to_a,@truck.comments) )%>
+  </div>
+
+ <div class="actions">
+    <%= f.submit("确定") %>
+ </div>
+<% end %>

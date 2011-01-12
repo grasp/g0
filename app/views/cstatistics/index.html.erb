@@ -1,0 +1,29 @@
+<h1>Listing cstatistics</h1>
+
+<table>
+  <tr>
+    <th>Total baojia</th>
+    <th>Total xunjia</th>
+    <th>Total match</th>
+    <th>Total click</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cstatistics.each do |cstatistic| %>
+  <tr>
+    <td><%= cstatistic.total_baojia %></td>
+    <td><%= cstatistic.total_xunjia %></td>
+    <td><%= cstatistic.total_match %></td>
+    <td><%= cstatistic.total_click %></td>
+    <td><%= link_to 'Show', cstatistic %></td>
+    <td><%= link_to 'Edit', edit_cstatistic_path(cstatistic) %></td>
+    <td><%= link_to 'Destroy', cstatistic, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Cstatistic', new_cstatistic_path %>

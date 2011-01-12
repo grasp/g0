@@ -1,0 +1,64 @@
+
+<table>
+  <tr>
+    <th>车辆</th>
+    <th>出发</th>
+    <th>到达</th>
+    <th>有效天数</th>
+       <th>发布日期</th>
+    <!--  <th>公司</th>-->
+    <th>状态</th>
+
+    <th>备注</th>
+    <th>货主询价</th>
+    <th>我已报价</th>
+    <th>匹配货源</th>
+
+  </tr>
+
+
+  <% if not @trucks.nil? %>
+    <% @trucks.each do |truck|%>
+      <%unless truck.nil?%>
+        <tr>
+        <%tstatistic=Tstatistic.find(truck.tstatistic_id)%>
+          <td>  <a class="show_float" href="/trucks/show/<%=truck.id%>">
+              <%=truck.paizhao%>,<%=truck.dunwei%>吨
+              <%=truck.length%>米,<%=$truck_shape[truck.shape]%>
+            </a></td>
+
+          <td><%= truck.fcity_name  %></td>
+          <td><%= truck.tcity_name  %></td>
+          <td><%= truck.send_date %>天</td>
+           <td><%= truck.created_at.to_s.slice(5,11) %></td>
+
+
+
+           <!--   <td><%= Company.find_by_id(truck.company_id).name unless truck.company_id.nil?%></td>-->
+           <%if truck.status=="请求成交"%>
+            <td><a href="/trucks/confirm_chenjiao/<%=truck.id%>">确认成交</a></td>
+           <%else%>
+          <td><%=truck.status%></td>
+          <%end%>
+
+
+          <td><%= $habit_word[truck.comments]%></td>
+        
+          <td><a class="show_float" href="/trucks/<%=truck.id%>/inqueries/truck">查看货主询价<%= tstatistic.total_xunjia %>条</a></td>
+          <td><a class="show_float" href="/trucks/<%=truck.id%>/quotes/truck">查看我的报价<%= tstatistic.total_baojia %>条</a></td>
+          <%if truck.status=="成交"%>
+           <td><a class="show_float " href="/trucks/chenjiao/<%=truck.id%>"><%=truck.status%></a></td>
+          <%else%>
+          <td><a class="show_float" href="/trucks/<%=truck.id%>/match">货源速配(<%=Lstatistic.find_by_line(truck.line).valid_cargo || 0%>)</a></td>
+          <%end%>
+
+      <!--   <td><a class="show_float" href="/trucks/<%=truck.id%>/edit">编辑</a>|<a href="/trucks/destroy/<%=truck.id%>">删除</a></td> -->
+
+
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>
+
+<%= will_paginate @trucks ,:class=>"page_navi_link"%>

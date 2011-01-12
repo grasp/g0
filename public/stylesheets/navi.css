@@ -1,0 +1,91 @@
+/* 
+    Document   : city
+    Created on : 2010-4-11, 14:04:33
+    Author     : w22812
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#navi {
+   /* padding: 3px;*/
+
+    background-color:white;
+    /*
+    border-right: 3px solid;
+    border-right-color: blue;
+    */
+    font-weight: normal;
+   /* width: 7%;*/
+    width:150px;
+    float: left;
+    text-align: left; 
+
+}
+#navi .navi_block {
+    border-bottom: 3px solid;
+    border-bottom-color: blue;
+    width:auto;
+    text-align: left;
+       /*
+    margin-top:1px;
+    margin-left: 0px;
+ 
+    border:1px  solid;
+    border-color:#b80000;
+    */
+}
+
+
+.navi_block ul {
+    padding-left: 0px;
+  width:auto;
+}
+
+.navi_block ul li {
+     width:auto;
+    /* background-color:#EBEFF9;*/
+     text-align:inherit;
+     margin-top:20px;
+     margin-left:5px;
+     padding-left: 5px;
+     list-style-type: none;
+
+}
+
+
+.navi_hover{
+     background-color:#D4E4FF;
+}
+
+.navi_active {
+ 
+  background-color:#6B90DA;
+  font-size: larger;
+ /* color:white;*/
+}
+
+.navi_active div {
+
+  background-color:#6B90DA;
+  font-size: larger;
+  color:white;
+}
+
+div.page_navi_link a {
+
+    display:inline-block;
+    margin-right:1px;
+    padding:0.2em 0.5em;
+    border:1px solid #9AAFE5;
+
+}
+div.page_navi_link
+{
+ margin-left: 100px;;
+
+}

@@ -1,0 +1,42 @@
+
+
+<h2>我的全部货物</h2>
+<table>
+  <tr>
+     
+    <th>货物</th>
+      <th>包装</th>     
+    <th>货物大类</th>
+     <th>总计发布</th>
+     <th>status</th>
+     <th>已发布货源</th>
+     <th>发布货源</th>
+
+
+  </tr>
+<%unless @stock_cargos.blank?%>
+  <% @stock_cargos.each do |stock_cargo| %>
+    <tr>   
+  
+      <td>       
+        <a class ="show_float" href="/stock_cargos/show/<%=stock_cargo.id.to_s%>"><%=h stock_cargo.cate_name %></a></td> 
+      <td><%=h stock_cargo.package_name %></td>     
+    
+      <td><%=h $cargo_big_category[stock_cargo.big_category] %></td>   
+      <td><%=h stock_cargo.sent_weight %>吨/<%=h stock_cargo.sent_bulk %>方</td>
+      <td><%=h stock_cargo.status%></td>     
+       <td><a class="page_navi_link" href="/stock_cargos/<%=stock_cargo.id.to_s%>/cargos/part/">条货源</a></td>
+       <td><a class="cargo_fabu" href="/cargos/new/<%=stock_cargo.id.to_s%>">发布货源</a></td>
+    </tr>
+  <% end %>
+    <% end %>
+</table>
+<%= will_paginate @trucks ,:class=>"page_navi_link"%>
+<div class="caozuo_area" ></div>
+
+<div class="page_navi">
+  <a class="show_float"  href="/stock_cargos/new">添加新的货物</a>
+</div>
+
+
+

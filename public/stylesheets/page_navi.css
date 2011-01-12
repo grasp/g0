@@ -1,0 +1,28 @@
+/* 
+    Document   : city
+    Created on : 2010-4-11, 14:04:33
+    Author     : w22812
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.page_navi
+{
+     margin:10px;
+     margin-bottom: 20px;
+     margin-left: 10px;
+     font-size:large;
+}
+.bottom_link
+{
+     margin:10px;
+     margin-bottom: 20px;
+     margin-left: 10px;
+     font-size:large;  
+
+}

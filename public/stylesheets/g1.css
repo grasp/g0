@@ -1,0 +1,181 @@
+/* 
+    Document   : g1
+    Created on : 2010-6-22, 22:17:45
+    Author     : w22812
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+      
+body {
+font-size: 16px;
+}
+
+#sheader {
+    padding: 5px;
+    height:100px;
+    float:left;
+    width:100%;
+}
+
+#ghead {
+    padding: 5px;
+    float:left;
+}
+
+#main {
+    background-color:white;
+    /*border: 3px solid blue;*/
+    border:none;
+    width:100%;
+   float:left;
+}
+
+
+h1,h2,h3{
+    margin-top:5px;
+    margin-left:5px;
+}
+
+
+#content {
+    padding: 5px;
+    border-left: 3px solid;
+    border-bottom: 3px solid;
+    border-left-color: #6694E3;
+    border-bottom-color: #6694E3;
+    background-color: #6694E3;
+    margin:0px;
+    width: 85%;
+    float: left;
+   }
+
+#show {
+  /* padding: 10px;*/
+   /* padding-top:0px;*/
+    padding-left:0px;
+    width:100%;
+    background-color: #F2F2F2;
+}
+
+
+#city_data_list{
+    padding: 3px;
+    border: 2px solid;
+    border-color:blue;
+    background-color: white;
+    width:100%;
+    position: absolute;
+    z-index: 1000;
+}
+
+.data_list{
+    padding: 3px;
+    border: 2px solid;
+    border-color:blue;
+    background-color: white;
+    position: absolute;
+    z-index: 1001;
+}
+
+
+
+.highlight_background {
+    background-color:#ffcc00;
+    font-size:120%;
+}
+
+#user_announcement{
+    float:left;
+    width: 30%;
+    height: 600px;
+}
+
+
+#user_form{
+    float:left;
+    width: 60%;
+    height: 600px;
+}
+
+
+.form_error{
+    border-color:red;
+}
+
+#notice{
+   color:red;
+  top:5px;
+}
+
+td a {
+    font-weight:normal;
+}
+
+
+
+a.menu
+{
+    font-weight: normal;
+
+}
+
+.ads{
+    width:100%;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding-left: 0px;
+    padding-bottom: 10px;
+    border-color:blue;
+    background-color:#BFD7FF;
+    height: 10%;
+}
+.ads a{
+    margin:10px;
+    margin-left: 5px;
+    padding-left: 5px;
+    font-size:larger;
+}
+
+.footer {
+    margin-top:150px;
+    margin-left:auto;
+    margin-right:auto;
+    float:left;
+    width: 100%;
+    text-align:center;
+}
+
+
+.footer p {
+    margin:auto;
+    display:inline;
+}
+
+
+
+.truck_bottom_link a,.cargo_bottom_link a {
+    margin-left: 10px;
+}
+
+.companyshow div{
+    margin-top: 10px;
+}
+
+.companyabout p{
+    width:50%;
+    margin-left: 5%;
+}
+
+
+
+
+

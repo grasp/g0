@@ -1,0 +1,51 @@
+
+
+<table>
+  <tr>
+   
+    <th>货物</th>
+    
+    <th>出发</th>
+    <th>到达</th>
+    <th>重量体积</th>
+    <th>有效天数</th>
+     <th>发布日期</th>
+    <th>状态</th>
+
+   <th>车主报价</th>
+    <th>我询价</th>
+
+    <th>匹配车源</th>
+
+   
+  </tr>
+  <%unless @cargos.nil?%>
+    <% @cargos.each do |cargo|  %>
+      <tr>
+       <%cstatistic=Cstatistic.find(cargo.cstatistic_id)%>
+        <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
+        <%= cargo.cate_name %></a> </td>
+  
+        <td><%= cargo.fcity_name %></td>
+        <td><%= cargo.tcity_name %></td>
+        <td><%= cargo.cargo_weight %>吨/<%= cargo.cargo_bulk %>方</td>
+        <td><%= cargo.send_date %>天</td>
+         <td><%= cargo.created_at.to_s.slice(5,11) %></td>
+
+        <td><%= cargo.status %></td>
+
+
+        <td><a class="show_float" href="/cargos/<%=cargo.id%>/quotes/cargo">查看车主报价<%= cstatistic.total_baojia %>个 </a></td>
+        <td><a class="show_float " href="/cargos/<%=cargo.id%>/inqueries/cargo/">查看我的询价<%= cstatistic.total_xunjia %>个</a></td>
+        <%if cargo.status=="成交"%>
+         <td><a class="show_float " href="/cargos/chenjiao/<%=cargo.id%>"><%=cargo.status%></a></td>
+        <%else%>
+        <td><a class="show_float " href="/cargos/<%=cargo.id%>/match">车源速配(<%=Lstatistic.find_by_line(cargo.line).valid_truck || 0 %>)</a></td>
+        <%end%>
+      </tr>
+    <% end %>
+  <% end %>
+
+</table>
+
+<%= will_paginate @cargos ,:class=>"page_navi_link"%>

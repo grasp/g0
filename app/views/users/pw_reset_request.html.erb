@@ -1,0 +1,24 @@
+﻿<%#
+form_tag(url_for_options = {}, options = {}, *parameters_for_url, &block)
+%>
+<div id="pw_reset_request">
+ <div class="form_header">
+<h3 >W090-密码重置</h3>
+</div>
+<form class="show_form" action="/users/pw_sent_confirm">
+  <div class="field">
+    <label for="email">你的邮箱:</label>
+    <input id="email" name="email" type="text" />
+  </div>
+  <div class="actions">
+    <input type="submit" class="submit_button_pw_reset " value="确认"  />
+  </div>
+
+  <p>
+    <label class="error" style="margin-left:120px;"><%=flash[:notice]%></label>
+  </p>
+</form>
+
+<div>请到你的Email邮箱接收邮件，点击邮件里面的密码重置链接，然后可重置密码</div>
+
+</div>

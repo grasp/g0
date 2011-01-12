@@ -1,0 +1,46 @@
+
+<%= form_for(@user_contact,:as=>:user_contact,:html => {:class => "show_form"}) do |f| %>
+  <% if @user_contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_contact.errors.count, "error") %> prohibited this contact_person from being saved:</h2>
+
+      <ul>
+        <% @user_contact.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :真实姓名 %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :移动电话 %>
+    <%= f.text_field :mobile_phone %>
+  </div>
+
+  <div class="field">
+    <%= f.label :QQ %>
+    <%= f.text_field :QQ %>
+  </div>
+
+
+
+  <div class="field">
+    <%= f.label :固定电话 %><br></br>
+     <input  style="width:30px;" id="user_contact_phone_quhao" name="user_contact[phone_quhao]" type="text" value=<%=@user_contact.phone_quhao%> > </input>
+     --
+     <input  style="width:150px;" id="user_contact_fix_phone" name="user_contact[fix_phone]" type="text" value=<%=@user_contact.fix_phone%> > </input>
+     <%#= f.text_field :fix_phone %>
+  </div>
+
+ <%= f.hidden_field :email %>
+
+  <div class="actions">
+    <%= f.submit(:value=>"确定") %>
+  </div>
+<% end %>
+<p id="notice"><%= notice %></p>
+

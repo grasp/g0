@@ -1,0 +1,89 @@
+/* 
+    Document   : city
+    Created on : 2010-4-11, 14:04:33
+    Author     : w22812
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+#cheyuan_sel  {
+    color:blue;
+}
+#huoyuan_sel{
+    color: blue;
+}
+
+.highlight {
+
+    border: 1px solid #888;
+    padding: 0.5em;
+    background-color:silver;
+}
+#gbar {
+  display: inline;
+  aligh:left;
+  clear:both;
+
+}
+
+#guser {
+  display: inline;
+  clear:both;
+  aligh:right;
+}
+
+#navi_bar {
+    border-width : 1px;
+    border: solid;
+    border-color: #E6E6FA;
+    width : 100px;
+    height : 200px;
+}
+
+.city_selector{
+     background:white;
+}
+
+div.province{
+   float:left;
+
+
+}
+div.region{
+    float:left;
+    
+
+}
+div.region ul li {
+    margin-top: 10px;
+    width: 700px;
+}
+
+.line{
+    background-color: rgb(213,214,255);
+    padding-top:15px;
+    padding-bottom:15px;
+}
+.city_province{
+    margin-left: 5px;
+    font-size: larger;
+}
+.selected_province{
+    background-color:#ffcc00;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.city_region{
+  font-weight: bold;
+}
+
+

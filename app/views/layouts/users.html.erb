@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+  <%=render "shared/html_header"%>
+  </head>
+  <body>
+    <div id="sheader">
+      <img src="/images/6376313.gif" alt="Icon" align="left" />
+      <div id="ghead">
+        <div  id="guser" >
+            <a  href="/" >首页</a>
+          <% if (@user_name.nil?) %>
+            <a  href="/users/login" >登录</a>
+            <a  href="/users/new" >注册</a>
+          <%else%>
+            <span>欢迎你!<%=@user_name%></span>
+            <a  href="/users/logout" >登出</a>
+          <%end%>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="user_announcement">
+      <%= render :partial => "users/user_annoucement" %>
+    </div>
+    <div id="user_form">
+      <%= yield %>
+    </div>
+
+    <%=render "shared/float_show"%>
+
+  </body>
+</html>

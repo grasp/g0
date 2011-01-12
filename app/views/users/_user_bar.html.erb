@@ -1,0 +1,15 @@
+﻿<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+<% if params[:name].nil? %>
+你还没有登录
+<a class="main_show" href ="/users/login">登录</a>
+<a class="main_show" href ="/users/new">注册</a>
+
+<% else %>
+"欢迎你 "
+<%= params[:name]%>
+<a class="main_show" href ="/users/logout">登出</a>
+<%= Time.now %>
+<%end%>

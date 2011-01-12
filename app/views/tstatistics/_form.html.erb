@@ -1,0 +1,33 @@
+<%= form_for(@tstatistic) do |f| %>
+  <% if @tstatistic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tstatistic.errors.count, "error") %> prohibited this tstatistic from being saved:</h2>
+
+      <ul>
+      <% @tstatistic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :total_baojia %><br />
+    <%= f.text_field :total_baojia %>
+  </div>
+  <div class="field">
+    <%= f.label :total_xunjia %><br />
+    <%= f.text_field :total_xunjia %>
+  </div>
+  <div class="field">
+    <%= f.label :total_match %><br />
+    <%= f.text_field :total_match %>
+  </div>
+  <div class="field">
+    <%= f.label :total_click %><br />
+    <%= f.text_field :total_click %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

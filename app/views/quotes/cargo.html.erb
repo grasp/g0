@@ -1,0 +1,53 @@
+<%#coding: utf-8%>
+<div class="title">
+<%=render "cargos/title"%>
+</div>
+
+<table>
+  <tr>
+    <th>报价车辆</th>
+    <th>车辆出发</th>
+    <th>车辆到达</th>    
+    <th>报价</th>
+    <th>车辆状态</th>
+    <th>货主联系</th>
+    <th>报价时间</th>
+    <th>成交状态</th>
+
+  </tr>
+
+  <%unless @quotes.nil? %>
+    <% @quotes.each do |quote| %>
+   <%truck=Truck.find(quote.truck_id)%>
+      <tr>
+        <td><a class="show_float" href="/trucks/show/<%truck.id%>">
+             <%=truck.paizhao%>,
+             <%=truck.dunwei%>吨,
+              <%=truck.length%>米,
+              <%= $truck_shape[truck.shape]%>
+            
+          </a></td>
+        <td><%= truck.fcity_name %></td>
+        <td><%= truck.tcity_name %></td>
+        <td><%= truck.status %></td>
+         <td><%= quote.price ||"面议"%></td>
+      <td><a class="show_float2"  href="/user_contacts/show/<%=truck.user_contact_id%>"><%="#{UserContact.find(truck.user_contact_id).name}"%></a>
+-<a class="show_float2" href="/companies/show/<%=truck.company_id%>"><%="#{Company.find(truck.company_id).name}"%></a>
+       </td>
+  
+        <td><%= quote.created_at.to_s.slice(5,11) %></td>
+        <td>
+          <%if quote.status=="已成交" %>
+          已成交
+          <%else%>
+          <%if @cargo.status=="配车"%>
+          <a class="cargo_chenjiao" href="quotes/chenjiao/<%=quote.id%>">请求成交</a>
+          <%end%>
+          <%end%>
+        </td>
+
+         </tr>
+    <% end %>
+  <% end %>
+</table>
+

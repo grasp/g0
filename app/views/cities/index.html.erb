@@ -1,0 +1,59 @@
+<div class="city_selector">
+<span>
+<!-- <a class="list_close" style="margin-top: 5px;margin-left: 2px; display: inline;" href="">关闭</a>-->
+  <%if params[:dir]=="from"%>
+<h3 style="display: inline;">出发城市:</h3>
+<%end%>
+
+<%if params[:dir]=="to"%>
+<h3 style="display: inline;">到达城市:</h3>
+<%end%>
+
+<p id="selected_city" style="display: inline;"  ><%=@selected_city_name%></p>
+
+<input id="selected_city_name" name="selected_city_name" value="<%=@selected_city_name%>" type="hidden"></input>
+<input id="selected_city_code" name="selected_city_code" value="<%=@selected_city_code%>" type="hidden"></input>
+</span>
+
+<div class="province" >
+<ul style="margin-top: 10px">省份:
+  
+
+  <%$raw_province_array.each do |one_row|%>
+  <li>
+    <%one_row.each do |city_key|%>
+     <%if city_key.to_s==@province.code%>
+     <a class="selected_province city_province" href=<%="/cities/#{params[:dir]}/#{city_key}"%>><%=$province[city_key.to_s]%></a>
+    <%else%>
+    <a class ="city_province" href=<%="/cities/#{params[:dir]}/#{city_key}"%>><%=$province[city_key.to_s]%></a>
+     <%end%>
+    <%end%>
+  </li>
+  <%end%>
+
+</ul>
+</div>
+
+<div class="region">
+<ul style="margin-top: 10px">地区:
+
+
+    <%@province.children.each do |region|%>
+      <li>
+        <a class ="city_region" href=<%="/cities/#{params[:dir]}/#{region.code}"%>><%=region.name%></a>
+      :
+       <%city_list=City.get_region_city_by_code(@selected_city_code)[1]%>
+       <%region.children.each do |city|%>
+        <%= link_to city.name, "/cities/#{params[:dir]}/#{city.code}" %>
+    <%end%>
+      </li>
+    <%end%>
+
+</ul>
+
+</div>
+
+
+</div>
+
+<%#= link_to 'New City', new_city_path %>

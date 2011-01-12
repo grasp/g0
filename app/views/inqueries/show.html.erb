@@ -1,0 +1,32 @@
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Price:</b>
+  <%= @inquery.price %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @inquery.comments %>
+</p>
+
+<p>
+  <b>Cargo:</b>
+  <%= @inquery.cargo_id %>
+</p>
+
+<p>
+  <b>Truck:</b>
+  <%= @inquery.truck_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @inquery.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_inquery_path(@inquery) %> |
+<%= link_to 'Back', inqueries_path %>
