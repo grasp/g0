@@ -30,16 +30,16 @@ class Truck
 
      
      # external search
-      key  :company_id,Integer
-      key  :user_id,Integer
-      key  :stock_truck_id,Integer
-      key  :user_contact_id,Integer
+      key  :company_id,ObjectId
+      key  :user_id,ObjectId
+      key  :stock_truck_id,ObjectId
+      key  :user_contact_id,ObjectId
        
       #for future usage
-      key  :truck_pingjia_id,Integer
-      key  :truck_status_id,Integer
-      key  :tstatistic_id ,Integer     
+      key  :truck_pingjia_id,ObjectId
+      key  :truck_status_id,ObjectId
+      key  :tstatistic_id ,ObjectId  
    
-       timestamps!
+      timestamps!
  
 end

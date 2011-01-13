@@ -16,18 +16,16 @@ class PackageCategoriesController < ApplicationController
   # GET /package_categories/1
   # GET /package_categories/1.xml
   def show
-   @package_category = PackageCategory.find_by_code(params[:code])
+    
+  # @package_category = PackageCategory.find_by_code(params[:code])
+   
     code=params[:code]
-    puts code
+  #  puts code
      if (code.match(/\d000/))
-           @package_category_two=$package_category_two[code]
-           puts $package_category_two[code].size
-       # @package_category_two.each do |code,name|
-      #    puts code+name
-     #   end
+           @package_category_two=$packagetree[code]
      else
-       parent_code=code[0]+"000"
-           @package_category_two=$package_category_two[ parent_code]
+           parent_code=code[0]+"000"
+           @package_category_two=$packagetree[parent_code]
      end
 
     respond_to do |format|

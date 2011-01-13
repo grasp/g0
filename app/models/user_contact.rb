@@ -4,9 +4,9 @@ include MongoMapper::Document
   
       key :name,String
       key :email,String
-      key :mobile_phone,String
-      key :phone_quhao,String
-      key :fix_phone,String
+      key :mphone,String
+      key :quhao,String
+      key :fixphone,String
       key :QQ,String
       key :website,String
       key :city_name,String

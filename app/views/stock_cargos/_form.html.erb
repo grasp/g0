@@ -1,4 +1,4 @@
-<%= form_for(@stock_cargo,:as=>:stock_cargo,:html => {:class => "show_form"}) do |f| %>
+<%= form_for(@stock_cargo,:as=>:stockcargo,:html => {:class => "show_form"}) do |f| %>
   <% if  @stock_cargo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@stock_cargo.errors.count, "error") %> prohibited this stock_cargo from being saved:</h2>

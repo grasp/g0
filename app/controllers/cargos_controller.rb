@@ -6,8 +6,6 @@ class CargosController < ApplicationController
   before_filter:authorize, :except => [:search]
   protect_from_forgery :except => [:tip,:login]
   layout nil
-
-
   
   def public
     #if this is all    
@@ -43,33 +41,31 @@ class CargosController < ApplicationController
     end
 
     if @search.fcity_code=="100000000000" && @search.tcity_code=="100000000000" then
-      @cargos=Cargo.where("status=?","配车").order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>10)
+       @cargos=Cargo.where(:status=>"配车").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
 
     elsif @search.fcity_code=="100000000000" && @search.tcity_code!="100000000000"
-      @cargos=Cargo.where("tcity_code =? AND status=?",@search.tcity_code,"配车").order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>10)
+      @cargos=Cargo.where({:tcity_code =>@search.tcity_code,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
 
     elsif params[:search][:tcity_code]=="100000000000" && params[:search][:fcity_code]!="100000000000"
-      @cargos=Cargo.where("fcity_code =? AND status=?",@search.fcity_code,"配车").order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>10)
-
+      @cargos=Cargo.where({:fcity_code =>@search.fcity_code,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
     else
-      @cargos=Cargo.where("tcity_code =? AND fcity_code = ?  AND status=? ",@search.tcity_code,@search.fcity_code,"配车").order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>10)
+      @cargos=Cargo.where({:tcity_code =>@search.tcity_code, :fcity_code =>@search.fcity_code ,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
     end
 
     @search.save
   end
 
 
-
   def index
 
     unless params[:stock_cargo_id].nil?
-      @cargos=Cargo.where("user_id =? AND stock_cargo_id =?",session[:user_id],params[:stock_cargo_id]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>20)
-
+       @cargos=Cargo.where({user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     else
       if params[:status]
-        @cargos = Cargo.where("user_id = ? AND status =?",session[:user_id],params[:status]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>10)
-      else
-        @cargos = Cargo.where("user_id = ?",session[:user_id]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>10)
+        @cargos = Cargo.where(:user_id =>session[:user_id],:status =>params[:status]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
+    else
+      #  @cargos = Cargo.where("user_id = ?",session[:user_id]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>10)
+       @cargos = Cargo.where(:user_id =>session[:user_id]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
       end
     end
     
@@ -81,7 +77,7 @@ class CargosController < ApplicationController
   
   def match
     @cargo = Cargo.find_by_id(params[:cargo_id])
-        @trucks=Truck.where("fcity_code = ? AND tcity_code =?",@cargo.fcity_code,@cargo.tcity_code).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>10)
+        @trucks=Truck.where(:fcity_code =>@cargo.fcity_code,:tcity_code =>@cargo.tcity_code).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @cargo }
@@ -91,7 +87,7 @@ class CargosController < ApplicationController
 
   def part
     @stock_cargo = StockCargo.find_by_id(params[:stock_cargo_id])
-    @cargos=Cargo.where("stock_cargo_id = ? AND user_id = ?", params[:stock_cargo_id], session[:user_id]).paginate(:page=>params[:page]||1,:per_page=>10)
+    @cargos=Cargo.where({:stock_cargo_id => params[:stock_cargo_id],:user_id =>session[:user_id]}).paginate(:page=>params[:page]||1,:per_page=>10)
     respond_to do |format|
       format.html # part.html.erb
       format.xml  { render :xml => @cargos }
@@ -103,12 +99,12 @@ class CargosController < ApplicationController
   def show
     @cargo = Cargo.find(params[:id])
     @stock_cargo=StockCargo.find(@cargo.stock_cargo_id)
-    @line_ad=LineAd.find_by_line(get_line(@cargo.fcity_code,@cargo.tcity_code))
+    @line_ad=LineAd.find({:line=>get_line(@cargo.fcity_code,@cargo.tcity_code)})
     
-    if @line_ad.nil?
-      @line_ad=LineAd.find_by_line("0")
-      @line_ad.fcity_name=@cargo.fcity_name
-      @line_ad.tcity_name=@cargo.tcity_name
+    if @line_ad.blank?
+      #@line_ad=LineAd.find_by_line("0")
+      #@line_ad.fcity_name=@cargo.fcity_name
+      #@line_ad.tcity_name=@cargo.tcity_name
     end
     # @user_contact=ContactPerson.find_by_id(@cargo.user_id)
     #  @company=Company.find_by_id(@cargo.company_id)
@@ -179,10 +175,10 @@ class CargosController < ApplicationController
         @cstatistic=Cstatistic.create(:total_baojia=>0,:total_xunjia=>0,:total_match=>0,
           :total_click=>0,:user_id=>session[:user_id]);
         #update statistic for cargo
-        @cargo.update_attribute(:cstatistic_id,@cstatistic.id)
+        @cargo.update_attributes({:cstatistic_id=>@cstatistic.id})
         @ustatistic=Ustatistic.find_by_user_id(session[:user_id])
         total_cargo=@ustatistic.total_cargo || 0
-        @ustatistic.update_attribute(:total_cargo, total_cargo+1)
+        @ustatistic.update_attributes({:total_cargo=>total_cargo+1})
 
         #update lstastistic info
         @lstatistic=Lstatistic.find_by_line(@cargo.line)
@@ -194,8 +190,9 @@ class CargosController < ApplicationController
 
         #update stock  cargo status
         @stock_cargo=StockCargo.find(@cargo.stock_cargo_id)
-        @stock_cargo.update_attribute(:status,"配车")
-
+              
+        StockCargo.collection.update({"_id" => @stock_cargo.id}, {:status=>"配车"},{"$inc" => {"cargocount" => 1}})
+        
         format.html { redirect_to(@cargo)}
         format.xml  { render :xml => @cargo, :status => :created, :location => @cargo }
       else

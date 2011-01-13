@@ -8,7 +8,7 @@ class InqueriesController < ApplicationController
      
   def index
 
-    @inqueries=Inquery.where("user_id = ?", session[:user_id]) 
+    @inqueries=Inquery.where(:user_id >session[:user_id]) 
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +18,7 @@ class InqueriesController < ApplicationController
 
   def cargo
     @cargo=Cargo.find_by_id(params[:cargo_id])
-    @inqueries=Inquery.where("cargo_id = ?", params[:cargo_id])
+    @inqueries=Inquery.where(:cargo_id => params[:cargo_id])
 
     respond_to do |format|
       format.html # cargo.html.erb
@@ -29,7 +29,7 @@ class InqueriesController < ApplicationController
   #one trucks's all baojia
   def truck
     @truck=Truck.find_by_id(params[:truck_id])
-    @inqueries=Inquery.where("truck_id = ?", params[:truck_id])
+    @inqueries=Inquery.where(:truck_id => params[:truck_id])
     respond_to do |format|
       format.html # part.html.erb
       format.xml  { render :xml => @inqueries }
@@ -40,12 +40,12 @@ class InqueriesController < ApplicationController
    
     unless params[:cargo_id].nil?
       @cargo=Cargo.find_by_id(params[:cargo_id])
-      @inqueries=Inquery.where("cargo_id = ? AND user_id = ?", params[:cargo_id], session[:user_id])
+      @inqueries=Inquery.where(:cargo_id =>params[:cargo_id],:user_id =>session[:user_id])
     end
 
     unless params[:truck_id].nil?
       @truck=Truck.find_by_id(params[:truck_id])
-      @inqueries=Inquery.where("truck_id = ? AND userb_id = ?", params[:truck_id], session[:user_id])
+      @inqueries=Inquery.where(:truck_id =>params[:truck_id],:userb_id =>session[:user_id])
     end
    
     respond_to do |format|
@@ -75,11 +75,13 @@ class InqueriesController < ApplicationController
     @inquery.user_id=session[:user_id]
 
     @truck=Truck.find(@inquery.truck_id)
+    @inquery.truck_user_id=@truck.user_id
+    @inquery.truck_company_id=@truck.company_id
 
     @mycargo=Hash.new
 
     if params[:cargo_id].nil?
-      @cargos = Cargo.where("user_id = ? AND status = ?",session[:user_id],"配车")
+      @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"配车")
 
       @cargos.each do |cargo|
         @mycargo[cargo.cate_name+"("+cargo.fcity_name+"<=>"+cargo.tcity_name+")"]=cargo.id
@@ -98,7 +100,7 @@ class InqueriesController < ApplicationController
   # GET /inqueries/1/edit
   def edit
     @inquery = Inquery.find(params[:id])
-    @cargos = Cargo.find(:all,:conditions=>["user_id = ?",session[:user_id]])
+    @cargos = Cargo.where(:user_id =>session[:user_id])
     @mycargo=Hash.new
     @cargos.each do |cargo|
       @mycargo[cargo.cate_name+"("+cargo.fcity_name+"<=>"+cargo.tcity_name+")"]=cargo.id
@@ -113,12 +115,12 @@ class InqueriesController < ApplicationController
       @inquery.price=nil
     end
      @cargo=Cargo.find(@inquery.cargo_id)
-     @truck=Truck.find(@inquery.truck_id)
+    # @truck=Truck.find(@inquery.truck_id)
 
     @inquery.cargo_company_id=@cargo.company_id
     @inquery.cargo_user_id=@cargo.user_id
-    @inquery.truck_company_id=@truck.company_id
-    @inquery.truck_user_id=@truck.user_id
+   # @inquery.truck_company_id=@truck.company_id
+   # @inquery.truck_user_id=@truck.user_id
 
 
     respond_to do |format|
@@ -153,7 +155,7 @@ class InqueriesController < ApplicationController
     @inquery.paizhao=@truck.paizhao
     @inquery.fcity_name=@truck.fcity_name
     @inquery.tcity_name=@truck.tcity_name
-    @cargos = Cargo.find(:all,:conditions=>["user_id = ?",session[:user_id]])
+    @cargos = Cargo.where(:user_id =>session[:user_id])
 
     @mycargo=Hash.new
     @cargos.each do |cargo|
@@ -176,7 +178,7 @@ class InqueriesController < ApplicationController
      #update truck status
      @truck=Truck.find(@inquery.truck_id)
 
-     @truck.update_attribute(:status,"请求成交")
+     @truck.update_attributes(:status=>"请求成交")
 
     puts "update rtuck #{@truck.id} status=请求成交"
       #update cargo status
@@ -184,7 +186,7 @@ class InqueriesController < ApplicationController
      @cargo=Cargo.find(@inquery.cargo_id)
      @cargo.update_attribute(:status,"请求成交")
 
-     @inquery.update_attribute(:status,"请求成交")
+     @inquery.update_attributes(:status=>"请求成交")
 
     #TOTO:notify all other related truck
     #All quotes to from this truck change to chenjiao
@@ -192,14 +194,14 @@ class InqueriesController < ApplicationController
     @quotes=Quote.where("truck_id =? AND status =?",@truck.id,"配货")
     if  @quote.size>0
     @quotes.each do |quote|
-      quote.update_attribute(:status,"过期")
+      quote.update_attributes(:status=>"过期")
     end
     end
       #All Inquers from this cargo neec change to chenjiao
-       @inqueries=Inquery.where("cargo_id =? AND status =?",@cargo.id,"配货")
+       @inqueries=Inquery.where(:cargo_id =>@cargo.id,:status =>"配货")
     if  @inqueries.size>0
       @inqueries.each do |inquery|
-      inquery.update_attribute(:status,"过期")
+      inquery.update_attributes(:status=>"过期")
     end
     end
 

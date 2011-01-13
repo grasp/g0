@@ -12,12 +12,13 @@ class Company
       key :city_name,String
       key :city_code,String
       key :city_id,String
-      key :address,String
+      key :address,String     
       key :fix_phone,String
       key :mobile_phone,String
       key :email,String
       key :company_license_id,ObjectId
       key :user_name,String
+       key :ispersonal,Integer
       key :user_id,ObjectId
       timestamps!
 end

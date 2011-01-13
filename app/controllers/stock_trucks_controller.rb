@@ -35,7 +35,7 @@ class StockTrucksController < ApplicationController
     @stock_truck = StockTruck.new
     @user=User.find_by_id(session[:user_id])
     @stock_truck.user_id=@user.id
-    @stock_truck.status="idle"
+    @stock_truck.status="空闲"
     @stock_truck.company_id=@user.company_id unless @user.nil?
 
     respond_to do |format|
@@ -60,14 +60,14 @@ class StockTrucksController < ApplicationController
   # POST /stock_trucks
   # POST /stock_trucks.xml
   def create
-    @stock_truck = StockTruck.new(params[:stock_truck])
-
+    params[:stocktruck][:truckcount]=0;#clear the counter 
+    @stock_truck = StockTruck.new(params[:stocktruck])
     respond_to do |format|
       if @stock_truck.save
         flash[:notice] = '成功创建车辆'
             @ustatistic=Ustatistic.find_by_user_id(session[:user_id])
             total_stock_truck=@ustatistic.total_stock_truck || 0
-            @ustatistic.update_attribute(:total_stock_truck, total_stock_truck+1)
+            @ustatistic.update_attributes({:total_stock_truck=>total_stock_truck+1})
 
         format.html { redirect_to(@stock_truck) }
         format.xml  { render :xml => @stock_truck, :status => :created, :location => @stock_truck }

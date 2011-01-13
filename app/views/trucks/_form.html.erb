@@ -23,7 +23,7 @@
        <a  style="margin-right:10px;" id="to_data_load"   href="/cities/to" ><%=(@truck.tcity_name.nil?||@truck.tcity_name.empty?) ?"请选择到达地":@truck.tcity_name%></a>
       <%= f.hidden_field(:tcity_code) %>
       <%= f.hidden_field(:tcity_name) %>
-  <!-- do not change this format -->
+   <!-- do not change this format -->
 </div>
 
 
@@ -32,7 +32,7 @@
     <%=f.hidden_field(:stock_truck_id) %>
     <%= f.hidden_field(:user_id)%>
     <%= f.hidden_field(:company_id)%>
-   <%= f.hidden_field :user_contact_id%>
+    <%= f.hidden_field :user_contact_id%>
 
  <%= f.hidden_field :paizhao%>
  <%= f.hidden_field :dunwei%>

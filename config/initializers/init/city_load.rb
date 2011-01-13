@@ -1,12 +1,34 @@
 # coding: utf-8 
 ## To change this template, choose Tools | Templates
 # and open the template in the editor.
-require 'active_record'
-require 'ancestry'
 require 'iconv'
-
 $KCODE="U"
 
+# we take all city data as a global array of province
+# each province is a :province_code  with value hash of region
+#each region is a :city_code with value of hash of city
+
+# when we found a new province, insert a new hash into citytree
+# when we found a new region ,insert a new hash into province's hash
+# when we found a city insert city hash into region's hash
+
+# if search a city, we can easy get his province , thus we get all data under that hash
+
+# at last ,frozen all array
+
+# if mongodb has no city data , then insert it,is this needed?
+# we need province name hash, and region name hash ,to get the actual name of code
+#  {:province_id=>{:region_id1=>{{:city_id1,:city_name1},{:city_id2,:city2_name2}},{:region_id2=>{{:city_id,:city_name},{:city_id,:city_name}}}}
+class CityTree  
+  def initialize
+       # @mongo = Connection.new
+      #  @db = @mongo.db('g0')
+      #  @col_city=@db[:city]
+        $citytree=Hash.new  # to store array of province hash
+        $province_region=Hash.new  # to store code with name pair for province and region
+        puts "connection Mongodb success!" unless  @mongo.nil? ||@db.nil?  
+  end
+  
 def process_to_level_4
   town_list=Hash.new
   count=0
@@ -43,196 +65,82 @@ def process_to_level_4
   end
   out.close
   puts "结束城市基础数据文本的第一次加工处理"
-
 end
 
-def activerecord_connect
-  ActiveRecord::Base.establish_connection(
-    :adapter => "mysql" ,
-    :host  =>"localhost",
-    :database => "g1_development" ,
-    :username => "root" , # defaults to 'root'
-    :password => "",
-    :encoding => "utf8"
-  )
-  ActiveRecord::Base.connection.execute 'SET NAMES UTF8'
-end
-
-def write_into_province
-
-  #City.activerecord_connect if  not ActiveRecord::Base.connected?
-
-  # Wrtie into and load the root node
-  if City.find_by_name( "中国").nil?
-    rootnode=City.create! :name => "中国",:code => "100000000000" unless City.find_by_name( "中国")
-  else
-    rootnode=City.find_by_name( "中国")
-  end
-
-
-
+ #$citytree
+#  {:province_id=>{:region_id1=>{{:city_id1,:city_name1},{:city_id2,:city2_name2}},{:region_id2=>{{:city_id,:city_name},{:city_id,:city_name}}}}
+def parse_code_text3
   #first write into all province name
   filename=File.dirname(__FILE__)+File::SEPARATOR+"code3.txt"
   open(filename).each do |line|
-    #line=line.encode("utf-8")
     line=Iconv.conv("utf-8","GB2312",line)
     name= line.split(',')
-    if name[0].match(/\d\d0000000000$/)
-      name[1]=name[1].chomp!
-
-      city=City.find_by_code(name[0])
-
-      if city.nil?
-        puts "writing into #{name[1]}"
-      end
-      rootnode.children.create! :name => name[1],:code => name[0]  if city.nil?
-      #  City.create! :name => name[1],:code => name[0],:parent => rootnode if city.nil?
+    name[1]=name[1].chomp!
+    if name[0].match(/\d\d0000000000$/) # is a province id  
+      $province_region[name[0]]=name[1]  #insert name hash at first when found a province
+      $citytree[name[0]]={}
+    #  puts "is province =#{name[1]}"
+      
+    elsif name[0].match(/\d\d\d\d00000000$/)  and (not name[0].match(/\d\d0000000000$/))  # is a region
+       $province_region[name[0]]=name[1]  #insert name hash at first when found a region            
+       province_code=name[0].slice(0,2)+"0000000000"
+       $citytree[province_code][name[0]]={}  
+       # puts "is region =#{name[1]}"
+      
+    elsif (not name[0].match(/\d\d\d\d00000000$/)) and (not name[0].match(/\d\d0000000000$/))# is a city
+      province_code=name[0].slice(0,2)+"0000000000"
+      region_code=name[0].slice(0,4)+"00000000"
+      $citytree[province_code][region_code][name[0]]=name[1]    
+     # puts "is city =#{name[1]}"
+      
+    else
+      puts "非法城市数据"
+    end
+      
+     
     end
   end
 
-end
-
-def write_into_region
-  # City.activerecord_connect if  not ActiveRecord::Base.connected?
-
-  #first write into all region name
-  filename=File.dirname(__FILE__)+File::SEPARATOR+"code3.txt"
-  open(filename).each do |line|
-    # line=line.encode("utf-8")
-    line=Iconv.conv("utf-8","GB2312",line)
-
-    name= line.split(',')
-   
-    if name[0].match(/\d\d\d\d00000000$/)  and (not name[0].match(/\d\d0000000000$/))
-      #  puts name[0]+name[1]
-
-      name[1]=name[1].chomp!
-      parent_code=name[0].sub(/\d\d00000000$/,"")
-   
-      parent_code=parent_code+"0000000000"
-   
-      parent_node=City.find_by_code(parent_code)
-
-      if not (parent_node.nil?)
-        # puts "parent_code=#{parent_code}=#{parent_node.name}"
-      else
-        puts "parent code is nil parent_code=#{parent_code} for #{name[0]}"
-        raise "parent code error"
-      end
-
-      city=City.find_by_code(name[0])
-
-      if city.nil?
-        puts "writing into #{name[1]} parentnode= #{parent_code}"
-      end
-      parent_node.children.create! :name => name[1],:code => name[0]  if city.nil?
-      # City.create! :name => name[1],:code => name[0],:parent => parent_node if city.nil?
-    end
+def print_city_tree
+#  puts "print province"
+puts Time.now
+  start_time=Time.now
+  $citytree.each do |key,value|
+    #puts "province#{key}=#{$province_region[key]}"
   end
-
-end
-
-def write_into_city
-  filename=File.dirname(__FILE__)+File::SEPARATOR+"code3.txt"
-  open(filename).each do |line|
-    # line=line.encode("utf-8")
-    line=Iconv.conv("utf-8","GB2312",line)
-    
-    name= line.split(',')
-    if name[0].match(/\d\d\d\d\d\d000000$/)  and (not name[0].match(/\d\d0000000000$/)) and (not name[0].match(/\d\d\d\d00000000$/))
-      # puts name[0]+name[1]
-      name[1]=name[1].chomp!
-      parent_code=name[0].sub(/\d\d000000$/,"")
-      parent_code=parent_code+"00000000"
-      parent_node=City.find_by_code(parent_code)
-
-      if not (parent_node.nil?)
-        #  puts "parent_code=#{parent_code}=#{parent_node.name}"
-      else
-        puts "parent code is nil parent_code=#{parent_code} for #{name[0]}"
-        raise "parent code error"
-      end
-
-      city=City.find_by_code(name[0])
-
-      if city.nil?
-        puts "writing into #{name[1]} parentnode= #{parent_code}"
-      end
-      parent_node.children.create! :name => name[1],:code => name[0]  if city.nil?
-      #  City.create! :name => name[1],:code => name[0],:parent => parent_node if city.nil?
-    end
-  end
-end
-
-has_migrated=false;
-begin
-  if ActiveRecord::Base.connection.tables.include?('cities')
-    has_migrated=true
-  else
-    has_migrated=false
-  end
-rescue
-  has_migrated=false;
-end
-if(has_migrated==true)
-  if(City.count <3300)
-
-    write_into_province
-    write_into_region
-    write_into_city
-
-    puts "load the city data into table write complete"
-
-  end
-
-  rootnode=City.find_by_name("中国")
   
-  all_province=rootnode.subtree(:to_depth =>1)
-
-  $province=Hash.new
-  $province1=Hash.new
-  $province2=Hash.new
-
- if all_province.size >0
-all_province.each do |province|
-  $province.store(province.code,province.name)
-end
-  $province.delete(rootnode.code)
-end
-middle=$province.size/2
-i=0;
-
-$province.each do |key,value|
-  if i<middle
-    $province1.store(key,value)
-  else
-     $province2.store(key,value)
+  puts "print region"
+  $citytree.each do |province_code,region|
+    region.each do |region_code,city|
+     # puts "region#{region_code}=#{$province_region[region_code]}"
+    end
   end
-  i=i+1
+  
+  puts "print city"
+  $citytree.each do |province_code,region|
+    region.each do |region_code,city|
+      city.each do |city_code,city_name|
+    #    puts "city #{city_code}=#{city_name}"
+      end
+    end
+  end
+  end_time=Time.now
+  puts Time.now
+  puts "cost time pase all#{end_time-start_time}"
 end
 
 # generate a province hash for list
 #$province["100000000000"]="全国"
-$raw_province_array=[[110000000000,120000000000],
-[130000000000,140000000000],
-[210000000000,150000000000],
-[220000000000,230000000000],
-[320000000000,310000000000],
-[330000000000,340000000000],
-[350000000000,360000000000],
-[370000000000,410000000000],
-[420000000000,430000000000],
-[440000000000,450000000000],
-[460000000000,500000000000],
-[510000000000,520000000000],
-[530000000000,540000000000],
-[610000000000,620000000000],
-[630000000000,640000000000],
-[650000000000],
-]
 
-
+$raw_province_array=
+[[110000000000,130000000000,210000000000,220000000000,320000000000,330000000000,350000000000,370000000000,420000000000,440000000000,460000000000,510000000000,530000000000,610000000000,150000000000],
+[120000000000,140000000000,310000000000,340000000000,360000000000,410000000000,430000000000,450000000000,500000000000520000000000,540000000000,620000000000,620000000000,630000000000,650000000000,230000000000,]]
 
 end
+
+CityTree.new.parse_code_text3
+$citytree.freeze
+$province_region.freeze
+
 
 

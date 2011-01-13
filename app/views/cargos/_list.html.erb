@@ -1,10 +1,9 @@
-
+<%#coding:utf-8%>
 
 <table>
   <tr>
    
-    <th>货物</th>
-    
+    <th>货物</th>    
     <th>出发</th>
     <th>到达</th>
     <th>重量体积</th>
@@ -33,7 +32,6 @@
          <td><%= cargo.created_at.to_s.slice(5,11) %></td>
 
         <td><%= cargo.status %></td>
-
 
         <td><a class="show_float" href="/cargos/<%=cargo.id%>/quotes/cargo">查看车主报价<%= cstatistic.total_baojia %>个 </a></td>
         <td><a class="show_float " href="/cargos/<%=cargo.id%>/inqueries/cargo/">查看我的询价<%= cstatistic.total_xunjia %>个</a></td>

@@ -17,6 +17,3 @@ def load_contact_group
 
 load_contact_group
 
-$contact_group.each do |key,value|
-  puts "#{key}=#{value}"
-end

@@ -24,6 +24,9 @@ class StockTruck
       key :company_id,ObjectId
       key :car_phone,String
       key :user_id,ObjectId
+      
+      #Statistic
+      key :truckcount,Integer
 
       #status
       key :status,String

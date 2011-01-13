@@ -17,7 +17,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :company_license_id
       t.string :user_name
       t.integer :user_id
-
+      t.integer :ispersonal
       t.timestamps
     end
   end

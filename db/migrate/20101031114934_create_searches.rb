@@ -7,6 +7,7 @@ class CreateSearches < ActiveRecord::Migration
       t.string :tcity_name
       t.string :stype
       t.integer :user_id
+
       t.timestamps
     end
   end

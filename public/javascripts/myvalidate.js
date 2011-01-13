@@ -40,7 +40,7 @@ function form_validate(){
             },
             email: {
                 required: true
-            //  email: true
+                //  email: true
             },
             QQ:{
                 digits: true,
@@ -123,7 +123,7 @@ function form_validate(){
             },
             email: {
                 required: "email不能为空"
-            //  email: "电子邮件格式不对"
+                //  email: "电子邮件格式不对"
             },
             QQ:{
                 digits:"QQ号码不对",
@@ -367,24 +367,508 @@ function login_validation(){
     }, "用户名只能包含:汉字，字母，数字和下划线");
 }
 
-function stock_truck_new_validation(){
-    $("#stock_truck_new").validate(
+function company_new_validation()
+{
+    $("#company_new").validate(
     {
 
         rules: {
-            "stock_truck[paizhao]": {required: true}
-        },
-           
-        messages: 
-            {"stock_truck[paizhao]": 
-                {              required: "你还没有选择货物类别"            }
+            "company[name]": {
+                required: true,
+                maxlength:100
+            },
+            "company[about]": {
+                required: true,
+                minlength:6,
+                maxlength:500
+            },
+            "company[num_employ]":{
+                number: true,
+                maxlength:6
+            },
+            "company[signed_che]":{
+                number: true,
+                maxlength:6
+            },
+            "company[contact_name]":{
+                required: true,
+                minlength:2,
+                maxlength:50
+            },
+            "company[city_name]":{
+                required: true
+            },
+            "company[address]":{
+                required: true
+
+            },
+            "company[fix_phone]":{
+                minlength:7,
+                maxlength:13,
+                number:true
+            },
+            "company[mobile_phone]":{
+                required: true,
+                minlength:11,
+                maxlength:11,
+                number:true
+            },
+            "company[email]":{
+                email:true
+            },
+            "quhao":{
+                number:true,
+                minlength:3,
+                maxlength:4
             }
-        
+
+
+
+
+        },
+        messages: {
+
+            "company[name]": {
+                required: "名字没有填写",
+                maxlength:"长度需小于100"
+
+            },
+            "company[about]":{
+                required: "介绍不能为空",
+                maxlength:"长度500字以内"
+            },
+            "company[num_employ]":{
+                number: true
+            },
+            "company[num_employ]":{
+                number: "必须是数字",
+                maxlength:"不对吧"
+            },
+            "company[signed_che]":{
+                number: "必须是数字",
+                maxlength:"不对吧"
+            },
+            "company[contact_name]":{
+                required: "联系人没有提供",
+                minlength:"名字不对，太短",
+                maxlength:"名字不对，太长"
+            },
+            "company[city_name]":{
+                required: "没有选择所在城市"
+            },
+            "company[address]":{
+                required: "需要提供公司地址"
+
+            },
+            "company[fix_phone]":{
+                minlength:"电话号码太短",
+                maxlength:"电话号码太长",
+                number:"必须是数字"
+            },
+            "company[mobile_phone]":{
+                required: "提供一个手机吧",
+                minlength:"长度不对",
+                maxlength:"长度不对",
+                number:"必须是数字"
+            },
+            "company[email]":{
+                email:"email格式不对"
+            },
+            "quhao":{
+                number:"区号必须是数字",
+                minlength:"区号长度最短是3",
+                maxlength:"区号长度最长是4"
+            }
+        }
+    });
+}
+
+function usercontacts_new_validation()
+{
+    $("#usercontact_new").validate(
+    {
+
+        rules: {
+            "usercontact[name]":{
+                required:true,
+                minlength:2,
+                maxlength:20
+
+            },
+            "usercontact[QQ]":{
+                number:true,
+                minlength:6,
+                maxlength:15
+
+            },
+            "usercontact[mphone]":{
+                required:true,
+                minlength:11,
+                maxlength:11
+            },
+            "usercontact[quhao]":{
+                minlength:3,
+                maxlength:4
+            },
+            "usercontact[fixphone]":{ 
+                minlength:7,
+                maxlength:13
+            }
+
+        },
+
+        messages:
+            {
+            "usercontact[name]":{
+                required:"真实姓名没有填写",
+                minlength:"长度不对",
+                maxlength:"长度不对"
+
+            },
+
+            "usercontact[QQ]":{
+                number:"号码需要是数字",
+                minlength:"长度太短不对",
+                maxlength:"长度太长不对"
+
+            },
+            "usercontact[mphone]":{
+                required:"手机没有填写",
+                minlength:"长度不是11位",
+                maxlength:"长度不是11位"
+            },
+            "usercontact[quhao]":{
+                minlength:"区号最小3位",
+                maxlength:"区号最大4位"
+            },
+            "usercontact[fixphone]":{
+                minlength:"电话号码太短",
+                maxlength:"电话号码太长"
+            }
+
+        }
+
 
     });
+
+}
+
+function stock_cargo_new_validation(){
+
+    $("#stockcargo_new").validate(
+    {
+        submitHandler: function(form) {
+            $('#stockcargo_new').ajaxSubmit({
+                // beforeSubmit:function(){ (stock_cargo_new_validation());},
+                target: '#float_load',
+                success: function() {
+                    $("#show").load($("a.navi_stock_cargo").attr("href"));
+                    $('#navi').load("/public/navibar");
+                }
+            });
+            return false;
+        },
+
+        rules: {
+            "stockcargo[cate_code]":{
+                required: true
+            },
+            "stockcargo[package_code]":{
+                required: true
+            }
+        },           
+        messages: 
+            {
+            "stockcargo[cate_code]":{
+                required: "你还没有选择货物类别"
+            },
+            "stockcargo[package_code]":{
+                required: "你还没有选择包装类别"
+            }
+        }
     }
+);     
+}
+
+function stock_truck_new_validation(){
+
+    $("#stocktruck_new").validate(
+    {
+        submitHandler: function(form) {
+            $('#stocktruck_new').ajaxSubmit({
+                // beforeSubmit:function(){ (stock_cargo_new_validation());},
+                target: '#float_load',
+                success: function() {
+                    $("#show").load($("a.navi_stock_truck").attr("href"));
+                    $('#navi').load("/public/navibar");
+                }
+            });
+            return false;
+        },
+
+        rules: {
+            "stocktruck[paizhao]":{
+                required: true,
+                minlength:7,
+                maxlength:8
+            },
+            "stocktruck[dun_wei]":{
+                required: true,
+                number:true,
+                maxlength:5
+            },
+            "stocktruck[che_length]":{
+                required: true,
+                maxlength:5
+            },
+            "stocktruck[truck_shape]":{
+                required: true,
+                maxlength:5
+            },
+            "stocktruck[car_phone]":{
+                required: true,
+                maxlength:11,
+                number:true
+            },
+            "stocktruck[driver_name]":{
+                required: true,
+                maxlength:10
+            },
+            "stocktruck[driver_phone]":{
+                required: true,
+                maxlength:11,
+                number:true
+            }
+    
+        },
+
+        messages:
+            {
+            "stocktruck[paizhao]":{
+                required: "没有填写paizhao",
+                minlength:"长度太短不对",
+                maxlength:"长度太长不对"
+            },
+            "stocktruck[dun_wei]":{
+                required: " 没有填写 dunwei",
+                number: "需要是数字",
+                maxlength:"长度太长不对"
+            },
+            "stocktruck[che_length]":{
+                required: " 没有填写 che_length",
+                maxlength:"长度太长不对"
+            },
+            "stocktruck[truck_shape]":{
+                required: "没有填写 shape",
+                maxlength:"长度太长不对"
+            },
+            "stocktruck[car_phone]":{
+                required: " 没有填写 car_phone",
+                maxlength:"长度太长不对",
+                number:"not true"
+            },
+            "stocktruck[driver_name]":{
+                required: " 没有填写 driver_name",
+                maxlength:"长度太长不对"
+            },
+            "stocktruck[driver_phone]":{
+                required: " 没有填写 driver_phone",
+                maxlength:"长度太长不对",
+                number:"not true"
+            }
+        }
+    }
+    );
+    }
+function cargo_new_validation(){
+
+    $("#cargo_new").validate(
+    {
+        submitHandler: function(form) {
+                  $('#cargo_new').ajaxSubmit({
+      target: '#float_load',
+       success: function() {
+       $("#show").load($("a.navi_cargo").attr("href"));
+       $('#navi').load("/public/navibar");
+       $('a.navi_link').removeClass("navi_active");
+       $("a.navi_cargo").addClass('navi_active');
+        }
+            });
+            return false;
+        },
+
+        rules: {
+            "cargo[fcity_name]":{
+                required: true
+            },
+             "cargo[cargo_weight]":{
+                required: true
+            }
+
+        },
+
+        messages:
+            {
+            "cargo[fcity_name]":{
+                required: "你还没有选择出发地"
+            },
+            "cargo[cargo_weight]":{
+                required: " 没有填写 zhongliang"
+            }
+
+        }
+    }
+);
+}
+
+function truck_new_validation(){
+
+    $("#truck_new").validate(
+    {
+        submitHandler: function(form) {
+                  $('#truck_new').ajaxSubmit({
+      target: '#float_load',
+       success: function() {
+       $("#show").load($("a.navi_truck").attr("href"));
+       $('#navi').load("/public/navibar");
+       $('a.navi_link').removeClass("navi_active");
+       $("a.navi_truck").addClass('navi_active');
+        }
+            });
+            return false;
+        },
+
+        rules: {
+            "truck[fcity_name]":{
+                required: true
+            }
+
+        },
+
+        messages:
+            {
+            "truck[fcity_name]":{
+                required: "你还没有选择出发地"
+            }
+
+        }
+    }
+);
+}
+
+function inquery_new_validation(){
+
+    $("#inquery_new").validate(
+    {
+        submitHandler: function(form) {
+                  $('#inquery_new').ajaxSubmit({
+       target: '#float_load',
+       success: function() {
+      
+        }
+       });
+            return false;
+        },
+
+        rules: {
+            "inquery[cargo_id]":{
+                required: true
+            }
+
+        },
+
+        messages:
+            {
+            "inquery[cargo_id]":{
+                required: "你还没有货物"
+            }
+
+        }
+    }
+);
+}
+
+function quote_new_validation(){
+
+    $("#quote_new").validate(
+    {
+        submitHandler: function(form) {
+                  $('#quote_new').ajaxSubmit({
+       target: '#float_load',
+       success: function() {
+
+        }
+       });
+            return false;
+        },
+
+        rules: {
+            "quote[truck_id]":{
+                required: true
+            }
+
+        },
+
+        messages:
+            {
+            "quote[truck_id]":{
+                required: "你还没有chezi"
+            }
+
+        }
+    }
+);
+ 
+}
+/*
+function stock_truck_new_validation(){
+
+  $("#stocktruck_new").validate(
+    {
+    submitHandler: function(form) {
+     $('#stocktruck_new').ajaxSubmit({
+      // beforeSubmit:function(){ (stock_cargo_new_validation());},
+      target: '#float_load',
+       success: function() {
+       $("#show").load($("a.navi_stock_truck").attr("href"));
+       $('#navi').load("/public/navibar");
+    }
+  });
+  return false;
+ },
+
+        rules: {
+            "stocktruck[paizhao]":{
+                required: true,
+                minlength:7,
+                maxlength:8
+            },
+                "stocktruck[dun_wei]":{
+                required: true,
+                number:true,
+                maxlength:5
+            },
+             "stocktruck[che_length]":{
+                required: true,
+                maxlength:5
+        },
+        :truck_shape
+        messages:
+        {
+            "stockcargo[cate_code]":{
+                required: "你还没有选择货物类别"
+            },
+              "stockcargo[package_code]":{
+                required: "你还没有选择包装类别"
+            }
+        }
+    }
+);
+>>>>>>> e7a011aff656f944ababf4b1e1f4489901ba46d3
+}
 
 
+*/
 
 
 

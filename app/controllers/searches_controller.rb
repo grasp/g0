@@ -30,15 +30,15 @@ class SearchesController < ApplicationController
         @trucks = Truck.paginate :page=>params[:page] if @search.stype=="trucks"
     elsif @search.fcity_code.size<1 && @search.tcity_code.size>1
        @search.fcity_name=nil
-       @cargos=Cargo.where( ["tcity_code = ?", @search.tcity_code]) if @search.stype=="cargos"
-       @trucks=Truck.where( ["tcity_code = ?", @search.tcity_code]) if @search.stype=="trucks"
+       @cargos=Cargo.where(:tcity_code =>@search.tcity_code) if @search.stype=="cargos"
+       @trucks=Truck.where( :tcity_code => @search.tcity_code) if @search.stype=="trucks"
     elsif @search.tcity_code.size<1 && @search.fcity_code.size>1
        @search.tcity_name=nil
-       @cargos=Cargo.where( ["fcity_code = ?", @search.fcity_code]) if @search.stype=="cargos"
-       @trucks=Truck.where( ["fcity_code = ?", @search.fcity_code]) if @search.stype=="trucks"
+       @cargos=Cargo.where(:fcity_code =>@search.fcity_code) if @search.stype=="cargos"
+       @trucks=Truck.where(:fcity_code =>@search.fcity_code) if @search.stype=="trucks"
     else
-       @cargos=Cargo.where( ["fcity_code = ? AND tcity_code=  ?", @search.fcity_code, @search.tcity_code]) if @search.stype=="cargos"
-       @trucks=Truck.where( ["fcity_code = ? AND tcity_code=  ?", @search.fcity_code, @search.tcity_code]) if @search.stype=="trucks"
+       @cargos=Cargo.where( :fcity_code =>@search.fcity_code,:tcity_code=>@search.tcity_code) if @search.stype=="cargos"
+       @trucks=Truck.where( :fcity_code =>@search.fcity_code,:tcity_code=>@search.tcity_code) if @search.stype=="trucks"
     end
 
   end

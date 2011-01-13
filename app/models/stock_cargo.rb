@@ -29,6 +29,9 @@ class StockCargo
       key :user_id,ObjectId
       key  :company_id ,ObjectId 
       key  :scstatistic_id,ObjectId
+      
+     #Statistic
+     key :cargocount,Integer
 
       #status
       key :status,String

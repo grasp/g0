@@ -6,33 +6,33 @@ class CompaniesController < ApplicationController
   protect_from_forgery :except => [:tip,:login]
   include CompaniesHelper
   # layout "public"
-  layout  "users",:except => [:show,:index,:edit,:search]
+  layout  "users",:except => [:show,:index,:search]
 
   def index
-    @company = Company.where("user_id =?",session[:user_id]).first #only one company actully
+    @company = Company.where(:user_id =>session[:user_id]).first #only one company actully
     @inquery_company=Array.new
     @quote_company=Array.new
     @companies=Array.new
     #vendor
     if params[:who]=="vendor"
-      Inquery.where("cargo_company_id =? and status=?",@company.id,"已成交").each do |inquery|
+      Inquery.where(:cargo_company_id =>@company.id,:status=>"已成交").each do |inquery|
         @inquery_company<<inquery.truck_company_id
       end
-      Quote.where("cargo_company_id =? and status=?",@company.id,"已成交").each do |quote|
+      Quote.where(:cargo_company_id =>@company.id,:status=>"已成交").each do |quote|
         @quote_company<<quote.truck_company_id
       end
 
     elsif params[:who]=="custermer"
-      Inquery.where("truck_company_id =? and status=?",@company.id,"已成交").each do |inquery|
+      Inquery.where(:truck_company_id =>@company.id, :status=>"已成交").each do |inquery|
         @inquery_company<<inquery.cargo_company_id
       end
-      Quote.where("truck_company_id =? and status=?",@company.id,"已成交").each do |quote|
+      Quote.where(:truck_company_id =>@company.id,:status=>"已成交").each do |quote|
         @quote_company<<quote.cargo_company_id
       end
     
     else
       #this is for logined user
-      @company = Company.where("user_id =?",session[:user_id]).first #only one company actully
+      @company = Company.where(:user_id =>session[:user_id]).first #only one company actully
     end
 
     #calculate companies
@@ -69,14 +69,31 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   # GET /companies/new.xml
   def new
+
     @company = Company.new
     @user=User.find_by_id(session[:user_id])
+     if params[:who]=="personal"
+       @company.ispersonal=1
+     else
+       @company.ispersonal=0
+     end
+
+
+    if @user
     @company.user_id=@user.id
     @company.user_name=@user.name
+    else
+      flash[:notice]="非法用户，不能创建公司"
+      redirect_to root_path
+    end
 
-    respond_to do |format| 
+    respond_to do |format|
+      if params[:who]=="personal"
+        format.html {render :template=>"/companies/personalnew"}# new.html.erb
+      else
       format.html # new.html.erb
-    
+      end
+   
       format.xml  { render :xml => @company }
     end
   end
@@ -146,7 +163,7 @@ class CompaniesController < ApplicationController
     @company=Company.new
     @company.city_code=params[:companysearch][:city_code]
     @company.city_name=params[:companysearch][:city_name]
-    @companies=Company.where("city_code = ?",params[:companysearch][:city_code])
+    @companies=Company.where(:city_code =>params[:companysearch][:city_code])
 
     respond_to do |format|
 

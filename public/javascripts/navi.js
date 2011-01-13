@@ -33,6 +33,8 @@ $('a.navi_link').live("click",function(){
 
 $(".page_navi_link,div.page_navi_link a").live("click",function(){
     $('#show').load(this.href,function(){
+
+    stock_truck_new_validation();
  });
      return false;
     });

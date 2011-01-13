@@ -18,19 +18,19 @@
 </div>
 <div style="margin: 2px; width:30%;float:left;">
 <ul style="margin: 2px;">子类
-    <%  if not @cargo_category_two.nil?%>
+    <%  unless @cargo_category_two.nil?%>
       <% @cargo_category_two.each do |code,name|  %>
         <li>
-          <%= link_to name,"/cargo_categories/show/#{code}"%>
+          <%= link_to $catename[code],"/cargo_categories/show/#{code}"%>
         </li>
       <%end%>
     <%end%>
  </ul>
 </div>
-
+<!--
 <div style="margin: 2px; width:20%;float:left;">
  <ul style="margin: 2px;">小类
-  <%  if not @cargo_category_three.nil?%>
+  <%  unless @cargo_category_three.nil?%>
     <% @cargo_category_three.each do |code,name|  %>
     <li>
       <%= link_to name,"/cargo_categories/show/#{code}"%>
@@ -41,7 +41,7 @@
   <%end%>
  </ul>
 </div>
-
+-->
 
 
 <!--

@@ -17,6 +17,3 @@ def load_truck_usage
 
 load_truck_usage
 
-    $truck_pinpai.each do |key,value|
-  puts "#{key}=#{value}"
-end

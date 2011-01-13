@@ -10,15 +10,15 @@ def load_cargo_big_category
         if line.size >0
           user=line.force_encoding("utf-8").split(/\s/)
         $cargo_big_category[user[0]]=user[1].force_encoding("utf-8")
-         $cargo_big_category_reverse[user[1].force_encoding("utf-8")]=user[0]
-         end
+        $cargo_big_category_reverse[user[1].force_encoding("utf-8")]=user[0]
+        end
       end
   end
 
 load_cargo_big_category
 
-$cargo_big_category.each do |key,value|
+#$cargo_big_category.each do |key,value|
   
-  puts "cargo_big_category：#{key}=#{value}"
-end
+ # puts "cargo_big_category：#{key}=#{value}"
+#end
 

@@ -1,3 +1,4 @@
+<%#coding=utf-8%>
 <h1>我的全部车子</h1>
 
 <table>
@@ -14,23 +15,18 @@
     <th>全部车源</th>
 
   </tr>
-
   <% @stock_trucks.each do |stock_truck| %>
     <tr>
-
       <td>  <a class="show_float" href="/stock_trucks/show/<%=stock_truck.id%>"><%= stock_truck.paizhao %></a></td>
-
-
       <td><%=stock_truck.dun_wei %>吨,
         <%= stock_truck.che_length %>米,
-  <%#= $truck_usage[stock_truck.truck_usage] %>
         <%= $truck_shape[stock_truck.truck_shape] %>
       </td>
       <td><%= stock_truck.status %></td>
       <td><%= stock_truck.car_phone %></td>
       <td><%= stock_truck.driver_name %></td>
       <td><%= stock_truck.driver_phone %></td>
-      <td><a class="page_navi_link" href="/stock_trucks/<%=stock_truck.id%>/trucks/part"><%= stock_truck.trucks.count %>条车源</a></td>
+      <td><a class="page_navi_link" href="/stock_trucks/<%=stock_truck.id%>/trucks/part"><%=stock_truck.truckcount || "0"%>条车源</a></td>
       <td><a class="truck_fabu" href="/trucks/new/<%=stock_truck.id%>">发布车源</a></td>
       <td><a class="show_float" href="/stock_trucks/<%=stock_truck.id%>/edit">编辑</a><a href="/stock_trucks/destroy/<%=stock_truck.id%>">删除</a></td>
     </tr>
@@ -40,6 +36,6 @@
 <br />
 
 <p>
-  <a class="show_float" href="/stock_trucks/new">新增车子</a>
+  <a class="page_navi_link" href="/stock_trucks/new">新增车子</a>
 </p>
 

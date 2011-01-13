@@ -15,7 +15,7 @@ class StockCargosController < ApplicationController
     #this if for logined user only
    # @stock_cargos = StockCargo.where("user_id = ?",session[:user_id]).order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>5)
   # @stock_cargos = StockCargo.all(:user_id =>session[:user_id]).sort(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>5)
-    @stock_cargos = StockCargo.all(:user_id =>session[:user_id]).paginate(:page=>params[:page]||1,:per_page=>5)
+    @stock_cargos = StockCargo.where(:user_id =>session[:user_id]).paginate(:page=>params[:page]||1,:per_page=>5)
     @stock_cargos .each do |p|
       puts "stock_cargo=#{p}"
     end
@@ -60,7 +60,8 @@ class StockCargosController < ApplicationController
   def create
     # result= get_stock_cargo_from_params(params)
     #  @stock_cargo = StockCargo.new(params)
-    @stock_cargo = StockCargo.new(params[:stock_cargo])    
+    params[:stockcargo][:cargocount]=0 #init value
+    @stock_cargo = StockCargo.new(params[:stockcargo])    
     respond_to do |format|
       if @stock_cargo.save
         flash[:notice] = '货物创建成功！.'
@@ -79,8 +80,7 @@ class StockCargosController < ApplicationController
 
   # PUT /stock_cargos/1
   # PUT /stock_cargos/1.xml
-  def update
-    
+  def update    
     @stock_cargo = StockCargo.find(params[:id])
     respond_to do |format|
       if @stock_cargo.update_attributes(params[:stock_cargo])

@@ -10,7 +10,7 @@ function general_data_load(){
     $("a.data_load" ).live("click",function()
     {
         selected=$(this).next();
-         $("a.data_load").css("background-color","inherit");
+         $("a.data_load").css("background-color","#D4E4FF");
    $(this).css("background-color","#ffcc00");
         if(selected.css("display")=="none")
         {
@@ -37,9 +37,9 @@ function general_data_load(){
     
 
         selected.prev().text($(this).text());
-        $(".data_load").css("background-color","inherit");
+        $(".data_load").css("background-color","#D4E4FF");
         selected.prev().css("background-color","#ffcc00");
-            $(".data_list div ul li a" ).css("background-color","inherit");
+            $(".data_list div ul li a" ).css("background-color","#D4E4FF");
         $(this).css("background-color","#ffcc00");
         selected.next().val(code);
         selected.next().next().val($(this).text());

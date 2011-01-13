@@ -13,9 +13,9 @@ $(document).ready(function() {
         target:  '#show'
     };
 navi_js();
-form_submit();
-float_load_layer1();
 
+float_load_layer1();
+form_submit();
     $(".delete").live("click",function()
     {
         var answer = confirm('删除吗？');
@@ -27,15 +27,16 @@ float_load_layer1();
    //form_validate();
     user_new_validation();
     login_validation();
-stock_truck_new_validation();
+    company_new_validation();
+    usercontacts_new_validation();
+   // stock_truck_new_validation();
+   // stock_cargo_new_validation();
+   //stock_truck_new_validation();
    
 
      
     general_data_load();
-
-    city_load();
-
-
+     city_load();
   
 });
 

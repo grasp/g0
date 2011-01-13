@@ -12,6 +12,7 @@ class CreateQuotes < ActiveRecord::Migration
       t.integer :truck_company_id
       t.integer :cargo_user_id
       t.integer :cargo_company_id
+       t.integer :user_id
 
       #status of quotes
       t.string:status

@@ -53,18 +53,20 @@ root {
 }
 
 div.province{
-   float:left;
+  /*float:left;*/
+    display:block;
 
 
 }
 div.region{
-    float:left;
+     /*float:left;*/
+    display:block;
     
 
 }
 div.region ul li {
     margin-top: 10px;
-    width: 700px;
+   /* width: 700px;*/
 }
 
 .line{

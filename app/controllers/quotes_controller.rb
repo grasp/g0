@@ -9,12 +9,12 @@ class QuotesController < ApplicationController
   def index
 
     unless params[:cargo_id].nil?
-      @quotes =  Quote.find(:all,:conditions=>["cargo_id = ?",params[:cargo_id]])
+      @quotes =  Quote.find(:cargo_id =>params[:cargo_id])
     else
       unless params[:to].nil?
-        @quotes =  Quote.find(:all,:conditions=>["userb_id = ?",session[:user_id]])
+        @quotes =  Quote.find(:userb_id =>session[:user_id])
       else
-        @quotes =  Quote.find(:all,:conditions=>["user_id = ?",session[:user_id]])
+        @quotes =  Quote.find(:user_id =>session[:user_id])
       end
     end
     
@@ -27,7 +27,7 @@ class QuotesController < ApplicationController
 
   def part
     @truck=Truck.find_by_id(params[:truck_id])
-    @quotes=Quote.where("truck_id = ? AND user_id = ?", params[:truck_id], session[:user_id])
+    @quotes=Quote.where(:truck_id =>params[:truck_id], :user_id =>session[:user_id])
 
     respond_to do |format|
       format.html # part.html.erb
@@ -38,8 +38,7 @@ class QuotesController < ApplicationController
   def cargo
     @cargo=Cargo.find_by_id(params[:cargo_id])
     #only belong to me
-    @quotes=Quote.where("cargo_id = ?", params[:cargo_id])
-
+    @quotes=Quote.where(:cargo_id => params[:cargo_id])
     respond_to do |format|
       format.html # cargo.html.erb
       format.xml  { render :xml => @quotes }
@@ -49,7 +48,7 @@ class QuotesController < ApplicationController
   #one trucks's all baojia
   def truck
     @truck=Truck.find_by_id(params[:truck_id])
-    @quotes=Quote.where("truck_id = ? AND user_id = ?", params[:truck_id], session[:user_id])
+    @quotes=Quote.where(:truck_id => params[:truck_id], :user_id =>session[:user_id])
     respond_to do |format|
       format.html # part.html.erb
       format.xml  { render :xml => @quotes }
@@ -62,7 +61,7 @@ class QuotesController < ApplicationController
   def show
     @quote = Quote.find(params[:id])
     @cargo=Cargo.find_by_id(@quote.cargo_id)
-    @trucks = Truck.find(:all,:conditions=>["user_id = ?",session[:user_id]])
+    @trucks = Truck.where(:user_id =>session[:user_id])
     @mytruck=Hash.new
     @trucks.each do |truck|
       @mytruck[truck.paizhao]=truck.id
@@ -80,14 +79,15 @@ class QuotesController < ApplicationController
 
     @quote = Quote.new
     @cargo=Cargo.find(params[:cargo_id])
-    @quote.cargo_id=@cargo.id 
+    @quote.cargo_id=@cargo.id
     @quote.user_id=session[:user_id]
-    @trucks = Truck.where("user_id = ? AND status= ?",session[:user_id],"配货")
-     
+    @quote.cargo_user_id=@cargo.user_id
+    @quote.cargo_company_id=@cargo.company_id
+    @trucks = Truck.where(:user_id =>session[:user_id],:status=>"配货")     
     @mytruck=Hash.new
 
     if params[:truck_id].nil?
-      @trucks = Truck.where("user_id = ? AND status = ?",session[:user_id],"配货")
+      @trucks = Truck.where(:user_id =>session[:user_id],:status =>"配货")
 
       @trucks.each do |truck|
         @mytruck[truck.paizhao+"("+truck.fcity_name+"<=>"+truck.tcity_name+")"]=truck.id
@@ -109,7 +109,7 @@ class QuotesController < ApplicationController
 
     @quote = Quote.find(params[:id])
      
-    @trucks = Truck.find(:all,:conditions=>["user_id = ?",session[:user_id]])
+    @trucks = Truck.where(:user_id =>session[:user_id])
     @mytruck=Hash.new
     @trucks.each do |truck|
       @mytruck[truck.paizhao]=truck.id
@@ -123,16 +123,15 @@ class QuotesController < ApplicationController
 
   def create
     @quote = Quote.new(params[:quote])
-
     if params[:mianyi]=="on"
       @quote.price=nil
     end
 
-    @cargo=Cargo.find(@quote.cargo_id)
+  #  @cargo=Cargo.find(@quote.cargo_id)
     @truck=Truck.find(@quote.truck_id)
 
-    @quote.cargo_company_id=@cargo.company_id
-    @quote.cargo_user_id=@cargo.user_id
+  #  @quote.cargo_company_id=@cargo.company_id
+  #  @quote.cargo_user_id=@cargo.user_id
     @quote.truck_company_id=@truck.company_id
     @quote.truck_user_id=@truck.user_id
 
@@ -141,12 +140,12 @@ class QuotesController < ApplicationController
         #update statistic
         @cstatistic=Cstatistic.find(@cargo.cstatistic_id)
         total_baojia=@cstatistic.total_baojia || 0
-        @cstatistic.update_attribute(:total_baojia,total_baojia+1)
+        @cstatistic.update_attributes(:total_baojia=>total_baojia+1)
 
         #update  tstatistic
         @tstatistic=Tstatistic.find(@truck.tstatistic_id)
-        total_baojia=@tstatistic.total_baojia || 0
-        @tstatistic.update_attribute(:total_baojia,total_baojia+1)
+         total_baojia=@tstatistic.total_baojia || 0
+        @tstatistic.update_attributes(:total_baojia=>total_baojia+1)
     
         flash[:notice]= "创建报价成功！"
         format.html { redirect_to(@quote, :notice => 'Quote was successfully created.') }
@@ -181,28 +180,28 @@ class QuotesController < ApplicationController
     #update truck status
     @truck=Truck.find(@quote.truck_id)
      
-    @truck.update_attribute(:status,"请求成交")
+    @truck.update_attributes(:status=>"请求成交")
     #update cargo status
 
     @cargo=Cargo.find(@quote.cargo_id)
-    @cargo.update_attribute(:status,"请求成交")
+    @cargo.update_attributes(:status=>"请求成交")
 
-    @quote.update_attribute(:status,"请求成交")
+    @quote.update_attributes(:status=>"请求成交")
 
     #TOTO:notify all other related truck
     #All quotes to from this truck change to chenjiao
 
-    @quotes=Quote.where("truck_id =? AND status =?",@truck.id,"配货")
+    @quotes=Quote.where(:truck_id =>@truck.id , :status =>"配货")
     if  @quote.size>0
       @quotes.each do |quote|
-        quote.update_attribute(:status,"过期")
+        quote.update_attributes(:status=>"过期")
       end
     end
     #All Inquers from this cargo neec change to chenjiao
-    @inqueries=Inquery.where("cargo_id =? AND status =?",@cargo.id,"配货")
+    @inqueries=Inquery.where(:cargo_id =>@cargo.id,:status=>"配货")
     if  @inqueries.size>0
       @inqueries.each do |inquery|
-        inquery.update_attribute(:status,"过期")
+        inquery.update_attributes(:status=>"过期")
       end
     end
 

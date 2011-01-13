@@ -28,10 +28,10 @@ class Cargo
       key :tcity_code,String
       
       # for contact
-      key :user_id,Integer
-      key :company_id,Integer
-      key :stock_cargo_id,Integer
-      key :user_contact_id,Integer
+      key :user_id,ObjectId
+      key :company_id,ObjectId
+      key :stock_cargo_id,ObjectId
+      key :user_contact_id,ObjectId
 
       #important information
       key :zhuang_addr,String
@@ -39,10 +39,10 @@ class Cargo
       key :xie_addr,String
 
       #future usage
-      key :pingjia_id,Integer
-      key :cstatistic_id,Integer
+      key :pingjia_id,ObjectId
+      key :cstatistic_id,ObjectId
       
-       timestamps!
+     timestamps!
 
      
 end

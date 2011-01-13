@@ -17,7 +17,4 @@ def load_cargo_option
 
 load_cargo_option
 
-  $cargo_option.each do |key,value|
-  puts "#{key}=#{value}"
-end
 

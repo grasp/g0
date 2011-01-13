@@ -73,6 +73,11 @@
 -->
 
   <div class="field">
+    <label for="装车时间">装车时间：</label>
+    <%= f.text_field(:zhuang_time) %>
+  </div>
+
+  <div class="field">
     <label for="装货地址">装货地址：</label>
     <%= f.text_field(:zhuang_addr) %>
   </div>
@@ -82,10 +87,6 @@
     <%= f.text_field(:xie_addr) %>
   </div>
 
-  <div class="field">
-    <label for="装车时间">装车时间：</label>
-    <%= f.text_field(:zhuang_time) %>
-  </div>
 
   <div class="actions">
     <%= f.submit("确定") %>

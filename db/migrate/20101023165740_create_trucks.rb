@@ -35,7 +35,7 @@ class CreateTrucks < ActiveRecord::Migration
       #for future usage
       t.integer :truck_pingjia_id
       t.integer :truck_status_id
-      t.integer :tstatistic_id      
+      t.integer :tstatistic_id
    
       t.timestamps
     end

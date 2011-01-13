@@ -14,58 +14,40 @@ function float_load_layer1(){
         var cord_top=corordiate.top;
 
         selected=$('#float_show');
+        
         var select_parent=$(this).parent().parent();
 
-      $('tr').css("background-color","white");
+       $('tr').css("background-color","white");
 
        $('#float_load').empty();
        $('#float_load').load(this.href,function(){
-
-      $("#stock_cargo_new").validate(
-     {
-
-        rules: {
-            "stock_cargo[package_code]": {required: true},
-            "stock_cargo[cate_code]": { required: true}
-
-        },
-        messages: {"stock_cargo[cate_code]": {              required: "你还没有选择货物类别"            },
-            "stock_cargo[package_code]":{                required: "你还没有选择包装类别"          }
-        }
-
-    });
- $("#stock_truck_new").validate(
-    {
-
-        rules: {
-            "stock_truck[paizhao]": {required: true}
-        },
-
-        messages:
-            {"stock_truck[paizhao]":
-                {              required: "你还没有选择货物类别"            }
-            }
-
-
-    });
-
-
+     
+           stock_cargo_new_validation();
+           cargo_new_validation();
+           truck_new_validation();
+           inquery_new_validation();
+           quote_new_validation();
        });
 
+  
+
        css_class= $(this).attr("class");
-        
+
+            
+             
         if(selected.css("display")=="none")
         {
-            selected.css("display","inline");
+           selected.css("display","inline");
         }
         else
         {
-             selected.css("display","none");
-             $('tr').css("background-color","white;");
-             selected.css("display","inline");
+            
+            selected.css("display","none");
+             
+             selected.css("display","inline"); 
+            
         }
 
-        
 
 //        alert(select_parent.get(0).nodeName);
          if(select_parent.get(0).nodeName=="TR")
@@ -97,13 +79,23 @@ function float_load_layer1(){
              selected.css("left",$("#show").offset().left);
           }
 */
-        return false;
+         if($.browser.msie) {
+                event.returnValue = false;
+                event.preventDefault();
+                return false;
+            }
+            else   return false;
     });
 
     $('a.float_close').live("click",function(){
         $('#float_show').css("display","none");
         $('tr').css("background-color","white");
-        return false;
+          if($.browser.msie) {
+                event.returnValue = false;
+                event.preventDefault();
+                return false;
+            }
+            else   return false;
     });
 
 

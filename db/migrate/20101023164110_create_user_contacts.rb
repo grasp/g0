@@ -3,9 +3,9 @@ class CreateUserContacts < ActiveRecord::Migration
     create_table :user_contacts do |t|
       t.string :name
       t.string :email
-      t.string :mobile_phone
-      t.string :phone_quhao
-      t.string :fix_phone     
+      t.string :mphone
+      t.string :quhao
+      t.string :fixphone     
       t.string :QQ
       t.string :website
       t.string :city_name

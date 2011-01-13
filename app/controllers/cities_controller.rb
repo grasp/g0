@@ -1,38 +1,35 @@
- # coding: utf-8
+ #coding: utf-8
 class CitiesController < ApplicationController
   # GET /cities
   # GET /cities.xml
   layout :nil
 
   def index
-
-    @selected_city_code=code=params[:code]  
-
-  
-    if code.nil?
-      @selected_city_name=nil
-      @selected_city_code=nil
-    else
-    @selected_city_name=City.get_full_name_by_code(code)
-     @selected_city_code=code
-    end
-
-    @selected_city_code ||="330106000000"
-
-    if code.nil? || code=="100000000000"
-      code="330106000000"
+    code=params[:code]
+     if code.nil? || code=="100000000000"
+      code="330100000000" #default open ZheJiang Province
       puts "code is nil !!!"
-    end
-    @province=City.find_by_code(code[0..1]+"0000000000")
-    logger.debug("we got a code=#{code}")
-
-    puts "index get code =#{code},selected_code=#{@selected_city_code}"
-
-    ret=City.get_region_city_by_code(code)
+    end    
     
-    @region_list=ret[0]
-    @city_list=ret[1]
-
+    @selected_city_code=code    
+    puts "we received city code request=#{code}"    
+    if code.match(/\d\d0000000000$/) # is a province id  
+      @selected_city_name= $province_region[code]
+       @province_code=code
+       @region=$citytree[@province_code]
+      
+    elsif code.match(/\d\d\d\d00000000$/)  and (not code.match(/\d\d0000000000$/))
+       @selected_city_name= $province_region[code.slice(0,2)+"0000000000"]+$province_region[code]
+       @province_code=code.slice(0,2)+"0000000000"
+       @region_code=code  
+       @region=$citytree[@province_code]
+    else
+      @province_code=code.slice(0,2)+"0000000000"
+      @region_code=code.slice(0,4)+"00000000"
+      @city_code=code
+      @region=$citytree[@province_code]
+      @selected_city_name= $province_region[@province_code]+$province_region[@region_code]+$citytree[@province_code][@region_code][code]
+    end    
 
     respond_to do |format|
       format.html # index.html.erb

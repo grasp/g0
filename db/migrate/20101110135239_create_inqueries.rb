@@ -15,6 +15,7 @@ class CreateInqueries < ActiveRecord::Migration
       t.integer :truck_user_id
       t.integer :cargo_company_id
       t.integer :cargo_user_id
+       t.integer :user_id
       
 #feature usage
       t.integer :ismailed

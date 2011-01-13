@@ -7,11 +7,15 @@ class CreateUsers < ActiveRecord::Migration
       t.string :hashed_password
       t.string :salt
       t.string :status
-      t.string :activate      
+      t.string :activate
+      
       t.integer :company_id
       t.integer :user_contact_id
+
       t.integer :ustatistic_id
-      t.integer :preference      
+
+      t.integer :preference
+      
       t.timestamps
     end
   end

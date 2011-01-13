@@ -10,4 +10,4 @@ $truck_huicheng["003"]="其他车"
 
 $truck_huicheng_reverse["回程车"]="001"
 $truck_huicheng_reverse["本地车"]="002"
-$truck_huicheng["其他车"]="003"
+$truck_huicheng_reverse["其他车"]="003"

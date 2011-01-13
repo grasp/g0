@@ -4,11 +4,11 @@
  */
 
 function form_submit(){
+    /*
      $('#stock_cargo_submit').live("click",function(){
-  // alert(" search_submit Hi");
-      $('#stock_cargo_new').ajaxSubmit({
-
-    //  beforeSubmit:function(){stock_cargo_new_validation();},
+    
+      $('#stockcargo_new').ajaxSubmit({
+      // beforeSubmit:function(){ (stock_cargo_new_validation());},
       target: '#float_load',
        success: function() {
        $("#show").load($("a.navi_stock_cargo").attr("href"));
@@ -29,7 +29,7 @@ function form_submit(){
   });
   return false;
 });
-
+*/
  $('#search_submit').live("click",function(){
   // alert(" search_submit Hi");
       $('.show_form').ajaxSubmit({
@@ -41,6 +41,7 @@ function form_submit(){
   return false;
 });
 
+/*
 
  $('#cargo_submit').live("click",function(){
    // alert("quote_submit Hi");
@@ -69,7 +70,7 @@ function form_submit(){
   });
   return false;
 });
-
+*/
 
 /*
  $('#user_contact_submit').live("click",function(){
@@ -83,13 +84,12 @@ function form_submit(){
   return false;
 });
 */
-
+/*
  $('#inquery_submit').live("click",function(){
       $('#inquery_new').ajaxSubmit({
       target: '#float_load',
        success: function() {
-      /* $('#navi').load("/public/navibar");*/
-    }
+       }
   });
   return false;
 });
@@ -98,16 +98,14 @@ function form_submit(){
       $('#quote_new').ajaxSubmit({
       target: '#float_load',
        success: function() {
-      /* $('#navi').load("/public/navibar");*/
-      //alert("quote loaded")
+     
     }
   });
   return false;
 });
-
-
-
+*/
 }
+
 
  $('#companysearch_submit').live("click",function(){
    // alert("quote_submit Hi");
@@ -118,10 +116,10 @@ function form_submit(){
   });
   return false;
 });
-//only apply for edit submit which use ajax submit
- $('#company_edit #company_submit').live("click",function(){
-    // alert("company_submit Hi");
-      $('#company_edit').ajaxSubmit({
+/*
+ $('#company_submit').live("click",function(){
+   // alert("quote_submit Hi");
+      $('#company_new,#company_edit').ajaxSubmit({
       target: '#show',
        success: function() {
     }
@@ -129,7 +127,7 @@ function form_submit(){
   return false;
 });
 
-
+*/
 $('a.cargo_chenjiao').live("click",function(){
 $("#float_show").css("display","none")
 $("#show").load(this.href);

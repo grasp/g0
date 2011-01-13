@@ -17,6 +17,3 @@ def load_shape_usage
 
 load_shape_usage
 
- $truck_shape.each do |key,value|
-  puts "#{key}=#{value}"
-end

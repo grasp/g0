@@ -5,7 +5,6 @@ class CargoCategoriesController < ApplicationController
   layout :nil
   def index
     @cargo_categories = CargoCategory.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @cargo_categories }
@@ -15,24 +14,20 @@ class CargoCategoriesController < ApplicationController
   # GET /cargo_categories/1
   # GET /cargo_categories/1.xml
   def show
-    @cargo_category = CargoCategory.find_by_code(params[:code])
+   # @cargo_category = CargoCategory.find_by_code(params[:code])
     code=params[:code]
-    puts code
+   # puts code
      if (code.match(/\d\d0000/))
-           @cargo_category_two=$cargo_category_two[code]
-           code_three = @cargo_category_two.keys[@cargo_category_two.size-1]
-           @cargo_category_three = $cargo_category_three[code_three]
+           @cargo_category_two=$catetree[code]
      elsif(code.match(/\d\d\d\d00/))
-       parent_code=code[0,2]+"0000"
-           @cargo_category_two=$cargo_category_two[ parent_code]
-          @cargo_category_three =  $cargo_category_three[code]
+           parent_code=code[0,2]+"0000"
+           @cargo_category_two=$catetree[code][parent_code]          
      else
-         parent_code=code[0,4]+"00"
-         ancient_code=code[0,2]+"0000"
-           @cargo_category_two=$cargo_category_two[ ancient_code]
-         @cargo_category_three = $cargo_category_three[parent_code]
+           parent_code=code[0,4]+"00"
+           ancient_code=code[0,2]+"0000"
+           @cargo_category_two=$catetree[ancient_code]
+           @cargo_category_three = $catetree[ancient_code][parent_code]
      end
-
  
     respond_to do |format|
       format.html # show.html.erb

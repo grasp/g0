@@ -1,7 +1,11 @@
 
 .show_form {
      background-color:rgb(236,245,255);
-     width:100%;
+    /* width:100%;*/
+}
+
+.stock_truck_new{
+    width:50%;
 }
 
 .show_form .field,.actions {
@@ -37,7 +41,8 @@
      font-weight: bold;
      display:-moz-inline-stack;
      /*width: 110px; width of labels. Should be smaller than left column (155px) to create some right margin*/
-     width:50%;
+    /* width:50%;*/
+     width:20%;
      display:inline-block;
      margin-left:10px;
 }
@@ -49,7 +54,7 @@ div.stockcargo_new .field label{
 /* for email reminder label*/
 #register_email
 {
-     width:100%;
+    /* width:100%;*/
 }
 
 
@@ -62,7 +67,7 @@ div.stockcargo_new .field label{
 
 .show_form input { /*width of text boxes. IE6 does not understand this attribute*/
   margin-left: 10px;
-  width:80%;
+ /* width:80%;*/
   height:20px;
 }
 
@@ -73,7 +78,7 @@ div.stockcargo_new .field input{
 
 .show_form select { /*width of text boxes. IE6 does not understand this attribute*/
   /*margin-left: 10px;*/
-  width:80%;
+ /* width:80%;*/
 } 
 
 
@@ -139,8 +144,10 @@ to account for 3 pixel bug: http://www.positioniseverything.net/explorer/threepx
 .float_close,.float_close2 {
     margin-bottom: 5px;
     font-size: larger;
-    float:left;
+   /* float:left;*/
+    display:block;
     background-color:#D4E4FF;
+    
 }
 
 div.form_header{
@@ -170,14 +177,14 @@ margin-top:20px;margin-left: auto; margin-right: auto; text-align:center
 }
 
 .stock_cargo_new,.cargo_new,.truck_new{
-    width:100%;
+   /* width:100%;*/
     background-color:#D4E4FF;
 }
 
 /*show  common*/
 .show_stock_cargo{
      background-color:rgb(236,245,255);
-     width:100%;
+   /*  width:100%;*/
 }
 
 .title{

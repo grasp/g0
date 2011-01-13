@@ -33,12 +33,12 @@
     <%= f.label :自有车辆 %>
     <%= f.text_field :self_che %>
   </div>
-
+<!--
   <div class="field">
     <%= f.label :协议车辆 %>
     <%= f.text_field :signed_che %>
   </div>
-
+-->
 
 <h2>公司的联系信息 </h2>
 <div class="field">
@@ -50,7 +50,7 @@
 <div class="field"  style="display:inline">
 
   <!-- do not change below  format -->
-      <label >所在城市:</label>
+      <label style="width:130px;" >所在城市:</label>
       <a id="from_data_load"  class="company_city" href="/cities/from"><%=@company.city_name ||"选择"%></a>
       <%= f.hidden_field(:city_code) %>
       <%= f.hidden_field(:city_name) %>
@@ -65,8 +65,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :固定电话 %>
-     <input  style="width:30px;" id="quhao" name="quhao" type="text" value=<%=@company.quhao%> > </input>
+    <label style="width:130px;">固定电话:</label>
+     <input  style="width:50px;" id="quhao" name="quhao" type="text" value=<%=@company.quhao%> > </input>
      --
      <input  style="width:150px;" id="companyfix_phone" name="company[fix_phone]" type="text" value=<%=@company.fix_phone%> > </input>
      <%#= f.text_field :fix_phone %>
@@ -83,6 +83,7 @@
   </div>
 <%= f.hidden_field :user_id %>
 <%= f.hidden_field :user_name %>
+<%= f.hidden_field(:ispersonal) %>
   <div class="actions">
     <%= f.submit("确定")%>
   </div>

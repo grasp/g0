@@ -28,7 +28,7 @@
 
 -->
     <%= f.hidden_field :cargo_id %>
-    <%= f.hidden_field :user_id %>
+
 
   <div class="field">
     <%= f.label :我的车辆和线路 %>
@@ -36,7 +36,9 @@
      <%= f.select(:truck_id,options_for_select(@mytruck.to_a,@quote.truck_id) ) %>
   </div>  
 
-
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :cargo_user_id %>
+  <%= f.hidden_field :cargo_company_id %>
 
   <div class="actions">
     <%= f.submit("确定") %>

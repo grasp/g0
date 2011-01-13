@@ -24,10 +24,10 @@ class UserContactsController < ApplicationController
 
     #vendor
     if params[:who]=="vendor"
-      Inquery.where("cargo_user_id =? and status=?",user_id,"已成交").each do |inquery|
+      Inquery.where(:cargo_user_id =>user_id,:status=>"已成交").each do |inquery|
         @inquery_user<<inquery.truck_user_id
       end
-      Quote.where("cargo_company_id =? and status=?",user_id,"已成交").each do |quote|
+      Quote.where(:cargo_company_id =>user_id,:status=>"已成交").each do |quote|
         @quote_user<<quote.truck_user_id
       end
 
@@ -42,7 +42,7 @@ class UserContactsController < ApplicationController
 
     else
       #this is for logined user
-      @user_contacts = Company.where("user_id =?",session[:user_id]).first #only one company actully
+      @user_contacts = Company.where(:user_id =>session[:user_id]).first #only one company actully
     end
 
     #calculate users
@@ -114,18 +114,18 @@ class UserContactsController < ApplicationController
              @user_contact.fix_phone=phone[1]
           end
     else
-      @user_contact=UserContact.find(:first,:conditions => [ "name = ? AND email = ?", session[:user_name], session[:user_email]])
+      @user_contact=UserContact.where(:name =>session[:user_name],:email =>session[:user_email]).first
       @user_contact.name=session[:user_name]
       @user_contact.email=session[:user_email]
-      @user_contact.group="001"
+      @user_contact.group="001"  #what is this for????
     end
   end
 
   # POST /contact_people
   # POST /contact_people.xml
   def create
-    params[:user_contact][:user_id]=session[:user_id]
-     @user_contact = UserContact.new(params[:user_contact])
+     params[:usercontact][:user_id]=session[:user_id]
+     @user_contact = UserContact.new(params[:usercontact])
     respond_to do |format|
       if @user_contact.save
         flash[:notice] = '成功创建了联系人,还需要创建你的公司'

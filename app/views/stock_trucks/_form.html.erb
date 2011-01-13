@@ -1,4 +1,4 @@
-<%= form_for(@stock_truck,:as=>:stock_truck,:html=>{:class=>"show_form"}) do |f| %>
+<%= form_for(@stock_truck,:as=>:stocktruck,:html=>{:class=>"show_form"}) do |f| %>
   <% if @stock_truck.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@stock_truck.errors.count, "error") %> prohibited this stock_truck from being saved:</h2>
@@ -27,7 +27,7 @@
   </div>
   <div class="field">
     <%= f.label :用途 %>
-      <%= f.select(:truck_usage,options_for_select($truck_usage_reverse.to_a,@stock_truck.truck_usage) ) %>
+    <%= f.select(:truck_usage,options_for_select($truck_usage_reverse.to_a,@stock_truck.truck_usage) ) %>
   </div>
   <div class="field">
     <%= f.label :车厢结构 %>

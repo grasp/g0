@@ -49,6 +49,7 @@ G0::Application.routes.draw do
       resources :inqueries
       resources :quotes
   end
+  match '/companies/new/(:who)' =>'companies#new',:as=>:companiesnewwho
   match '/companies/index/:id/(:who)' =>'companies#index',:as=>:companiesindex
   match '/companies/show/:id/(:who)' =>'companies#show',:as=>:companiesshow
   match '/companies/search' =>'companies#search',:as=>:companiessearch

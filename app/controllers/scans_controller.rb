@@ -12,19 +12,18 @@ class ScansController < ApplicationController
 
     Truck.all.each do |truck|
       if compare_time_expired(truck.created_at,truck.send_date)==true
-
         #only for first time 过期
         if truck.status!="过期"
         #only can be once
         lstatistic=Lstatistic.find_by_line(truck.line)
-        lstatistic.update_attribute(:valid_truck,lstatistic.valid_truck-1)
-        truck.update_attribute(:status,"过期")
+        lstatistic.update_attributes(:valid_truck=>lstatistic.valid_truck-1)
+        truck.update_attributes(:status=>"过期")
         #update the line statistic
-        trucks=Truck.where("stock_truck_id = ? AND status = ?",truck.stock_truck_id,"配货")
+        trucks=Truck.where(:stock_truck_id =>truck.stock_truck_id,:status =>"配货")
 
         expired_truck+=1;
         if trucks.size==0
-          StockTruck.find(truck.stock_truck_id).update_attribute(:status,"空闲")
+          StockTruck.find(truck.stock_truck_id).update_attributes(:status=>"空闲")
         end
         end
 
@@ -35,16 +34,16 @@ class ScansController < ApplicationController
       if compare_time_expired(cargo.created_at,cargo.send_date)==true
 
         if cargo.status!="过期"
-        cargo.update_attribute(:status,"过期")
-        cargos=Cargo.where("stock_cargo_id = ? AND status = ?",cargo.stock_cargo_id,"配车")
+        cargo.update_attributes(:status=>"过期")
+        cargos=Cargo.where(:stock_cargo_id =>cargo.stock_cargo_id,:status =>"配车")
         
         #update the line statistic
         lstatistic=Lstatistic.find_by_line(cargo.line)
-        lstatistic.update_attribute(:valid_cargo,lstatistic.valid_cargo-1)
+        lstatistic.update_attributes(:valid_cargo=>lstatistic.valid_cargo-1)
         expired_cargo+=1
         
         if cargos.size==0
-          StockCargo.find(cargo.stock_cargo_id).update_attribute(:status,"空闲")
+          StockCargo.find(cargo.stock_cargo_id).update_attributes(:status=>"空闲")
         end
         end
       end
@@ -55,9 +54,9 @@ class ScansController < ApplicationController
       
     scan=Hash.new
     scan[:total_stock_cargo]=StockCargo.count
-    scan[:idle_stock_cargo]=StockCargo.where("status = ?","空闲").count
+    scan[:idle_stock_cargo]=StockCargo.where(:status =>"空闲").count
     scan[:total_stock_truck]=StockTruck.count
-    scan[:idle_stock_truck]=StockTruck.where("status = ?","空闲").count
+    scan[:idle_stock_truck]=StockTruck.where(:status =>"空闲").count
         
     scan[:total_cargo]=Cargo.count
     scan[:total_truck]=Truck.count
@@ -65,8 +64,8 @@ class ScansController < ApplicationController
     scan [:expired_truck]=expired_truck
     scan[:expired_cargo]=expired_cargo
 
-    scan[:chenjiao_cargo]=Cargo.where("status = ?","chenjiao").count
-    scan[:chenjiao_truck]=Truck.where("status = ?","chenjiao").count
+    scan[:chenjiao_cargo]=Cargo.where(:status =>"已成交").count
+    scan[:chenjiao_truck]=Truck.where(:status =>"已成交").count
     scan[:total_line]=Lstatistic.count
     scan[:total_user]=User.count
     scan[:total_company]=Company.count
