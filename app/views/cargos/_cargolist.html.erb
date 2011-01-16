@@ -17,7 +17,7 @@
       <%unless cargo.nil? %>
         <tr>
             <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
-        <%= cargo.cate_name %></a> </td>
+           <%= cargo.cate_name %></a> </td>
           <td><%= cargo.fcity_name %></td> 
           <td><%= cargo.tcity_name %></td>
            <td><%= cargo.cargo_weight %>吨<%= cargo.cargo_bulk %>方</td>
@@ -32,15 +32,18 @@
          
           <td><%=cargo.status %></td>
           <td>
+            <%if cargo[:from_site]=="local"%>
             <%unless session[:user_id].nil?%>
             <%if cargo.user_id==session[:user_id]%>
              货主
             <%else%>
             <a class="baojia" href="/cargos/<%=cargo.id%>/quotes/new">报价</a>
              <%end%>
-
             <%else%>
             登录后报价
+            <%end%>
+            <%else%>
+            其他
             <%end%>
            </td>               
         </tr>
@@ -50,7 +53,6 @@
 
 <%= will_paginate @cargos ,:class=>"page_navi_link"%>
 
-  <%#=will_paginate @cargos %>
 <%else%>
   <p>
     不好意思，没有对应的货源。

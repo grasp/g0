@@ -36,9 +36,7 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
-    ancestry (1.2.3)
-      activerecord (>= 2.2.2)
-    arel (2.0.6)
+    arel (2.0.7)
     bson (1.1.5)
     builder (2.1.2)
     erubis (2.6.6)
@@ -61,7 +59,6 @@ GEM
       plucky (~> 0.3.6)
     mongrel (1.2.0.pre2-x86-mingw32)
       gem_plugin (~> 0.2.3)
-    mysql2 (0.2.6-x86-mingw32)
     plucky (0.3.6)
       mongo (~> 1.1)
     polyglot (0.3.1)
@@ -93,9 +90,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  ancestry
   mongo_mapper
   mongrel (>= 1.2.0.pre2)
-  mysql2
   rails (= 3.0.3)
   will_paginate!

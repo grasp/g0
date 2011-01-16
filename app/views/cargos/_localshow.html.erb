@@ -1,0 +1,63 @@
+
+<p id="notice"><%= notice %></p>
+
+<%#=render :template=>'line_ads/show',:layout=>nil %>
+
+  <div class="show_header">
+<%=render "cargos/title"%>
+    </div>
+  <div id="cargo_show" >
+  <p>
+ <label>货物：</label>
+<%= @cargo.cate_name %>
+</p>
+ <p>
+  <label> 重量体积:</label>
+ <%=@cargo.cargo_weight %>吨/
+ <%=@cargo.cargo_bulk %>方
+</p>
+ <p>
+  <label> 组货方式:</label>
+ <%= $cargo_option[@cargo.cargo_zuhuo]%>
+</p>
+
+ <p><label>货物大类：</label>
+<%=$cargo_big_category[@stock_cargo.big_category]%></p>
+    <p> <label>货物包装：</label>
+<%=@stock_cargo.package_name%></p>
+
+
+<p>
+<label>发货日期:</label>
+ <%= @cargo.send_date %></p>
+
+
+ <p>
+  <label>联系人:</label>
+  <%= User.find(@cargo.user_id).name %>
+</p>
+
+ <p>
+  <label>备注:</label>
+ <%=$habit_word[@cargo.comments] %>
+</p>
+
+ <p>
+  <label>create_time:</label>
+<%= @cargo.created_at.to_s.slice(0,19) %>
+</p>
+
+</div>
+
+
+
+
+
+<!--
+<% if session[:user_id]==@cargo.user_id %>
+<a class="navi_link" href="http://localhost:3000/stock_cargos">我的货物</a> |
+<a class="navi_link" href="http://localhost:3000/cargos">我的货源</a> |
+  <%= link_to '编辑货源', edit_cargo_path(@cargo),:class=>"show_float"%> |
+<%end%>
+-->
+  

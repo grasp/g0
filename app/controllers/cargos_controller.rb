@@ -1,12 +1,14 @@
 # coding: utf-8
+
 class CargosController < ApplicationController
+ # include Soku
   # GET /cargos
   # GET /cargos.xml
   include CargosHelper
   before_filter:authorize, :except => [:search]
   protect_from_forgery :except => [:tip,:login]
   layout nil
-  
+  #
   def public
     #if this is all    
     if params[:city_from].nil?
@@ -22,13 +24,11 @@ class CargosController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @cargo }
     end
-
   end
 
   def search
     @search=Search.new
     if params[:search].nil? then
-
       @search.fcity_name="全国"
       @search.tcity_name="全国"
       @search.fcity_code="100000000000"
@@ -42,7 +42,6 @@ class CargosController < ApplicationController
 
     if @search.fcity_code=="100000000000" && @search.tcity_code=="100000000000" then
        @cargos=Cargo.where(:status=>"配车").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
-
     elsif @search.fcity_code=="100000000000" && @search.tcity_code!="100000000000"
       @cargos=Cargo.where({:tcity_code =>@search.tcity_code,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
 
@@ -165,9 +164,9 @@ class CargosController < ApplicationController
   # POST /cargos.xml
   def create
     @cargo=Cargo.new(params[:cargo])
+    params[:cargo][:from_site]="local"
     # @cargo=get_cargo_info_from_params(params)
     @cargo.line=@cargo.fcity_code+"#"+@cargo.tcity_code
-
   
     respond_to do |format|
       if @cargo.save

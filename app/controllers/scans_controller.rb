@@ -26,13 +26,11 @@ class ScansController < ApplicationController
           StockTruck.find(truck.stock_truck_id).update_attributes(:status=>"空闲")
         end
         end
-
       end
     end
 
     Cargo.all.each do |cargo|
       if compare_time_expired(cargo.created_at,cargo.send_date)==true
-
         if cargo.status!="过期"
         cargo.update_attributes(:status=>"过期")
         cargos=Cargo.where(:stock_cargo_id =>cargo.stock_cargo_id,:status =>"配车")
@@ -50,8 +48,7 @@ class ScansController < ApplicationController
     end
 
 
-    #update sans statistic
-      
+    #update sans statistic      
     scan=Hash.new
     scan[:total_stock_cargo]=StockCargo.count
     scan[:idle_stock_cargo]=StockCargo.where(:status =>"空闲").count

@@ -2,6 +2,7 @@
 ## To change this template, choose Tools | Templates
 # and open the template in the editor.
 require 'iconv'
+# require 'city_dic'
 $KCODE="U"
 
 # we take all city data as a global array of province
@@ -19,13 +20,17 @@ $KCODE="U"
 # if mongodb has no city data , then insert it,is this needed?
 # we need province name hash, and region name hash ,to get the actual name of code
 #  {:province_id=>{:region_id1=>{{:city_id1,:city_name1},{:city_id2,:city2_name2}},{:region_id2=>{{:city_id,:city_name},{:city_id,:city_name}}}}
+ $citytree=Hash.new  # to store array of province hash
+ $province_region=Hash.new  # to store code with name pair for province and region
+ $city_name_code=Hash.new
+ $city_code_name=Hash.new
+ 
 class CityTree  
   def initialize
        # @mongo = Connection.new
       #  @db = @mongo.db('g0')
       #  @col_city=@db[:city]
-        $citytree=Hash.new  # to store array of province hash
-        $province_region=Hash.new  # to store code with name pair for province and region
+
         puts "connection Mongodb success!" unless  @mongo.nil? ||@db.nil?  
   end
   
@@ -73,9 +78,11 @@ def parse_code_text3
   #first write into all province name
   filename=File.dirname(__FILE__)+File::SEPARATOR+"code3.txt"
   open(filename).each do |line|
-    line=Iconv.conv("utf-8","GB2312",line)
+   line=Iconv.conv("utf-8//IGNORE","GB2312",line)
     name= line.split(',')
     name[1]=name[1].chomp!
+       $city_name_code[name[1]]=name[0]
+      $city_code_name[name[0]]=name[1]
     if name[0].match(/\d\d0000000000$/) # is a province id  
       $province_region[name[0]]=name[1]  #insert name hash at first when found a province
       $citytree[name[0]]={}
@@ -86,11 +93,13 @@ def parse_code_text3
        province_code=name[0].slice(0,2)+"0000000000"
        $citytree[province_code][name[0]]={}  
        # puts "is region =#{name[1]}"
+
       
     elsif (not name[0].match(/\d\d\d\d00000000$/)) and (not name[0].match(/\d\d0000000000$/))# is a city
       province_code=name[0].slice(0,2)+"0000000000"
       region_code=name[0].slice(0,4)+"00000000"
-      $citytree[province_code][region_code][name[0]]=name[1]    
+      $citytree[province_code][region_code][name[0]]=name[1]  
+
      # puts "is city =#{name[1]}"
       
     else
@@ -129,18 +138,64 @@ puts Time.now
   puts "cost time pase all#{end_time-start_time}"
 end
 
+
+def self.get_city_full_path(code)
+  #puts "start get full path of code =#{code}"
+  unless code.nil?
+   if code.match(/\d\d0000000000$/) # is a province id  
+      return $city_code_name[code]      
+    elsif code.match(/\d\d\d\d00000000$/)  and (not code.match(/\d\d0000000000$/))  # is a region
+     province_code=code.slice(0,2)+"0000000000"   
+     return $city_code_name[province_code]+$city_code_name[code]      
+    elsif (not code.match(/\d\d\d\d00000000$/)) and (not code.match(/\d\d0000000000$/))# is a city
+      province_code=code.slice(0,2)+"0000000000" 
+      region_code=code.slice(0,4)+"00000000"
+     # puts "$city_code_name[province_code]=#{$city_code_name[province_code]}"
+    #  puts "$city_code_name[region_code]=#{$city_code_name[region_code]}"
+     # puts "$city_code_name[code] =#{$city_code_name[code]}"
+       return $city_code_name[province_code]+$city_code_name[region_code]+$city_code_name[code]      
+    else
+      return nil
+    end
+  end
+end
+
+def self.get_code_from_name(name)  
+  #first lookup into city_dic
+   return  $city_dic[name] unless $city_dic[name].nil?
+   #guess from last
+    guess_array=[$city_name[name]|| name]
+    name.size.downto(2).each do |i|
+     guess_array<<name[-i,i] #from last
+     guess_array<<name[0,i] #from forward
+     end
+     guess_array.each do |guess|
+     city_name=[guess,guess+"省",guess+"市",guess+"县",guess+"区"]
+     city_name.each do |c|
+        $city_dic[name]=$city_name_code[c];return $city_name_code[c] unless $city_name_code[c].nil?
+     end     
+   end 
+  return nil
+end
+
+
 # generate a province hash for list
 #$province["100000000000"]="全国"
 
 $raw_province_array=
 [[110000000000,130000000000,210000000000,220000000000,320000000000,330000000000,350000000000,370000000000,420000000000,440000000000,460000000000,510000000000,530000000000,610000000000,150000000000],
-[120000000000,140000000000,310000000000,340000000000,360000000000,410000000000,430000000000,450000000000,500000000000520000000000,540000000000,620000000000,620000000000,630000000000,650000000000,230000000000,]]
-
+[120000000000,140000000000,310000000000,340000000000,360000000000,410000000000,430000000000,450000000000,500000000000,520000000000,540000000000,620000000000,630000000000,650000000000,230000000000,]]
 end
 
 CityTree.new.parse_code_text3
 $citytree.freeze
 $province_region.freeze
+$city_name_code.freeze
+$city_code_name.freeze
+
+
+
+
 
 
 

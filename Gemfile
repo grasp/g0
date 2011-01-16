@@ -4,11 +4,12 @@ require 'rubygems'
 source 'http://rubygems.org'
 source 'http://gemcutter.org'
 gem 'rails', '3.0.3'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
-gem 'ancestry'
+#gem 'mysql2'
+#gem 'ancestry'
 gem 'will_paginate',:git => 'http://github.com/mislav/will_paginate.git',:branch=>'rails3'
 gem "mongrel", '>= 1.2.0.pre2'
 
