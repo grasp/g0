@@ -5,7 +5,7 @@ class CargosController < ApplicationController
   # GET /cargos
   # GET /cargos.xml
   include CargosHelper
-  before_filter:authorize, :except => [:search]
+  before_filter:authorize, :except => [:search,:show]
   protect_from_forgery :except => [:tip,:login]
   layout nil
   #

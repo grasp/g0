@@ -36,7 +36,7 @@ font-size: 16px;
     /*border: 3px solid blue;*/
     border:none;
     width:100%;
-   float:left;
+    float:left;
 }
 
 
@@ -47,14 +47,16 @@ h1,h2,h3{
 
 
 #content {
-    padding: 5px;
+    /*
+    padding: 5px;    
     border-left: 3px solid;
     border-bottom: 3px solid;
     border-left-color: #6694E3;
     border-bottom-color: #6694E3;
-    background-color: #6694E3;
+    */
+    background-color: #6694E3;    
     margin:0px;
-    width: 85%;
+    width: 100%;
     float: left;
    }
 
@@ -133,10 +135,12 @@ a.menu
     margin-top: 0px;
     margin-left: 0px;
     padding-left: 0px;
+    /*
     padding-bottom: 10px;
-    border-color:blue;
+   border-color:blue;
     background-color:#BFD7FF;
     height: 10%;
+    */
 }
 .ads a{
     margin:10px;

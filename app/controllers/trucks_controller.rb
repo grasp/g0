@@ -4,7 +4,7 @@ class TrucksController < ApplicationController
   # GET /trucks.xml
 
   include TrucksHelper
-  before_filter:authorize, :except => [:search]
+  before_filter:authorize, :except => [:search,:show]
   protect_from_forgery :except => [:tip,:login]
   # layout "public"
   layout nil
@@ -73,7 +73,7 @@ class TrucksController < ApplicationController
 
   def match
     @truck = Truck.find_by_id(params[:truck_id])
-    @cargos=Cargo.where(:fcity_code =>@truck.fcity_code,:tcity_code =>@truck.tcity_code).paginate(:page=>params[:page]||1,:per_page=>10)
+    @cargos=Cargo.where(:fcity_code =>@truck.fcity_code,:tcity_code =>@truck.tcity_code).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @truck }

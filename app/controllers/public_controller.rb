@@ -11,11 +11,20 @@ layout "public",:except=>:navibar
     @search.fcity_code="100000000000"
     @search.tcity_code="100000000000"
     @search.save
+    
   #  @cargos=Cargo.order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>10)
-    @cargos=Cargo.paginate(:page=>params[:page]||1,:per_page=>10)
+    @cargos=Cargo.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
 
+    puts "params[:page]=#{params[:page]}"
     respond_to do |format|
-      format.html {}# new.html.erb
+       if params[:page]
+         puts "render without layout"
+         format.html {render :layout=>nil}# index.html.erb
+       else
+         puts "render with layout"
+          format.html {}# new.html.erb
+       end
+         
       format.xml  {render :xml => @search }
     end
   end
