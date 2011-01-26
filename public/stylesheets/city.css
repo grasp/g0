@@ -78,7 +78,7 @@ div.region ul li {
     margin-left: 5px;
     font-size: larger;
 }
-.selected_province{
+.selected_province,.selected_region,.selected_city{
     background-color:#ffcc00;
     font-weight: bold;
     font-size: larger;

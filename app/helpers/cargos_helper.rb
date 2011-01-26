@@ -1,32 +1,26 @@
  # coding: utf-8
 module CargosHelper
-  def get_cargo_info_from_params(params)
-
-  params[:cargo][:user_id]=session[:user_id]
-
-    begin
-      cargo = Cargo.create!(params[:cargo])
-    rescue
-      puts "cargo创建失败"
-      return nil
-    end
     
-    puts "cargo创建成功"
-      return cargo
-  end
-
-  def update_cargo_info_from_params(params)
-
-
-    if  @cargo
-      @cargo.update_attributes( params[:cargo])
-      return @cargo
-    else
-      return nil
-    end
-
- 
-
+ def get_max_min_code(code)
+    max_code,min_code=0
+   if code.match(/\d\d0000000000$/) # is a province id 
+     puts "is province #{code}"
+        max_code=(code.to_i+10000000000).to_s
+     
+        puts "max_code=#{max_code}"
+        min_code=code
+   elsif code.match(/\d\d\d\d00000000$/)  and (not code.match(/\d\d0000000000$/))  # is a region
+      puts "is region"
+        max_code=(code.to_i+100000000).to_s
+        min_code=code
+   else
+        puts "is city"
+       max_code=code
+       min_code=code
+   end
+   
+   [min_code,max_code]
+   
   end
 
 

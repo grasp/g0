@@ -7,9 +7,8 @@
   </head>
   <body>
    <%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
-
     <div id="sheader">
-      <img src="/images/6376313.gif" alt="Icon" align="left" />
+      <img src="/images/7491063.gif" alt="Icon" align="left" />
       <div id="ghead">
         <div id="guser" >
           <a  href="/" >首页</a>
@@ -25,8 +24,6 @@
         </div>
       </div>
     </div>
-
-    <div id="main">
       <div id="navi">
        <%=render "shared/navibar"%>
       </div>
@@ -58,7 +55,6 @@
 
       </div>
 
-    </div>
 
 <%=render "shared/float_show"%>
 

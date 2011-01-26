@@ -2,8 +2,7 @@
 <%= form_for(@cargo,@stock_cargo,:as=>:cargo,:html => {:class => "show_form"}) do |f| %>
   <% if @cargo.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@cargo.errors.count, "error") %> prohibited this cargo from being saved:</h2>
-
+      <h2><%= pluralize(@cargo.errors.count, "错误") %></h2>
       <ul>
         <% @cargo.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -12,8 +11,9 @@
     </div>
   <% end %>
   <div>
+    
     <div class="line">
-
+      <b><%=@stock_cargo.cate_name%>,<%=@stock_cargo.package_name%></b>
   <!-- do not change below  format -->
       <label class="line_from_label" >出发地:</label>
       <a id="from_data_load"  href="/cities/from"><%=(@cargo.fcity_name.nil?||@cargo.fcity_name.empty?) ?"请选择出发地":@cargo.fcity_name%></a>
@@ -27,6 +27,8 @@
    
   <!-- do not change this format -->
 </div>
+    
+
  </div>
 
   <%= f.hidden_field(:cate_name, :value=>@stock_cargo.cate_name) %>
@@ -35,24 +37,17 @@
 
 <%= f.hidden_field :status%>
 
-  <div class="field">
-    <%= f.label "发货重量(吨)"%>
-    <%= f.text_field :cargo_weight %>
-  </div>
-
-  <div class="field">
-    <%= f.label "发货体积(方)"%>
-    <%= f.text_field :cargo_bulk %>
-  </div>
-
-  <div class="field">
- <%= f.label :有效天数 %>
-   <%= f.select(:send_date,options_for_select([["当天","0"],["一天","1"],["二天","2"]],@cargo.send_date) )%>
-  </div>
-
-  <div class="field">
-    <label for="cargo_option">组货方式：</label>
-    <%= f.select(:cargo_zuhuo,options_for_select($cargo_option_reverse.to_a,@cargo.cargo_zuhuo) )%>
+  <div class="field2">
+    <label>重量</label>
+    <%= f.text_field :cargo_weight %>(吨)  
+    <label>体积</label>
+    <%= f.text_field :cargo_bulk %>(方)
+    <label>有效天数</label>
+     <%= f.select(:send_date,options_for_select([["当天","0"],["一天","1"],["二天","2"]],@cargo.send_date) )%>
+     <label for="cargo_option">组货方式：</label>
+     <%= f.select(:cargo_zuhuo,options_for_select($cargo_option_reverse.to_a,@cargo.cargo_zuhuo) )%>
+     
+       <%= f.submit("确定") %>
   </div>
 
 
@@ -66,7 +61,7 @@
     <label for="comments">备注：</label>
     <%= f.select(:comments,options_for_select($habit_word_reverse.to_a,@cargo.comments) )%>
   </div>
--->
+
 
   <div class="field">
     <label for="装车时间">装车时间：</label>
@@ -82,11 +77,10 @@
     <label for="卸货地址">卸货地址：</label>
     <%= f.text_field(:xie_addr) %>
   </div>
+-->
 
+  
 
-  <div class="actions">
-    <%= f.submit("确定") %>
-  </div>
 <% end %>
 <div>
 <p id="notice"><%= notice %></p>

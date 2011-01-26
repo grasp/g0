@@ -1,3 +1,4 @@
+# coding: utf-8
 class StockTruck 
    include MongoMapper::Document
   #  belongs_to :users
@@ -19,6 +20,14 @@ class StockTruck
       #driver info
       key :driver_name,String
       key :driver_phone,String
+      
+      #owner info
+      key :owner_name,String
+      key :owner_phone,String
+      
+        #owner info
+      key :bis_name,String
+      key :bis_phone,String
 
       # contact inforamtion
       key :company_id,ObjectId
@@ -34,6 +43,8 @@ class StockTruck
       # for feature usage
       key :truck_license_id,ObjectId
       key :truck_owner_id,ObjectId
+      
+      validates_uniqueness_of :paizhao ,:message=>"该牌照车子已经存在."
 
       timestamps!
 end

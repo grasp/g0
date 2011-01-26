@@ -10,34 +10,31 @@
       </ul>
     </div>
   <% end %>
-
-<h3 style="text-align: center;">W090-新增一个询价</h3>
-<%=render "trucks/title"%>
-  <div class="field">
+<%#=render "trucks/title"%>
+  <div class="field2">
     <%= f.label :出价 %>
-    <%= f.text_field :price %>
+    <%= f.text_field :price %>元,
    <label  style="width:20px;">面议</label><input  style="width:20px;" id="mianyi" name="mianyi" type="checkbox"></input>
-  </div>
+</div>
 <!--
   <div class="field">
     <%= f.label :备注 %>
     <%= f.text_field :comments %>
   </div>
 -->
-  <div class="field">
+  <div class="field2">
     <%= f.label :我的货物及其线路 %>
     <%#= f.text_field :cargo_id %>
      <%= f.select(:cargo_id,options_for_select(@mycargo.to_a,@inquery.cargo_id) ) %>
+  <%= f.submit("确定") %>
   </div>
 
     <%= f.hidden_field :truck_id %>
 
-  <%= f.hidden_field :user_id %>
-  <%= f.hidden_field :truck_user_id %>
-  <%= f.hidden_field :truck_company_id %>
+    <%= f.hidden_field :user_id %>
 
 
   <div class="actions">
-    <%= f.submit("确定") %>
+   
   </div>
 <% end %>

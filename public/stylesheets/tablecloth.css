@@ -20,13 +20,13 @@ table{
 }
 div.table_header {
 
-    padding: 5px;
+  /*  padding: 5px;*/
     text-align:left;
     background-color: #EBEFF9;
 
 }
 
-th{text-align:center;margin-left: 20px;padding:.5em;}
+th{text-align:center;margin-left: 20px;margin-top: 0px;padding-top: 0px;}
 td{text-align:center;margin-left: 20px;padding:.5em;margin-top: 20px;}
 
 tr{ background:white;border-bottom: 1px solid silver;}

@@ -1,8 +1,26 @@
+
 <table>
+  
   <tr>
     <th>车辆</th>
-    <th>出发</th>
-    <th>到达</th>
+    <%=form_for(@search,:as=>:search,:url=>"/trucks/search",:html=>{:class=>"show_form"},:method=>"get") do |f| %>
+ <div class="line"  style="display:inline">
+  <!-- do not change below  format -->
+     <!-- <label style="margin-left:10px;" class="line_from_label" >出发地:</label>-->
+     <th>
+     <a id="from_data_load"  href="/cities/from/<%=@search.fcity_code%>"><%=@search.fcity_name ||"出发地选择"%></a>
+      <%= f.hidden_field(:fcity_code) %>
+      <%= f.hidden_field(:fcity_name) %>
+     </th>
+     <!--  <label style="margin-left:50px;" class="line_to_label " >到达地:</label>-->
+     <th>
+     <a  id="to_data_load"  href="/cities/to/<%=@search.tcity_code%>"><%=@search.tcity_name ||"到达地选择"%></a>
+      <%= f.hidden_field(:tcity_code) %>
+      <%= f.hidden_field(:tcity_name) %>
+     </th>
+   <!-- do not change this format -->
+</div>
+
     <th>回程</th>
     <!--  <th>公司</th>-->
 
@@ -10,12 +28,18 @@
     <th>发布时间</th>
      <th>状态</th>
     <th>货主操作</th>
+    <th>
+     <div class="actions">
+    <%= f.submit("搜索") %></th>
+ </div>
+    
   </tr>
 
 
-  <% if not @trucks.nil? %>
-    <% @trucks.each do |truck|%>
-   <%unless truck.nil? %>
+<% end %>
+   <% unless @trucks.blank? %>
+   <% @trucks.each do |truck|%>
+   <%unless truck.blank? %>
         <tr>
                    <td>  <a class="show_float" href="/trucks/show/<%=truck.id%>">
               <%=truck.paizhao%>,<%=truck.dunwei%>吨
@@ -46,6 +70,11 @@
         </tr>
       <% end %>
     <% end %>
-  <% end %>
-</table>
+     </table>
+     <%else%>
+        </table>
+        <p>没有找到对应车源</p>
+     <% end %>
+
+
 <%= will_paginate @trucks ,:class=>"page_navi_link"%>

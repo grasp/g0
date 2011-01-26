@@ -1,7 +1,7 @@
-<div class="title">
+<div class="form_header">
 <%=render "trucks/title"%>
 </div>
-
+ <%unless @inqueries.blank? %>
 <table>
   <tr>
     <th>询价货物</th>
@@ -15,7 +15,7 @@
 
   </tr>
 
-  <%unless @inqueries.nil? %>
+ 
     <% @inqueries.each do |inquery| %>
       <tr>
         <%cargo=Cargo.find_by_id(inquery.cargo_id)%>
@@ -39,5 +39,8 @@
 
          </tr>
     <% end %>
+         </table>
+<%else%>
+<p>还没有收到货主的询价</p>
   <% end %>
-</table>
+

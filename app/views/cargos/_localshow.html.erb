@@ -1,51 +1,36 @@
-
-<p id="notice"><%= notice %></p>
-
-<%#=render :template=>'line_ads/show',:layout=>nil %>
-
-  <div class="show_header">
-<%=render "cargos/title"%>
-    </div>
-  <div id="cargo_show" >
-  <p>
- <label>货物：</label>
-<%= @cargo.cate_name %>
-</p>
- <p>
-  <label> 重量体积:</label>
- <%=@cargo.cargo_weight %>吨/
- <%=@cargo.cargo_bulk %>方
-</p>
- <p>
-  <label> 组货方式:</label>
+ <div id="cargo_show" >
+ <table>
+   <tr>
+    <th>组货方式</th>
+    <th>货物大类</th>
+    <th>货物包装</th>
+    <th>发货日期</th>
+    <th>联系人</th>
+    <th>联系方式</th>
+  </tr>
+     <tr>
+<td>
  <%= $cargo_option[@cargo.cargo_zuhuo]%>
-</p>
+</td>
 
- <p><label>货物大类：</label>
-<%=$cargo_big_category[@stock_cargo.big_category]%></p>
-    <p> <label>货物包装：</label>
-<%=@stock_cargo.package_name%></p>
+<td>
+<%=$cargo_big_category[@stock_cargo.big_category]%></td>
+ 
+<td> 
+<%=@stock_cargo.package_name%></td>
+<td>
+ <%= @cargo.send_date %></td>
 
-
-<p>
-<label>发货日期:</label>
- <%= @cargo.send_date %></p>
-
-
- <p>
-  <label>联系人:</label>
+<td>
   <%= User.find(@cargo.user_id).name %>
-</p>
+</td>
 
- <p>
-  <label>备注:</label>
- <%=$habit_word[@cargo.comments] %>
-</p>
-
- <p>
-  <label>create_time:</label>
-<%= @cargo.created_at.to_s.slice(0,19) %>
-</p>
+<td>
+  <%= UserContact.find_by_user_id(@cargo.user_id).mphone %>
+  <%= UserContact.find_by_user_id(@cargo.user_id).fixphone %>
+</td>
+</tr>
+</table>
 
 </div>
 

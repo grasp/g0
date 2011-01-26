@@ -14,48 +14,49 @@
 #navi {
    /* padding: 3px;*/
 
-    background-color:white;
-    /*
+    /* background-color:red;
+   
+   
     border-right: 3px solid;
     border-right-color: blue;
     */
     font-weight: normal;
    /* width: 7%;*/
+   
     width:100%;
     float: left;
     text-align: left; 
-
 }
-#navi .navi_block {
-    /*
-    border-bottom: 3px solid;
-    border-bottom-color: blue;
-    */
+table.navi {
+    background-color: white;
+}
+
+table.navi tr{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     width:auto;
     text-align: left;
-       /*
-    margin-top:1px;
-    margin-left: 0px;
- 
-    border:1px  solid;
-    border-color:#b80000;
-    */
 }
 
-
-.navi_block ul {
-    padding-left: 0px;
-  width:auto;
+table.navi tr td{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding:.5em;
+    width:auto;
+    text-align: left;
 }
 
-.navi_block ul li {
-     width:auto;
-    /* background-color:#EBEFF9;*/
-     text-align:inherit;
-     margin-top:20px;
-     margin-left:5px;
-     padding-left: 5px;
-     list-style-type: none;
+#navi table tr td a div{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 
@@ -66,14 +67,14 @@
 .navi_active {
  
   background-color:#6B90DA;
-  font-size: larger;
- /* color:white;*/
+  /* font-size: larger;
+ color:white;*/
 }
 
 .navi_active div {
 
   background-color:#6B90DA;
-  font-size: larger;
+ /* font-size: larger;*/
   color:white;
 }
 
@@ -83,10 +84,26 @@ div.page_navi_link a {
     margin-right:1px;
     padding:0.2em 0.5em;
     border:1px solid #9AAFE5;
-
 }
 div.page_navi_link
 {
- margin-left: 100px;;
-
+ margin-left: 100px;
 }
+
+#show table {
+      /* width:80%*/
+      width:auto;
+      border-collapse:collapse;
+     /* margin:1em 0;     */
+}
+/*
+div.navi_huo{border:1px solid #9AAFE5;}
+div.navi_che{border:1px solid #9AAFE5;}
+div.navi_contact{border:1px solid #9AAFE5;}
+*/
+#head_line{border:1px solid #9AAFE5;}
+#show table tr{ background:white;;border:none;border-bottom: 1px solid silver;}
+
+#show table th{text-align:center;margin-left: 20px;margin-top: 0px;padding-top: 0px;background:#E6EEF7;}
+
+#show table tr td {text-align:center;margin-left: 20px;padding:.5em;margin-top: 20px;border:none;}

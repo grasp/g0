@@ -1,46 +1,29 @@
 
-<p id="notice"><%= notice %></p>
 
-<%#=render :template=>'line_ads/show',:layout=>nil %>
 
-  <div class="show_header">
-<%=render "cargos/title"%>
-    </div>
   <div id="cargo_show" >
-  <p>
- <label>货物：</label>
- <%= @cargo.cate_name %>
-</p>
- <p>
- <label> 重量体积:</label>
- <%=@cargo.cargo_weight %>吨
-</p>
-<p>
- <label>价格:</label>
+ <table>
+   <tr>
+    <th>价格</th>
+    <th>联系电话</th>
+    <th>发货日期</th>
+    <th>备注</th>
+  </tr>
+  <tr>
+<td>
+
  <%=@cargo.price %><%=@cargo.price_unit %>
-</p>
-<p>
- <label>联系电话:</label>
+</td>
+<td>
  <%=@cargo.contact_phone %>
-</p>
-
-
-<p>
-<label>发货日期:</label>
- <%= @cargo.send_date %></p>
-
-
-
-
- <p>
-  <label>发布时间:</label>
-<%= @cargo.created_at.to_s.slice(0,19) %>
-</p>
-
- <p>
-  <label>备注:</label>
+</td>
+<td>
+ <%= @cargo.send_date %></td>
+<td>
   <%= @cargo.comments %>
-</p>
+</td>
+</tr>
+</table>
 </div>
 
 

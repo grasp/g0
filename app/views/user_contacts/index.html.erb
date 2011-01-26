@@ -3,6 +3,7 @@
 
 <table>
   <thead>
+    <% unless @user_contacts.blank? %>
     <tr>
       <th>姓名</th>
       <th>移动电话</th>
@@ -14,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-<% unless @user_contacts.blank? %>
+
  <%@user_contacts.each do |user_contact|%>
         <tr>
           <td><%=h user_contact.name  ||"无"%></td>

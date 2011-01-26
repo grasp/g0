@@ -5,7 +5,14 @@ class CitiesController < ApplicationController
   layout :nil
 
   def index
-    code=params[:code]
+    #get the original value
+    if params[:dir]=="from"
+    code=params[:code] ||( params[:search][:fcity_code] unless params[:search].nil?)
+    elsif  params[:dir]=="to"
+    code=params[:code] || (params[:search][:tcity_code] unless params[:search].nil?)
+    end
+       
+    
      if code.nil? || code=="100000000000"
       code="330100000000" #default open ZheJiang Province
       puts "code is nil !!!"

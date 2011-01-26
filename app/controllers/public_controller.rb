@@ -6,14 +6,14 @@ layout "public",:except=>:navibar
   def index
 
     @search=Search.new
-    @search.fcity_name="全国"
-    @search.tcity_name="全国"
+    @search.fcity_name="选择出发地"
+    @search.tcity_name="选择到达地"
     @search.fcity_code="100000000000"
     @search.tcity_code="100000000000"
     @search.save
     
-  #  @cargos=Cargo.order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>10)
-    @cargos=Cargo.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>10)
+  #  @cargos=Cargo.order("created_at desc").paginate(:page=>params[:page]||1,::per_page=>30)
+    @cargos=Cargo.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
 
     puts "params[:page]=#{params[:page]}"
     respond_to do |format|

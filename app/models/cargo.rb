@@ -1,7 +1,8 @@
+# coding: utf-8
 class Cargo 
     include MongoMapper::Document
      cattr_reader :per_page
-     @@per_page = 3
+     @@per_page = 20
     # belongs_to :users
    #  has_many :quotes
     # has_many :inqueries
@@ -42,7 +43,20 @@ class Cargo
       key :pingjia_id,ObjectId
       key :cstatistic_id,ObjectId
       
+  # from site
+     key :from_site,String
+     
+     validate :check_unique
+      
      timestamps!
 
+  def check_unique
+    repeated=Cargo.where(:cate_name=>self.cate_name,:line=>self.line,:user_id=>self.user_id,:status=>"配车")
+       unless repeated.size==0
+      errors.add_to_base("不能重复发布货源信息")
+      return false
+    end
+    return true
+  end
      
 end

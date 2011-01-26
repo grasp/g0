@@ -2,23 +2,49 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
+function get_full_name(code){
+    
+    if (code.match(/\d\d0000000000$/) )
+    {
+     selected=$("#float_load2 div ul li a[href$="+code+"]")
+     selected.css("background-color","#ffcc00");
+     return selected.text();
+    }
+      
+    else  if (code.match(/\d\d\d\d00000000$/)  && ( ! code.match(/\d\d0000000000$/)))
+    {       
+       province_code=code.slice(0,2)+"0000000000"
+       $("#float_load2 div ul li a[href$="+province_code+"]").css("background-color","#ffcc00");
+       $("#float_load2 div ul li a[href$="+code+"]").css("background-color","#ffcc00");
+       return  $("#float_load2 div ul li a[href$="+province_code+"]").text()+ $("#float_load2 div ul li a[href$="+code+"]").text(); 
+    }
+         
+    else if ((! code.match(/\d\d\d\d00000000$/)) && (! code.match(/\d\d0000000000$/)))
+    {
+      province_code=code.slice(0,2)+"0000000000"
+      region_code=code.slice(0,4)+"00000000"
+       $("#float_load2 div ul li a[href$="+province_code+"]").css("background-color","#ffcc00");
+       $("#float_load2 div ul li a[href$="+region_code+"]").css("background-color","#ffcc00");
+       $("#float_load2 div ul li a[href$="+code+"]").css("background-color","#ffcc00");
+      return  $("#float_load2 div ul li a[href$="+province_code+"]").text()+$("#float_load2 div ul li a[href$="+region_code+"]").text()+$("#float_load2 div ul li a[href$="+code+"]").text();
+    }
+    return $("#float_load2 div ul li a[href$="+code+"]").text();
+}
 
 function city_load(){
+    var last_province_code=""
+    var new_province_code=""
 
     $("#from_data_load,#to_data_load" ).live("click",function()
-
-
     {
             var coordinate=$("#from_data_load").offset();
             selected= $("#float_load2");
-
             /*IE not support inherit*/
 
          //  $("#from_data_load,#to_data_load" ).css("background-color","inherit");
             if($("#float_show2").css("display")=="none")
             {
-                  $("#float_show2").css("display","inline");
+                $("#float_show2").css("display","inline");
                 if($(this).attr("class")=="company_city")
                 {
 
@@ -46,35 +72,46 @@ function city_load(){
             else   return false;
         });
 
-    $("#float_load2  div ul li a" ).live("click",function()
+    $("#float_load2 div ul li a" ).live("click",function()
     {
         var last_index=this.href.toString().lastIndexOf('/')
         var code =this.href.toString().substring(last_index+1);
         thishref=this.href
-        slected=$(this);
-
-        $("#float_load2").load(this.href,function(){
-           
-     
-            if (thishref.match(/cities\/from/))
-            {
-                // $("#search_fcity_code").val(code);
-                //  $("#search_fcity_name").val($("#selected_city").text());
-                $("#from_data_load").next().val(code);
-                $("#from_data_load").next().next().val($("#selected_city").text());
-                $("#from_data_load").text($("#selected_city").text());
-
-            }
-
-            if (thishref.match(/cities\/to/))
-            {
-                $("#to_data_load").next().val(code);
-                $("#to_data_load").next().next().val($("#selected_city").text());
-                $("#to_data_load").text($("#selected_city").text());
-            }
-
+        new_province_code=code.slice(0,2)+"0000000000"
+        region_code=code.slice(0,4)+"00000000"   
+        
+        $("#float_load2 div ul li a" ).css("background-color","inherit");
+        slected=$(this);        
+        // if same province , do not load
+        if (new_province_code!=last_province_code)
+         {
+            $("#float_load2").css("display","none");
+            $("#float_load2").load(this.href,function(){                          
         });
+          $("#float_load2").css("display","inline");
+       }  
+     
+       if (thishref.match(/cities\/from/))
+        {
+           $("#selected_city").text(get_full_name(code));
+         
+           $("#from_data_load").attr("href",thishref);
+           $("#from_data_load").next().val(code);
+           $("#from_data_load").next().next().val($("#selected_city").text());
+           $("#from_data_load").text($("#selected_city").text());                
+        }
 
+         if (thishref.match(/cities\/to/))
+          {
+            $("#selected_city").text(get_full_name(code));
+             
+             $("#to_data_load").attr("href",thishref);
+            $("#to_data_load").next().val(code);
+            $("#to_data_load").next().next().val($("#selected_city").text());
+            $("#to_data_load").text($("#selected_city").text());
+            } 
+      last_province_code=new_province_code
+      
         if($.browser.msie) {
             event.returnValue = false;
             event.preventDefault();
@@ -86,6 +123,8 @@ function city_load(){
     $("a.float_close2").live("click",function()
     {
         $(this).parent().parent().css("display","none");
+        
+        //updated the selected
 
         if($.browser.msie) {
             event.returnValue = false;

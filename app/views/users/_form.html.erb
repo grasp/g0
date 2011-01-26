@@ -4,8 +4,7 @@
 
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "错误") %> 有一个错误:</h2>
-
+      <h4><%= pluralize(@user.errors.count, "错误") %></h4>
       <ul>
         <% @user.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -19,21 +18,21 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <label id="register_email">Email:(如无Email,可用qq号码@qq.com或者手机号码@163.com)</label>
+    <label id="register_email">Email:</label>
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <label>确认设置的Email:</label>
-    <input id="email_confirm" name="email_confirm" type="text"/>
+    <label>确认Email:</label>
+   
+     <%= f.text_field :email_confirm %>
   </div>
-
 
   <div class="field">
     <label>设置密码:</label>
     <%= f.password_field :password %>
   </div>
   <div class="field">
-    <label>确认设置的密码:</label>
+    <label>确认密码:</label>
     <%= f.password_field :password_confirmation %>
   </div>
 

@@ -2,19 +2,20 @@
 
 <h2>我的全部货物</h2>
 <table>
+  <%unless @stock_cargos.blank?%>
   <tr>
      
     <th>货物</th>
       <th>包装</th>     
     <th>货物大类</th>
      <th>总计发布</th>
-     <th>status</th>
+     <th>状态</th>
      <th>已发布货源</th>
      <th>发布货源</th>
 
 
   </tr>
-<%unless @stock_cargos.blank?%>
+
   <% @stock_cargos.each do |stock_cargo| %>
     <tr>   
   
@@ -29,6 +30,8 @@
        <td><a class="cargo_fabu" href="/cargos/new/<%=stock_cargo.id.to_s%>">发布货源</a></td>
     </tr>
   <% end %>
+    <%else%>
+    <tr>请先添加货物， 然后发布货源<tr>
     <% end %>
 </table>
 <%= will_paginate @trucks ,:class=>"page_navi_link"%>

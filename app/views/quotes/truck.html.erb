@@ -1,7 +1,7 @@
-<div class="title">
+<div class="form_header">
 <%=render "trucks/title"%>
 </div>
-
+ <%unless @quotes.blank? %>
 <table>
   <tr>
     <th>报价货物</th>
@@ -14,7 +14,7 @@
 
   </tr>
 
-  <%unless @quotes.nil? %>
+ 
     <% @quotes.each do |quote| %>
       <tr>
         <%cargo=Cargo.find(quote.cargo_id)%>
@@ -37,5 +37,8 @@
 
          </tr>
     <% end %>
+         </table>
+<%else%>
+<p>还没有报价</p>
   <% end %>
-</table>
+

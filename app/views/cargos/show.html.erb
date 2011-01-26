@@ -1,5 +1,5 @@
 
-<p id="notice"><%= notice %></p>
+
 
 <%#=render :template=>'line_ads/show',:layout=>nil %>
 
@@ -7,6 +7,9 @@
 <%=render "qzshow"%>
 <%elsif @cargo[:from_site]=="tf56"%>
 <%=render "tf56show"%>
-<%else @cargo[:from_site]=="local" %>
+<%elsif @cargo[:from_site]=="local" %>
+<%=render "localshow"%>
+<%else%>
 <%=render "localshow"%>
 <%end%>
+<p id="notice"><%= notice %></p>

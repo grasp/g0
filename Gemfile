@@ -12,7 +12,7 @@ gem 'rails', '3.0.3'
 #gem 'ancestry'
 gem 'will_paginate',:git => 'http://github.com/mislav/will_paginate.git',:branch=>'rails3'
 gem "mongrel", '>= 1.2.0.pre2'
-
+#gem 'thin'
 gem "mongo_mapper"
 
 # Use unicorn as the web server

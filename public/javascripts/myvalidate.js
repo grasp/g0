@@ -645,36 +645,36 @@ function stock_truck_new_validation(){
         messages:
             {
             "stocktruck[paizhao]":{
-                required: "没有填写paizhao",
+                required: "没有填写牌照",
                 minlength:"长度太短不对",
                 maxlength:"长度太长不对"
             },
             "stocktruck[dun_wei]":{
-                required: " 没有填写 dunwei",
+                required: " 没有填写吨位",
                 number: "需要是数字",
                 maxlength:"长度太长不对"
             },
             "stocktruck[che_length]":{
-                required: " 没有填写 che_length",
+                required: " 没有填写车厢长度",
                 maxlength:"长度太长不对"
             },
             "stocktruck[truck_shape]":{
-                required: "没有填写 shape",
+                required: "没有填写车厢结构",
                 maxlength:"长度太长不对"
             },
-            "stocktruck[car_phone]":{
-                required: " 没有填写 car_phone",
+            "stocktruck[owner_phone]":{
+                required: " 没有填写车主电话",
                 maxlength:"长度太长不对",
-                number:"not true"
+                number:"电话号码必须是数字"
             },
             "stocktruck[driver_name]":{
-                required: " 没有填写 driver_name",
+                required: " 没有填写 司机名称",
                 maxlength:"长度太长不对"
             },
             "stocktruck[driver_phone]":{
-                required: " 没有填写 driver_phone",
+                required: " 没有填写司机电话",
                 maxlength:"长度太长不对",
-                number:"not true"
+                number:"电话号码必须是数字"
             }
         }
     }
@@ -713,7 +713,7 @@ function cargo_new_validation(){
                 required: "你还没有选择出发地"
             },
             "cargo[cargo_weight]":{
-                required: " 没有填写 zhongliang"
+                required: " 没有填写重量"
             }
 
         }
@@ -812,9 +812,8 @@ function quote_new_validation(){
         messages:
             {
             "quote[truck_id]":{
-                required: "你还没有chezi"
+                required: "你还没有发布车源"
             }
-
         }
     }
 );

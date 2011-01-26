@@ -3,7 +3,7 @@ class User
   include MongoMapper::Document
  # include UsersHelper
   
-  attr_accessor:password_confirmation
+  attr_accessor:password_confirmation,:email_confirm
   
   key :email,String
   key :name,String
@@ -17,15 +17,19 @@ class User
   key :user_contact_id,ObjectId
   key :ustatistic_id,ObjectId
   key :preference,Integer
+  
+  validates_presence_of :email,:name,:message=>"用户名和email必须填写."
+  validates_uniqueness_of :name ,:message=>"该用户名已经存在."
+  validates_uniqueness_of :email ,:message=>"该email已经存在."
   timestamps!
   
+ 
   
    def self.authenticated_with_token(user_id, stored_salt)
      u = find_by_id(user_id)
      u && u.salt == stored_salt ? u : nil
    end
   
-
   def self.authenticate(email_or_name,password)
 
     if(email_or_name.match(/.*@.*\..*/))
@@ -79,5 +83,6 @@ class User
   def create_new_salt
     self.salt= self.object_id.to_s+rand.to_s
   end
+  
 
 end

@@ -1,11 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <%= form_for(@company,:as=>:company,:html => {:class => "show_form"}) do |f| %>
-
   <% if @company.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
+      <h4><%= pluralize(@company.errors.count, "error") %></h4>
       <ul>
       <% @company.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -40,7 +38,7 @@
   </div>
 -->
 
-<h2>公司的联系信息 </h2>
+<h3>公司的联系信息 </h3>
 <div class="field">
     <%= f.label :联系人 %>
     <%= f.text_field :contact_name %>
@@ -54,10 +52,7 @@
       <a id="from_data_load"  class="company_city" href="/cities/from"><%=@company.city_name ||"选择"%></a>
       <%= f.hidden_field(:city_code) %>
       <%= f.hidden_field(:city_name) %>
-
-
 </div>
-
 
   <div class="field">
     <%= f.label :公司地址 %>

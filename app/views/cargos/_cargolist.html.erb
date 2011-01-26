@@ -1,29 +1,27 @@
 
-<% if not @cargos.nil? %>
-  <table>
-    <tr>
-      <th>货物名称</th>  
 
-    
-  <%=form_for(@search,:as=>:search,:url=>"/cargos/search",:html=>{:class=>"show_form"},:method=>"get") do |f| %>
+  <table> 
+ 
+ <th>货物名称</th>      
+ <%=form_for(@search,:as=>:search,:url=>"/cargos/search",:html=>{:class=>"show_form"},:method=>"get") do |f| %>
 <div class="line"  style="display:inline">
   <!-- do not change below  format -->
     <!--  <label class="line_from_label" >出发地:</label>-->
     <th>
-      <a id="from_data_load"  href="/cities/from"><%=@search.fcity_name ||"出发地选择"%></a>
+      <a id="from_data_load"  href="/cities/from/<%=@search.fcity_code%>"><%=@search.fcity_name ||"出发地选择"%></a>
       <%= f.hidden_field(:fcity_code) %>
       <%= f.hidden_field(:fcity_name) %>
 </th>
 <th>
  <!--<label style="margin-left:30px;" class="line_to_label " >到达地:</label>-->
-      <a  id="to_data_load"  href="/cities/to" ><%=@search.tcity_name ||"到达地选择"%></a>
+      <a  id="to_data_load"  href="/cities/to/<%=@search.tcity_code%>" ><%=@search.tcity_name ||"到达地选择"%></a>
       <%= f.hidden_field(:tcity_code) %>
       <%= f.hidden_field(:tcity_name) %>
   <!-- do not change this format -->
   </th>
       <%= f.hidden_field(:stype) %>
 </div>
-        <th>重量</th>
+      <th>重量</th>
       <th>有效期</th>      
       <th>发布日期</th>
       <th>货源状态</th>    
@@ -35,17 +33,15 @@
   </div>
   </th>
 <% end %>
-
- </tr>
-
+ <% unless @cargos.blank? %>
     <% @cargos.each do |cargo| %>
       <%unless cargo.nil? %>
         <tr>
-            <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
+           <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
            <%= cargo.cate_name %></a> </td>
           <td><%= cargo.fcity_name %></td> 
           <td><%= cargo.tcity_name %></td>
-           <td><%= cargo.cargo_weight %>吨<%= cargo.cargo_bulk %>方</td>
+           <td><%= cargo.cargo_weight %><%= cargo.cargo_bulk %></td>
           <td><%= cargo.send_date %>天</td>
                    <!--
           <td><%= cargo.package_name %></td>
@@ -79,19 +75,15 @@
 <%= will_paginate @cargos ,:class=>"page_navi_link"%>
 
 <%else%>
+</table>
   <p>
     不好意思，没有对应的货源。
   </p>
-<% end %>
-
-<div class="caozuo_area" ></div>
-
-<br />
-<% unless @stock_cargo.nil? %>
-  <div>
-    <a  href="/cargos/new/<%=@stock_cargo.id%>">新增货源</a>
-  </div>
 
 <% end %>
+
+
+  
+
 
 

@@ -37,9 +37,17 @@
 <ul style="margin-top: 10px">地区:
     <%@region.each do |region_code,region|%>
       <li>
-        <a class ="city_region" href=<%="/cities/#{params[:dir]}/#{region_code}"%>><%=$province_region[region_code]%></a>
+         <%if region_code==@region_code%>
+         <a class ="selected_region city_region" href=<%="/cities/#{params[:dir]}/#{region_code}"%>><%=$province_region[region_code]%></a> 
+        <%else%>
+        <a class ="city_region" href=<%="/cities/#{params[:dir]}/#{region_code}"%>><%=$province_region[region_code]%></a>   
+        <%end%>
        <%region.each do |city_code,city_name|%>
-        <%= link_to city_name, "/cities/#{params[:dir]}/#{city_code}" %>
+        <%if city_code==@city_code%>
+         <a class="selected_city" href=<%="/cities/#{params[:dir]}/#{city_code}"%>><%=city_name%></a>
+        <%else%>
+         <%= link_to city_name, "/cities/#{params[:dir]}/#{city_code}" %>
+        <%end%>
        <%end%>
       </li>
     <%end%>

@@ -1,6 +1,8 @@
 
 .show_form {
-     background-color:rgb(236,245,255);
+    background-color:rgb(236,245,255);
+    padding-top:  1em;
+   
     /* width:100%;*/
 }
 
@@ -22,8 +24,6 @@
 {
     padding-top: 20px;
 }
-
-
 
 
 .show_form .actions input
@@ -65,10 +65,13 @@ div.stockcargo_new .field label{
     margin-left: 10px;
 }
 
-.show_form input { /*width of text boxes. IE6 does not understand this attribute*/
+.show_form input,.show_form select { /*width of text boxes. IE6 does not understand this attribute*/
   margin-left: 10px;
- /* width:80%;*/
+  /* width:80%;*/
   height:20px;
+}
+#login #email,#login #password{
+    width:80%;
 }
 
 div.stockcargo_new .field input{
@@ -152,7 +155,8 @@ to account for 3 pixel bug: http://www.positioniseverything.net/explorer/threepx
 
 div.form_header{
  background-color:#D4E4FF;
- margin-top:20px;margin-left: auto; margin-right: auto; text-align:center
+ margin-top:20px;margin-left: auto; margin-right: auto; text-align:center;
+
 }
 
 .show_header{ background-color:#D4E4FF;
@@ -172,11 +176,12 @@ margin-top:20px;margin-left: auto; margin-right: auto; text-align:center
     border-color:hsl(218, 100%, 88%);
 }
 
+
 .company_new{
     width:60%;
 }
 
-.stock_cargo_new,.cargo_new,.truck_new{
+.stock_cargo_new,#cargo_new,#truck_new{
    /* width:100%;*/
     background-color:#D4E4FF;
 }
@@ -202,6 +207,7 @@ margin-top:20px;margin-left: auto; margin-right: auto; text-align:center
  font-size: larger;
  font-weight: bold;
 }
+
 
 
 
@@ -239,3 +245,12 @@ text-align: left;
 #pw_reset_request{
     width:50%;
 }
+
+.form_header h2{margin:0px;padding: 0px;}
+
+#cargo_cargo_weight,#cargo_cargo_bulk{
+    width: 50px;    
+}
+#stocktruck_edit .field2 input,#inquery_price,#quote_price { width: 80px;   }
+
+#error_explanation{color:red;}

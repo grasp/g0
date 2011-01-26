@@ -86,7 +86,7 @@ class UsersController < ApplicationController
         if User.find_by_email(params[:email])
           flash[:notice] = 'email已经存在'
         else
-          flash[:notice] = '未知错误'
+          flash[:notice] = '用户验证出错'
         end
         
         format.html { render :action => "new" }

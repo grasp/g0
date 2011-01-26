@@ -2,12 +2,12 @@
 <h1>我的全部车子</h1>
 
 <table>
+  <%unless @stock_trucks.blank?%>
   <tr>
-
     <th>车子</th>
-    <th>描述</th>
-    <th>status</th>
-    <th>随车电话</th>
+    <th>状态</th>
+    <th>车主</th>
+    <th>车主电话</th>
     <th>司机</th>
     <th>司机电话</th>
     <th>已发布车源</th>
@@ -17,20 +17,23 @@
   </tr>
   <% @stock_trucks.each do |stock_truck| %>
     <tr>
-      <td>  <a class="show_float" href="/stock_trucks/show/<%=stock_truck.id%>"><%= stock_truck.paizhao %></a></td>
-      <td><%=stock_truck.dun_wei %>吨,
+      <td> <a class="show_float" href="/stock_trucks/show/<%=stock_truck.id%>"> <%= stock_truck.paizhao %><%=stock_truck.dun_wei%>吨,
         <%= stock_truck.che_length %>米,
-        <%= $truck_shape[stock_truck.truck_shape] %>
+        <%= $truck_shape[stock_truck.truck_shape] %></a>
       </td>
       <td><%= stock_truck.status %></td>
-      <td><%= stock_truck.car_phone %></td>
+       <td><%= stock_truck.owner_name %></td>
+      <td><%= stock_truck.owner_phone %></td>
       <td><%= stock_truck.driver_name %></td>
       <td><%= stock_truck.driver_phone %></td>
       <td><a class="page_navi_link" href="/stock_trucks/<%=stock_truck.id%>/trucks/part"><%=stock_truck.truckcount || "0"%>条车源</a></td>
       <td><a class="truck_fabu" href="/trucks/new/<%=stock_truck.id%>">发布车源</a></td>
-      <td><a class="show_float" href="/stock_trucks/<%=stock_truck.id%>/edit">编辑</a><a href="/stock_trucks/destroy/<%=stock_truck.id%>">删除</a></td>
+      <td><a class="show_float" href="/stock_trucks/<%=stock_truck.id%>/edit">更新</a></td>
     </tr>
   <% end %>
+    <%else%>
+    <tr>请先添加车子，然后发布车源信息.</tr>
+    <%end%>
 </table>
 <%= will_paginate @stock_trucks ,:class=>"page_navi_link"%>
 <br />

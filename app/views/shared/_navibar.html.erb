@@ -2,36 +2,30 @@
 <% unless user.nil? %>
   <%ustatistic=Ustatistic.find(user.ustatistic_id)%>
 <%end%>
-
-     <table>
+<hr id="head_line">
+     <table class="navi">
          <tr>
-            <% unless user.nil? %>
-             <td><a class="navi_link" href="/cargos/search"><div>查货源(<%=h Cargo.count%>)</div></a></td>
-            <td> <a class="navi_link" href="/trucks/search"><div>查车源(<%=h Truck.count%>)</div></a></td>
-          <%else%>
-             <td><a class="navi_link" href="/cargos/search/"><div>查货源(<%=h Cargo.count%>)</div></a></td>
-             <td><a class="navi_link" href="/trucks/search"><div>查车源(<%=h Truck.count%>)</div></a></td>
-          <%end%>
-       
-            <% unless user.nil? %>
                   
+            <% unless user.nil? %>
+         <div class="navi_huo">
+              <td><a class="navi_link" href="/cargos/search"><div>全部货源(<%=h Cargo.count%>)</div></a></td>
               <td> <a class="navi_link navi_stock_cargo" href="/users/<%=user.id%>/stock_cargos"><div>发布货源(<%=ustatistic.nil? ? "0":ustatistic.total_stock_cargo%>)</div></a></td>
               <td> <a class="navi_link navi_cargo" href="/users/<%=user.id%>/cargos/"> <div>我的货源(<%=ustatistic.nil? ? "0":ustatistic.total_cargo%>)</div></a></td>
-  
-              
+            </div>
+         <div class="navi_che">
+              <td><a class="navi_link" href="/trucks/search"><div>全部车源(<%=h Truck.count%>)</div></a></td>
               <td> <a class="navi_link navi_stock_truck" href="/users/<%=user.id%>/stock_trucks"><div>发布车源(<%=ustatistic.nil? ? "0":ustatistic.total_stock_truck%>)</div></a></td>
               <td> <a class="navi_link navi_truck" href="/users/<%=user.id%>/trucks"><div>我的车源(<%=ustatistic.nil? ? "0":ustatistic.total_truck%>)</div></a> </td>
-
-
-              <%company=Company.find_by_user_id(user.id)%>
-              
+            </div>  
+         <div class="contact">
+              <%company=Company.find_by_user_id(user.id)%>              
               <%unless company.nil?%>
               <td> <a class="navi_link" href="/companies/show/<%=company.id%>"> <div>我的公司</div></a> </td>
               <%else%>
               <td> <a class="navi_link" href="/users/<%=user.id%>/companies"> <div>我的公司(未创建)</div></a> </td>
-              <%end%>
-                        
+              <%end%>                        
               <td> <a class="navi_link" href="/user_contacts/user/<%=user.id%>"><div>我的联系人</div></a></td>
+       </div>
              <!-- <td> <a class="navi_link" href="/user_contacts/user/<%=user.id%>"><div>我的档案</div></a> </td>-->
        
 <!--
@@ -42,6 +36,9 @@
             </ul>
           </div>
 -->
-        <%end%>
-   </tr>
+          <%else%>
+             <td><a class="navi_link" href="/cargos/search/"><div>全部货源(<%=h Cargo.count%>)</div></a></td>
+             <td><a class="navi_link" href="/trucks/search"><div>全部车源(<%=h Truck.count%>)</div></a></td>
+          <%end%>
+         </tr>
   </table>

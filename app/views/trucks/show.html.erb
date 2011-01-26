@@ -1,44 +1,14 @@
+
 <p id="notice"><%= notice %></p>
 
-<div id="truck_show">
 <%#=render :template=>'line_ads/show',:layout=>nil %>
-<h3> <%= @truck.fcity_name %>==><%= @truck.tcity_name %></h3>
 
-<p>
-  <label>车辆:</label>
-  <%=@truck.paizhao%>, <%=@truck.dunwei%>吨，车长<%=@truck.length%>米,<%=$truck_shape[@truck.shape]%>,<%=$truck_usage[@truck.usage]%>
-</p>
-
-<p>
-  <label>车辆联系:</label>
-  司机 <%=@truck.driver_name%>, 电话<%=@truck.driver_phone%>，随车电话<%=@truck.car_phone%>
-</p>
-<p>
-  <label>发车日期:</label>
-  <%= @truck.send_date %>
-</p>
-
-<p>
-  <label>备注:</label>
-  <%= $habit_word[@truck.comments] %>
-</p>
-
-<p>
-  <label>回程车:</label>
-  <%= $truck_huicheng[@truck.huicheng] %>
-</p>
-
-<p>
-  <label>create_time:</label>
-  <%= @truck.created_at.to_s.slice(0,19)%>
-</p>
-  
-</div>
-<!--
-<% if session[:user_id]==@truck.user_id %>
-<a href="http://localhost:3000/stock_trucks">我的车子</a> |
-<a href="http://localhost:3000/trucks">我的车源</a> |
-  <%= link_to '编辑', edit_truck_path(@truck) %> |
+<%if @truck[:from_site]=="quzhou"%>
+<%=render "qzshow"%>
+<%elsif @truck[:from_site]=="tf56"%>
+<%=render "tf56show"%>
+<%elsif @truck[:from_site]=="local" %>
+<%=render "localshow"%>
+<%else%>
+<%=render "localshow"%>
 <%end%>
-
--->

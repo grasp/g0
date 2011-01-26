@@ -1,8 +1,8 @@
+<%= #coding: utf-8%>
 <%= form_for(@stock_truck,:as=>:stocktruck,:html=>{:class=>"show_form"}) do |f| %>
   <% if @stock_truck.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@stock_truck.errors.count, "error") %> prohibited this stock_truck from being saved:</h2>
-
+      <h4><%= pluralize(@stock_truck.errors.count, "错误") %></h4>
       <ul>
       <% @stock_truck.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -12,17 +12,16 @@
   <% end %>
 
 
-
   <div class="field">
     <%= f.label :牌照 %>
     <%= f.text_field :paizhao %>
   </div>
   <div class="field">
-    <%= f.label "核定载重(dun)" %>
+    <%= f.label "核定载重(吨)" %>
     <%= f.text_field :dun_wei %>
   </div>
   <div class="field">
-    <%= f.label "车厢长度(mi)" %>
+    <%= f.label "车厢长度(米)" %>
     <%= f.text_field :che_length %>
   </div>
   <div class="field">
@@ -38,34 +37,42 @@
     <%= f.select(:truck_gps, options_for_select([["有","有"],["无","无"]],@stock_truck.truck_gps)) %>
   </div>
   <div class="field">
-    <%= f.label :随车电话 %>
-    <%= f.text_field :car_phone %>
+    <%= f.label :车主姓名 %>
+    <%= f.text_field :owner_name %>
   </div>
-
+  <div class="field">
+    <%= f.label :车主电话 %>
+    <%= f.text_field :owner_phone %>
+  </div>
   <div class="field">
     <%= f.label :司机姓名 %>
     <%= f.text_field :driver_name %>
   </div>
-
   <div class="field">
     <%= f.label :司机电话 %>
     <%= f.text_field :driver_phone %>
   </div>
-
+  <div class="field">
+    <%= f.label :业务员名字 %>
+    <%= f.text_field :bis_name %>
+  </div>
+  <div class="field">
+    <%= f.label :业务员电话 %>
+    <%= f.text_field :bis_phone %>
+  </div>
   <div class="field">
     <%= f.label :车子品牌 %>
-      <%= f.select(:truck_pinpai, options_for_select( $truck_pinpai_reverse.to_a,@stock_truck.truck_pinpai)) %>
-
+    <%= f.select(:truck_pinpai, options_for_select( $truck_pinpai_reverse.to_a,@stock_truck.truck_pinpai)) %>
   </div>
+
   <div class="field">
     <%= f.label :车子型号 %>
     <%= f.text_field :truck_xinghao %>
   </div>
-  <div class="field">
-    <%= f.label :购买年份 %>
-    
-    <%= f.select(:truck_year, options_for_select($year_hash_reverse.to_a,@stock_truck.truck_year)) %>
 
+  <div class="field">
+    <%= f.label :购买年份 %>    
+    <%= f.select(:truck_year, options_for_select($year_hash_reverse.to_a,@stock_truck.truck_year)) %>
   </div>
 
   <%= f.hidden_field :user_id %>

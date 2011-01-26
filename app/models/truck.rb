@@ -1,5 +1,7 @@
+# coding: utf-8
 class Truck 
   include MongoMapper::Document
+  
   #belongs_to :users
   #belongs_to :stock_trucks
   #has_many :inqueries
@@ -40,6 +42,18 @@ class Truck
       key  :truck_status_id,ObjectId
       key  :tstatistic_id ,ObjectId  
    
-      timestamps!
+       validate :check_unique
+      
+     timestamps!
+
+   def check_unique
+    repeated=Truck.where(:paizhao=>self.paizhao,:line=>self.line,:user_id=>self.user_id,:status=>"配货")
+    puts "repeated.size=#{repeated.size}"
+    unless repeated.size==0
+      errors.add_to_base("不能重复发布车源信息")
+      return false
+    end
+    return true
+  end
  
 end

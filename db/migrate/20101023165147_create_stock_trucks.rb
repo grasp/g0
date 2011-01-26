@@ -19,6 +19,9 @@ class CreateStockTrucks < ActiveRecord::Migration
       #driver info
       t.string :driver_name
       t.string :driver_phone
+      
+      t.string :owner_name
+      t.string :owner_phone
 
       # contact inforamtion
       t.integer :company_id

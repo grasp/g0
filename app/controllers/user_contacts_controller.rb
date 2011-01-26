@@ -16,7 +16,7 @@ class UserContactsController < ApplicationController
     user_id=session[:user_id]
 
    # @company = Company.where("user_id =?",session[:user_id]).first #only one company actully
-
+   
     @inquery_user=Array.new
     @quote_user=Array.new
     @user_contacts=Array.new
@@ -108,11 +108,6 @@ class UserContactsController < ApplicationController
   def edit
        unless params[:id].nil?
           @user_contact= UserContact.find_by_id(params[:id])
-          unless @user_contact.fix_phone.nil?
-             phone=@user_contact.fix_phone.split(/-/)
-             @user_contact.phone_quhao=phone[0]
-             @user_contact.fix_phone=phone[1]
-          end
     else
       @user_contact=UserContact.where(:name =>session[:user_name],:email =>session[:user_email]).first
       @user_contact.name=session[:user_name]

@@ -21,7 +21,8 @@ font-size: 16px;
 
 #sheader {
     padding: 5px;
-    height:100px;
+  /*  height:100px;*/
+    margin-bottom: 10px;
     float:left;
     width:100%;
 }
@@ -53,9 +54,11 @@ h1,h2,h3{
     border-bottom: 3px solid;
     border-left-color: #6694E3;
     border-bottom-color: #6694E3;
-    */
-    background-color: #6694E3;    
+   
+    background-color: #6694E3;   
+     */
     margin:0px;
+    padding: 0px;
     width: 100%;
     float: left;
    }
@@ -64,6 +67,8 @@ h1,h2,h3{
   /* padding: 10px;*/
    /* padding-top:0px;*/
     padding-left:0px;
+      margin:0px;
+    padding: 0px;
     width:100%;
     background-color: #F2F2F2;
 }

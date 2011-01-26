@@ -1,6 +1,7 @@
 <%#coding:utf-8%>
 
 <table>
+   <%unless @cargos.blank?%>
   <tr>
    
     <th>货物</th>    
@@ -10,15 +11,13 @@
     <th>有效天数</th>
      <th>发布日期</th>
     <th>状态</th>
-
    <th>车主报价</th>
     <th>我询价</th>
-
     <th>匹配车源</th>
 
    
   </tr>
-  <%unless @cargos.nil?%>
+ 
     <% @cargos.each do |cargo|  %>
       <tr>
        <%cstatistic=Cstatistic.find(cargo.cstatistic_id)%>
@@ -30,7 +29,6 @@
         <td><%= cargo.cargo_weight %>吨/<%= cargo.cargo_bulk %>方</td>
         <td><%= cargo.send_date %>天</td>
          <td><%= cargo.created_at.to_s.slice(5,11) %></td>
-
         <td><%= cargo.status %></td>
 
         <td><a class="show_float" href="/cargos/<%=cargo.id%>/quotes/cargo">查看车主报价<%= cstatistic.total_baojia %>个 </a></td>
@@ -38,10 +36,13 @@
         <%if cargo.status=="成交"%>
          <td><a class="show_float " href="/cargos/chenjiao/<%=cargo.id%>"><%=cargo.status%></a></td>
         <%else%>
-        <td><a class="show_float " href="/cargos/<%=cargo.id%>/match">车源速配(<%=Lstatistic.find_by_line(cargo.line).valid_truck || 0 %>)</a></td>
+         <%l=Lstatistic.find({:line=>cargo.line})%>
+        <td><a class="show_float " href="/cargos/<%=cargo.id%>/match">车源速配(<%=l.nil? ? 0:l.valid_truck %>)</a></td>
         <%end%>
       </tr>
     <% end %>
+      <%else%>
+       <tr>你还没有发布任何货源.</tr>
   <% end %>
 
 </table>

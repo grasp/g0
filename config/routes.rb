@@ -1,5 +1,7 @@
 G0::Application.routes.draw do
 
+  resources :citystatistics
+
   get "quzhou_wuliu/index"
 
   get "quzhou_wuliu/show"

@@ -111,7 +111,7 @@ class InqueriesController < ApplicationController
   # POST /inqueries.xml
   def create
     @inquery = Inquery.new(params[:inquery])
-     if params[:mianyi]=="on"
+    if params[:mianyi]=="on"
       @inquery.price=nil
     end
      @cargo=Cargo.find(@inquery.cargo_id)
@@ -122,28 +122,20 @@ class InqueriesController < ApplicationController
    # @inquery.truck_company_id=@truck.company_id
    # @inquery.truck_user_id=@truck.user_id
 
-
     respond_to do |format|
       #update statistic
 
-
-      @cstatistic=Cstatistic.find(@cargo.cstatistic_id)
-      total_xunjia=@cstatistic.total_xunjia || 0
-      @cstatistic.update_attribute(:total_xunjia,total_xunjia+1)
-
-      #update  tstatistic
-      
-      @tstatistic=Tstatistic.find(@truck.tstatistic_id)
-      total_xunjia=@tstatistic.total_xunjia || 0
-      @tstatistic.update_attribute(:total_xunjia,total_xunjia+1)
-
-      if @inquery.save
-        format.html { redirect_to(@inquery, :notice => 'Inquery was successfully created.') }
+    if @inquery.save
+        if @cargo.from_site=="local"
+          Cstatistic.collection.update({'cargo_id' => @cargo.id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true}) 
+          Tstatistic.collection.update({'truck_id'=>@truck.id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true})
+        end
+        format.html { redirect_to(@inquery, :notice => '报价创建成功.') }
         format.xml  { render :xml => @inquery, :status => :created, :location => @inquery }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @inquery.errors, :status => :unprocessable_entity }
-      end
+     end
     end
   end
 

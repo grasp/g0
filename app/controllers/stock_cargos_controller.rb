@@ -64,10 +64,8 @@ class StockCargosController < ApplicationController
     @stock_cargo = StockCargo.new(params[:stockcargo])    
     respond_to do |format|
       if @stock_cargo.save
-        flash[:notice] = '货物创建成功！.'
-        @ustatistic=Ustatistic.find_by_user_id(session[:user_id])
-        total_stock_cargo=@ustatistic.total_stock_cargo || 0
-        @ustatistic.update_attributes({:total_stock_cargo=>total_stock_cargo+1})
+        flash[:notice] = '货物创建成功！'
+        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_stock_cargo" => 1}}) 
         format.html { redirect_to(@stock_cargo) }
         format.xml  { render :xml => @stock_cargo, :status => :created, :location => @stock_cargo }
       else
