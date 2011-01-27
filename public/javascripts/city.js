@@ -40,31 +40,30 @@ function city_load(){
             var coordinate=$("#from_data_load").offset();
             selected= $("#float_load2");
             /*IE not support inherit*/
-
-         //  $("#from_data_load,#to_data_load" ).css("background-color","inherit");
+          //$("#from_data_load,#to_data_load" ).css("background-color","inherit");
             if($("#float_show2").css("display")=="none")
             {
                 $("#float_show2").css("display","inline");
                 if($(this).attr("class")=="company_city")
                 {
-
                     $("#float_show2").css("top",coordinate.top-400);
                     $("#float_show2").css("left",coordinate.left-400);
-                }else{
+                }
+                else{
                     $("#float_show2").css("top",coordinate.top+30);
                     $("#float_show2").css("left",coordinate.left);
                 }
                $("#from_data_load,#to_data_load" ).css("background-color","#D4E4FF");
-                $(this).css("background-color","#ffcc00");
-                selected.load(this.href);
-               //locate the position
+                 $(this).css("background-color","#ffcc00");
+                 selected.load(this.href);
+                //locate the position
             }
             else
             {
                 $("#float_show2").css("display","none");
             }
 
-            if($.browser.msie) {
+            if($.browser.msie){
                 event.returnValue = false;
                 event.preventDefault();
                 return false;

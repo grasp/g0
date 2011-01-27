@@ -5,7 +5,7 @@ class UserContactsController < ApplicationController
   before_filter:authorize
   protect_from_forgery :except => [:tip,:login]
  #  layout "public"
-  layout  "users",:except => [:show,:index]
+  layout  "users",:except => [:show,:index,:showf]
   def index
 
    ## only do this when in admin user
@@ -74,6 +74,17 @@ class UserContactsController < ApplicationController
      end
     respond_to do |format|
       format.html # show.html.erb
+      format.xml  { render :xml => @user_contact }
+    end
+  end
+    def showf
+    if params[:user_id]
+     @user_contact = UserContact.find_by_user_id(params[:user_id])
+    else
+    @user_contact = UserContact.find(params[:id])
+     end
+    respond_to do |format|
+      format.html # showf.html.erb
       format.xml  { render :xml => @user_contact }
     end
   end

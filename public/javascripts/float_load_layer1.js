@@ -3,7 +3,25 @@
  * and open the template in the editor.
  */
 
+function confirm_request(){
+    $("a.request_chenjiao").live("click",function(){
+        var answer=confirm("注意:该条货源将改为已成交状态,再不能接收新报价，请确保你已经联系并核实过该条车源,对方同意成交后，再确认请点击OK"); 
+        if(answer)
+         { 
+              $('#show').load(this.href);
+              if($.browser.msie) {
+            event.returnValue = false;
+            event.preventDefault();
+            return false;
+        }
+        else   return false;
+    
+         }
+    
 
+                
+    });
+}
 function float_load_layer1(){
 
     /* 显示报价 或者询价 子页面 not for form submit ajax*/
@@ -21,6 +39,7 @@ function float_load_layer1(){
            truck_new_validation();
            inquery_new_validation();
            quote_new_validation();
+           confirm_request();
        });  
 
        css_class= $(this).attr("class");  

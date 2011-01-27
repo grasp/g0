@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 
+
 function form_submit(){
     /*
      $('#stock_cargo_submit').live("click",function(){
@@ -128,9 +129,3 @@ function form_submit(){
 });
 
 */
-$('a.cargo_chenjiao').live("click",function(){
-$("#float_show").css("display","none")
-$("#show").load(this.href);
-alert("loaded")
-return false;
-});

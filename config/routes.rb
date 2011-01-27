@@ -57,6 +57,7 @@ G0::Application.routes.draw do
   end
   match '/companies/new/(:who)' =>'companies#new',:as=>:companiesnewwho
   match '/companies/index/:id/(:who)' =>'companies#index',:as=>:companiesindex
+  match '/companies/showf/:id' =>'companies#showf',:as=>:companiesshowf
   match '/companies/show/:id/(:who)' =>'companies#show',:as=>:companiesshow
   match '/companies/search' =>'companies#search',:as=>:companiessearch
   match '/companies/create' =>'companies#create',:as=>:companiescreate
@@ -94,7 +95,8 @@ G0::Application.routes.draw do
 
   match  '/package_categories/show/:code' =>'package_categories#show',:as=>:package_categoriesshow
   resources :package_categories
-  match '/user_contacts//index/:id/(:who)'=>'user_contacts#index' , :as=>:usercontactsindex
+   match '/user_contacts/showf/:id'=>'user_contacts#showf' , :as=>:usercontactsshowf
+  match '/user_contacts/index/:id/(:who)'=>'user_contacts#index' , :as=>:usercontactsindex
   match '/user_contacts/user/:user_id'=>'user_contacts#show' , :as=>:usercontactsshow
   match '/user_contacts/edit'=>'user_contacts#edit' , :as=>:usercontactsedit
   match '/user_contacts/create' =>'user_contacts#create', :as=>:usercontactscreate

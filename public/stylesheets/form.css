@@ -18,7 +18,7 @@
     padding-left: 15px; /*width of left column containing the label elements*/
     margin-right: 15px; /*width of left column containing the label elements*/
   /*  height: 1%;*/
-} 
+}
 
 .show_form .actions
 {
@@ -70,8 +70,9 @@ div.stockcargo_new .field label{
   /* width:80%;*/
   height:20px;
 }
+
 #login #email,#login #password{
-    width:80%;
+    width:50%;
 }
 
 div.stockcargo_new .field input{

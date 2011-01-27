@@ -211,7 +211,7 @@ class TrucksController < ApplicationController
         Lstatistic.collection.update({'line'=>@truck.line},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"配货"}},{:upsert =>true})
         StockTruck.collection.update({'_id' => @truck.stock_truck_id},{'$inc' => {"truckcount" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"配货"}})       
 
-        format.html { redirect_to(@truck) }
+        format.html { redirect_to(@truck)}
         format.xml  { render :xml => @truck, :status => :created, :location => @truck }
       else 
         @stock_truck=StockTruck.find_by_id(@truck.stock_truck_id)        

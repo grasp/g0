@@ -2,6 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+function confirm_chenjiao(){
+    alert("confirm_chenjiao");
+    return false;
+}
 
 
 $(document).ready(function() {

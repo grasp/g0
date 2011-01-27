@@ -12,8 +12,8 @@
      <th>发布日期</th>
     <th>状态</th>
    <th>车主报价</th>
-    <th>我询价</th>
-    <th>匹配车源</th>
+    <th>货主询价</th>
+    <th>车源速配</th>
 
    
   </tr>
@@ -31,13 +31,13 @@
          <td><%= cargo.created_at.to_s.slice(5,11) %></td>
         <td><%= cargo.status %></td>
 
-        <td><a class="show_float" href="/cargos/<%=cargo.id%>/quotes/cargo">查看车主报价<%= cstatistic.total_baojia %>个 </a></td>
-        <td><a class="show_float " href="/cargos/<%=cargo.id%>/inqueries/cargo/">查看我的询价<%= cstatistic.total_xunjia %>个</a></td>
+        <td><a class="show_float" href="/cargos/<%=cargo.id%>/quotes/cargo"><%= cstatistic.total_baojia %>个 </a></td>
+        <td><a class="show_float " href="/cargos/<%=cargo.id%>/inqueries/cargo/"><%= cstatistic.total_xunjia %>个</a></td>
         <%if cargo.status=="成交"%>
          <td><a class="show_float " href="/cargos/chenjiao/<%=cargo.id%>"><%=cargo.status%></a></td>
         <%else%>
          <%l=Lstatistic.find({:line=>cargo.line})%>
-        <td><a class="show_float " href="/cargos/<%=cargo.id%>/match">车源速配(<%=l.nil? ? 0:l.valid_truck %>)</a></td>
+        <td><a class="show_float " href="/cargos/<%=cargo.id%>/match"><%=l.nil? ? 0:l.valid_truck %>个</a></td>
         <%end%>
       </tr>
     <% end %>

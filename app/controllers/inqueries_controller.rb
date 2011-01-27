@@ -18,8 +18,7 @@ class InqueriesController < ApplicationController
 
   def cargo
     @cargo=Cargo.find_by_id(params[:cargo_id])
-    @inqueries=Inquery.where(:cargo_id => params[:cargo_id])
-
+    @bao_or_xun_record=Inquery.where(:cargo_id => params[:cargo_id])
     respond_to do |format|
       format.html # cargo.html.erb
       format.xml  { render :xml => @inqueries }

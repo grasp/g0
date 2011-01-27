@@ -102,8 +102,6 @@ div.navi_che{border:1px solid #9AAFE5;}
 div.navi_contact{border:1px solid #9AAFE5;}
 */
 #head_line{border:1px solid #9AAFE5;}
-#show table tr{ background:white;;border:none;border-bottom: 1px solid silver;}
-
+#show table tr,#float_show table tr { background:white;;border:none;border-bottom: 1px solid silver;}
 #show table th{text-align:center;margin-left: 20px;margin-top: 0px;padding-top: 0px;background:#E6EEF7;}
-
 #show table tr td {text-align:center;margin-left: 20px;padding:.5em;margin-top: 20px;border:none;}

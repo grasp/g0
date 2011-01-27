@@ -1,26 +1,14 @@
-<h1>标的</h1>
-<%= render 'cargos/title' %>
+
 
 <p id="notice"><%= notice %></p>
-<h1>报价单</h1>
+
 <p>
   <b>价格:</b>
   <%= @quote.price %>
 </p>
 
-<p>
-  <b>备注:</b>
-  <%= @quote.comments %>
-</p>
-
-
-<p>
-  <b>Truck:</b>
-  <%= @quote.truck_id %>
-</p>
 
 
 
-
-<%= link_to 'Edit', edit_quote_path(@quote) %> |
-<%= link_to 'Back', quotes_path %>
+<%#= link_to 'Edit', edit_quote_path(@quote) %> |
+<%#= link_to 'Back', quotes_path %>

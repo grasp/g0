@@ -6,7 +6,7 @@ class CompaniesController < ApplicationController
   protect_from_forgery :except => [:tip,:login]
   include CompaniesHelper
   # layout "public"
-  layout  "users",:except => [:show,:index,:search]
+  layout  "users",:except => [:show,:index,:search,:showf]
 
   def index
     @company = Company.where(:user_id =>session[:user_id]).first #only one company actully
@@ -57,12 +57,17 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
 
     respond_to do |format|
-      if params[:who]=="public"
-        format.html { render :template=>"companies/show2"}
-      else
-        format.html # new.html.erb
-      end
+
+      format.html # new.html.erb
       format.xml  { render :xml => @company }
+    end
+  end
+   def showf
+    @company = Company.find(params[:id])
+
+    respond_to do |format|
+        format.html # new.html.erb
+       format.xml  { render :xml => @company }
     end
   end
 

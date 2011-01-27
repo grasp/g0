@@ -1,34 +1,26 @@
-<p id="notice"><%= notice %></p>
-<%unless @user_contact.nil?%>
-<p>
-  <b>联系人:</b>
-  <%= @user_contact.name || "无"%>
-</p>
+<%#coding: utf-8%>
+<p id="notice"><%= notice %></td>
+  <%unless @user_contact.nil?%>
 
-<p>
-  <b>Email:</b>
-  <%= @user_contact.email || "无"%>
-</p>
-
-<p>
-  <b>Qq:</b>
-  <%= @user_contact.QQ || "无"%>
-</p>
-
-<p>
-  <b>固定电话:</b>
-  <%= @user_contact.quhao+"-"+@user_contact.fixphone || "无"%>
-</p>
-
-<p>
-  <b>移动电话:</b>
-  <%= @user_contact.mphone || "无"%>
-</p>
-
-
-
-
-<%#= link_to '编辑', edit_user_contact_path(@user_contact),:class=>"show_float" %> 
+ <p>
+   <label> <b>信息发布</b></label>
+        <%= @user_contact.name || "无"%>
+ </p>
+ <p>
+     <label> <b>移动电话</b></label>
+        <%= @user_contact.mphone || "无"%>
+   </p>
+ <p>
+    <label> <b>固定电话</b></label>
+        <%= @user_contact.quhao+"-"+@user_contact.fixphone || "无"%>
+   </p>
+ <p>
+      <label> <b>Email</b></label>
+        <%= @user_contact.email || "无"%>
+   </p>
+ <p>
+        <label> <b>Qq</b></label>
+        <%= @user_contact.QQ || "无"%>
+   </p>
 
 <%end%>
-<%=render 'usercontactsnavi'%>

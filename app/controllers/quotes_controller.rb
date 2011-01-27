@@ -38,7 +38,7 @@ class QuotesController < ApplicationController
   def cargo
     @cargo=Cargo.find_by_id(params[:cargo_id])
     #only belong to me
-    @quotes=Quote.where(:cargo_id => params[:cargo_id])
+    @bao_or_xun_record=Quote.where(:cargo_id => params[:cargo_id])
     respond_to do |format|
       format.html # cargo.html.erb
       format.xml  { render :xml => @quotes }
@@ -127,7 +127,7 @@ class QuotesController < ApplicationController
       @quote.price=nil
     end
 
-  #  @cargo=Cargo.find(@quote.cargo_id)
+    @cargo=Cargo.find(@quote.cargo_id)
     @truck=Truck.find(@quote.truck_id)
 
   #  @quote.cargo_company_id=@cargo.company_id
@@ -138,17 +138,11 @@ class QuotesController < ApplicationController
     respond_to do |format|
       if @quote.save
         #update statistic
-        @cstatistic=Cstatistic.find(@cargo.cstatistic_id)
-        total_baojia=@cstatistic.total_baojia || 0
-        @cstatistic.update_attributes(:total_baojia=>total_baojia+1)
-
+        Cstatistic.collection.update({'_id' => @cargo.cstatistic_id},{'$inc' => {"total_baojia" => 1}}) 
         #update  tstatistic
-        @tstatistic=Tstatistic.find(@truck.tstatistic_id)
-         total_baojia=@tstatistic.total_baojia || 0
-        @tstatistic.update_attributes(:total_baojia=>total_baojia+1)
-    
+        Tstatistic.collection.update({'_id' => @truck.tstatistic_id},{'$inc' => {"total_baojia" => 1}})  
         flash[:notice]= "创建报价成功！"
-        format.html { redirect_to(@quote, :notice => 'Quote was successfully created.') }
+        format.html { redirect_to(@quote, :notice => '创建报价成功.') }
         format.xml  { render :xml => @quote, :status => :created, :location => @quote }
       else
         flash[:notice]= "创建报价失败！" 
@@ -162,10 +156,9 @@ class QuotesController < ApplicationController
   # PUT /quotes/1.xml
   def update
     @quote = Quote.find(params[:id])
-
     respond_to do |format|
       if @quote.update_attributes(params[:quote])
-        format.html { redirect_to(@quote, :notice => 'Quote was successfully updated.') }
+        format.html { redirect_to(@quote, :notice => '更新报价成功.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -178,33 +171,25 @@ class QuotesController < ApplicationController
 
     @quote = Quote.find(params[:id])
     #update truck status
-    @truck=Truck.find(@quote.truck_id)
-     
-    @truck.update_attributes(:status=>"请求成交")
-    #update cargo status
-
-    @cargo=Cargo.find(@quote.cargo_id)
-    @cargo.update_attributes(:status=>"请求成交")
-
-    @quote.update_attributes(:status=>"请求成交")
+    Truck.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"成交确认中"}})
+    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"成交确认中"}})
+    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"成交确认中"}})
 
     #TOTO:notify all other related truck
     #All quotes to from this truck change to chenjiao
-
-    @quotes=Quote.where(:truck_id =>@truck.id , :status =>"配货")
-    if  @quote.size>0
+    @quotes=Quote.where(:truck_id =>@quote.truck_id , :status =>"配货")
+    if  @quotes.size>0
       @quotes.each do |quote|
-        quote.update_attributes(:status=>"过期")
+        Quote.collection.update({'truck_id'=>@quote.truck_id },{'$set'=>{:status=>"过期"}})
       end
     end
     #All Inquers from this cargo neec change to chenjiao
-    @inqueries=Inquery.where(:cargo_id =>@cargo.id,:status=>"配货")
+    @inqueries=Inquery.where(:cargo_id =>@quote.cargo_id,:status=>"配货")
     if  @inqueries.size>0
       @inqueries.each do |inquery|
-        inquery.update_attributes(:status=>"过期")
+        Inquery.collection.update({'cargo_id'=>@quote.cargo_id },{'$set'=>{:status=>"过期"}})
       end
     end
-
 
     respond_to do |format|
       format.html { redirect_to(:controller=>"cargos",:action=>"index" )}
