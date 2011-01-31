@@ -40,7 +40,11 @@ class Truck
       #for future usage
       key  :truck_pingjia_id,ObjectId
       key  :truck_status_id,ObjectId
-      key  :tstatistic_id ,ObjectId  
+      key  :tstatistic_id ,ObjectId
+
+
+  # add more le
+     key :from_site,String
    
        validate :check_unique
       

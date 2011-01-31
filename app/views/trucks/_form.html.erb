@@ -1,3 +1,4 @@
+<%unless @stock_truck.blank? %>
 <%= form_for(@truck,@stock_truck,:as=>:truck,:html => {:class => "show_form"}) do |f| %>
   <% if @truck.errors.any? %>
     <div id="error_explanation">
@@ -52,4 +53,5 @@
     <%= f.select(:huicheng,options_for_select($truck_huicheng_reverse.to_a,@truck.huicheng) ) %>
     <%= f.submit("确定")%>
  </div>
+<% end %>
 <% end %>

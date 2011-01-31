@@ -39,6 +39,7 @@ GEM
     arel (2.0.7)
     bson (1.1.5)
     builder (2.1.2)
+    daemons (1.0.10)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     gem_plugin (0.2.3)
@@ -57,6 +58,9 @@ GEM
       activesupport (>= 2.3.4)
       jnunemaker-validatable (~> 1.8.4)
       plucky (~> 0.3.6)
+    mongrel (1.2.0.pre2)
+      daemons (~> 1.0.10)
+      gem_plugin (~> 0.2.3)
     mongrel (1.2.0.pre2-x86-mingw32)
       gem_plugin (~> 0.2.3)
     plucky (0.3.6)
@@ -87,6 +91,7 @@ GEM
     tzinfo (0.3.23)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES

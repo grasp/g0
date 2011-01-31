@@ -32,13 +32,14 @@ function float_load_layer1(){
         selected=$('#float_show');        
         var select_parent=$(this).parent().parent();
        $('tr').css("background-color","white");
-       $('#float_load').empty();
+    //   $('#float_load').empty();
        $('#float_load').load(this.href,function(){     
            stock_cargo_new_validation();
            cargo_new_validation();
            truck_new_validation();
            inquery_new_validation();
            quote_new_validation();
+           stock_truck_update_validation();
            confirm_request();
        });  
 

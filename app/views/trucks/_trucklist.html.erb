@@ -28,11 +28,11 @@
     <th>发布时间</th>
      <th>状态</th>
     <th>货主操作</th>
-    <th>
-     <div class="actions">
-    <%= f.submit("搜索") %></th>
+ <th>
+   <div class="actions">
+    <%= f.submit("搜索") %>
  </div>
-    
+</th>
   </tr>
 
 
@@ -57,10 +57,12 @@
 
           <td>
              <%unless session[:user_id].nil?%>
-            <%if truck.user_id==session[:user_id]%>
+             <%if truck.user_id==session[:user_id]%>
             车主
-            <%else%>
+            <%elsif truck.from_site=="local"%>
               <a class="baojia" href="/trucks/<%=truck.id%>/inqueries/new">询价</a>
+             <%else%>
+              其他
               <%end%>
               <%else%>
               登录后询价
@@ -72,7 +74,6 @@
     <% end %>
      </table>
      <%else%>
-        </table>
         <p>没有找到对应车源</p>
      <% end %>
 

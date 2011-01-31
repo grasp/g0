@@ -195,8 +195,8 @@ class TrucksController < ApplicationController
   def create
 
     # @truck= get_truck_info_from_params(params)
-    @truck=Truck.new(params[:truck])
     params[:truck][:from_site]="local"
+    @truck=Truck.new(params[:truck])  
     @truck.line=@truck.fcity_code+"#"+@truck.tcity_code     
 
     respond_to do |format|
@@ -213,9 +213,10 @@ class TrucksController < ApplicationController
 
         format.html { redirect_to(@truck)}
         format.xml  { render :xml => @truck, :status => :created, :location => @truck }
-      else 
-        @stock_truck=StockTruck.find_by_id(@truck.stock_truck_id)        
-        format.html { render :controller=>"trucks",:action => "new" }
+      else
+        flash[:notice] = '车源创建失败，重复发布'
+       # @stock_truck=StockTruck.find_by_id(@truck.stock_truck_id)
+        format.html { render :action => "new" }
         format.xml  { render :xml => @truck.errors, :status => :unprocessable_entity }
       end
     end

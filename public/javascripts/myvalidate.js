@@ -726,15 +726,16 @@ function truck_new_validation(){
     $("#truck_new").validate(
     {
         submitHandler: function(form) {
-                  $('#truck_new').ajaxSubmit({
-      target: '#float_load',
+         $('#truck_new').ajaxSubmit({
+         target: '#float_load',
+
        success: function() {
        $("#show").load($("a.navi_truck").attr("href"));
        $('#navi').load("/public/navibar");
        $('a.navi_link').removeClass("navi_active");
        $("a.navi_truck").addClass('navi_active');
         }
-            });
+          });
             return false;
         },
 
@@ -819,55 +820,72 @@ function quote_new_validation(){
 );
  
 }
-/*
-function stock_truck_new_validation(){
 
-  $("#stocktruck_new").validate(
+function stock_truck_update_validation(){
+
+  $("#stocktruck_edit").validate(
     {
-    submitHandler: function(form) {
-     $('#stocktruck_new').ajaxSubmit({
+      submitHandler: function(form) {
+
+        $('#stocktruck_edit').ajaxSubmit({
       // beforeSubmit:function(){ (stock_cargo_new_validation());},
-      target: '#float_load',
+       target: '#float_load',
        success: function() {
        $("#show").load($("a.navi_stock_truck").attr("href"));
-       $('#navi').load("/public/navibar");
     }
   });
   return false;
- },
+    },
 
         rules: {
-            "stocktruck[paizhao]":{
-                required: true,
-                minlength:7,
-                maxlength:8
+            "stocktruck[owner_name]":{
+                required: true
             },
-                "stocktruck[dun_wei]":{
-                required: true,
-                number:true,
-                maxlength:5
+                "stocktruck[owner_phone]":{
+                required: true
             },
-             "stocktruck[che_length]":{
-                required: true,
-                maxlength:5
+             "stocktruck[driver_name]":{
+                required: true
         },
-        :truck_shape
+        "stocktruck[driver_phone]":{
+                required: true
+        },
+                "stocktruck[bis_name]":{
+                required: true
+        },
+                "stocktruck[bis_phone]":{
+                required: true
+        }
+        },
         messages:
         {
-            "stockcargo[cate_code]":{
-                required: "你还没有选择货物类别"
+            "stocktruck[owner_name]":{
+                required: "不能为空"
             },
-              "stockcargo[package_code]":{
-                required: "你还没有选择包装类别"
-            }
+                "stocktruck[owner_phone]":{
+                required: "不能为空"
+            },
+             "stocktruck[driver_name]":{
+                required: "不能为空"
+           },
+        "stocktruck[driver_phone]":{
+                required: "不能为空"
+        },
+                "stocktruck[bis_name]":{
+                required: "不能为空"
+        },
+                "stocktruck[bis_phone]":{
+                required: "不能为空"
+        }
         }
     }
-);
->>>>>>> e7a011aff656f944ababf4b1e1f4489901ba46d3
-}
+)};
 
 
-*/
+
+
+
+
 
 
 

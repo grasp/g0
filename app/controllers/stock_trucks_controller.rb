@@ -72,6 +72,7 @@ class StockTrucksController < ApplicationController
         format.html { redirect_to(@stock_truck) }
         format.xml  { render :xml => @stock_truck, :status => :created, :location => @stock_truck }
       else
+        flash[:notice] = '创建车辆失败,该牌照已经存在'
         format.html { render :action => "new" }
         format.xml  { render :xml => @stock_truck.errors, :status => :unprocessable_entity }
       end

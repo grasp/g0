@@ -12,12 +12,12 @@
     <th>司机电话</th>
     <th>已发布车源</th>
     <th>发布车源</th>
-    <th>全部车源</th>
+    <th>更新</th>
 
   </tr>
   <% @stock_trucks.each do |stock_truck| %>
     <tr>
-      <td> <a class="show_float" href="/stock_trucks/show/<%=stock_truck.id%>"> <%= stock_truck.paizhao %><%=stock_truck.dun_wei%>吨,
+      <td> <a class="show_float" href="/stock_trucks/show/<%=stock_truck.id%>"> <%= stock_truck.paizhao %>,<%=stock_truck.dun_wei%>吨,
         <%= stock_truck.che_length %>米,
         <%= $truck_shape[stock_truck.truck_shape] %></a>
       </td>
@@ -26,7 +26,7 @@
       <td><%= stock_truck.owner_phone %></td>
       <td><%= stock_truck.driver_name %></td>
       <td><%= stock_truck.driver_phone %></td>
-      <td><a class="page_navi_link" href="/stock_trucks/<%=stock_truck.id%>/trucks/part"><%=stock_truck.truckcount || "0"%>条车源</a></td>
+      <td><a class="page_navi_link" href="/stock_trucks/<%=stock_truck.id%>/trucks/part"><%=stock_truck.truckcount || "0"%>条</a></td>
       <td><a class="truck_fabu" href="/trucks/new/<%=stock_truck.id%>">发布车源</a></td>
       <td><a class="show_float" href="/stock_trucks/<%=stock_truck.id%>/edit">更新</a></td>
     </tr>
@@ -37,6 +37,8 @@
 </table>
 <%= will_paginate @stock_trucks ,:class=>"page_navi_link"%>
 <br />
+
+<p id="notice"><%= notice %></p>
 
 <p>
   <a class="page_navi_link" href="/stock_trucks/new">新增车子</a>

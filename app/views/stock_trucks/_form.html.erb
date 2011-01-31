@@ -1,7 +1,9 @@
+<%unless @stock_truck.blank?%>
 <%= form_for(@stock_truck,:as=>:stocktruck,:html=>{:class=>"show_form"}) do |f|%>
+<!--
 <% if @stock_truck.errors.any? %>
     <div id="error_explanation">
-    <h2><%= pluralize(@stock_truck.errors.count, "错误") %> </h2>
+    <h2><%= pluralize(@stock_truck.errors.count, "错误")%> </h2>
       <ul>
       <% @stock_truck.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -9,7 +11,7 @@
       </ul>
     </div>
   <% end %>
-
+-->
 
   <div class="field">
     <%= f.label :牌照 %>
@@ -82,4 +84,5 @@
     <%= f.submit("确定") %>
   </div>
 
+<%end %>
 <%end %>
