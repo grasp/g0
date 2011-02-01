@@ -1,5 +1,5 @@
 <%#coding: utf-8%>
-<p id="notice"><%= notice %></p>
+
 
 <%=render 'cityform'%>
  <%  unless @companies.blank? %>
@@ -18,8 +18,7 @@
 
   <tbody>
     
-    <%@companies.each do |company|%>
-   
+    <%@companies.each do |company|%>   
       <tr>
         <td><a class="show_float" href="/companies/show/<%=company.id%>/public"><%=h company.name %></a>
 </td>
@@ -37,7 +36,7 @@
 
   </tbody>
 </table>
-
+<p id="notice"><%= notice %></p>
 <%=render 'companynavi'%>
 
 

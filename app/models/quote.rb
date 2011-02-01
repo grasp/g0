@@ -1,3 +1,4 @@
+# coding: utf-8
 class Quote 
   # belongs_to :cargos
   # belongs_to :trucks
@@ -20,7 +21,18 @@ class Quote
       # for future usage
       key :ismailed,Boolean
       key :isaccepted,Boolean
+      
 
       timestamps!
+      
+     validate :check_unique
+  def check_unique
+    repeated=Quote.where(:cargo_id=>self.cargo_id,:truck_id=>self.truck_id)
+       unless repeated.size==0
+      errors.add_to_base("不能重复报价")
+      return false
+    end
+    return true
+  end
 
 end

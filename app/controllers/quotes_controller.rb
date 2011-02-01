@@ -7,7 +7,6 @@ class QuotesController < ApplicationController
   before_filter:authorize, :except => [:public]
     
   def index
-
     unless params[:cargo_id].nil?
       @quotes =  Quote.find(:cargo_id =>params[:cargo_id])
     else
@@ -48,7 +47,7 @@ class QuotesController < ApplicationController
   #one trucks's all baojia
   def truck
     @truck=Truck.find_by_id(params[:truck_id])
-    @quotes=Quote.where(:truck_id => params[:truck_id], :user_id =>session[:user_id])
+    @bao_or_xun_record=Quote.where(:truck_id => params[:truck_id], :user_id =>session[:user_id])
     respond_to do |format|
       format.html # part.html.erb
       format.xml  { render :xml => @quotes }
@@ -107,8 +106,7 @@ class QuotesController < ApplicationController
   # GET /quotes/1/edit
   def edit
 
-    @quote = Quote.find(params[:id])
-     
+    @quote = Quote.find(params[:id])     
     @trucks = Truck.where(:user_id =>session[:user_id])
     @mytruck=Hash.new
     @trucks.each do |truck|
@@ -145,8 +143,9 @@ class QuotesController < ApplicationController
         format.html { redirect_to(@quote, :notice => '创建报价成功.') }
         format.xml  { render :xml => @quote, :status => :created, :location => @quote }
       else
-        flash[:notice]= "创建报价失败！" 
-        format.html { render :action => "new" }
+        @quote=nil
+        flash[:notice]="创建报价失败,不能重复报价！" 
+        format.html { render :template => "quotes/new" }
         format.xml  { render :xml => @quote.errors, :status => :unprocessable_entity }
       end
     end
@@ -168,13 +167,19 @@ class QuotesController < ApplicationController
   end
 
   def request_chenjiao
-
     @quote = Quote.find(params[:id])
+    
+   unless @quote.blank?
     #update truck status
-    Truck.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"成交确认中"}})
-    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"成交确认中"}})
-    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"成交确认中"}})
-
+    Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"请求成交"}})
+    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"请求成交"}})
+    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"请求成交"}})
+   else
+    @quote=Inquery.find(params[:id])
+     Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"请求成交"}})
+     Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"请求成交"}})
+     Inquery.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"请求成交"}})
+   end
     #TOTO:notify all other related truck
     #All quotes to from this truck change to chenjiao
     @quotes=Quote.where(:truck_id =>@quote.truck_id , :status =>"配货")
@@ -197,9 +202,18 @@ class QuotesController < ApplicationController
     
   end
   
-  def confirm_chenjiao
+  def confirm_chenjiao    
+    @quote = Quote.find(params[:id])
+    #update truck status
+    Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"已成交"}})
+    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"已成交"}})
+    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"已成交"}}) 
 
+    respond_to do |format|
+      format.html { redirect_to(:controller=>"trucks",:action=>"index" )}
+    end    
   end
+
   # DELETE /quotes/1
   # DELETE /quotes/1.xml
   def destroy

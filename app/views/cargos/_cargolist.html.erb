@@ -41,7 +41,7 @@
            <%= cargo.cate_name %></a> </td>
           <td><%= cargo.fcity_name %></td> 
           <td><%= cargo.tcity_name %></td>
-           <td><%= cargo.cargo_weight %><%= cargo.cargo_bulk %></td>
+           <td><%= cargo.cargo_weight || "0" %>吨<%= cargo.cargo_bulk %></td>
           <td><%= cargo.send_date %>天</td>
                    <!--
           <td><%= cargo.package_name %></td>
@@ -58,7 +58,7 @@
             <%if cargo.user_id==session[:user_id]%>
              货主
             <%else%>
-            <a class="baojia" href="/cargos/<%=cargo.id%>/quotes/new">报价</a>
+                <a class="baojia" href="/cargos/<%=cargo.id%>/quotes/new">报价</a>
              <%end%>
             <%else%>
             登录后报价
@@ -72,10 +72,9 @@
     <% end %>
   </table>
 
-<%= will_paginate @cargos ,:class=>"page_navi_link"%>
+<%= will_paginate @cargos ,:class=>"page_navi_link",:action=>"search",:params=>{:fcity_code=>@search.fcity_code, :tcity_code=>@search.tcity_code}%>
 
 <%else%>
-</table>
   <p>
     不好意思，没有对应的货源。
   </p>

@@ -27,12 +27,21 @@ class CargosController < ApplicationController
   end
 
   def search
-    @search=Search.new
-    if params[:search].nil? then
-      @search.fcity_name="选择出发地"
-      @search.tcity_name="选择到达地"
-      @search.fcity_code="100000000000"
-      @search.tcity_code="100000000000"
+     @search=Search.new
+    if params[:search].nil?      
+      unless params[:fcity_code].blank?
+        @search.fcity_code=params[:fcity_code]
+         @search.fcity_name=$city_code_name[params[:fcity_code]]
+     else
+        @search.fcity_code="100000000000"
+        @search.fcity_name="出发地选择"
+     end
+     unless params[:fcity_code].blank?
+        @search.tcity_code=params[:tcity_code];@search.tcity_name=$city_code_name[params[:tcity_code]] 
+     else
+         @search.tcity_name="到达地选择"
+         @search.tcity_code="100000000000"
+     end
     else
       @search.fcity_name=params[:search][:fcity_name]
       @search.tcity_name=params[:search][:tcity_name]
@@ -43,25 +52,29 @@ class CargosController < ApplicationController
     puts "@search.fcity_code=#{@search.fcity_code},@search.tcity_code=#{@search.tcity_code}";
 
     if @search.fcity_code=="100000000000" && @search.tcity_code=="100000000000" then
-       @cargos=Cargo.where(:status=>"配车").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos=Cargo.where(:status=>"配车").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20,
+                           :conditions => ["fcity_code LIKE ? AND tcity_code LIKE ?", "%#{@search.fcity_code}", "%#{@search.tcity_code}%"])
     elsif @search.fcity_code=="100000000000" && @search.tcity_code!="100000000000"
      min=get_max_min_code(@search.tcity_code)[0]
      max=get_max_min_code(@search.tcity_code)[1]
       
-      @cargos=Cargo.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     @cargos=Cargo.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20,
+                          :conditions =>["fcity_code LIKE ? AND tcity_code LIKE ?", "%#{@search.fcity_code}", "%#{@search.tcity_code}%"])
     elsif @search.tcity_code=="100000000000" && @search.fcity_code!="100000000000"
      min=get_max_min_code(@search.fcity_code)[0]
      max=get_max_min_code(@search.fcity_code)[1]
-      @cargos=Cargo.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      @cargos=Cargo.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20,
+                          :conditions =>["fcity_code LIKE ? AND tcity_code LIKE ?", "%#{@search.fcity_code}", "%#{@search.tcity_code}%"])
     else
       mint=get_max_min_code(@search.tcity_code)[0]
       maxt=get_max_min_code(@search.tcity_code)[1]
       minf=get_max_min_code(@search.fcity_code)[0]
       maxf=get_max_min_code(@search.fcity_code)[1]
-      @cargos=Cargo.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      @cargos=Cargo.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20,
+                                        :conditions => ["fcity_code LIKE ? AND tcity_code LIKE ?", "%#{@search.fcity_code}", "%#{@search.tcity_code}%"])
     end
-
     @search.save
+    
   end
 
 
@@ -70,13 +83,14 @@ class CargosController < ApplicationController
     unless params[:stock_cargo_id].nil?
        @cargos=Cargo.where({user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     else
-      if params[:status]
+    if params[:status]
         @cargos = Cargo.where(:user_id =>session[:user_id],:status =>params[:status]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     else
       #  @cargos = Cargo.where("user_id = ?",session[:user_id]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>20)
        @cargos = Cargo.where(:user_id =>session[:user_id]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
       end
-    end
+    end    
+    
     
     respond_to do |format|
       format.html # show.html.erb

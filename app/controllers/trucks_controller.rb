@@ -39,10 +39,22 @@ class TrucksController < ApplicationController
      @search=Search.new
    if params[:search].nil? then
     puts "params[:search] is nil"
-    @search.fcity_name="出发地选择"
-    @search.tcity_name="到达地选择"
-    @search.fcity_code="100000000000"
-    @search.tcity_code="100000000000"
+
+    
+     unless params[:fcity_code].blank?
+     @search.fcity_code=params[:fcity_code]
+     @search.fcity_name=$city_code_name[params[:fcity_code]]
+     else
+     @search.fcity_code="100000000000"
+     @search.fcity_name="出发地选择"
+     end
+     unless params[:fcity_code].blank?
+        @search.tcity_code=params[:tcity_code];@search.tcity_name=$city_code_name[params[:tcity_code]] 
+     else
+         @search.tcity_name="到达地选择"
+         @search.tcity_code="100000000000"
+     end
+
    else
     @search.fcity_name=params[:search][:fcity_name]
     @search.tcity_name=params[:search][:tcity_name]
@@ -55,17 +67,22 @@ class TrucksController < ApplicationController
    elsif @search.fcity_code=="100000000000" && @search.tcity_code!="100000000000"
      min=get_max_min_code(@search.tcity_code)[0]
      max=get_max_min_code(@search.tcity_code)[1]
-      @trucks=Truck.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"配货"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-    elsif params[:search][:tcity_code]=="100000000000" && params[:search][:fcity_code]!="100000000000"
+     @trucks=Truck.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"配货"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+                          
+    elsif @search.tcity_code=="100000000000" && @search.fcity_code!="100000000000"
      min=get_max_min_code(@search.fcity_code)[0]
      max=get_max_min_code(@search.fcity_code)[1]     
      @trucks=Truck.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"配货"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     else
+      puts "both from and to is here"
       mint=get_max_min_code(@search.tcity_code)[0]
       maxt=get_max_min_code(@search.tcity_code)[1]
       minf=get_max_min_code(@search.fcity_code)[0]
       maxf=get_max_min_code(@search.fcity_code)[1]
-     @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"配货"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      puts "mint=#{mint}, maxt=#{maxt},minf=#{minf},maxf=#{maxf}"
+     @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"配货"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
+            
+      puts "@trucks.size=#{@trucks.size}"
     end
     @search.save
   end

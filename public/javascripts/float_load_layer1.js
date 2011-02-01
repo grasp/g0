@@ -3,25 +3,49 @@
  * and open the template in the editor.
  */
 
-function confirm_request(){
+function request_chenjiao(){
     $("a.request_chenjiao").live("click",function(){
-        var answer=confirm("注意:该条货源将改为已成交状态,再不能接收新报价，请确保你已经联系并核实过该条车源,对方同意成交后，再确认请点击OK"); 
+        var answer=confirm("注意:该条货源将改为已成交状态,成交的货源和车源不能再接收新报价，请确保你已经联系并核实过该条车源,对方同意成交后，再确认请点击OK"); 
         if(answer)
          { 
-              $('#show').load(this.href);
+            $('#show').load(this.href); 
+            $('#float_load').empty();
+            $('#float_show').css("display","none");
+            $('tr').css("background-color","white");
+            //  $('#float_show').empty();
+             // $('#float_show').css("display","none");              
+         }
+    
               if($.browser.msie) {
             event.returnValue = false;
             event.preventDefault();
             return false;
         }
         else   return false;
-    
-         }
-    
-
                 
     });
 }
+
+function confirm_chenjiao(){
+    $("a.confirm_chenjiao").live("click",function(){
+        var answer=confirm("确认成交表示你和货主已经成功协商,货主或将可以评价你提供的服务"); 
+        if(answer)
+         { 
+              $('#show').load(this.href); 
+              $('#float_show').empty();
+              $('#float_show').css("display","none");              
+         }
+    
+              if($.browser.msie) {
+            event.returnValue = false;
+            event.preventDefault();
+            return false;
+        }
+        else   return false;
+                
+    });
+}
+
 function float_load_layer1(){
 
     /* 显示报价 或者询价 子页面 not for form submit ajax*/
@@ -32,7 +56,7 @@ function float_load_layer1(){
         selected=$('#float_show');        
         var select_parent=$(this).parent().parent();
        $('tr').css("background-color","white");
-    //   $('#float_load').empty();
+       $('#float_load').empty();
        $('#float_load').load(this.href,function(){     
            stock_cargo_new_validation();
            cargo_new_validation();
@@ -40,7 +64,8 @@ function float_load_layer1(){
            inquery_new_validation();
            quote_new_validation();
            stock_truck_update_validation();
-           confirm_request();
+           request_chenjiao();
+           confirm_chenjiao();
        });  
 
        css_class= $(this).attr("class");  

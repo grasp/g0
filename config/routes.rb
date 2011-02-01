@@ -22,6 +22,7 @@ G0::Application.routes.draw do
   match '/cargos/:cargo_id/inqueries/cargo' =>'inqueries#cargo', :as=>:inqueriescargo
   match 'users/:user_id/inqueries/tome/:to' =>'inqueries#index',:as=>:inqueriesto
   match "inqueries/request_chenjiao/:id" =>'inqueries#request_chenjiao',:as=>:inqueriesrequest_chenjiao
+  match "inqueries/confirm_chenjiao/:id" =>'inqueries#confirm_chenjiao',:as=>:inqueriesconfirm_chenjiao
   resources :inqueries
 
   match '/cargos/:cargo_id/trucks/:truck_id/quotes/new'  =>'quotes#new',:as=>:quotesnew
@@ -29,6 +30,7 @@ G0::Application.routes.draw do
   match '/trucks/:truck_id/quotes/truck' =>'quotes#truck', :as=>:quotestruck
   match 'users/:user_id/quotes/tome/:to' =>'quotes#index',:as=>:quotesto
   match "quotes/request_chenjiao/:id" =>'quotes#request_chenjiao',:as=>:quotesrequest_chenjiao
+  match "quotes/confirm_chenjiao/:id" =>'quotes#confirm_chenjiao',:as=>:quotesconfirm_chenjiao
   resources :quotes
 
   resources :line_ads

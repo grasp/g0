@@ -1,3 +1,4 @@
+# coding: utf-8
 class Inquery 
     include MongoMapper::Document
   #belongs_to :trucks
@@ -22,5 +23,14 @@ class Inquery
       key:ismailed,Boolean
       key:isaccepted,Boolean
       timestamps!
+     validate :check_unique
+  def check_unique
+    repeated=Inquery.where(:cargo_id=>self.cargo_id,:truck_id=>self.truck_id)
+       unless repeated.size==0
+      errors.add_to_base("不能重复询价")
+      return false
+    end
+    return true
+  end
 
 end

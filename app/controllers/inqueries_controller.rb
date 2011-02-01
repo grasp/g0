@@ -7,9 +7,7 @@ class InqueriesController < ApplicationController
   before_filter:authorize, :except => [:public]
      
   def index
-
     @inqueries=Inquery.where(:user_id >session[:user_id]) 
-
     respond_to do |format|
       format.html # index.html.erb
       #  format.xml  { render :xml => @inqueries }
@@ -109,6 +107,7 @@ class InqueriesController < ApplicationController
   # POST /inqueries
   # POST /inqueries.xml
   def create
+    
     @inquery = Inquery.new(params[:inquery])
     if params[:mianyi]=="on"
       @inquery.price=nil
@@ -124,14 +123,16 @@ class InqueriesController < ApplicationController
     respond_to do |format|
       #update statistic
 
-    if @inquery.save
+      if @inquery.save
         if @cargo.from_site=="local"
-          Cstatistic.collection.update({'cargo_id' => @cargo.id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true}) 
-          Tstatistic.collection.update({'truck_id'=>@truck.id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true})
+          Cstatistic.collection.update({'cargo_id' => @inquery.cargo_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true}) 
+          Tstatistic.collection.update({'truck_id'=>@inquery.truck_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true})
         end
-        format.html { redirect_to(@inquery, :notice => '报价创建成功.') }
+        format.html { redirect_to(@inquery, :notice => '询价创建成功.') }
         format.xml  { render :xml => @inquery, :status => :created, :location => @inquery }
       else
+        @inquery=nil
+        flash[:notice]="创建询价失败，不能重复询价"
         format.html { render :action => "new" }
         format.xml  { render :xml => @inquery.errors, :status => :unprocessable_entity }
      end
@@ -147,7 +148,6 @@ class InqueriesController < ApplicationController
     @inquery.fcity_name=@truck.fcity_name
     @inquery.tcity_name=@truck.tcity_name
     @cargos = Cargo.where(:user_id =>session[:user_id])
-
     @mycargo=Hash.new
     @cargos.each do |cargo|
       @mycargo[cargo.cate_name+"("+cargo.fcity_name+"<=>"+cargo.tcity_name+")"]=cargo.id
@@ -171,7 +171,7 @@ class InqueriesController < ApplicationController
 
      @truck.update_attributes(:status=>"请求成交")
 
-    puts "update rtuck #{@truck.id} status=请求成交"
+ 
       #update cargo status
 
      @cargo=Cargo.find(@inquery.cargo_id)

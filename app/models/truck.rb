@@ -29,7 +29,6 @@ class Truck
       key  :tcity_name,String
       key  :fcity_code,String
       key  :tcity_code,String
-
      
      # external search
       key  :company_id,ObjectId
@@ -40,7 +39,10 @@ class Truck
       #for future usage
       key  :truck_pingjia_id,ObjectId
       key  :truck_status_id,ObjectId
-      key  :tstatistic_id ,ObjectId
+      key  :tstatistic_id ,ObjectId      
+      
+      key :price,String
+      key :price_unit,String
 
 
   # add more le

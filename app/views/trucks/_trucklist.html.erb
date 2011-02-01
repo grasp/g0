@@ -78,4 +78,4 @@
      <% end %>
 
 
-<%= will_paginate @trucks ,:class=>"page_navi_link"%>
+<%= will_paginate(@trucks ,:class=>"page_navi_link",:action=>"search",:params=>{:fcity_code=>@search.fcity_code, :tcity_code=>@search.tcity_code}) %>

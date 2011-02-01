@@ -13,15 +13,15 @@ layout "public",:except=>:navibar
     @search.save
     
   #  @cargos=Cargo.order("created_at desc").paginate(:page=>params[:page]||1,::per_page=>30)
-    @cargos=Cargo.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+    @cargos=Cargo.where(:status=>"配车").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
 
-    puts "params[:page]=#{params[:page]}"
+   # puts "params[:page]=#{params[:page]}"
     respond_to do |format|
        if params[:page]
-         puts "render without layout"
+         #puts "render without layout"
          format.html {render :layout=>nil}# index.html.erb
        else
-         puts "render with layout"
+        # puts "render with layout"
           format.html {}# new.html.erb
        end
          

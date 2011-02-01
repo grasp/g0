@@ -4,7 +4,7 @@
 <%unless @bao_or_xun_record.blank? %>
   <table>
   <tr>
-     <th>发布人</th>
+     <th>车源发布人</th>
      <th>所在公司</th>
      <th>报价车辆</th>
      <th>车辆出发</th>
@@ -16,16 +16,16 @@
 
 
 
-    <% @bao_or_xun_record.each do |inquery| %>
-      <%truck=Truck.find(inquery.truck_id)%>
+    <% @bao_or_xun_record.each do |record| %>
+      <%truck=Truck.find(record.truck_id)%>
       <%unless truck.blank?%>
         <tr>
           <td>
-            <a class="show_float2" href="/user_contacts/<%=truck.user_contact_id%>"> <%="#{UserContact.find(truck.user_contact_id).name}"%>
+            <a class="show_float2" href="/user_contacts/showf/<%=truck.user_contact_id%>"> <%="#{UserContact.find(truck.user_contact_id).name}"%>
             </a>
           </td> 
           <td>
-            <a class="show_float2" href="/companies/<%= truck.company_id%>"><%="#{Company.find(truck.company_id).name}"%></a>
+            <a class="show_float2" href="/companies/showf/<%= truck.company_id%>"><%="#{Company.find(truck.company_id).name}"%></a>
           </td>
           <td>
             <a class="show_float" href="/trucks/show/<%=truck.id%>">
@@ -38,16 +38,23 @@
 
           <td><%= truck.fcity_name %></td>
           <td><%= truck.tcity_name %></td>
-          <td> <%= inquery.price.nil? ? "面议":"#{inquery.price}元"%></td>
-          <td><%= inquery.created_at.to_s.slice(5,11) %></td>          <td>
-            <%if inquery.status=="已成交" %>
-              已成交
-            <%else%>
-              <%if @cargo.status=="配车"%>
-                <a class="cargo_chenjiao" href="inqueries/chenjiao/<%=inquery.id%>">请求成交</a>
-              <%end%>
+          <td> <%= record.price.nil? ? "面议":"#{record.price}元"%></td>
+          <td><%= record.created_at.to_s.slice(5,11) %></td>          <td>
+            <%if record.cargo_user_id==session[:user_id]%>            
+                <%if @cargo.status=="配车"%>            
+                   <a class="request_chenjiao" href="quotes/request_chenjiao/<%=record.id%>">请求成交</a> 
+                <%else%>
+                   <%=@cargo.status%>
+                <%end%>
             <%end%>
-          </td>
+              <%if record.truck_user_id==session[:user_id]%>
+                <%if truck.status=="请求成交" %>
+                     <a class="confirm_chenjiao" href="inqueries/confirm_chenjiao/<%=record.id%>">确认成交</a>  
+                 <%else%>
+                <%=truck.status%>
+                <%end%>
+              <%end%>
+           </td>
         </tr>
       <%end%>
     <% end %>

@@ -43,13 +43,16 @@ class Cargo
       key :pingjia_id,ObjectId
       key :cstatistic_id,ObjectId
       
+      key :price,String
+      key :price_unit,String
+      
   # from site
      key :from_site,String
      
-     validate :check_unique
+     
       
      timestamps!
-
+   validate :check_unique
   def check_unique
     repeated=Cargo.where(:cate_name=>self.cate_name,:line=>self.line,:user_id=>self.user_id,:status=>"配车")
        unless repeated.size==0
