@@ -3,7 +3,7 @@
 
 <table>
   <tr>
-    <th>车源拍照</th>
+    <th>车源牌照</th>
     <th>车源联系</th>
     <th>出价</th>
     <th>出发</th>
@@ -12,7 +12,7 @@
     <th>询价货源</th>
     <th>管理</th>
   </tr>
-  <% unless @inqueries.nil?%>
+  <% unless @inqueries.blank?%>
 
     <% @inqueries.each do |inquery| %>
       <tr>

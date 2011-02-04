@@ -61,28 +61,58 @@ class TrucksController < ApplicationController
     @search.fcity_code=params[:search][:fcity_code]
     @search.tcity_code=params[:search][:tcity_code]
    end
-   puts "@search.fcity_code=#{@search.fcity_code},@search.tcity_code=#{@search.tcity_code}";
+
  if @search.fcity_code=="100000000000" && @search.tcity_code=="100000000000" then   
-    @trucks=Truck.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     @trucks=Truck.where().sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
    elsif @search.fcity_code=="100000000000" && @search.tcity_code!="100000000000"
-     min=get_max_min_code(@search.tcity_code)[0]
-     max=get_max_min_code(@search.tcity_code)[1]
-     @trucks=Truck.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"配货"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-                          
+      result=get_max_min_code(@search.tcity_code)
+      min=result[0]
+      max=result[1]
+      if result[2]
+        @trucks=Truck.where({:tcity_code=>min,:status=>"正在配货"}).
+                       sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      else
+         @trucks=Truck.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"正在配货"}).
+                       sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      end
     elsif @search.tcity_code=="100000000000" && @search.fcity_code!="100000000000"
-     min=get_max_min_code(@search.fcity_code)[0]
-     max=get_max_min_code(@search.fcity_code)[1]     
-     @trucks=Truck.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"配货"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     result=get_max_min_code(@search.fcity_code)
+     min=result[0]
+     max=result[1]
+     if result[2]
+       @trucks=Truck.where({:fcity_code =>min,:status=>"正在配货"}).
+                          sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     else
+       @trucks=Truck.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"正在配货"}).
+                          sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     end
+ 
     else
-      puts "both from and to is here"
-      mint=get_max_min_code(@search.tcity_code)[0]
-      maxt=get_max_min_code(@search.tcity_code)[1]
-      minf=get_max_min_code(@search.fcity_code)[0]
-      maxf=get_max_min_code(@search.fcity_code)[1]
+     resultt=get_max_min_code(@search.tcity_code)
+     resultf=get_max_min_code(@search.fcity_code)
+      mint=resultt[0]
+      maxt=resultt[1]
+      minf=resultf[0]
+      maxf=resultf[1]
       puts "mint=#{mint}, maxt=#{maxt},minf=#{minf},maxf=#{maxf}"
-     @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"配货"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
-            
-      puts "@trucks.size=#{@trucks.size}"
+      if resultt[2]==false && resultf[2]==false
+        puts "两个都不是县级市"
+          @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配货"}).
+                                 sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
+       elsif resultt[2]==true && resultf[2]==false
+          puts "到达是县级市"
+          @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code=>mint,:status=>"正在配货"}).
+                                 sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
+       elsif resultt[2]==false && resultf[2]==true
+
+           puts "出发是县级市"
+          @trucks=Truck.where({:fcity_code =>minf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配货"}).
+                                 sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
+       else
+         puts "两个都是县级市"
+          @trucks=Truck.where({:fcity_code =>minf,:tcity_code=>mint,:status=>"正在配货"}).
+                                 sort(:updated_at.desc).all.paginate(:page=>params[:page]||1,:per_page=>20 )
+      end
     end
     @search.save
   end
@@ -105,22 +135,22 @@ class TrucksController < ApplicationController
     @search.tcity_code=@truck.tcity_code
     
        if @search.fcity_code=="100000000000" && @search.tcity_code=="100000000000" then
-       @cargos=Cargo.where(:status=>"配车").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos=Cargo.where(:status=>"正在配车").sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     elsif @search.fcity_code=="100000000000" && @search.tcity_code!="100000000000"
      min=get_max_min_code(@search.tcity_code)[0]
      max=get_max_min_code(@search.tcity_code)[1]
       
-      @cargos=Cargo.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      @cargos=Cargo.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"正在配车"}).sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     elsif @search.tcity_code=="100000000000" && @search.fcity_code!="100000000000"
      min=get_max_min_code(@search.fcity_code)[0]
      max=get_max_min_code(@search.fcity_code)[1]
-      @cargos=Cargo.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      @cargos=Cargo.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"正在配车"}).sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     else
       mint=get_max_min_code(@search.tcity_code)[0]
       maxt=get_max_min_code(@search.tcity_code)[1]
       minf=get_max_min_code(@search.fcity_code)[0]
       maxf=get_max_min_code(@search.fcity_code)[1]
-      @cargos=Cargo.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"配车"}).order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      @cargos=Cargo.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配车"}).sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     end
 
   
@@ -170,7 +200,7 @@ class TrucksController < ApplicationController
     @truck.driver_name=@stock_truck.driver_name
     @truck.driver_phone=@stock_truck.driver_phone
     @truck.car_phone=@stock_truck.car_phone
-    @truck.status="配货"
+    @truck.status="正在配货"
 
 
     @truck.user_id=@stock_truck.user_id
@@ -220,13 +250,13 @@ class TrucksController < ApplicationController
       if @truck.save
         flash[:notice] = '车源创建成功'
         @tstatistic=Tstatistic.create(:total_baojia=>0,:total_xunjia=>0,:total_match=>0,
-          :total_click=>0,:user_id=>session[:user_id]);
+          :total_click=>0,:user_id=>session[:user_id],:truck_id=>@truck.id);
         #update statistic for truck
         # to avoid use @truck.update to avoid model validation
         Truck.collection.update({'_id' => @truck.id},{'$set' =>{:tstatistic_id=>@tstatistic.id}})              
-        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"配货"}},{:upsert =>true}) 
-        Lstatistic.collection.update({'line'=>@truck.line},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"配货"}},{:upsert =>true})
-        StockTruck.collection.update({'_id' => @truck.stock_truck_id},{'$inc' => {"truckcount" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"配货"}})       
+        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
+        Lstatistic.collection.update({'line'=>@truck.line},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
+        StockTruck.collection.update({'_id' => @truck.stock_truck_id},{'$inc' => {"truckcount" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}})
 
         format.html { redirect_to(@truck)}
         format.xml  { render :xml => @truck, :status => :created, :location => @truck }

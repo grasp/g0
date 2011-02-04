@@ -60,7 +60,9 @@ class StockTrucksController < ApplicationController
   # POST /stock_trucks
   # POST /stock_trucks.xml
   def create
-    params[:stocktruck][:truckcount]=0;#clear the counter 
+    params[:stocktruck][:truckcount]=0 #clear the counter
+    params[:stocktruck][:status]="车辆闲置" #clear the counter
+    
     @stock_truck = StockTruck.new(params[:stocktruck])
     respond_to do |format|
       if @stock_truck.save

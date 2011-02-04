@@ -26,7 +26,7 @@ class InqueriesController < ApplicationController
   #one trucks's all baojia
   def truck
     @truck=Truck.find_by_id(params[:truck_id])
-    @inqueries=Inquery.where(:truck_id => params[:truck_id])
+    @bao_or_xun_record=Inquery.where(:truck_id => params[:truck_id])
     respond_to do |format|
       format.html # part.html.erb
       format.xml  { render :xml => @inqueries }
@@ -34,7 +34,7 @@ class InqueriesController < ApplicationController
   end
   
   def part
-   
+    
     unless params[:cargo_id].nil?
       @cargo=Cargo.find_by_id(params[:cargo_id])
       @inqueries=Inquery.where(:cargo_id =>params[:cargo_id],:user_id =>session[:user_id])
@@ -56,7 +56,6 @@ class InqueriesController < ApplicationController
   # GET /inqueries/1.xml
   def show
     @inquery = Inquery.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @inquery }
@@ -112,7 +111,7 @@ class InqueriesController < ApplicationController
     if params[:mianyi]=="on"
       @inquery.price=nil
     end
-     @cargo=Cargo.find(@inquery.cargo_id)
+      @cargo=Cargo.find(@inquery.cargo_id)
     # @truck=Truck.find(@inquery.truck_id)
 
     @inquery.cargo_company_id=@cargo.company_id
@@ -125,9 +124,18 @@ class InqueriesController < ApplicationController
 
       if @inquery.save
         if @cargo.from_site=="local"
+         # before= Cstatistic.where({'cargo_id' => @inquery.cargo_id}).first.total_xunjia
+         # before1= Tstatistic.where({'truck_id'=>@inquery.truck_id}).first.total_xunjia
+        #  puts "更新询价统计cargo before=#{before},truck before=#{before1}"
+
           Cstatistic.collection.update({'cargo_id' => @inquery.cargo_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true}) 
           Tstatistic.collection.update({'truck_id'=>@inquery.truck_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true})
+
+          #  after= Cstatistic.where({'cargo_id' => @inquery.cargo_id}).first.total_xunjia
+          #  after1=Tstatistic.where({'truck_id'=>@inquery.truck_id}).first.total_xunjia
+          #  puts "更新询价统计 cargo after=#{after},truck after=#{after1}"
         end
+
         format.html { redirect_to(@inquery, :notice => '询价创建成功.') }
         format.xml  { render :xml => @inquery, :status => :created, :location => @inquery }
       else
@@ -169,30 +177,30 @@ class InqueriesController < ApplicationController
      #update truck status
      @truck=Truck.find(@inquery.truck_id)
 
-     @truck.update_attributes(:status=>"请求成交")
+     @truck.update_attributes(:status=>"邀请成交")
 
  
       #update cargo status
 
      @cargo=Cargo.find(@inquery.cargo_id)
-     @cargo.update_attribute(:status,"请求成交")
+     @cargo.update_attribute(:status,"邀请成交")
 
-     @inquery.update_attributes(:status=>"请求成交")
+     @inquery.update_attributes(:status=>"邀请成交")
 
     #TOTO:notify all other related truck
     #All quotes to from this truck change to chenjiao
   
-    @quotes=Quote.where("truck_id =? AND status =?",@truck.id,"配货")
+    @quotes=Quote.where("truck_id =? AND status =?",@truck.id,"正在配货")
     if  @quote.size>0
     @quotes.each do |quote|
-      quote.update_attributes(:status=>"过期")
+      quote.update_attributes(:status=>"成交过期")
     end
     end
       #All Inquers from this cargo neec change to chenjiao
-       @inqueries=Inquery.where(:cargo_id =>@cargo.id,:status =>"配货")
+       @inqueries=Inquery.where(:cargo_id =>@cargo.id,:status =>"正在配货")
     if  @inqueries.size>0
       @inqueries.each do |inquery|
-      inquery.update_attributes(:status=>"过期")
+      inquery.update_attributes(:status=>"成交过期")
     end
     end
 

@@ -13,7 +13,7 @@ layout "public",:except=>:navibar
     @search.save
     
   #  @cargos=Cargo.order("created_at desc").paginate(:page=>params[:page]||1,::per_page=>30)
-    @cargos=Cargo.where(:status=>"配车").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+    @cargos=Cargo.where(:status=>"正在配车").order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
 
    # puts "params[:page]=#{params[:page]}"
     respond_to do |format|

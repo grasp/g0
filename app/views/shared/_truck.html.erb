@@ -12,7 +12,7 @@
      <th>货物到达</th>    
      <th>报价</th>
      <th>报价时间</th>
-     <th>成交状态</th>
+     <th>货物成交</th>
   </tr>
 
     <% @bao_or_xun_record.each do |record| %>
@@ -39,19 +39,21 @@
           <td><%= record.created_at.to_s.slice(5,11) %></td>         
           
           <td> 
-            <%if record.cargo_user_id==session[:user_id]%>            
-                <%if cargo.status=="配车"%>            
+            <%if record.cargo_user_id==session[:user_id] && record.truck_user_id!=session[:user_id]%>
+                <%if cargo.status=="正在配车"%>
                    <a class="request_chenjiao" href="inqueries/request_chenjiao/<%=record.id%>">请求成交</a> 
                 <%else%>
                    <%=cargo.status%>
                 <%end%>
-            <%end%>
-            <%if record.truck_user_id==session[:user_id]%>
+       
+            <%elsif record.truck_user_id==session[:user_id] && record.cargo_user_id!=session[:user_id]%>
                 <%if cargo.status=="请求成交" %>
                      <a class="confirm_chenjiao" href="quotes/confirm_chenjiao/<%=record.id%>">确认成交</a>  
                  <%else%>
                 <%=cargo.status%>
                 <%end%>
+             <%else%>
+                 <%=cargo.status%>
            <%end%>     
           </td>
           

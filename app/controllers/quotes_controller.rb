@@ -82,11 +82,11 @@ class QuotesController < ApplicationController
     @quote.user_id=session[:user_id]
     @quote.cargo_user_id=@cargo.user_id
     @quote.cargo_company_id=@cargo.company_id
-    @trucks = Truck.where(:user_id =>session[:user_id],:status=>"配货")     
+    @trucks = Truck.where(:user_id =>session[:user_id],:status=>"正在配货")
     @mytruck=Hash.new
 
     if params[:truck_id].nil?
-      @trucks = Truck.where(:user_id =>session[:user_id],:status =>"配货")
+      @trucks = Truck.where(:user_id =>session[:user_id],:status =>"正在配货")
 
       @trucks.each do |truck|
         @mytruck[truck.paizhao+"("+truck.fcity_name+"<=>"+truck.tcity_name+")"]=truck.id
@@ -166,33 +166,34 @@ class QuotesController < ApplicationController
     end
   end
 
+  #only for owner of cargo
   def request_chenjiao
     @quote = Quote.find(params[:id])
     
    unless @quote.blank?
     #update truck status
-    Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"请求成交"}})
-    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"请求成交"}})
-    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"请求成交"}})
+    Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"邀请成交"}})
+    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"邀请成交"}})
+    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"邀请成交"}})
    else
     @quote=Inquery.find(params[:id])
-     Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"请求成交"}})
-     Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"请求成交"}})
-     Inquery.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"请求成交"}})
+     Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"邀请成交"}})
+     Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"邀请成交"}})
+     Inquery.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"邀请成交"}})
    end
     #TOTO:notify all other related truck
     #All quotes to from this truck change to chenjiao
-    @quotes=Quote.where(:truck_id =>@quote.truck_id , :status =>"配货")
+    @quotes=Quote.where(:truck_id =>@quote.truck_id , :status =>"正在配货")
     if  @quotes.size>0
       @quotes.each do |quote|
-        Quote.collection.update({'truck_id'=>@quote.truck_id },{'$set'=>{:status=>"过期"}})
+        Quote.collection.update({'truck_id'=>@quote.truck_id },{'$set'=>{:status=>"成交过期"}})
       end
     end
     #All Inquers from this cargo neec change to chenjiao
-    @inqueries=Inquery.where(:cargo_id =>@quote.cargo_id,:status=>"配货")
+    @inqueries=Inquery.where(:cargo_id =>@quote.cargo_id,:status=>"正在配货")
     if  @inqueries.size>0
       @inqueries.each do |inquery|
-        Inquery.collection.update({'cargo_id'=>@quote.cargo_id },{'$set'=>{:status=>"过期"}})
+        Inquery.collection.update({'cargo_id'=>@quote.cargo_id },{'$set'=>{:status=>"成交过期"}})
       end
     end
 
@@ -201,9 +202,12 @@ class QuotesController < ApplicationController
     end
     
   end
-  
+
+
+  #only for owner of truck
   def confirm_chenjiao    
     @quote = Quote.find(params[:id])
+    
     #update truck status
     Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"已成交"}})
     Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"已成交"}})

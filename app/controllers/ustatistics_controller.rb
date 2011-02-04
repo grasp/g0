@@ -14,7 +14,6 @@ class UstatisticsController < ApplicationController
   # GET /ustatistics/1.xml
   def show
     @ustatistic = Ustatistic.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @ustatistic }
@@ -41,7 +40,6 @@ class UstatisticsController < ApplicationController
   # POST /ustatistics.xml
   def create
     @ustatistic = Ustatistic.new(params[:ustatistic])
-
     respond_to do |format|
       if @ustatistic.save
         format.html { redirect_to(@ustatistic, :notice => 'Ustatistic was successfully created.') }

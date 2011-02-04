@@ -11,12 +11,10 @@ function request_chenjiao(){
             $('#show').load(this.href); 
             $('#float_load').empty();
             $('#float_show').css("display","none");
-            $('tr').css("background-color","white");
-            //  $('#float_show').empty();
-             // $('#float_show').css("display","none");              
+            $('tr').css("background-color","white");             
          }
     
-              if($.browser.msie) {
+            if($.browser.msie) {
             event.returnValue = false;
             event.preventDefault();
             return false;
@@ -32,7 +30,7 @@ function confirm_chenjiao(){
         if(answer)
          { 
               $('#show').load(this.href); 
-              $('#float_show').empty();
+              $('#float_load').empty();
               $('#float_show').css("display","none");              
          }
     

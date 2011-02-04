@@ -39,7 +39,7 @@
         <tr>
            <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
            <%= cargo.cate_name %></a> </td>
-          <td><%= cargo.fcity_name %></td> 
+          <td><%= cargo.fcity_name %></td>
           <td><%= cargo.tcity_name %></td>
            <td><%= cargo.cargo_weight || "0" %>吨<%= cargo.cargo_bulk %></td>
           <td><%= cargo.send_date %>天</td>
@@ -49,7 +49,7 @@
           <td><%=h $cargo_big_category[cargo.big_category]%></td>
           <td><%= h $cargo_option[cargo.cargo_zuhuo] %></td>
             -->
-          <td><%=cargo.created_at.to_s.slice(5,11)%></td>
+          <td><%=cargo.updated_at.to_s.slice(5,11)%></td>
          
           <td><%=cargo.status %></td>
           <td>

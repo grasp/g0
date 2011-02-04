@@ -61,6 +61,8 @@ class StockCargosController < ApplicationController
     # result= get_stock_cargo_from_params(params)
     #  @stock_cargo = StockCargo.new(params)
     params[:stockcargo][:cargocount]=0 #init value
+    params[:stockcargo][:status]="货物闲置" #init value
+    
     @stock_cargo = StockCargo.new(params[:stockcargo])    
     respond_to do |format|
       if @stock_cargo.save
