@@ -40,6 +40,8 @@
 <% end %>
 </table>
 
+<%= will_paginate @scans ,:class=>"page_navi_link"%>
+
 <br />
 
 <%= link_to 'New Scan', new_scan_path %>

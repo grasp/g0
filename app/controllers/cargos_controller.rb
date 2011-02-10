@@ -256,7 +256,7 @@ class CargosController < ApplicationController
         Cargo.collection.update({'_id' => @cargo.id},{'$set' =>{:cstatistic_id=>@cstatistic.id}})
         Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_cargo" => 1,"cargopeiche"=>1},'$set' => {"status"=>"正在配车"}},{:upsert =>true})
         Lstatistic.collection.update({'line'=>@cargo.line},{'$inc' => {"total_cargo" => 1,"cargopeiche"=>1},'$set' => {"status"=>"正在配车"}},{:upsert =>true})
-        StockCargo.collection.update({'_id' => @cargo.stock_cargo_id},{'$inc' => {"cargocount" => 1,"cargopeiche"=>1},'$set' => {"status"=>"正在配车"}})
+        StockCargo.collection.update({'_id' => @cargo.stock_cargo_id},{'$inc' => {"valid_cargo" => 1},'$set' => {"status"=>"正在配车"}})
 
         format.html { redirect_to(@cargo)}
         format.xml  { render :xml => @cargo, :status => :created, :location => @cargo }

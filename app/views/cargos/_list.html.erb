@@ -28,7 +28,7 @@
         <td><%= cargo.tcity_name %></td>
         <td><%= cargo.cargo_weight ||"0" %>吨/<%= cargo.cargo_bulk ||"0" %>方</td>
         <td><%= cargo.send_date %>天</td>
-         <td><%= cargo.created_at.to_s.slice(5,11) %></td>
+        <td><%= cargo.created_at.to_s.slice(5,11) %></td>
         <td><%= cargo.status %></td>
 
         <td><a class="show_float" href="/cargos/<%=cargo.id%>/quotes/cargo"><%= cstatistic.total_baojia %>个 </a></td>

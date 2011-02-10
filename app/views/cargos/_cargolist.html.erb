@@ -1,6 +1,5 @@
 
-
-  <table> 
+ <table> 
  
  <th>货物名称</th>      
  <%=form_for(@search,:as=>:search,:url=>"/cargos/search",:html=>{:class=>"show_form"},:method=>"get") do |f| %>
@@ -11,7 +10,7 @@
       <a id="from_data_load"  href="/cities/from/<%=@search.fcity_code%>"><%=@search.fcity_name ||"出发地选择"%></a>
       <%= f.hidden_field(:fcity_code) %>
       <%= f.hidden_field(:fcity_name) %>
-</th>
+    </th>
 <th>
  <!--<label style="margin-left:30px;" class="line_to_label " >到达地:</label>-->
       <a  id="to_data_load"  href="/cities/to/<%=@search.tcity_code%>" ><%=@search.tcity_name ||"到达地选择"%></a>
@@ -25,8 +24,7 @@
       <th>有效期</th>      
       <th>发布日期</th>
       <th>货源状态</th>    
-      <th>车主操作</th>     
-    
+      <th>车主操作</th>
   <th>
   <div class="actions" style="display:inline">
     <%= f.submit("搜索")%>
@@ -37,20 +35,18 @@
     <% @cargos.each do |cargo| %>
       <%unless cargo.nil? %>
         <tr>
-           <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
+          <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
            <%= cargo.cate_name %></a> </td>
-          <td><%= cargo.fcity_name %></td>
-          <td><%= cargo.tcity_name %></td>
-           <td><%= cargo.cargo_weight || "0" %>吨<%= cargo.cargo_bulk %></td>
+          <td><%= cargo.fcity_name %>#<%= cargo.updated_at %></td>
+          <td><%= cargo.tcity_name %>#<%= cargo.send_date %></td>
+          <td><%= cargo.cargo_weight || "0" %>吨<%= cargo.cargo_bulk %></td>
           <td><%= cargo.send_date %>天</td>
-                   <!--
-          <td><%= cargo.package_name %></td>
-        
+          <!--
+          <td><%= cargo.package_name %></td>        
           <td><%=h $cargo_big_category[cargo.big_category]%></td>
           <td><%= h $cargo_option[cargo.cargo_zuhuo] %></td>
-            -->
-          <td><%=cargo.updated_at.to_s.slice(5,11)%></td>
-         
+           -->
+          <td><%=cargo.updated_at.to_s.slice(5,11)%></td>         
           <td><%=cargo.status %></td>
           <td>
             <%if cargo[:from_site]=="local"%>
@@ -76,7 +72,7 @@
 
 <%else%>
   <p>
-    不好意思，没有对应的货源。
+    不好意思，没有对应的货源.
   </p>
 
 <% end %>

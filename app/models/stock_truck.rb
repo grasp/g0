@@ -25,7 +25,7 @@ class StockTruck
       key :owner_name,String
       key :owner_phone,String
       
-        #owner info
+      #owner info
       key :bis_name,String
       key :bis_phone,String
 
@@ -35,7 +35,8 @@ class StockTruck
       key :user_id,ObjectId
       
       #Statistic
-      key :truckcount,Integer
+      key :valid_truck,Integer
+      key :expired_truck,Integer
 
       #status
       key :status,String

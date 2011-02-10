@@ -20,40 +20,36 @@
      </th>
    <!-- do not change this format -->
 </div>
-
     <th>回程</th>
     <!--  <th>公司</th>-->
-
     <th>有效期</th>
     <th>发布时间</th>
-     <th>状态</th>
+    <th>状态</th>
     <th>货主操作</th>
  <th>
    <div class="actions">
     <%= f.submit("搜索") %>
  </div>
-</th>
+ </th>
   </tr>
-
-
 <% end %>
    <% unless @trucks.blank? %>
    <% @trucks.each do |truck|%>
    <%unless truck.blank? %>
         <tr>
-            <td>  <a class="show_float" href="/trucks/show/<%=truck.id%>">
+            <td><a class="show_float" href="/trucks/show/<%=truck.id%>">
               <%=truck.paizhao%>,<%=truck.dunwei%>吨
               <%=truck.length%>米,<%=$truck_shape[truck.shape]%>
-            </a></td>
-          <td><%= truck.fcity_name %></td>
-          <td><%= truck.tcity_name %></td>
+            </a>
+            </td>
+          <td><%= truck.fcity_name %>#<%= truck.updated_at %></td>
+          <td><%= truck.tcity_name %>#<%= truck.send_date %></td>
 
           <td><%=$truck_huicheng[truck.huicheng]%></td>
 
           <td><%= truck.send_date %>天</td>
           <td><%= truck.updated_at.to_s.slice(5,11) %></td>
           <td><%= truck.status %></td>
-
           <td>
              <%unless session[:user_id].nil?%>
              <%if truck.user_id==session[:user_id]%>

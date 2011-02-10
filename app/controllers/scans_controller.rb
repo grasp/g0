@@ -5,46 +5,55 @@ class ScansController < ApplicationController
   include ScansHelper
   layout:nil
   def index
-    @scans = Scan.all
-    expired_truck=0
-    expired_cargo=0
-    #scan truck at first
+    @scans = Scan.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
 
+   expired_truck=0
+   expired_cargo=0
+    #scan truck at first
     Truck.all.each do |truck|
-      if compare_time_expired(truck.created_at,truck.send_date)==true
+      puts "truck.created_at=#{truck.created_at || truck.updated_at},truck.send_date=#{truck.send_date}"
+      if compare_time_expired(truck.created_at ||truck.updated_at,truck.send_date || "1")==true
         #only for first time 过期
         if truck.status=="正在配货"
-        #only can be once
-        lstatistic=Lstatistic.find_by_line(truck.line)
-        lstatistic.update_attributes(:valid_truck=>lstatistic.valid_truck-1)
+        #first change truck status
         truck.update_attributes(:status=>"超时过期")
-        
-        #update the line statistic
-        trucks=Truck.where(:stock_truck_id =>truck.stock_truck_id,:status =>"正在配货")
+        expired_truck+=1
+        #update line statistic
+        Lstatistic.collection.update({'line'=>truck.line},
+        {'$inc' => {"valid_truck" => -1,"expired_truck"=> 1}},{:upsert =>true})       
 
-        expired_truck+=1;
-        if trucks.size==0
-          StockTruck.find(truck.stock_truck_id).update_attributes(:status=>"车辆闲置")
-        end
+        #decrement valid truck for stock truck
+        StockTruck.collection.update({:truck_id=>truck.id},{'$inc' => {"valid_truck" => -1}})
+         end
+      end
+    end
+
+    StockTruck.all.each do |stock_truck|
+      if stock_truck.count==0
+         StockTruck.collection.update({:_id=>stock_truck_id},{'$set' => {"status" => "车辆闲置"}})
+      end
+    end
+    
+    Cargo.all.each do |cargo|
+    #   puts "cargo.created_at=#{cargo.created_at},cargo.send_date=#{cargo.send_date}"
+      if compare_time_expired(cargo.created_at ||cargo.updated_at,cargo.send_date || "1")==true
+        if cargo.status=="正在配车"
+          # first update cargo status
+          cargo.update_attributes(:status=>"超时过期")
+          expired_cargo+=1
+         #update line statistic
+         Lstatistic.collection.update({'line'=>cargo.line},
+         {'$inc' => {"valid_cargo" => -1,"expired_cargo"=> 1}},{:upsert =>true})
+
+          #decrement valid cargo for stock cargo
+          StockCargo.collection.update({:cargo_id=>cargo.id},{'$inc' => {"valid_cargo" => -1}})
         end
       end
     end
 
-    Cargo.all.each do |cargo|
-      if compare_time_expired(cargo.created_at,cargo.send_date)==true
-        if cargo.status=="正在配车"
-          cargo.update_attributes(:status=>"超时过期")
-          cargos=Cargo.where(:stock_cargo_id =>cargo.stock_cargo_id,:status =>"正在配车")
-        
-        #update the line statistic
-        lstatistic=Lstatistic.find_by_line(cargo.line)
-        lstatistic.update_attributes(:valid_cargo=>lstatistic.valid_cargo-1)
-        expired_cargo+=1
-        
-        if cargos.size==0
-          StockCargo.find(cargo.stock_cargo_id).update_attributes(:status=>"货物闲置")
-        end
-        end
+   StockCargo.all.each do |stock_cargo|
+      if stock_cargo.count==0
+         StockCargo.collection.update({:_id=>stock_cargo_id},{'$set' => {"status" => "货物闲置"}})
       end
     end
 
@@ -59,7 +68,7 @@ class ScansController < ApplicationController
     scan[:total_cargo]=Cargo.count
     scan[:total_truck]=Truck.count
 
-    scan [:expired_truck]=expired_truck
+    scan[:expired_truck]=expired_truck
     scan[:expired_cargo]=expired_cargo
 
     scan[:chenjiao_cargo]=Cargo.where(:status =>"已成交").count
@@ -68,6 +77,7 @@ class ScansController < ApplicationController
     scan[:total_user]=User.count
     scan[:total_company]=Company.count
     scan[:user_id]=session[:user_id]
+    
     @scan = Scan.new(scan)
     @scan.save
     # we will do scan work in this action

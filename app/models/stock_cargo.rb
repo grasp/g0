@@ -24,14 +24,15 @@ class StockCargo
       key :sent_weight,String
       key :sent_bulk,String
       
-     #define for search
+      #define for search
       key :cangku_id,ObjectId
       key :user_id,ObjectId
       key  :company_id ,ObjectId 
       key  :scstatistic_id,ObjectId
       
-     #Statistic
-     key :cargocount,Integer
+      #Statistic
+      key :valid_cargo,Integer
+      key :expired_cargo,Integer
 
       #status
       key :status,String
