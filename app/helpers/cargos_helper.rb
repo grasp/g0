@@ -18,8 +18,7 @@ module CargosHelper
        min_code=code
    end
    puts "code=#{code},min_code=#{min_code},max_code=#{max_code},iscity=#{iscity}"
-   [min_code,max_code,iscity]
-   
+   [min_code,max_code,iscity]   
   end
 
 

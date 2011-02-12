@@ -2,18 +2,18 @@
 
 <table>
   <tr>
-    <th>Total user</th>
-    <th>Total stock truck</th>
-    <th>Total stock cargo</th>
-    <th>Idle stock truck</th>
-    <th>Idle stock cargo</th>
-    <th>Total cargo</th>
-    <th>Total truck</th>
-    <th>expired cargo</th>
-    <th>Expired truck</th>
-    <th>Total line</th>
-    <th>Total company</th>
-    <th>User</th>
+    <th>总用户</th>
+    <th>总车子</th>
+    <th>总货物</th>
+    <th>闲置车子</th>
+    <th>闲置货物</th>
+    <th>总货源</th>
+    <th>总车源</th>
+    <th>过期车源</th>
+    <th>过期货源</th>
+    <th>总线路</th>
+    <th>公司总数</th>
+    <th>操作着</th>
     <th></th>
     <th></th>
     <th></th>
@@ -32,7 +32,7 @@
     <td><%= scan.expired_truck %></td>
     <td><%= scan.total_line %></td>
     <td><%= scan.total_company %></td>
-    <td><%= scan.user_id %></td>
+    <td><%= User.find(scan.user_id).name  unless scan.user_id.nil?%></td>
     <td><%= link_to 'Show', scan %></td>
     <td><%= link_to 'Edit', edit_scan_path(scan) %></td>
     <td><%= link_to 'Destroy', scan, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -27,7 +27,7 @@
     <th>状态</th>
     <th>货主操作</th>
  <th>
-   <div class="actions">
+ <div class="actions" style="display:inline">
     <%= f.submit("搜索") %>
  </div>
  </th>
@@ -42,8 +42,8 @@
               <%=truck.length%>米,<%=$truck_shape[truck.shape]%>
             </a>
             </td>
-          <td><%= truck.fcity_name %>#<%= truck.updated_at %></td>
-          <td><%= truck.tcity_name %>#<%= truck.send_date %></td>
+          <td><%= truck.fcity_name %></td>
+          <td><%= truck.tcity_name %></td>
 
           <td><%=$truck_huicheng[truck.huicheng]%></td>
 
@@ -71,6 +71,5 @@
      <%else%>
         <p>没有找到对应车源</p>
      <% end %>
-
 
 <%= will_paginate(@trucks ,:class=>"page_navi_link",:action=>"search",:params=>{:fcity_code=>@search.fcity_code, :tcity_code=>@search.tcity_code}) %>

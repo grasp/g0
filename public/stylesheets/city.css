@@ -41,27 +41,26 @@ root {
 }
 
 #navi_bar {
-    border-width : 1px;
-    border: solid;
-    border-color: #E6E6FA;
+   
     width : 100px;
     height : 200px;
 }
 
-.city_selector{
-     background:white;
+
+div.float_show2{
+    background-color: red;
+    display:block; 
+    width:50%;
 }
+
 
 div.province{
   /*float:left;*/
     display:block;
-
-
 }
 div.region{
      /*float:left;*/
-    display:block;
-    
+    display:block;   
 
 }
 div.region ul li {
