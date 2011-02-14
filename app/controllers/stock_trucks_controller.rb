@@ -63,6 +63,11 @@ class StockTrucksController < ApplicationController
     params[:stocktruck][:truckcount]=0 #clear the counter
     params[:stocktruck][:status]="车辆闲置" #clear the counter
     
+    #initialize statistic 
+     params[:stocktruck][:valid_truck]=0
+     params[:stocktruck][:total_truck]=0
+     params[:stocktruck][:expired_truck]=0
+
     @stock_truck = StockTruck.new(params[:stocktruck])
 
     respond_to do |format|

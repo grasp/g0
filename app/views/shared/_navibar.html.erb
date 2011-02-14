@@ -22,7 +22,7 @@
               <%unless company.nil?%>
                <a class="navi_link" href="/companies/show/<%=company.id%>">我的公司</a>
               <%else%>
-               <a class="navi_link" href="/users/<%=user.id%>/companies"> 我的公司(未创建)</a> 
+               <a  href="/users/<%=user.id%>/companies/new"> 我的公司(未创建)</a> 
               <%end%>                        
               <a class="navi_link" href="/user_contacts/user/<%=user.id%>">我的联系人</a>
         </td>

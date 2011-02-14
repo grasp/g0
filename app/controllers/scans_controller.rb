@@ -4,11 +4,13 @@ class ScansController < ApplicationController
   # GET /scans.xml
   include ScansHelper
   layout:nil
-  def index
-    @scans = Scan.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+  before_filter:admin_authorize, :only => [:index]
+  
+  def scan 
 
    expired_truck=0
    expired_cargo=0
+   start_time=Time.now
     #scan truck at first
     Truck.all.each do |truck|
       puts "truck.created_at=#{truck.created_at || truck.updated_at},truck.send_date=#{truck.send_date}"
@@ -67,6 +69,10 @@ class ScansController < ApplicationController
         
     scan[:total_cargo]=Cargo.count
     scan[:total_truck]=Truck.count
+    
+    scan[:valid_truck]=Truck.where(:status=>"正在配货").count
+    scan[:valid_cargo]=Cargo.where(:status=>"正在配车").count
+
 
     scan[:expired_truck]=expired_truck
     scan[:expired_cargo]=expired_cargo
@@ -77,10 +83,22 @@ class ScansController < ApplicationController
     scan[:total_user]=User.count
     scan[:total_company]=Company.count
     scan[:user_id]=session[:user_id]
-    
+    #calculate time cost
+     end_time=Time.now
+    scan[:cost_time]=end_time-start_time
     @scan = Scan.new(scan)
     @scan.save
     # we will do scan work in this action
+
+   @scans = Scan.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+    respond_to do |format|
+      format.html{ render :template=>"scans/index"} # index.html.erb
+      format.xml  { render :xml => @scans }
+    end
+  end
+  
+  def index
+    @scans = Scan.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
 
     respond_to do |format|
       format.html # index.html.erb

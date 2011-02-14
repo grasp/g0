@@ -254,10 +254,12 @@ class CargosController < ApplicationController
         #update need use mongo way to avoid use model method
   
         Cargo.collection.update({'_id' => @cargo.id},{'$set' =>{:cstatistic_id=>@cstatistic.id}})
-        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_cargo" => 1,"cargopeiche"=>1},'$set' => {"status"=>"正在配车"}},{:upsert =>true})
-        Lstatistic.collection.update({'line'=>@cargo.line},{'$inc' => {"total_cargo" => 1,"cargopeiche"=>1},'$set' => {"status"=>"正在配车"}},{:upsert =>true})
-        StockCargo.collection.update({'_id' => @cargo.stock_cargo_id},{'$inc' => {"valid_cargo" => 1},'$set' => {"status"=>"正在配车"}})
-
+        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_cargo" =>1,"cargopeiche"=>1},'$set' => {"status"=>"正在配车"}},{:upsert =>true})
+        Lstatistic.collection.update({'line'=>@cargo.line},{'$inc' => {"total_cargo" =>1,"cargopeiche"=>1},'$set' =>{"status"=>"正在配车"}},{:upsert =>true})
+       #$inc and $set could not be used together !!!!!!!???
+        # $db[:stock_cargos].update({'_id' => @cargo.stock_cargo_id},{'$inc' =>{"valid_cargo" =>1},'$set' =>{"status"=>"正在配车"}})
+   StockCargo.collection.update({'_id' => @cargo.stock_cargo_id},{'$set' =>{"status"=>"正在配车"}})
+    StockCargo.collection.update({'_id' => @cargo.stock_cargo_id},{'$inc' =>{"valid_cargo"=>1,"total_cargo"=>1}},{:upsert =>true})
         format.html { redirect_to(@cargo)}
         format.xml  { render :xml => @cargo, :status => :created, :location => @cargo }
       else

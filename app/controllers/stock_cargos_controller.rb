@@ -62,7 +62,10 @@ class StockCargosController < ApplicationController
     #  @stock_cargo = StockCargo.new(params)
     params[:stockcargo][:cargocount]=0 #init value
     params[:stockcargo][:status]="货物闲置" #init value
-    
+    #must initialilize ,otherwise $inc  in update will not work
+   params[:stockcargo][:valid_cargo]=0
+   params[:stockcargo][:total_cargo]=0
+   params[:stockcargo][:expired_cargo]=0
     @stock_cargo = StockCargo.new(params[:stockcargo])    
     respond_to do |format|
       if @stock_cargo.save

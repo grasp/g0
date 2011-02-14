@@ -36,6 +36,7 @@ class StockTruck
       
       #Statistic
       key :valid_truck,Integer
+      key :total_truck,Integer
       key :expired_truck,Integer
 
       #status

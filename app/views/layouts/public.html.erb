@@ -14,7 +14,7 @@
           <a  href="/" >首页</a>
             <%if user.nil?%>
             | <a  href="/users/login" >登录</a>
-            | <a  href="/users/new" >快速注册</a>
+            | <a  href="/users/new" >快速注册,永久免费</a>
            <%else%>
             | <a  href="/users/logout" >登出</a>
             <span>欢迎您!<%=user.name||user.email%></span>
@@ -58,7 +58,7 @@
 
 <%=render "shared/float_show"%>
 
-    <%=flash[:notice]%>
+    <%#=flash[:notice]%>
     
     <div class="footer">
       <span>

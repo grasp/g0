@@ -1,0 +1,27 @@
+<table>
+  <tr>
+   <th>差别货物</th>
+   <th>差别车子</th>
+   <th>本次货物</th>
+   <th>本次车子</th>
+   <th>总共货物</th>
+   <th>总共车子</th>
+    <th>耗时(秒)</th>
+   <th>采集时间</th>
+  </tr>
+    
+<%@grasps.each do |grasp|%>
+<tr>
+  <td><%=grasp.diff_huo%></td>
+  <td><%=grasp.diff_che%></td>
+  <td><%=grasp.cycle_huo%></td>
+  <td><%=grasp.cycle_che%></td>
+  <td><%=grasp.total_huo%></td>
+  <td><%=grasp.total_che%></td>
+    <td><%=grasp.cost_time%></td>
+  <td><%=grasp.created_at%></td>
+</tr>
+<%end%>
+ </table>
+
+<%= will_paginate @grasps ,:class=>"page_navi_link"%>

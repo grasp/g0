@@ -183,12 +183,9 @@ class UsersController < ApplicationController
         flash[:notice] = "密码重置链接无效"
         format.html { redirect_to(:action =>"login") }
         format.xml  { head :ok }
-
       else
-
         format.html # index.html.erb
         format.xml
-
       end
     end
   end
@@ -201,8 +198,7 @@ class UsersController < ApplicationController
     if params[:remember_me]=="on" && @user
       @user.update_attribute(:preference,1)
       #need store user_info into coockie
-      cookies.permanent.signed[:remember_me] = [@user.id, @user.salt,1]
-   
+      cookies.permanent.signed[:remember_me] = [@user.id, @user.salt,1]   
       
     elsif params[:remember_me]=="off" && @user
        @user.update_attribute(:preference,0)
@@ -218,8 +214,8 @@ class UsersController < ApplicationController
         if @user.status !="actived"
           flash[:notice] = "请到你的邮箱去确认邮箱" if (@user.status == "new_register" )
         end
-        session[:user_id]=@user.id
-        #session[:user_name]=@user.name
+        session[:user_id]=@user.id.to_s  #BSon to string
+        session[:user_name]=@user.name
         session[:user_email]=@user.email
         session[:original_uri]=nil
         #  format.html { redirect_to({:controller=>"cargos",:action => "public"})}

@@ -5,7 +5,7 @@
 <div class="list_close"><a href="">关闭</a></div>
 
 <div style="margin: 2px; width:40%; float:left;">
-      <ul>大类
+      <ul>包装大类
     <%$package_category_one.each do |code,name|  %>
         <li>
         <%= link_to name,"/package_categories/show/#{code}"%>
@@ -15,7 +15,7 @@
 </div>
 
 <div style="margin: 2px; width:50%; float:left;">
-  <ul>小类
+  <ul>包装小类
     <%  unless @package_category_two.nil?%>
       <% @package_category_two.each do |code,name|  %>
         <li>

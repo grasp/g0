@@ -1,4 +1,23 @@
 G0::Application.routes.draw do
+    match '/admin/quzhougrasp'  =>'admin#quzhougrasp',:as=>:adminquzhougrasp
+  match '/admin/tf56grasp'  =>'admin#tf56grasp',:as=>:admintf56grasp
+  get "admin/index"
+
+  get "quzhougrasp/index"
+
+  get "quzhougrasp/show"
+
+  get "quzhougrasp/create"
+
+  get "quzhougrasp/delete"
+
+  get "tf56grasp/index"
+
+  get "tf56grasp/show"
+
+  get "tf56grasp/create"
+
+  get "tf56grasp/delete"
 
   resources :citystatistics
 
@@ -6,6 +25,7 @@ G0::Application.routes.draw do
 
   get "quzhou_wuliu/show"
 
+   match '/scans/scan'  =>'scans#scan',:as=>:scanscan
   resources :scans
 
   resources :lstatistics

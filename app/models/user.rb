@@ -37,9 +37,6 @@ class User
     else
       user=self.find_by_name(email_or_name.to_s)
     end
-    puts "self.count=#{User.count}"
-    puts "email_or_name=#{email_or_name}"
-    puts "password=#{password}"
     if user
       expected_password=encrypted_password(password,user.salt)
       if user.hashed_password!=expected_password

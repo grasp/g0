@@ -14,7 +14,7 @@
 
 
     <div class="line" >
-<%=@stock_truck.paizhao%>,<%=@stock_truck.dun_wei%>吨,<%=@stock_truck.che_length%>米
+<%=@stock_truck.paizhao%>,<%=$truck_pinpai[@stock_truck.truck_pinpai]%>,<%=@stock_truck.truck_xinghao%>,<%=@stock_truck.dun_wei%>吨,<%=@stock_truck.che_length%>米
   <!-- do not change below  format -->
       <label style="margin-left:10px;" class="line_from_label" >出发地:</label>
       <a id="from_data_load"  href="/cities/from"><%=(@truck.fcity_name.nil?||@truck.fcity_name.empty?) ?"请选择出发地":@truck.fcity_name%></a>

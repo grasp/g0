@@ -6,7 +6,7 @@
 
 <div style="margin: 0px; padding: 0px;width:40%;float:left;">
 
-     <ul style="margin: 2px;">大类
+     <ul style="margin: 2px;">货物大类
     <%$cargo_category_one.each do |code,name|  %>
        <li>
         <%= link_to name,"/cargo_categories/show/#{code}"%>
@@ -17,7 +17,7 @@
 
 </div>
 <div style="margin: 2px; width:30%;float:left;">
-<ul style="margin: 2px;">子类
+<ul style="margin: 2px;">货物子类
     <%  unless @cargo_category_two.nil?%>
       <% @cargo_category_two.each do |code,name|  %>
         <li>

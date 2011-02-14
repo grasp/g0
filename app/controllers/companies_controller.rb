@@ -77,6 +77,7 @@ class CompaniesController < ApplicationController
 
     @company = Company.new
     @user=User.find_by_id(session[:user_id])
+    @contact=UserContact.where(:user_id=>@user.id).first
      if params[:who]=="personal"
        @company.ispersonal=1
      else

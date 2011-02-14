@@ -17,11 +17,11 @@
 
   <div class="field">
     <%= f.label :尊姓大名 %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name,:value=>@contact.name%>
   </div>
 
   <div class="field">
-    <%= f.label :本人介绍 %>
+    <%= f.label :本人以及服务介绍 %>
     <%= f.text_area :about %>
   </div>
 <!--

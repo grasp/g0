@@ -32,6 +32,7 @@ class StockCargo
       
       #Statistic
       key :valid_cargo,Integer
+      key :total_cargo,Integer
       key :expired_cargo,Integer
 
       #status

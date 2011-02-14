@@ -1,0 +1,14 @@
+<h1>Admin#index</h1>
+<div>
+ 
+<ul><li> 用户数量:<%=User.count%></li></ul> 
+<ul> <li>公司数量:<%=Company.count%></li></ul> 
+<ul>
+  <li> 货源数量:<%=Cargo.count%></li> 
+  <li> 正在配车:<%=Cargo.where(:status=>"正在配车").count%></li> 
+</ul>
+<ul> 
+   <li> 车源数量:<%=Truck.count%></li> 
+   <li> 正在配货:<%=Truck.where(:status=>"正在配货").count%></li> 
+ </ul>
+</div>

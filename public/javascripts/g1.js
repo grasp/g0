@@ -12,6 +12,7 @@ $(document).ready(function() {
     var options={
         target:  '#show'
     };
+    
 navi_js();
 
 float_load_layer1();

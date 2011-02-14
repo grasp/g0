@@ -255,7 +255,7 @@ class TrucksController < ApplicationController
         Truck.collection.update({'_id' => @truck.id},{'$set' =>{:tstatistic_id=>@tstatistic.id}})              
         Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
         Lstatistic.collection.update({'line'=>@truck.line},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
-        StockTruck.collection.update({'_id' => @truck.stock_truck_id},{'$inc' => {"truckcount" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}})
+        StockTruck.collection.update({'_id' => @truck.stock_truck_id},{'$inc' => {"valid_truck" => 1,"total_truck"=>1},'$set' => {"status"=>"正在配货"}})
 
         format.html { redirect_to(@truck)}
         format.xml  { render :xml => @truck, :status => :created, :location => @truck }

@@ -100,7 +100,7 @@ h1,h2,h3{
     font-size:120%;
 }
 
-#user_announcement{
+div.user_announce{
     float:left;
     width: 30%;
     height: 600px;
@@ -172,7 +172,11 @@ a.menu
 
 
 .truck_bottom_link a,.cargo_bottom_link a {
-    margin-left: 10px;
+    padding-right: 10px;
+}
+
+div.bottom_link a {
+    padding-right: 10px;
 }
 
 .companyshow div{

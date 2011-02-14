@@ -1,0 +1,23 @@
+  <%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
+<% unless user.nil? %>
+  <%ustatistic=Ustatistic.find(user.ustatistic_id)%>
+<%end%>
+<hr id="head_line">
+     <table class="navi">
+         <tr>
+         <td> <a  href="/admin/">总体情况</a></td>
+         <td class="navi_scan">
+              <a class="navi_link" href="/scans/scan">开始扫描</a>
+              <a class="navi_link" href="/scans/">扫描信息(<%=h Scan.count%>)</a>
+         </td>
+         <td class="navi_grasp">
+              <a class="navi_link" href="/admin/tf56grasp">tf56采集信息(<%=h Tf56grasp.count%>)</a>
+              <a class="navi_link" href="/admin/quzhougrasp">quzhou采集信息(<%=h Quzhougrasp.count%>)</a>            
+          </td>  
+         <td class="navi_user">
+               <a class="navi_link" href="/admin/users/">用户管理</a>
+               <a class="navi_link" href="/admin/companies/">公司管理</a>
+        </td>
+
+         </tr>
+  </table>
