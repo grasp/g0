@@ -8,6 +8,8 @@
    <th>总共车子</th>
     <th>耗时(秒)</th>
    <th>采集时间</th>
+   <th>失败次数</th>
+    <th>成功次数</th>
   </tr>
     
 <%@grasps.each do |grasp|%>
@@ -20,6 +22,8 @@
   <td><%=grasp.total_che%></td>
     <td><%=grasp.cost_time%></td>
   <td><%=grasp.created_at%></td>
+  <td><%=grasp.fail_counter%></td>
+  <td><%=grasp.succ_counter%></td>
 </tr>
 <%end%>
  </table>

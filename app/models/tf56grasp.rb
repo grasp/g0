@@ -9,7 +9,9 @@ class Tf56grasp
       key :cycle_huo,Integer
       key :total_che,Integer
       key :total_huo,Integer   
-        key :total_huo,Integer 
-         key :cost_time,String 
+      key :total_huo,Integer 
+      key :cost_time,String          
+      key :fail_counter,Integer
+      key :succ_counter,Integer
       timestamps!    
 end
