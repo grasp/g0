@@ -2,7 +2,7 @@
 class PublicController < ApplicationController
 before_filter:authorize_public
 layout "public",:except=>:navibar
-
+ 
   def index
 
     @search=Search.new
@@ -11,9 +11,7 @@ layout "public",:except=>:navibar
     @search.fcity_code="100000000000"
     @search.tcity_code="100000000000"
     @search.save
-    
-  #  @cargos=Cargo.order("created_at desc").paginate(:page=>params[:page]||1,::per_page=>30)
-    @cargos=Cargo.where(:status=>"正在配车").order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+       
 
    # puts "params[:page]=#{params[:page]}"
     respond_to do |format|

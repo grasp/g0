@@ -7,13 +7,12 @@ class ScansController < ApplicationController
   before_filter:admin_authorize, :only => [:index]
   
   def scan 
-
    expired_truck=0
    expired_cargo=0
    start_time=Time.now
     #scan truck at first
     Truck.all.each do |truck|
-      puts "truck.created_at=#{truck.created_at || truck.updated_at},truck.send_date=#{truck.send_date}"
+     # puts "truck.created_at=#{truck.created_at || truck.updated_at},truck.send_date=#{truck.send_date}"
       if compare_time_expired(truck.created_at ||truck.updated_at,truck.send_date || "1")==true
         #only for first time 过期
         if truck.status=="正在配货"
@@ -23,16 +22,21 @@ class ScansController < ApplicationController
         #update line statistic
         Lstatistic.collection.update({'line'=>truck.line},
         {'$inc' => {"valid_truck" => -1,"expired_truck"=> 1}},{:upsert =>true})       
-
         #decrement valid truck for stock truck
         StockTruck.collection.update({:truck_id=>truck.id},{'$inc' => {"valid_truck" => -1}})
-         end
+        
+        #change all inquery and quote status 
+        Inquery.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})
+        Quote.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})
+        
+        end
       end
     end
 
+    #initialize the status if no any truck issued
     StockTruck.all.each do |stock_truck|
-      if stock_truck.count==0
-         StockTruck.collection.update({:_id=>stock_truck_id},{'$set' => {"status" => "车辆闲置"}})
+      if stock_truck.valid_truck==0
+         StockTruck.collection.update({:_id=>stock_truck.id},{'$set' => {"status" => "车辆闲置"}})
       end
     end
     
@@ -49,13 +53,19 @@ class ScansController < ApplicationController
 
           #decrement valid cargo for stock cargo
           StockCargo.collection.update({:cargo_id=>cargo.id},{'$inc' => {"valid_cargo" => -1}})
+          
+        #change all inquery and quote status 
+        Inquery.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
+        Quote.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
+        
         end
       end
     end
-
+    
+  #initialize all stockcargo
    StockCargo.all.each do |stock_cargo|
-      if stock_cargo.count==0
-         StockCargo.collection.update({:_id=>stock_cargo_id},{'$set' => {"status" => "货物闲置"}})
+      if stock_cargo.valid_cargo==0
+         StockCargo.collection.update({:_id=>stock_cargo.id},{'$set' => {"status" => "货物闲置"}})
       end
     end
 
@@ -92,14 +102,78 @@ class ScansController < ApplicationController
 
    @scans = Scan.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     respond_to do |format|
-      format.html{ render :template=>"scans/index"} # index.html.erb
+      format.html{ render :template=>"/scans/index"} # index.html.erb
       format.xml  { render :xml => @scans }
     end
   end
   
+  #move out expired cargo/truck/inquery/quote, this can keep simple  and fast for main function  
+  def move
+    @move=Move.new
+      @move.expired_cargo=0
+      @move.expired_truck=0
+      @move.expired_quote=0
+      @move.expired_inquery=0
+    start_time=Time.now
+    Truck.where(:status=>"超时过期").each do |truck|
+      expiredtruck=ExpiredTruck.new
+      truck.keys.each do |key| 
+      expiredtruck[key[0]]=truck[key[0]]
+      end
+      expiredtruck.save      
+      truck.destroy
+      @move.expired_truck+=1
+    end
+    Rails.logger.debug "expiredtruck.count=#{ExpiredTruck.count}"
+    Cargo.where(:status=>"超时过期").each do |cargo|
+      expiredcargo=ExpiredCargo.new(:id=>cargo.id)
+      cargo.keys.each do |key| 
+      expiredcargo[key[0]]=cargo[key[0]]
+      end
+      expiredcargo.save
+      cargo.destroy
+      @move.expired_cargo+=1
+    end
+    Rails.logger.debug "expiredcargo.count=#{ExpiredCargo.count}"
+    
+    Quote.where(:status=>"超时过期").each do |quote|
+      expiredquote=ExpiredQuote.new
+      quote.keys.each do |key| 
+      expiredquote[key[0]]=quote[key[0]]
+      end
+      expiredquote.save
+      quote.destroy
+      @move.expired_quote+=1
+   end
+   Rails.logger.debug "expiredquote.count=#{ExpiredQuote.count}"
+   Inquery.where(:status=>"超时过期").each do |inquery|
+      expiredinquery=ExpiredInquery.new
+      inquery.keys.each do |key| 
+        expiredinquery[key[0]]=inquery[key[0]]
+      end
+      expiredinquery.save
+      inquery.destroy
+      @move.expired_inquery+=1
+   end
+   Rails.logger.debug "expiredinquery.count=#{ExpiredInquery.count}"
+    end_time=Time.now
+    @move.cost_time=end_time-start_time
+    
+    @move.save
+    
+    @moves=Move.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+    
+     respond_to do |format|
+      format.html{ render :template=>"/admin/move"} # index.html.erb
+      format.xml  { render :xml => @moves }
+    end
+
+    
+  end
+  
+  
   def index
     @scans = Scan.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @scans }
@@ -137,7 +211,6 @@ class ScansController < ApplicationController
   # POST /scans.xml
   def create
     @scan = Scan.new(params[:scan])
-
     respond_to do |format|
       if @scan.save
         format.html { redirect_to(@scan, :notice => 'Scan was successfully created.') }

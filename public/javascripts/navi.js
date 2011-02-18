@@ -38,4 +38,11 @@ $(".page_navi_link,div.page_navi_link a").live("click",function(){
  });
      return false;
     });
+    
+    $('#search').live("click",function(){
+    
+     $('#show').load(this.href);
+     return false;
+     
+})
 }

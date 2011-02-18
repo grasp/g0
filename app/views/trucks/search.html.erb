@@ -1,4 +1,6 @@
 
 <%#= render '/searches/tform' %>
-<%=render 'trucklist'%>
-<p>物流零距离--共找到<%=@trucks.size unless @trucks.nil?%>条<b>车</b>源信息</p>
+ <%cache(:action=>"search", :layout=>nil,:action_suffix =>"truck#{@action_suffix}") do %>
+<%get_search_truck(@search.fcity_code,@search.tcity_code)%>
+ <%=render 'trucklist'%>
+<%end%>

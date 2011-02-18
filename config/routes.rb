@@ -1,5 +1,6 @@
 G0::Application.routes.draw do
-    match '/admin/quzhougrasp'  =>'admin#quzhougrasp',:as=>:adminquzhougrasp
+  match '/admin/move'  =>'scans#move',:as=>:adminmove
+  match '/admin/quzhougrasp'  =>'admin#quzhougrasp',:as=>:adminquzhougrasp
   match '/admin/tf56grasp'  =>'admin#tf56grasp',:as=>:admintf56grasp
   get "admin/index"
 
@@ -44,7 +45,8 @@ G0::Application.routes.draw do
   match "inqueries/request_chenjiao/:id" =>'inqueries#request_chenjiao',:as=>:inqueriesrequest_chenjiao
   match "inqueries/confirm_chenjiao/:id" =>'inqueries#confirm_chenjiao',:as=>:inqueriesconfirm_chenjiao
   resources :inqueries
-
+  #map.connect '/cargos/search/from/:from/to/:to/page/:page',:controller=>"cargos",:action=>"search"
+  match '/cargos/search/:from/:to/:page'  =>'cargos#search',:as=>:cargossearchline
   match '/cargos/:cargo_id/trucks/:truck_id/quotes/new'  =>'quotes#new',:as=>:quotesnew
   match '/cargos/:cargo_id/quotes/cargo' =>'quotes#cargo', :as=>:quotescargo
   match '/trucks/:truck_id/quotes/truck' =>'quotes#truck', :as=>:quotestruck
@@ -100,9 +102,9 @@ G0::Application.routes.draw do
   end
 
  # match '/cargos/:cargo_id/inqueries/part' =>'inqueries#part', :as=>:inqueries#part
- match 'cargos/request_chenjiao/:id'=>"cargos#request_chenjiao" ,:as=>:cargorequest_chenjiao
- match '/cargos/index/:status' =>"cargos#index" ,:as=>:cargoindexstatus
- match '/cargos/search' =>'cargos#search', :as=>:cargosnew
+  match 'cargos/request_chenjiao/:id'=>"cargos#request_chenjiao" ,:as=>:cargorequest_chenjiao
+  match '/cargos/index/:status' =>"cargos#index" ,:as=>:cargoindexstatus
+  match '/cargos/search' =>'cargos#search', :as=>:cargosrootsearch
   match '/cargos/new' =>'cargos#new', :as=>:cargosnew
   match '/cargos/create' =>'cargos#create', :as=>:cargoscreate
   match '/cargos/show' =>'cargos#show', :as=>:cargosshow

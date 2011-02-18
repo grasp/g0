@@ -3,40 +3,22 @@ class CitiesController < ApplicationController
   # GET /cities
   # GET /cities.xml
   layout :nil
-
+  caches_page :index
+  
   def index
     #get the original value
     if params[:dir]=="from"
     code=params[:code] ||( params[:search][:fcity_code] unless params[:search].nil?)
     elsif  params[:dir]=="to"
     code=params[:code] || (params[:search][:tcity_code] unless params[:search].nil?)
-    end
-       
+    end       
     
      if code.nil? || code=="100000000000"
       code="330100000000" #default open ZheJiang Province
       puts "code is nil !!!"
     end    
-    
-    @selected_city_code=code    
-    puts "we received city code request=#{code}"    
-    if code.match(/\d\d0000000000$/) # is a province id  
-      @selected_city_name= $province_region[code]
-       @province_code=code
-       @region=$citytree[@province_code]
-      
-    elsif code.match(/\d\d\d\d00000000$/)  and (not code.match(/\d\d0000000000$/))
-       @selected_city_name= $province_region[code.slice(0,2)+"0000000000"]+$province_region[code]
-       @province_code=code.slice(0,2)+"0000000000"
-       @region_code=code  
-       @region=$citytree[@province_code]
-    else
-      @province_code=code.slice(0,2)+"0000000000"
-      @region_code=code.slice(0,4)+"00000000"
-      @city_code=code
-      @region=$citytree[@province_code]
-      @selected_city_name= $province_region[@province_code]+$province_region[@region_code]+$citytree[@province_code][@region_code][code]
-    end    
+    @code=code
+    @selected_city_code=code  
 
     respond_to do |format|
       format.html # index.html.erb

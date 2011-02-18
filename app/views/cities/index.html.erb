@@ -1,4 +1,7 @@
+
 <%#coding:utf-8%>
+ <% #=cache(:controller=>"cities",:action=>"index", :layout=>nil,:action_suffix =>"city#{params[:dir]}#{@selected_city_code}") do %>
+<%get_city_array(@code)%>
 <div class="city_selector" style="width:800px;">
 <div>
 <!-- <a class="list_close" style="margin-top: 5px;margin-left: 2px; display: inline;" href="">关闭</a>-->
@@ -58,5 +61,5 @@
 
 
 </div>
+<%#=end%>
 
-<%#= link_to 'New City', new_city_path %>

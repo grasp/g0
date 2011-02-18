@@ -38,21 +38,20 @@ class TrucksController < ApplicationController
   def search
      @search=Search.new
    if params[:search].nil? then
-    puts "params[:search] is nil"
-
+   #puts "params[:search] is nil"
     
      unless params[:fcity_code].blank?
-     @search.fcity_code=params[:fcity_code]
-     @search.fcity_name=$city_code_name[params[:fcity_code]]
+       @search.fcity_code=params[:fcity_code]
+       @search.fcity_name=$city_code_name[params[:fcity_code]]
      else
-     @search.fcity_code="100000000000"
-     @search.fcity_name="出发地选择"
+       @search.fcity_code="100000000000"
+       @search.fcity_name="出发地选择"
      end
      unless params[:fcity_code].blank?
-        @search.tcity_code=params[:tcity_code];@search.tcity_name=$city_code_name[params[:tcity_code]] 
+       @search.tcity_code=params[:tcity_code];@search.tcity_name=$city_code_name[params[:tcity_code]] 
      else
-         @search.tcity_name="到达地选择"
-         @search.tcity_code="100000000000"
+        @search.tcity_name="到达地选择"
+        @search.tcity_code="100000000000"
      end
 
    else
@@ -62,57 +61,8 @@ class TrucksController < ApplicationController
     @search.tcity_code=params[:search][:tcity_code]
    end
 
- if @search.fcity_code=="100000000000" && @search.tcity_code=="100000000000" then   
-     @trucks=Truck.where(:status=>"正在配货").sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-   elsif @search.fcity_code=="100000000000" && @search.tcity_code!="100000000000"
-      result=get_max_min_code(@search.tcity_code)
-      min=result[0]
-      max=result[1]
-      if result[2]
-        @trucks=Truck.where({:tcity_code=>min,:status=>"正在配货"}).
-                       sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-      else
-         @trucks=Truck.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"正在配货"}).
-                       sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-      end
-    elsif @search.tcity_code=="100000000000" && @search.fcity_code!="100000000000"
-     result=get_max_min_code(@search.fcity_code)
-     min=result[0]
-     max=result[1]
-     if result[2]
-       @trucks=Truck.where({:fcity_code =>min,:status=>"正在配货"}).
-                          sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-     else
-       @trucks=Truck.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"正在配货"}).
-                          sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-     end
- 
-    else
-     resultt=get_max_min_code(@search.tcity_code)
-     resultf=get_max_min_code(@search.fcity_code)
-      mint=resultt[0]
-      maxt=resultt[1]
-      minf=resultf[0]
-      maxf=resultf[1]
-      puts "mint=#{mint}, maxt=#{maxt},minf=#{minf},maxf=#{maxf}"
-      if resultt[2]==false && resultf[2]==false
-      #  puts "两个都不是县级市"
-          @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配货"}).
-                                 sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
-       elsif resultt[2]==true && resultf[2]==false
-       #   puts "到达是县级市"
-          @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code=>mint,:status=>"正在配货"}).
-                                 sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
-       elsif resultt[2]==false && resultf[2]==true
-        #   puts "出发是县级市"
-          @trucks=Truck.where({:fcity_code =>minf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配货"}).
-                                 sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
-       else
-       #  puts "两个都是县级市"
-          @trucks=Truck.where({:fcity_code =>minf,:tcity_code=>mint,:status=>"正在配货"}).
-                                 sort(:updated_at.desc).all.paginate(:page=>params[:page]||1,:per_page=>20 )
-      end
-    end
+    @action_suffix="#{@search.fcity_code}#{@search.tcity_code}#{params[:page]}"
+  
     @search.save
   end
   

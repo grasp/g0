@@ -101,22 +101,38 @@ function city_load(){
       
        if (thishref.match(/cities\/from/))
         {
-           $("#selected_city").text(get_full_name(code));
-         
+           $("#selected_city").text(get_full_name(code));         
            $("#from_data_load").attr("href",thishref);
+           $("#from_data_load").text($("#selected_city").text());  
+          if ($("#search").length >0)
+          {
+            var action=$("#search").attr("href")
+            new_action=action.slice(0,15)+code+action.slice(27,42)//trucks and cargos have same length, luck
+            $("#search").attr("href",new_action)
+          }
+          else
+           {
            $("#from_data_load").next().val(code);
-           $("#from_data_load").next().next().val($("#selected_city").text());
-           $("#from_data_load").text($("#selected_city").text());                
+           $("#from_data_load").next().next().val($("#selected_city").text());  
+           }
         }
 
          if (thishref.match(/cities\/to/))
           {
-            $("#selected_city").text(get_full_name(code));
-             
-             $("#to_data_load").attr("href",thishref);
-            $("#to_data_load").next().val(code);
-            $("#to_data_load").next().next().val($("#selected_city").text());
+            $("#selected_city").text(get_full_name(code));             
+            $("#to_data_load").attr("href",thishref);           
             $("#to_data_load").text($("#selected_city").text());
+            if ($("#search").length >0)
+            {
+            var action2=$("#search").attr("href");
+            new_action=action2.slice(0,28)+code+"/1"//trucks and cargos have same length, luck
+            $("#search").attr("href",new_action) 
+            }
+            else
+            {
+              $("#to_data_load").next().val(code);
+              $("#to_data_load").next().next().val($("#selected_city").text());
+            }
             } 
             last_province_code=new_province_code
             if($.browser.msie) {

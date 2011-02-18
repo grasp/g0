@@ -1,5 +1,5 @@
 # coding: utf-8
-class  Cargo
+class  ExpiredCargo
     include MongoMapper::Document
      cattr_reader :per_page
      @@per_page = 20
@@ -47,19 +47,9 @@ class  Cargo
       key :price_unit,String
       
   # from site
-     key :from_site,String
-     
-     
+     key :from_site,String         
       
      timestamps!
-   validate :check_unique
-  def check_unique
-    repeated=Cargo.where(:cate_name=>self.cate_name,:line=>self.line,:user_id=>self.user_id,:status=>"配车")
-       unless repeated.size==0
-      errors.add_to_base("不能重复发布货源信息")
-      return false
-    end
-    return true
-  end
+  
      
 end
