@@ -1,22 +1,24 @@
+  <%@trucks=get_search_truck(@search.fcity_code,@search.tcity_code)%>
 
+<p><%="#{@search.fcity_code}/#{@search.tcity_code}/#{Time.now}"%></p>
 <table>
   
   <tr>
     <th>车辆</th>
-    <%=form_for(@search,:as=>:search,:url=>"/trucks/search",:html=>{:class=>"show_form"},:method=>"get") do |f| %>
+   
  <div class="line"  style="display:inline">
   <!-- do not change below  format -->
      <!-- <label style="margin-left:10px;" class="line_from_label" >出发地:</label>-->
      <th>
      <a id="from_data_load"  href="/cities/from/<%=@search.fcity_code%>"><%=@search.fcity_name ||"出发地选择"%></a>
-      <%= f.hidden_field(:fcity_code) %>
-      <%= f.hidden_field(:fcity_name) %>
+      <%#= f.hidden_field(:fcity_code) %>
+      <%#= f.hidden_field(:fcity_name) %>
      </th>
      <!--  <label style="margin-left:50px;" class="line_to_label " >到达地:</label>-->
      <th>
      <a  id="to_data_load"  href="/cities/to/<%=@search.tcity_code%>"><%=@search.tcity_name ||"到达地选择"%></a>
-      <%= f.hidden_field(:tcity_code) %>
-      <%= f.hidden_field(:tcity_name) %>
+      <%#= f.hidden_field(:tcity_code) %>
+      <%#= f.hidden_field(:tcity_name) %>
      </th>
    <!-- do not change this format -->
 </div>
@@ -26,13 +28,11 @@
     <th>发布时间</th>
     <th>状态</th>
     <th>货主操作</th>
- <th>
- <div class="actions" style="display:inline">
-    <%= f.submit("搜索") %>
- </div>
- </th>
+  <th>
+     <a id ="search"  href=<%="/trucks/search/#{@search.fcity_code}/#{@search.tcity_code}/1"%>>搜索</a>
+  </th>
   </tr>
-<% end %>
+
    <% unless @trucks.blank? %>
    <% @trucks.each do |truck|%>
    <%unless truck.blank? %>

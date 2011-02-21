@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   end
   
   def tf56grasp
-    @grasps=Tf56grasp.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+    @grasps=GraspRecord.where(:from_site=>"tf56").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
         respond_to do |format|
       format.html{render :template=>"/admin/grasp"} # index.html.erb
       format.xml  { render :xml => @scans }
@@ -13,7 +13,7 @@ class AdminController < ApplicationController
   end
   
   def quzhougrasp
-    @grasps=Quzhougrasp.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+    @grasps=GraspRecord.where(:from_site=>"quzhou").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
         respond_to do |format|
       format.html{render :template=>"/admin/grasp"} # index.html.erb
       format.xml  { render :xml => @scans }

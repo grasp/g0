@@ -5,7 +5,8 @@ class QuotesController < ApplicationController
   #  layout "public"
   layout :nil
   before_filter:authorize, :except => [:public]
-    
+  include CargosHelper
+  include TrucksHelper
   def index
     unless params[:cargo_id].nil?
       @quotes =  Quote.find(:cargo_id =>params[:cargo_id])
@@ -173,14 +174,20 @@ class QuotesController < ApplicationController
    unless @quote.blank?
     #update truck status
     Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"邀请成交"}})
-    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"邀请成交"}})
-    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"邀请成交"}})
+    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"邀请成交"}})    
+    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"邀请成交"}}) 
    else
     @quote=Inquery.find(params[:id])
      Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"邀请成交"}})
      Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"邀请成交"}})
      Inquery.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"邀请成交"}})
    end
+   #expire line
+    @cargo=Cargo.find_by_id(@quote.cargo_id)
+    @truck=Truck.find_by_id(@quote.cargo_id)
+    expire_line_cargo(@cargo.fcity_code,@cargo.tcity_code)
+    expire_line_truck(@truck.fcity_code,@truck.tcity_code)
+    
     #TOTO:notify all other related truck
     #All quotes to from this truck change to chenjiao
     @quotes=Quote.where(:truck_id =>@quote.truck_id , :status =>"正在配货")

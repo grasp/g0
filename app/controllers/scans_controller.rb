@@ -3,6 +3,8 @@ class ScansController < ApplicationController
   # GET /scans
   # GET /scans.xml
   include ScansHelper
+  include TrucksHelper
+  include CargosHelper
   layout:nil
   before_filter:admin_authorize, :only => [:index]
   
@@ -23,12 +25,13 @@ class ScansController < ApplicationController
         Lstatistic.collection.update({'line'=>truck.line},
         {'$inc' => {"valid_truck" => -1,"expired_truck"=> 1}},{:upsert =>true})       
         #decrement valid truck for stock truck
-        StockTruck.collection.update({:truck_id=>truck.id},{'$inc' => {"valid_truck" => -1}})
-        
+        StockTruck.collection.update({:truck_id=>truck.id},{'$inc' => {"valid_truck" => -1}})        
         #change all inquery and quote status 
         Inquery.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})
-        Quote.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})
-        
+        Quote.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})      
+        #expire line
+        expire_line_truck(truck.fcity_code,truck.tcity_code)
+         expire_page(:controller=>"trucks",:action=>"show",:id=>truck.id)
         end
       end
     end
@@ -57,7 +60,8 @@ class ScansController < ApplicationController
         #change all inquery and quote status 
         Inquery.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
         Quote.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
-        
+        expire_line_cargo(cargo.fcity_code,cargo.tcity_code)
+        expire_page(:controller=>"cargos",:action=>"show",:id=>cargo.id)
         end
       end
     end
@@ -170,7 +174,52 @@ class ScansController < ApplicationController
 
     
   end
+  #for grasp line
+  def cargoexpire
+   @cargolines=Array.new
+   @grasps=GraspRecord.where({:cargostatus=>"notexpired"})
+   Rails.logger.debug "grasps size=="+@grasps.size.to_s
+   puts @grasps
+   @grasps.each do |grasp|
+     @cargolines+=grasp.cargo_lines unless grasp.cargo_lines.nil? 
+     GraspRecord.collection.update({"_id"=>grasp.id},{'$set'=>{:cargostatus=>"expired"}}) 
+     Rails.logger.debug grasp.cargo_lines    
+   end
+
+   @cargolines=@cargolines.uniq   
+   unless @cargolines.size==0
+      @cargolines.each do |line|
+       FileUtils.rm_rf Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"       
+       Rails.logger.debug "expire "+Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"
+    end
+   end
+   end
+
+  #for grasp line
+  def truckexpire
+   @trucklines=Array.new
+   @grasps=GraspRecord.where({:truckstatus=>"notexpired"})
+   Rails.logger.debug "truck grasps size=="+@grasps.size.to_s
+
+   @grasps.each do |grasp|
+     @trucklines+=grasp.truck_lines unless grasp.truck_lines.nil? 
+     GraspRecord.collection.update({"_id"=>grasp.id},{'$set'=>{:truckstatus=>"expired"}})        
+   end
+
+   @trucklines=@trucklines.uniq   
+   unless @trucklines.size==0
+      @trucklines.each do |line|
+       FileUtils.rm_rf Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}"       
+       Rails.logger.debug "expire "+Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}"
+    end
+   end
+  end
   
+  def expiretimer
+     FileUtils.rm_rf Rails.public_path+"/trucks/search"+"/100000000000"+"/100000000000"  
+     FileUtils.rm_rf Rails.public_path+"/cargos/search"+"/100000000000"+"/100000000000"       
+     Rails.logger.debug "expire anywhere to anywhere for cargo and truck "
+  end
   
   def index
     @scans = Scan.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)

@@ -1,6 +1,4 @@
 
 <%#= render '/searches/tform' %>
- <%cache(:action=>"search", :layout=>nil,:action_suffix =>"truck#{@action_suffix}") do %>
-<%get_search_truck(@search.fcity_code,@search.tcity_code)%>
+
  <%=render 'trucklist'%>
-<%end%>

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
    def get_line(from_code,to_code)
+     
     if from_code<to_code
       return from_code+to_code
     elsif from_code>to_code

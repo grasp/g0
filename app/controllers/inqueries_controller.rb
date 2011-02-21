@@ -5,7 +5,9 @@ class InqueriesController < ApplicationController
   # layout "public"
   layout nil
   before_filter:authorize, :except => [:public]
-     
+  include CargosHelper
+  include TrucksHelper
+  
   def index
     @inqueries=Inquery.where(:user_id >session[:user_id]) 
     respond_to do |format|

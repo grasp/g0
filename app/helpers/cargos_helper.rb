@@ -1,6 +1,9 @@
  # coding: utf-8
+ 
+
+
 module CargosHelper
-    
+    include FileUtils
  def get_max_min_code(code)
     max_code,min_code=0
 
@@ -21,6 +24,7 @@ module CargosHelper
    [min_code,max_code,iscity]   
   end
 
+ #for view storage purpose, but now use page cache 
  def get_search_cargos(fcity_code,tcity_code)
    
    if fcity_code=="100000000000" && tcity_code=="100000000000" then
@@ -61,10 +65,49 @@ module CargosHelper
       elsif resultt[2]==false && resultf[2]==true
         @cargos=Cargo.where({:fcity_code=>minf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配车"}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
       else
-          @cargos=Cargo.where(:fcity_code =>minf,:tcity_code=>mint,:status=>"正在配车").sort(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+        @cargos=Cargo.where(:fcity_code =>minf,:tcity_code=>mint,:status=>"正在配车").sort(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
         end
     end
     @cargos
+ end
+ 
+ def expire_line_cargo(from_city,to_city)   
+   lines=Array.new
+  if (from_city!="100000000000" && to_city!="100000000000")
+    lines<<[from_city,to_city] #expire city to city 
+    lines<<[from_city.slice(0,4)+"00000000",to_city] #expire region to city
+    lines<<[from_city.slice(0,2)+"0000000000",to_city] #province to city
+    lines<<["100000000000",to_city] #expire anywhere  to city  
+    lines<<["100000000000",to_city.slice(0,4)+"00000000"] #expire anywhere  to region  
+    lines<<["100000000000",to_city.slice(0,2)+"0000000000"] #expire anywhere to province  
+     
+    lines<<[from_city,to_city.slice(0,4)+"00000000"] #city to region
+    lines<<[from_city,to_city.slice(0,2)+"0000000000"] #city  to province
+    lines<<[from_city,"100000000000"]  #expire city to anywhere
+    lines<<[from_city.slice(0,4)+"00000000","100000000000"]  #expire region to anywhere
+    lines<<[from_city.slice(0,2)+"0000000000","100000000000"]  #expire province to anywhere
+    
+   lines<<[from_city.slice(0,4)+"00000000",to_city.slice(0,4)+"00000000"] #expire region to region 
+   lines<<[from_city.slice(0,2)+"0000000000",to_city.slice(0,2)+"0000000000"] #expire province to province 
+   lines<<[from_city.slice(0,4)+"00000000",to_city.slice(0,2)+"0000000000"] #expire region to province 
+   lines<<[from_city.slice(0,2)+"0000000000",to_city.slice(0,4)+"00000000"] #expire province  to region 
+  
+  
+   all_lines=lines.uniq
+  
+   #rm folder
+   all_lines.each do |line|
+     FileUtils.rm_rf Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"       
+     Rails.logger.debug "expire "+Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"
+   end
+  else
+    #only expire first page, others only Cargos.count/ % 20 ==0 to expire
+    # if Cargo.count % 20 ==0
+    #    FileUtils.rm_rf Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"   
+    # else
+   #     FileUtils.rm_rf Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}/1.html"       
+   #  end
+    end
  end
 
 

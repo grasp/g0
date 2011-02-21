@@ -4,29 +4,15 @@ G0::Application.routes.draw do
   match '/admin/tf56grasp'  =>'admin#tf56grasp',:as=>:admintf56grasp
   get "admin/index"
 
-  get "quzhougrasp/index"
-
-  get "quzhougrasp/show"
-
-  get "quzhougrasp/create"
-
-  get "quzhougrasp/delete"
-
-  get "tf56grasp/index"
-
-  get "tf56grasp/show"
-
-  get "tf56grasp/create"
-
-  get "tf56grasp/delete"
 
   resources :citystatistics
 
   get "quzhou_wuliu/index"
-
   get "quzhou_wuliu/show"
-
-   match '/scans/scan'  =>'scans#scan',:as=>:scanscan
+  match '/scans/expiretimer'  =>'scans#expiretimer',:as=>:scanexpiretimer
+  match '/scans/truckexpire'  =>'scans#truckexpire',:as=>:scantruckexpire
+  match '/scans/cargoexpire'  =>'scans#cargoexpire',:as=>:scancargoexpire
+  match '/scans/scan'  =>'scans#scan',:as=>:scanscan
   resources :scans
 
   resources :lstatistics
@@ -47,6 +33,7 @@ G0::Application.routes.draw do
   resources :inqueries
   #map.connect '/cargos/search/from/:from/to/:to/page/:page',:controller=>"cargos",:action=>"search"
   match '/cargos/search/:from/:to/:page'  =>'cargos#search',:as=>:cargossearchline
+  #match  '/cargos/search'=>'cargos#search',:as=>:cargossearch  
   match '/cargos/:cargo_id/trucks/:truck_id/quotes/new'  =>'quotes#new',:as=>:quotesnew
   match '/cargos/:cargo_id/quotes/cargo' =>'quotes#cargo', :as=>:quotescargo
   match '/trucks/:truck_id/quotes/truck' =>'quotes#truck', :as=>:quotestruck
@@ -67,9 +54,10 @@ G0::Application.routes.draw do
   match 'cargos/public' =>'cargos#public',:as=>:cargospublic
   match 'trucks/public' =>'trucks#public',:as=>:truckspublic
 
+   match '/trucks/search/:from/:to/:page'  =>'trucks#search',:as=>:truckssearchline  
    match '/trucks/request_chenjiao/:id' =>"trucks#request_chenjiao" ,:as=>:trucksrequest_chenjiao
    match '/trucks/index/:status' =>"trucks#index" ,:as=>:truckindexstatus
-   match  '/trucks/search'=>'trucks#search',:as=>:trucksnew
+ #  match  '/trucks/search'=>'trucks#search',:as=>:trucksearch
   match  '/trucks/new'=>'trucks#new',:as=>:trucksnew
   match  '/trucks/create'=>'trucks#create',:as=>:truckscreate
   match '/trucks/show' =>'trucks#show',:as=>:trucksshow

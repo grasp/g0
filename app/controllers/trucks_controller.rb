@@ -4,10 +4,11 @@ class TrucksController < ApplicationController
   # GET /trucks.xml
 
   include TrucksHelper
-    include CargosHelper
+  include CargosHelper
   before_filter:authorize, :except => [:search,:show]
   protect_from_forgery :except => [:tip,:login]
   # layout "public"
+  caches_page :search,:show
   layout nil
 
   def public
@@ -101,7 +102,6 @@ class TrucksController < ApplicationController
       maxf=get_max_min_code(@search.fcity_code)[1]
       @cargos=Cargo.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配车"}).sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     end
-
   
     respond_to do |format|
       format.html # show.html.erb
@@ -114,7 +114,7 @@ class TrucksController < ApplicationController
   def show
     
     @truck = Truck.find(params[:id])
-    @line_ad=LineAd.find_by_line(get_line(@truck.fcity_code,@truck.tcity_code))
+   # @line_ad=LineAd.find_by_line(get_line(@truck.fcity_code,@truck.tcity_code))
     
     if @line_ad.nil?
      # @line_ad=LineAd.find_by_line("0")
@@ -207,6 +207,8 @@ class TrucksController < ApplicationController
         Lstatistic.collection.update({'line'=>@truck.line},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
         StockTruck.collection.update({'_id' => @truck.stock_truck_id},{'$inc' => {"valid_truck" => 1,"total_truck"=>1},'$set' => {"status"=>"正在配货"}})
 
+        expire_line_truck(@truck.fcity_code,@truck.tcity_code)
+        
         format.html { redirect_to(@truck)}
         format.xml  { render :xml => @truck, :status => :created, :location => @truck }
       else

@@ -6,7 +6,7 @@ class CargosController < ApplicationController
   # GET /cargos.xml
   include CargosHelper
   before_filter:authorize, :except => [:search,:show]
-  caches_page :search
+  caches_page :search,:show
   #cache_sweeper :cargo_sweeper, :only => [:create, :destroy]
   protect_from_forgery :except => [:tip,:login]
   layout nil
@@ -31,9 +31,7 @@ class CargosController < ApplicationController
   end
 
   def search
-    #expire_page :action=>"search"
-   
-
+  
      @search=Search.new
     if params[:search].nil?      
       unless params[:from].blank?
@@ -56,11 +54,7 @@ class CargosController < ApplicationController
       @search.fcity_code=params[:search][:fcity_code]
       @search.tcity_code=params[:search][:tcity_code]
     end
-    if params[:from]
-      expire_page(:action=>"search",:from=>@search.fcity_code,:to=>@search.fcity_code,:page=>1)
-    else
-      expire_page(:action=>"search")
-    end
+
     #puts "@search.fcity_code=#{@search.fcity_code},@search.tcity_code=#{@search.tcity_code}";
     @line=@search.fcity_code+"#"+@search.tcity_code
     @action_suffix="#{@line}#{params[:page]}"        
@@ -76,9 +70,9 @@ class CargosController < ApplicationController
     if params[:status]
         @cargos = Cargo.where(:user_id =>session[:user_id],:status =>params[:status]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     else
-      #  @cargos = Cargo.where("user_id = ?",session[:user_id]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>20)
+       #@cargos = Cargo.where("user_id = ?",session[:user_id]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>20)
        @cargos = Cargo.where(:user_id =>session[:user_id]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-      end
+    end
     end    
     
     
@@ -136,7 +130,7 @@ class CargosController < ApplicationController
   def show
     @cargo = Cargo.find(params[:id])
     @stock_cargo=StockCargo.find(@cargo.stock_cargo_id)
-    @line_ad=LineAd.find({:line=>get_line(@cargo.fcity_code,@cargo.tcity_code)})
+  #  @line_ad=LineAd.find({:line=>get_line(@cargo.fcity_code,@cargo.tcity_code)})
     
     if @line_ad.blank?
       #@line_ad=LineAd.find_by_line("0")
@@ -217,12 +211,11 @@ class CargosController < ApplicationController
           :total_click=>0,:user_id=>session[:user_id],:cargo_id=>@cargo.id);
         #update statistic for cargo
         #update need use mongo way to avoid use model method
-        expire_page(:action=>"search",:from=>@cargo.fcity_code,:to=>@cargo.tcity_code)
-        
+        expire_line_cargo(@cargo.fcity_code,@cargo.tcity_code)
         Cargo.collection.update({'_id' => @cargo.id},{'$set' =>{:cstatistic_id=>@cstatistic.id}})
         Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_cargo" =>1,"cargopeiche"=>1},'$set' => {"status"=>"正在配车"}},{:upsert =>true})
         Lstatistic.collection.update({'line'=>@cargo.line},{'$inc' => {"total_cargo" =>1,"cargopeiche"=>1},'$set' =>{"status"=>"正在配车"}},{:upsert =>true})
-       #$inc and $set could not be used together !!!!!!!???
+        #$inc and $set could not be used together !!!!!!!???
         # $db[:stock_cargos].update({'_id' => @cargo.stock_cargo_id},{'$inc' =>{"valid_cargo" =>1},'$set' =>{"status"=>"正在配车"}})
         StockCargo.collection.update({'_id' => @cargo.stock_cargo_id},{'$set' =>{"status"=>"正在配车"}})
         StockCargo.collection.update({'_id' => @cargo.stock_cargo_id},{'$inc' =>{"valid_cargo"=>1,"total_cargo"=>1}},{:upsert =>true})

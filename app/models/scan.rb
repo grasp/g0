@@ -1,4 +1,6 @@
 class Scan 
+    cattr_reader :per_page
+     @@per_page = 20
     include MongoMapper::Document
       key :total_user,Integer
       key :total_stock_truck,Integer
