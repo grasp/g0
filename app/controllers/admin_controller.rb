@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
-  layout "admin",:only=>[:index]
+  layout "admin"
+    before_filter:admin_authorize,:except=>[:index] #for debug purpose
   def index
     
   end

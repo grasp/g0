@@ -2,6 +2,7 @@
 class PublicController < ApplicationController
 before_filter:authorize_public
 layout "public",:except=>:navibar
+#caches_page:about
  
   def index
 
@@ -30,6 +31,20 @@ layout "public",:except=>:navibar
   def navibar
      respond_to do |format|
       format.html {}# navi.html.erb
+    #  format.xml  {render :xml => @search }
+    end
+  end
+  
+  def about
+     respond_to do |format|
+      format.html {render :template=>"/public/about"}# navi.html.erb
+    #  format.xml  {render :xml => @search }
+    end
+  end
+  
+  def mianze
+         respond_to do |format|
+      format.html {render :template=>"/public/mianze"}# navi.html.erb
     #  format.xml  {render :xml => @search }
     end
   end

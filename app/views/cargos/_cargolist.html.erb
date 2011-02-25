@@ -1,6 +1,4 @@
   
-
-
   <%@cargos=get_search_cargos(@search.fcity_code,@search.tcity_code)%>
 
 <p><%="#{@search.fcity_code}/#{@search.tcity_code}/#{Time.now}"%></p>
@@ -12,7 +10,7 @@
     </th>
 <th>
       <a  id="to_data_load"  href="/cities/to/<%=@search.tcity_code%>" ><%=@search.tcity_name ||"到达地选择"%></a>
- </th>
+</th>
       <th>重量</th>
       <th>有效期</th>      
       <th>发布日期</th>

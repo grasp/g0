@@ -1,4 +1,6 @@
 G0::Application.routes.draw do
+  resources :feedbacks
+
   match '/admin/move'  =>'scans#move',:as=>:adminmove
   match '/admin/quzhougrasp'  =>'admin#quzhougrasp',:as=>:adminquzhougrasp
   match '/admin/tf56grasp'  =>'admin#tf56grasp',:as=>:admintf56grasp
@@ -9,6 +11,7 @@ G0::Application.routes.draw do
 
   get "quzhou_wuliu/index"
   get "quzhou_wuliu/show"
+   match '/scans/uinfoscan'  =>'scans#uinfoscan',:as=>:scanuinfoscan
   match '/scans/expiretimer'  =>'scans#expiretimer',:as=>:scanexpiretimer
   match '/scans/truckexpire'  =>'scans#truckexpire',:as=>:scantruckexpire
   match '/scans/cargoexpire'  =>'scans#cargoexpire',:as=>:scancargoexpire
@@ -32,7 +35,7 @@ G0::Application.routes.draw do
   match "inqueries/confirm_chenjiao/:id" =>'inqueries#confirm_chenjiao',:as=>:inqueriesconfirm_chenjiao
   resources :inqueries
   #map.connect '/cargos/search/from/:from/to/:to/page/:page',:controller=>"cargos",:action=>"search"
-  match '/cargos/search/:from/:to/:page'  =>'cargos#search',:as=>:cargossearchline
+  match '/cargos/search(/:from/:to(/:page))'  =>'cargos#search',:as=>:cargossearchline
   #match  '/cargos/search'=>'cargos#search',:as=>:cargossearch  
   match '/cargos/:cargo_id/trucks/:truck_id/quotes/new'  =>'quotes#new',:as=>:quotesnew
   match '/cargos/:cargo_id/quotes/cargo' =>'quotes#cargo', :as=>:quotescargo
@@ -49,6 +52,7 @@ G0::Application.routes.draw do
   resources :searches
 
   get "public_main/index"
+
 
   match 'users/login' => 'users#login', :as => :userslogin
   match 'cargos/public' =>'cargos#public',:as=>:cargospublic
@@ -68,7 +72,7 @@ G0::Application.routes.draw do
       resources :quotes
   end
   match '/companies/new/(:who)' =>'companies#new',:as=>:companiesnewwho
-  match '/companies/index/:id/(:who)' =>'companies#index',:as=>:companiesindex
+  match '/companies/index/:id(/:who)' =>'companies#index',:as=>:companiesindex
   match '/companies/showf/:id' =>'companies#showf',:as=>:companiesshowf
   match '/companies/show/:id/(:who)' =>'companies#show',:as=>:companiesshow
   match '/companies/search' =>'companies#search',:as=>:companiessearch
@@ -193,7 +197,7 @@ G0::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "public#index"
+  root :to => "cargos#search"
 
   # See how all your routes lay out with "rake routes"
 

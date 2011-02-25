@@ -153,18 +153,24 @@ a.menu
     padding-left: 5px;
     font-size:larger;
 }
+#footer {
+     display:inline;
+     margin-top:50px;
+     margin-bottom: 50px;
+     float:left;
+     text-align:center;
+}
+/*not work*/
+#footer a {
 
-.footer {
-    margin-top:150px;
-    margin-left:auto;
-    margin-right:auto;
-    float:left;
-    width: 100%;
-    text-align:center;
+    margin-left:10px;
+    margin-right:10px; 
+      
+   /* text-align:center;*/
 }
 
 
-.footer p {
+#footer p {
     margin:auto;
     display:inline;
 }
@@ -188,7 +194,12 @@ div.bottom_link a {
     margin-left: 5%;
 }
 
+#search {
+    margin-left: 20px;
+}
 
-
-
+div.feedback_form{
+    
+     margin-left: 120px;
+}
 

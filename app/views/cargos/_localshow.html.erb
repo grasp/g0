@@ -4,7 +4,6 @@
     <th>组货方式</th>
     <th>货物大类</th>
     <th>货物包装</th>
-    <th>发货日期</th>
     <th>联系人</th>
     <th>联系方式</th>
   </tr>
@@ -18,16 +17,15 @@
  
 <td> 
 <%=@stock_cargo.package_name%></td>
-<td>
- <%= @cargo.send_date %></td>
 
 <td>
   <%= User.find(@cargo.user_id).name %>
 </td>
 
 <td>
-  <%= UserContact.find_by_user_id(@cargo.user_id).mphone %>
-  <%= UserContact.find_by_user_id(@cargo.user_id).fixphone %>
+  <%usercontact=UserContact.find_by_user_id(@cargo.user_id)%>
+  <%= usercontact.mphone %>
+  <%= usercontact.quhao+"-"+usercontact.fixphone %>
 </td>
 </tr>
 </table>

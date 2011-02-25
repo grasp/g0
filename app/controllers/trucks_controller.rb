@@ -8,7 +8,7 @@ class TrucksController < ApplicationController
   before_filter:authorize, :except => [:search,:show]
   protect_from_forgery :except => [:tip,:login]
   # layout "public"
-  caches_page :search,:show
+ # caches_page :search,:show
   layout nil
 
   def public
@@ -41,15 +41,15 @@ class TrucksController < ApplicationController
    if params[:search].nil? then
    #puts "params[:search] is nil"
     
-     unless params[:fcity_code].blank?
-       @search.fcity_code=params[:fcity_code]
-       @search.fcity_name=$city_code_name[params[:fcity_code]]
+     unless params[:from].blank?
+       @search.fcity_code=params[:from]
+       @search.fcity_name=$city_code_name[params[:from]]
      else
        @search.fcity_code="100000000000"
        @search.fcity_name="出发地选择"
      end
-     unless params[:fcity_code].blank?
-       @search.tcity_code=params[:tcity_code];@search.tcity_name=$city_code_name[params[:tcity_code]] 
+     unless params[:from].blank?
+       @search.tcity_code=params[:to];@search.tcity_name=$city_code_name[params[:to]] 
      else
         @search.tcity_name="到达地选择"
         @search.tcity_code="100000000000"
@@ -114,6 +114,7 @@ class TrucksController < ApplicationController
   def show
     
     @truck = Truck.find(params[:id])
+    @stock_truck = StockTruck.find_by_id(@truck.stock_truck_id) if @truck.from_site=="local"
    # @line_ad=LineAd.find_by_line(get_line(@truck.fcity_code,@truck.tcity_code))
     
     if @line_ad.nil?

@@ -41,8 +41,8 @@ class ApplicationController < ActionController::Base
       logger.debug "cookies.signed[:preference]=#{cookies.signed[:remember_me][2]}"
       logger.debug "cookies.signed[:remember_me]=#{cookies.signed[:remember_me]}"
       if(cookies.signed[:remember_me][2]==1)
-      user = User.authenticated_with_token(cookies.signed[:remember_me][0],cookies.signed[:remember_me][1])
-      if user.blank?
+      @user = User.authenticated_with_token(cookies.signed[:remember_me][0],cookies.signed[:remember_me][1])
+      if @user.blank?
        redirect_to root_path
       else
         session[:user_id]=@user.id

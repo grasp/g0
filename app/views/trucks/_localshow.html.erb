@@ -2,30 +2,19 @@
 <div id="truck_show">
 <table>
    <tr>
-
-    <th>发车日期</th>
-    <th>备注</th>
     <th>回程车</th>
-    <th>车辆联系</th>
-    
+    <th>车辆联系</th>    
   </tr>
   <tr>
 
 
-<td>
-  <%= @truck.send_date %>
-</td>
-
-<td>
-  <%= $habit_word[@truck.comments] %>
-</td>
 
 <td>
   <%= $truck_huicheng[@truck.huicheng] %>
 </td>
 
 <td>
-   司机 <%=@truck.driver_name%>, 电话<%=@truck.driver_phone%>，随车电话<%=@truck.car_phone%>
+ 业务电话<%=@stock_truck.bis_phone%>, 司机 <%=@truck.driver_name%>, 电话<%=@truck.driver_phone%>，随车电话<%=@truck.car_phone%>
 </td>
   </tr>
  </table>

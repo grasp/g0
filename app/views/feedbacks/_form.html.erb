@@ -1,0 +1,35 @@
+<%= form_for(@feedback) do |f| %>
+  <% if @feedback.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+
+      <ul>
+      <% @feedback.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class=" field">
+    <%= f.label :网站总体评价 %>
+    <%#= f.text_field :pingjia %>
+    <%= f.select(:pingjia,options_for_select([["很好","很好"],["一般","一般"],["差","差"]],@feedback.pingjia) ) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :不喜欢的地方 %>
+    <%= f.text_area :hate %>
+  </div>
+  <div class="field">
+    <%= f.label :需要新增加的功能 %>
+    <%= f.text_area :improve %>
+  </div>
+  <div class="field">
+    <%= f.label :喜欢的地方 %>
+    <%= f.text_area :satisfy %>
+  </div>
+  <div class="actions">
+    <%= f.submit("确定") %>
+  </div>
+<% end %>

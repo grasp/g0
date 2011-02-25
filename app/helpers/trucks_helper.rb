@@ -76,12 +76,12 @@ def get_search_truck(fcity_code,tcity_code)
           @trucks=Truck.where({:fcity_code =>minf,:tcity_code=>mint,:status=>"正在配货"}).
                                  sort(:updated_at.desc).all.paginate(:page=>params[:page]||1,:per_page=>20 )
       end
-    end
-    
+    end    
   end
- def expire_line_truck(from_city,to_city)   
-   lines=Array.new
-  if (from_city!="100000000000" && to_city!="100000000000")
+  
+  def cal_expire_city(from_city,to_city)   
+     lines=Array.new
+     if (from_city!="100000000000" && to_city!="100000000000")
     lines<<[from_city,to_city] #expire city to city 
     lines<<[from_city.slice(0,4)+"00000000",to_city] #expire region to city
     lines<<[from_city.slice(0,2)+"0000000000",to_city] #province to city
@@ -98,23 +98,28 @@ def get_search_truck(fcity_code,tcity_code)
    lines<<[from_city.slice(0,4)+"00000000",to_city.slice(0,4)+"00000000"] #expire region to region 
    lines<<[from_city.slice(0,2)+"0000000000",to_city.slice(0,2)+"0000000000"] #expire province to province 
    lines<<[from_city.slice(0,4)+"00000000",to_city.slice(0,2)+"0000000000"] #expire region to province 
-   lines<<[from_city.slice(0,2)+"0000000000",to_city.slice(0,4)+"00000000"] #expire province  to region 
-  
+   lines<<[from_city.slice(0,2)+"0000000000",to_city.slice(0,4)+"00000000"] #expire province  to region   
   
    all_lines=lines.uniq
+   
+    all_lines
+  end
+  
+    def iterate_expire_line(line,from_city,to_city)
+      line << cal_expire_city(from_city,to_city)
+      line=line.uniq
+      line
+    end
+    
+ def expire_one_line_truck(from_city,to_city)   
+   all_lines=cal_expire_city(from_city,to_city)   
   
    #rm folder
    all_lines.each do |line|
      FileUtils.rm_rf Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}"       
      Rails.logger.debug "expire "+Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}"
    end
-  else
-    #only expire first page, others only Cargos.count/ % 20 ==0 to expire
-     if Truck.count % 20 ==0
-        FileUtils.rm_rf Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}"   
-     else
-        FileUtils.rm_rf Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}/1.html"       
-     end
+
     end
  end
 

@@ -6,11 +6,9 @@ class CargosController < ApplicationController
   # GET /cargos.xml
   include CargosHelper
   before_filter:authorize, :except => [:search,:show]
-  caches_page :search,:show
-  #cache_sweeper :cargo_sweeper, :only => [:create, :destroy]
+ # caches_page :search,:show
   protect_from_forgery :except => [:tip,:login]
-  layout nil
-  
+  layout nil  
 
   #
   def public
@@ -30,8 +28,7 @@ class CargosController < ApplicationController
     end
   end
 
-  def search
-  
+  def search  
      @search=Search.new
     if params[:search].nil?      
       unless params[:from].blank?
@@ -57,9 +54,16 @@ class CargosController < ApplicationController
 
     #puts "@search.fcity_code=#{@search.fcity_code},@search.tcity_code=#{@search.tcity_code}";
     @line=@search.fcity_code+"#"+@search.tcity_code
-    @action_suffix="#{@line}#{params[:page]}"        
+  #  @action_suffix="#{@line}#{params[:page]}"        
     @search.save
     
+    respond_to do |format|
+    if params[:page]     
+      format.html 
+    else
+      format.html {render :layout=>"public"}
+    end
+    end
   end
 
 
@@ -128,8 +132,8 @@ class CargosController < ApplicationController
   # GET /cargos/1
   # GET /cargos/1.xml
   def show
-    @cargo = Cargo.find(params[:id])
-    @stock_cargo=StockCargo.find(@cargo.stock_cargo_id)
+    @cargo = Cargo.find_by_id(params[:id])
+    @stock_cargo=StockCargo.find(@cargo.stock_cargo_id) if @cargo.from_site=="local"
   #  @line_ad=LineAd.find({:line=>get_line(@cargo.fcity_code,@cargo.tcity_code)})
     
     if @line_ad.blank?

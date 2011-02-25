@@ -37,13 +37,14 @@
     <%= f.label :有无GPS %>
     <%= f.select(:truck_gps, options_for_select([["有","有"],["无","无"]],@stock_truck.truck_gps)) %>
   </div>
+
   <div class="field">
-    <%= f.label :车主姓名 %>
-    <%= f.text_field :owner_name %>
+    <%= f.label :业务员名字 %>
+    <%= f.text_field :bis_name %>
   </div>
   <div class="field">
-    <%= f.label :车主电话 %>
-    <%= f.text_field :owner_phone %>
+    <%= f.label :业务员电话(重要) %>
+    <%= f.text_field :bis_phone %>
   </div>
   <div class="field">
     <%= f.label :司机姓名 %>
@@ -54,13 +55,14 @@
     <%= f.text_field :driver_phone %>
   </div>
   <div class="field">
-    <%= f.label :业务员名字 %>
-    <%= f.text_field :bis_name %>
+    <%= f.label :车主姓名 %>
+    <%= f.text_field :owner_name %>
   </div>
   <div class="field">
-    <%= f.label :业务员电话 %>
-    <%= f.text_field :bis_phone %>
+    <%= f.label :车主电话 %>
+    <%= f.text_field :owner_phone %>
   </div>
+
   <div class="field">
     <%= f.label :车子品牌 %>
     <%= f.select(:truck_pinpai, options_for_select( $truck_pinpai_reverse.to_a,@stock_truck.truck_pinpai)) %>

@@ -137,9 +137,9 @@ class QuotesController < ApplicationController
     respond_to do |format|
       if @quote.save
         #update statistic
-        Cstatistic.collection.update({'_id' => @cargo.cstatistic_id},{'$inc' => {"total_baojia" => 1}}) 
+        Cargo.collection.update({'_id' => @quote.cargo_id},{'$inc' => {"total_baojia" => 1}})         
         #update  tstatistic
-        Tstatistic.collection.update({'_id' => @truck.tstatistic_id},{'$inc' => {"total_baojia" => 1}})  
+        Truck.collection.update({'_id' => @quote.truck_id},{'$inc' => {"total_baojia" => 1}})  
         flash[:notice]= "创建报价成功！"
         format.html { redirect_to(@quote, :notice => '创建报价成功.') }
         format.xml  { render :xml => @quote, :status => :created, :location => @quote }

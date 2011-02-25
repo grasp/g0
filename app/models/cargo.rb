@@ -49,6 +49,12 @@ class  Cargo
   # from site
      key :from_site,String
      
+    # statistic
+      key :total_baojia,Integer
+      key :total_xunjia,Integer
+      key:total_match,Integer
+      key :total_click,Integer
+     
      
       
      timestamps!

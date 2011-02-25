@@ -130,8 +130,8 @@ class InqueriesController < ApplicationController
          # before1= Tstatistic.where({'truck_id'=>@inquery.truck_id}).first.total_xunjia
         #  puts "更新询价统计cargo before=#{before},truck before=#{before1}"
 
-          Cstatistic.collection.update({'cargo_id' => @inquery.cargo_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true}) 
-          Tstatistic.collection.update({'truck_id'=>@inquery.truck_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true})
+          Cargo.collection.update({'_id' => @inquery.cargo_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true}) 
+          Truck.collection.update({'_id'=>@inquery.truck_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true})
 
           #  after= Cstatistic.where({'cargo_id' => @inquery.cargo_id}).first.total_xunjia
           #  after1=Tstatistic.where({'truck_id'=>@inquery.truck_id}).first.total_xunjia

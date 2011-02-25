@@ -20,8 +20,7 @@
  
     <% @cargos.each do |cargo|  %>
       <tr>
-       <%cstatistic=Cstatistic.find(cargo.cstatistic_id)%>
-        <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
+       <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
         <%= cargo.cate_name %></a> </td>
   
         <td><%= cargo.fcity_name %></td>
@@ -31,8 +30,8 @@
         <td><%= cargo.created_at.to_s.slice(5,11) %></td>
         <td><%= cargo.status %></td>
 
-        <td><a class="show_float" href="/cargos/<%=cargo.id%>/quotes/cargo"><%= cstatistic.total_baojia %>个 </a></td>
-        <td><a class="show_float " href="/cargos/<%=cargo.id%>/inqueries/cargo/"><%= cstatistic.total_xunjia %>个</a></td>
+        <td><a class="show_float" href="/cargos/<%=cargo.id%>/quotes/cargo"><%= cargo.total_baojia||0 %>个 </a></td>
+        <td><a class="show_float " href="/cargos/<%=cargo.id%>/inqueries/cargo/"><%= cargo.total_xunjia||0 %>个</a></td>
         <%if cargo.status=="成交"%>
          <td><a class="show_float " href="/cargos/chenjiao/<%=cargo.id%>"><%=cargo.status%></a></td>
         <%else%>

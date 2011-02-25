@@ -47,6 +47,11 @@ class Truck
 
   # add more le
      key :from_site,String
+  #statistic related
+     key :total_baojia,Integer
+     key :total_xunjia,Integer
+     key :total_match,Integer
+     key :total_click,Integer
    
        validate :check_unique
       

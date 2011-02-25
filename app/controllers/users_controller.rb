@@ -196,12 +196,12 @@ class UsersController < ApplicationController
     
     #authenticate with cookie
     if params[:remember_me]=="on" && @user
-      @user.update_attribute(:preference,1)
+      @user.update_attributes(:preference=>1)
       #need store user_info into coockie
       cookies.permanent.signed[:remember_me] = [@user.id, @user.salt,1]   
       
     elsif params[:remember_me]=="off" && @user
-       @user.update_attribute(:preference,0)
+       @user.update_attributes(:preference=>0)
        cookies.permanent.signed[:remember_me] = [@user.id, @user.salt,0]
     end
 
