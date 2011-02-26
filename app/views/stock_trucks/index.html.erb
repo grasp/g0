@@ -10,9 +10,8 @@
     <th>车主电话</th>
     <th>司机</th>
     <th>司机电话</th>
-    <th>已发布车源</th>
     <th>发布车源</th>
-    <th>更新</th>
+    <th>更新联系方式</th>
 
   </tr>
   <% @stock_trucks.each do |stock_truck| %>
@@ -26,7 +25,7 @@
       <td><%= stock_truck.owner_phone %></td>
       <td><%= stock_truck.driver_name %></td>
       <td><%= stock_truck.driver_phone %></td>
-      <td><a class="page_navi_link" href="/stock_trucks/<%=stock_truck.id%>/trucks/part"><%=stock_truck.truckcount || "0"%>条</a></td>
+     
       <td><a class="truck_fabu" href="/trucks/new/<%=stock_truck.id%>">发布车源</a></td>
       <td><a class="show_float" href="/stock_trucks/<%=stock_truck.id%>/edit">更新</a></td>
     </tr>

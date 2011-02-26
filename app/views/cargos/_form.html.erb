@@ -43,7 +43,7 @@
     <label>体积</label>
     <%= f.text_field :cargo_bulk %>(方)
     <label>有效天数</label>
-     <%= f.select(:send_date,options_for_select([["当天","0"],["一天","1"],["二天","2"]],@cargo.send_date) )%>
+     <%= f.select(:send_date,options_for_select([["一天","1"],["当天","0"],["二天","2"]],@cargo.send_date) )%>
      <label for="cargo_option">组货方式：</label>
      <%= f.select(:cargo_zuhuo,options_for_select($cargo_option_reverse.to_a,@cargo.cargo_zuhuo) )%>
      

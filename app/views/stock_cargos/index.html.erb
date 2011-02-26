@@ -10,7 +10,6 @@
     <th>货物大类</th>
      <th>总计发布</th>
      <th>状态</th>
-     <th>已发布货源</th>
      <th>发布货源</th>
 
 
@@ -26,8 +25,7 @@
       <td><%=h $cargo_big_category[stock_cargo.big_category] %></td>   
       <td><%=h stock_cargo.sent_weight %>吨/<%=h stock_cargo.sent_bulk %>方</td>
       <td><%=h stock_cargo.status%></td>     
-       <td><a class="page_navi_link" href="/stock_cargos/<%=stock_cargo.id.to_s%>/cargos/part/"><%=stock_cargo.cargocount ||"0"%>条货源</a></td>
-       <td><a class="cargo_fabu" href="/cargos/new/<%=stock_cargo.id.to_s%>">发布货源</a></td>
+      <td><a class="cargo_fabu" href="/cargos/new/<%=stock_cargo.id.to_s%>">发布货源</a></td>
     </tr>
   <% end %>
     <%else%>

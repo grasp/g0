@@ -19,7 +19,7 @@ class ScansController < ApplicationController
     #scan truck at first
     Truck.where(:status=>"正在配货").each do |truck|
      # puts "truck.created_at=#{truck.created_at || truck.updated_at},truck.send_date=#{truck.send_date}"
-      if compare_time_expired(truck.created_at ||truck.updated_at,truck.send_date || "1")==true
+      if compare_time_expired(truck,truck.created_at ||truck.updated_at,truck.send_date || "1")==true
         #only for first time 过期
         if truck.status=="正在配货"
         #first change truck status
@@ -30,7 +30,7 @@ class ScansController < ApplicationController
         Lstatistic.collection.update({'line'=>truck.line},
         {'$inc' => {"valid_truck" => -1,"expired_truck"=> 1}},{:upsert =>true})       
         #decrement valid truck for stock truck
-        StockTruck.collection.update({:truck_id=>truck.id},{'$inc' => {"valid_truck" => -1}}) 
+        StockTruck.collection.update({:_id=>truck.stock_truck_id},{'$inc' => {"valid_truck" => -1}}) 
         if truck.from_site=="local"
         User.collection.update({:_id=>truck.user_id},{'$inc' =>{:valid_truck=>-1}}) 
         end
@@ -42,9 +42,10 @@ class ScansController < ApplicationController
         #expire line
         start=Time.now
         begin
-          iterate_expire_line(truck_expire_line,truck.fcity_code,truck.tcity_code)
+          iterate_expire_line(truck_expire_line,truck.fcity_code,truck.tcity_code)          
         rescue
-          Rails.logger.info "exception for expire line truck#{truck.fcity_code} to #{truck.tcity_code}"
+       #   raise
+         # Rails.logger.info "exception #{$@}for expire line truck#{truck.fcity_code} to #{truck.tcity_code}"
         end
          end_time=Time.now
         Rails.logger.info "quick truck exprie time=#{end_time-start}sec"
@@ -60,15 +61,15 @@ class ScansController < ApplicationController
      Rails.logger.info "total truck exprie time=#{end_time-truck_scan_start}sec"
      
     #initialize the status if no any truck issued
-    StockTruck.all.each do |stock_truck|
-      if stock_truck.valid_truck==0
+    StockTruck.where.each do |stock_truck|
+      if stock_truck.valid_truck.blank? || stock_truck.valid_truck==0 
          StockTruck.collection.update({:_id=>stock_truck.id},{'$set' => {"status" => "车辆闲置"}})
       end
     end
     cargo_scan_start=Time.now
     Cargo.where(:status=>"正在配车").each do |cargo|
     #   puts "cargo.created_at=#{cargo.created_at},cargo.send_date=#{cargo.send_date}"
-      if compare_time_expired(cargo.created_at ||cargo.updated_at,cargo.send_date || "1")==true
+      if compare_time_expired(cargo,cargo.created_at ||cargo.updated_at,cargo.send_date || "1")==true
         if cargo.status=="正在配车"
           # first update cargo status
           cargo.update_attributes(:status=>"超时过期")
@@ -78,7 +79,7 @@ class ScansController < ApplicationController
          {'$inc' => {"valid_cargo" => -1,"expired_cargo"=> 1}},{:upsert =>true})
 
           #decrement valid cargo for stock cargo
-          StockCargo.collection.update({:cargo_id=>cargo.id},{'$inc' => {"valid_cargo" => -1}})
+          StockCargo.collection.update({:_id=>cargo.stock_cargo_id},{'$inc' => {"valid_cargo" => -1}})
         if cargo.from_site=="local"
          User.collection.update({:_id=>cargo.user_id},{'$inc' =>{:valid_cargo=>-1}}) 
         end
@@ -104,8 +105,8 @@ class ScansController < ApplicationController
      Rails.logger.info "total cargo exprie time=#{end_time-cargo_scan_start}sec"
     
   #initialize all stockcargo
-   StockCargo.all.each do |stock_cargo|
-      if stock_cargo.valid_cargo==0
+   StockCargo.where.each do |stock_cargo|
+      if stock_cargo.valid_cargo .blank?||stock_cargo.valid_cargo==0
          StockCargo.collection.update({:_id=>stock_cargo.id},{'$set' => {"status" => "货物闲置"}})
       end
     end
@@ -235,7 +236,7 @@ class ScansController < ApplicationController
     end
    end
 
-  #for grasp line
+  #only for grasp line, no 
   def truckexpire
    @trucklines=Array.new
    @grasps=GraspRecord.where({:truckstatus=>"notexpired"})

@@ -6,6 +6,7 @@ class CargosController < ApplicationController
   # GET /cargos.xml
   include CargosHelper
   before_filter:authorize, :except => [:search,:show]
+  before_filter:authorize_public, :only => [:search]
  # caches_page :search,:show
   protect_from_forgery :except => [:tip,:login]
   layout nil  
@@ -211,12 +212,12 @@ class CargosController < ApplicationController
     respond_to do |format|
       if @cargo.save
         flash[:notice] = '创建货源成功！'
-        @cstatistic=Cstatistic.create(:total_baojia=>0,:total_xunjia=>0,:total_match=>0,
+        @cargo.update_attributes(:total_baojia=>0,:total_xunjia=>0,:total_match=>0,
           :total_click=>0,:user_id=>session[:user_id],:cargo_id=>@cargo.id);
         #update statistic for cargo
         #update need use mongo way to avoid use model method
         expire_line_cargo(@cargo.fcity_code,@cargo.tcity_code)
-        Cargo.collection.update({'_id' => @cargo.id},{'$set' =>{:cstatistic_id=>@cstatistic.id}})
+       #  Cargo.collection.update({'_id' => @cargo.id},{'$set' =>{:cstatistic_id=>@cstatistic.id}})
         Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_cargo" =>1,"cargopeiche"=>1},'$set' => {"status"=>"正在配车"}},{:upsert =>true})
         Lstatistic.collection.update({'line'=>@cargo.line},{'$inc' => {"total_cargo" =>1,"cargopeiche"=>1},'$set' =>{"status"=>"正在配车"}},{:upsert =>true})
         #$inc and $set could not be used together !!!!!!!???

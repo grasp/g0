@@ -4,7 +4,6 @@ module TrucksHelper
   def get_truck_info_from_params(params)
 
   params[:truck][:user_id]=session[:user_id]
-
   begin
   @truck = Truck.create!(params[:truck])
   rescue
@@ -24,7 +23,7 @@ end
     end
 
   end
-  
+  # This is for view cache purpose
 def get_search_truck(fcity_code,tcity_code)    
  if fcity_code=="100000000000" && tcity_code=="100000000000" then   
      @trucks=Truck.where(:status=>"正在配货").sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
@@ -81,7 +80,7 @@ def get_search_truck(fcity_code,tcity_code)
   
   def cal_expire_city(from_city,to_city)   
      lines=Array.new
-     if (from_city!="100000000000" && to_city!="100000000000")
+    if (from_city!="100000000000" && to_city!="100000000000")
     lines<<[from_city,to_city] #expire city to city 
     lines<<[from_city.slice(0,4)+"00000000",to_city] #expire region to city
     lines<<[from_city.slice(0,2)+"0000000000",to_city] #province to city
@@ -106,7 +105,7 @@ def get_search_truck(fcity_code,tcity_code)
   end
   
     def iterate_expire_line(line,from_city,to_city)
-      line << cal_expire_city(from_city,to_city)
+      line =line+cal_expire_city(from_city,to_city)
       line=line.uniq
       line
     end

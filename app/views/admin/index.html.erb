@@ -11,4 +11,9 @@
    <li> 车源数量:<%=Truck.count%></li> 
    <li> 正在配货:<%=Truck.where(:status=>"正在配货").count%></li> 
  </ul>
+
+<ul> 
+   <li> 过期货源:<%=ExpiredCargo.count%></li> 
+   <li> 过期车源:<%=ExpiredTruck.count%></li> 
+ </ul>
 </div>
