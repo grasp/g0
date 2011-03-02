@@ -40,10 +40,11 @@
         <%end%>
       </tr>
     <% end %>
+      </table>
       <%else%>
-       <tr>没有对应货源,或者你还没有发布任何货源.</tr>
+       <p>没有对应货源,或者你还没有发布任何货源.</p>
   <% end %>
 
-</table>
+
 
 <%= will_paginate @cargos ,:class=>"page_navi_link"%>

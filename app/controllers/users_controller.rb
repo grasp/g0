@@ -58,7 +58,8 @@ class UsersController < ApplicationController
         # record the session for authorize
          session[:user_id]=@user.id
          @ustatistic=Ustatistic.create(:total_stock_cargo=>0,:total_stock_truck=>0,:total_truck=>0,
-          :total_cargo=>0,:total_line=>0, :total_driver=>0,:total_custermer=>0,:user_id=>@user.id);
+          :total_cargo=>0,:total_line=>0, :total_driver=>0,:total_custermer=>0,:valid_cargo=>0,
+          :valid_truck=>0,:user_id=>@user.id);
         
         #update statistic for user
         @user.update_attributes({:ustatistic_id=>@ustatistic.id})

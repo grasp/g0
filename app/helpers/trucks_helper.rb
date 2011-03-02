@@ -103,7 +103,7 @@ def get_search_truck(fcity_code,tcity_code)
    
     all_lines
   end
-  
+ end
     def iterate_expire_line(line,from_city,to_city)
       line =line+cal_expire_city(from_city,to_city)
       line=line.uniq
@@ -119,8 +119,8 @@ def get_search_truck(fcity_code,tcity_code)
      Rails.logger.debug "expire "+Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}"
    end
 
-    end
- end
+  end
+
 
 
 end

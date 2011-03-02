@@ -68,7 +68,11 @@ div.stockcargo_new .field label{
 .show_form input,.show_form select { /*width of text boxes. IE6 does not understand this attribute*/
   margin-left: 10px;
   /* width:80%;*/
-  height:20px;
+  height:30px;
+}
+
+.stock_truck_new field select {
+      height:30px;
 }
 
 #login #email,#login #password{
@@ -80,17 +84,12 @@ div.stockcargo_new .field input{
 }
 
 
-.show_form select { /*width of text boxes. IE6 does not understand this attribute*/
-  /*margin-left: 10px;*/
- /* width:80%;*/
-} 
-
-
 .show_form .login_button {
      margin-left: 30%;
 }
 div.stock_cargo_new .field select{
      width:50%;
+    
 }
  
 /*.threepxfix class below: 
@@ -128,12 +127,15 @@ to account for 3 pixel bug: http://www.positioniseverything.net/explorer/threepx
     background-color:#D4E4FF;
     border: 1px solid;
     border-color:blue;
-    position:absolute;
+   position:absolute;
     z-index: 100;
+     margin-right: -3px;
 }
 
 #float_load {
-
+ display: inline;
+ margin-right: -3px;
+ 
 }
 
 #float_show2 {

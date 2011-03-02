@@ -28,14 +28,15 @@
       <td><a class="cargo_fabu" href="/cargos/new/<%=stock_cargo.id.to_s%>">发布货源</a></td>
     </tr>
   <% end %>
+    </table>
     <%else%>
-    <tr>请先添加货物， 然后发布货源<tr>
+    <p>请先添加货物， 然后发布货源</p>
     <% end %>
-</table>
+
 <%= will_paginate @trucks ,:class=>"page_navi_link"%>
 <div class="caozuo_area" ></div>
 
-<div class="page_navi">
+<div class="bottom_link">
   <a class="show_float"  href="/stock_cargos/new">添加新的货物</a>
 </div>
 

@@ -56,35 +56,92 @@ div.float_show2{
 
 div.province{
   /*float:left;*/
-    display:block;
+    display:inline-block;
+    width:auto;
+    margin-left: 0px;
 }
+
+div.province ul {
+     width:100%;
+      float: left;
+     display: inline;
+     margin-left: 0px;
+
+}
+
+div.province ul li {
+     width:100%;
+     float: left;
+     display: inline;
+     list-style-type:none;
+     margin-left: 0px;
+     
+}
+
+/* for IE use float and display*/
+.city_province{
+   /* margin-left: 5px;*/
+    font-size: larger;
+    float:left;
+    display: inline;
+    margin-left: 3px;
+
+ }
 div.region{
      /*float:left;*/
-    display:block;   
+   /* display:block;   */
+    margin-left: 0px;
+}
 
+div.region ul{
+     float: left;
+     list-style-type:none;
+     margin-left: 0px;
+     width: 100%;
 }
 div.region ul li {
     margin-top: 10px;
-   /* width: 700px;*/
+    width: 100%;
+    margin-left: 0px;
+    list-style-type:none;   
+}
+
+.city_region{
+  font-weight: bold;
+  float:left;
+ /* display: inline-block;
+  margin-left: 1px;*/
+}
+.city {
+     /* float:left;
+      margin-left: 1px;*/
+      display: inline-block;
+     
 }
 
 .line{
     background-color: rgb(213,214,255);
-    padding-top:15px;
-    padding-bottom:15px;
+/*    padding-top:15px;
+    padding-bottom:15px;*/
+   float:left;
+
 }
-.city_province{
-    margin-left: 5px;
-    font-size: larger;
+
+#from_data_load ,#to_data_load,.line_from_label,.line_to_label{
+    float:left;
+    display: inline;
+}
+.truck_area2
+{
+       float:left;
 }
 .selected_province,.selected_region,.selected_city{
     background-color:#ffcc00;
     font-weight: bold;
     font-size: larger;
+
 }
 
-.city_region{
-  font-weight: bold;
-}
+
 
 

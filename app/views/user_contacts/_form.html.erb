@@ -17,13 +17,8 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :移动电话 %>
+    <%= f.label :移动电话(*) %>
     <%= f.text_field :mphone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :QQ %>
-    <%= f.text_field :QQ %>
   </div>
 
   <div class="field">
@@ -32,6 +27,11 @@
      --
      <input  style="width:150px;" id="user_contact_fix_phone" name="usercontact[fixphone]" type="text" value=<%=@user_contact.fixphone%> > </input>
      <%#= f.text_field :fix_phone %>
+  </div>
+
+  <div class="field">
+    <%= f.label :QQ %>
+    <%= f.text_field :QQ %>
   </div>
 
  <%= f.hidden_field :email %>

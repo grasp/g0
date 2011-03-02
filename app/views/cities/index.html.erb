@@ -1,43 +1,44 @@
 
 <%#coding:utf-8%>
- <% #=cache(:controller=>"cities",:action=>"index", :layout=>nil,:action_suffix =>"city#{params[:dir]}#{@selected_city_code}") do %>
+ 
 <%get_city_array(@code)%>
-<div class="city_selector" style="width:800px;">
+<div class="city_selector" style="width:800px;margin:0px;">
 <div>
 <!-- <a class="list_close" style="margin-top: 5px;margin-left: 2px; display: inline;" href="">关闭</a>-->
-  <%if params[:dir]=="from"%>
-<h3 style="display: inline;">出发城市:</h3>
+
+<%if params[:dir]=="from"%>
+<p style="display: inline"> 出发城市:<b id="selected_city" > <%=@selected_city_name%></b></p>
 <%end%>
 
 <%if params[:dir]=="to"%>
-<h3 style="display: inline;">到达城市:</h3>
+<p style="display: inline;">到达城市:<b id="selected_city" ><%=@selected_city_name%></b></p>
 <%end%>
-
-<p id="selected_city" style="display: inline;"  ><%=@selected_city_name%></p>
 
 <input id="selected_city_name" name="selected_city_name" value="<%=@selected_city_name%>" type="hidden"> </input>
 <input id="selected_city_code" name="selected_city_code" value="<%=@selected_city_code%>" type="hidden"> </input>
 </div>
 
-<div class="province" >
-<ul style="margin-top: 10px">省份:  
+<div class="province" style="margin-left: 0px;" >
+<ul style="margin-top: 10px">
   <%$raw_province_array.each do |one_row|%>
-  <li>
+ <li>
     <%one_row.each do |city_key|%>
+ 
     <%if city_key.to_s==@province_code%>
-     <a class="selected_province city_province" href=<%="/cities/#{params[:dir]}/#{city_key}"%>><%=$province_region[city_key.to_s]%></a>
+     <a class="selected_province city_province"  href=<%="/cities/#{params[:dir]}/#{city_key}"%>><%=$province_region[city_key.to_s]%></a>
     <%else%>
-    <a class ="city_province" href=<%="/cities/#{params[:dir]}/#{city_key}"%>><%=$province_region[city_key.to_s]%></a>
+     <a class ="city_province"  href=<%="/cities/#{params[:dir]}/#{city_key}"%>><%=$province_region[city_key.to_s]%></a>
      <%end%>
+ 
     <%end%>
   </li>
   <%end%>
+ </ul>
 
-</ul>
 </div>
   <hr>
-<div class="region">
-<ul style="margin-top: 10px">地区:
+<div class="region" style="margin-left: 0px;">
+<ul style="margin-top: 10px">
     <%@region.each do |region_code,region|%>
       <li>
          <%if region_code==@region_code%>
@@ -47,10 +48,10 @@
         <%end%>
        <%region.each do |city_code,city_name|%>
         <%if city_code==@city_code%>
-         <a class="selected_city" href=<%="/cities/#{params[:dir]}/#{city_code}"%>><%=city_name%></a>
+         <a class="selected_city city" href=<%="/cities/#{params[:dir]}/#{city_code}"%>><%=city_name%></a>
         <%else%>
-         <%= link_to city_name, "/cities/#{params[:dir]}/#{city_code}" %>
-        <%end%>
+          <a class="city" href=<%="/cities/#{params[:dir]}/#{city_code}"%>><%=city_name%></a>
+          <%end%>
        <%end%>
       </li>
     <%end%>

@@ -199,16 +199,15 @@ class TrucksController < ApplicationController
     respond_to do |format|
       if @truck.save
         flash[:notice] = '车源创建成功'
-        @tstatistic=Tstatistic.create(:total_baojia=>0,:total_xunjia=>0,:total_match=>0,
-          :total_click=>0,:user_id=>session[:user_id],:truck_id=>@truck.id);
-        #update statistic for truck
-        # to avoid use @truck.update to avoid model validation
-        Truck.collection.update({'_id' => @truck.id},{'$set' =>{:tstatistic_id=>@tstatistic.id}})              
+         #update statistic for truck
+         Truck.collection.update({'_id' => @truck.id},{'$set' =>{:total_baojia=>0,:total_xunjia=>0,:total_match=>0,
+          :total_click=>0}});     
+               
         Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
         Lstatistic.collection.update({'line'=>@truck.line},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
         StockTruck.collection.update({'_id' => @truck.stock_truck_id},{'$inc' => {"valid_truck" => 1,"total_truck"=>1},'$set' => {"status"=>"正在配货"}})
 
-        expire_line_truck(@truck.fcity_code,@truck.tcity_code)
+       expire_one_line_truck(@truck.fcity_code,@truck.tcity_code)
         
         format.html { redirect_to(@truck)}
         format.xml  { render :xml => @truck, :status => :created, :location => @truck }
