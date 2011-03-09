@@ -107,7 +107,7 @@ function city_load(){
           if ($("#search").length >0)
           {
             var action=$("#search").attr("href")
-            new_action=action.slice(0,15)+code+action.slice(27,42)//trucks and cargos have same length, luck
+           new_action=action.replace(/search\/\d+/,"search/"+code)
             $("#search").attr("href",new_action)
           }
           else
@@ -125,8 +125,11 @@ function city_load(){
             if ($("#search").length >0)
             {
             var action2=$("#search").attr("href");
-            new_action=action2.slice(0,28)+code+"/1"//trucks and cargos have same length, luck
-            $("#search").attr("href",new_action) 
+            
+            lastindex=action2.toString().lastIndexOf('/')
+            lastcode =action2.toString().substring(lastindex+1);//fro recover the last number
+            new_action=action2.replace(/\/\d+\/\d$/,"/"+code+"/"+lastcode)
+           $("#search").attr("href",new_action)     
             }
             else
             {

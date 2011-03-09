@@ -29,8 +29,10 @@ class  Cargo
       key :tcity_code,String
       
       # for contact
-      key :user_id,ObjectId
+      key :user_id,ObjectId        
       key :company_id,ObjectId
+
+      
       key :stock_cargo_id,ObjectId
       key :user_contact_id,ObjectId
 
@@ -54,6 +56,11 @@ class  Cargo
       key :total_xunjia,Integer
       key:total_match,Integer
       key :total_click,Integer
+      
+      key :cj_truck_id,ObjectId
+      key :cj_quote_id,ObjectId
+      key :cj_user_id,ObjectId
+      key :cj_company_id,ObjectId 
      
      
       

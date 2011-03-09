@@ -5,7 +5,6 @@ class CompaniesController < ApplicationController
   before_filter:authorize
   protect_from_forgery :except => [:tip,:login]
   include CompaniesHelper
-  # layout "public"
   layout  "users",:except => [:show,:index,:search,:showf]
 
   def index
@@ -131,8 +130,8 @@ class CompaniesController < ApplicationController
         #@user=User.find_by_id(params[:company][:user_id])
         @user=User.find_by_id(session[:user_id])
         raise if @user.blank?
-        @user.update_attributes!({:company_id=>@company.id})
-        
+       # @user.update_attributes!({:company_id=>@company.id})
+        User.collection.update({:_id=>@user.id},{'$set'=>{:company_id=>@company.id}})        
         flash[:notice] = '公司创建成功，恭喜你注册完成了'
        # session[:user_id]=@user.id
         format.html {  redirect_to root_path}
@@ -155,8 +154,9 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       if @company.update_attributes(params[:company])
         flash[:notice] = "公司信息成功更新"
-        format.html { redirect_to(@company) }
-        format.xml  { head :ok }
+      #  format.html { redirect_to(@company) }
+      format.html { render(:layout=>'public',:action=>'show') }
+      format.xml  { head :ok }
       else
         flash[:notice] << " 公司信息更新失败"
         format.html { render :action => "edit" }
@@ -173,7 +173,7 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
 
-      format.html { render :action=>"index"}
+      format.html { render :layout=>'public',:action=>"index"}
         
     end
   end

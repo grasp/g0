@@ -79,16 +79,18 @@ class InqueriesController < ApplicationController
     @mycargo=Hash.new
 
     if params[:cargo_id].nil?
-      @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"配车")
+      @cargos = Cargo.where(:user_id =>session[:user_id].to_s,:status =>"正在配车")
 
       @cargos.each do |cargo|
         @mycargo[cargo.cate_name+"("+cargo.fcity_name+"<=>"+cargo.tcity_name+")"]=cargo.id
       end
+     # logger.info "params cargo id =nil count=#{@mycargo.size}"
     else
       @cargo=Cargo.find(params[:cargo_id])
-      @mycargo[@cargo.cate_name+"("+@cargo.fcity_name+"<=>"+@cargo.tcity_name+")"]=@cargo.id
+      @mycargo[@cargo.cate_name+"("+@cargo.fcity_name+"<=>"+@cargo.tcity_name+")"]=@cargo.id  
+     # logger.info "params cargo id #{params[:cargo_id]}"
     end
-
+   # logger.info "my cargo =#{@mycargo.to_a}"
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @inquery }

@@ -1,70 +1,69 @@
-<div class="companyshow">
 <div id="notice"><%= notice %></div>
-
-
+<div  class="companyshow">
+  <h3>我的公司信息</h3>
 <div>
-  <b>公司名称:</b>
+  <label>公司名称:</label>
   <%= @company.name %>
 </div>
 
 <div class="companyabout">
-  <b>公司介绍:</b>
+  <label>公司介绍:</label>
   <p> <%= @company.about %></p>
 </div>
 
 <div>
-  <b>公司联系人:</b>
+  <label>公司联系人:</label>
   <%= @company.contact_name %>
 </div>
 
 <div>
-  <b>所在城市:</b>
+  <label>所在城市:</label>
   <%= @company.city_name %>
 </div>
 
 
 <div>
-  <b>公司地址:</b>
+  <label>公司地址:</label>
   <%= @company.address %>
 </div>
 
 <div>
-  <b>固定电话:</b>
+  <label>固定电话:</label>
   <%= @company.fix_phone %>
 </div>
 
 <div>
-  <b>移动电话:</b>
+  <label>移动电话:</label>
   <%= @company.mobile_phone %>
 </div>
 
 <div>
-  <b>公司邮件:</b>
+  <label>公司邮件:</label>
   <%= @company.email %>
 </div>
 
 <div>
-  <b>自有车辆:</b>
+  <label>自有车辆:</label>
   <%= @company.self_che %>
 </div>
 
 <div>
-  <b>挂靠车辆:</b>
+  <label>挂靠车辆:</label>
   <%= @company.signed_che %>
 </div>
 
 <div>
-  <b>员工数量:</b>
+  <label>员工数量:</label>
   <%= @company.num_employ %>
 </div>
 
 
 
 <div >
-  <b>该信息由
+  <label>该信息由
 <%= User.find(@company.user_id).name %>
 
- 创建</b>
+ 创建</label>
 </div>
 
 </div>

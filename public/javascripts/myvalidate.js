@@ -369,8 +369,8 @@ function login_validation(){
 
 function company_new_validation()
 {
-    $("#company_new").validate(
-    {
+    $("#company_new,#company_edit").validate(
+    {         
 
         rules: {
             "company[name]": {
@@ -421,8 +421,6 @@ function company_new_validation()
                 minlength:3,
                 maxlength:4
             }
-
-
 
 
         },
@@ -686,7 +684,7 @@ function cargo_new_validation(){
     {
         submitHandler: function(form) {
                   $('#cargo_new').ajaxSubmit({
-      target: '#float_load',
+      // target: '#show',
        success: function() {
        $("#show").load($("a.navi_cargo").attr("href"));
        $('#navi').load("/public/navibar");
@@ -727,7 +725,7 @@ function truck_new_validation(){
     {
         submitHandler: function(form) {
          $('#truck_new').ajaxSubmit({
-         target: '#float_load',
+       //  target: '#float_load',
 
        success: function() {
        $("#show").load($("a.navi_truck").attr("href"));

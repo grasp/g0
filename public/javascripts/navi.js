@@ -31,10 +31,14 @@ $('a.navi_link').live("click",function(){
        return false;
     });
 
-$(".page_navi_link,div.page_navi_link a").live("click",function(){
+$(".page_navi_link,div.page_navi_link a,a.link_show").live("click",function(){
     $('#show').load(this.href,function(){
 
     stock_truck_new_validation();
+    truck_new_validation();
+    cargo_new_validation();
+     request_chenjiao();
+     confirm_chenjiao();
  });
      return false;
     });

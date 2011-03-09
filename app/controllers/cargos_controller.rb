@@ -67,10 +67,16 @@ class CargosController < ApplicationController
     end
   end
 
+  def quoteinquery
+    @cargo=Cargo.find_by_id(params[:cargo_id])
 
+    @xunjia=Inquery.where(:cargo_id => params[:cargo_id])
+    @baojia=Quote.where(:cargo_id => params[:cargo_id])
+  end
+  
   def index
     unless params[:stock_cargo_id].nil?
-       @cargos=Cargo.where({user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos=Cargo.where({:user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     else
     if params[:status]
         @cargos = Cargo.where(:user_id =>session[:user_id],:status =>params[:status]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
@@ -78,7 +84,7 @@ class CargosController < ApplicationController
        #@cargos = Cargo.where("user_id = ?",session[:user_id]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>20)
        @cargos = Cargo.where(:user_id =>session[:user_id]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     end
-    end    
+   end    
     
     
     respond_to do |format|
@@ -216,16 +222,21 @@ class CargosController < ApplicationController
           :total_click=>0,:user_id=>session[:user_id],:cargo_id=>@cargo.id);
         #update statistic for cargo
         #update need use mongo way to avoid use model method
-        expire_line_cargo(@cargo.fcity_code,@cargo.tcity_code)
-       #  Cargo.collection.update({'_id' => @cargo.id},{'$set' =>{:cstatistic_id=>@cstatistic.id}})
-        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_cargo" =>1,"cargopeiche"=>1},'$set' => {"status"=>"正在配车"}},{:upsert =>true})
-        Lstatistic.collection.update({'line'=>@cargo.line},{'$inc' => {"total_cargo" =>1,"cargopeiche"=>1},'$set' =>{"status"=>"正在配车"}},{:upsert =>true})
+        #be carefull when use foreign object_id,otherwise ,will not update !!!!
+        Ustatistic.collection.update({:user_id => BSON::ObjectId(session[:user_id].to_s)}, {'$set' => {:status=>"正在配车"}})
+        Ustatistic.collection.update({:user_id => BSON::ObjectId(session[:user_id].to_s)},{'$inc' => {:total_cargo =>1,:valid_cargo=>1}})
+        
+        Lstatistic.collection.update({:line=>@cargo.line},{'$set' =>{:status=>"正在配车"}});
+        Lstatistic.collection.update({:line=>@cargo.line},{'$inc' => {:total_cargo =>1,:valid_cargo=>1}})
+        
         #$inc and $set could not be used together !!!!!!!???
         # $db[:stock_cargos].update({'_id' => @cargo.stock_cargo_id},{'$inc' =>{"valid_cargo" =>1},'$set' =>{"status"=>"正在配车"}})
-        StockCargo.collection.update({'_id' => @cargo.stock_cargo_id},{'$set' =>{"status"=>"正在配车"}})
-        StockCargo.collection.update({'_id' => @cargo.stock_cargo_id},{'$inc' =>{"valid_cargo"=>1,"total_cargo"=>1}},{:upsert =>true})
-        format.html { redirect_to(@cargo)}
-        format.xml  { render :xml => @cargo, :status => :created, :location => @cargo }
+        StockCargo.collection.update({:_id => @cargo.stock_cargo_id},{'$set' =>{:status=>"正在配车"}})
+        StockCargo.collection.update({:_id => @cargo.stock_cargo_id},
+         {'$inc' =>{:valid_cargo=>1,:total_cargo=>1,:sent_weight=>@cargo.cargo_weight.to_f,:sent_bulk=>@cargo.cargo_bulk.to_f}},{:upsert =>true})
+      
+        format.html { redirect_to(:controller=>"cargos",:action => "index",:stock_cargo_id=>@cargo.stock_cargo_id)}
+      #  format.xml  { render :xml => @cargo, :status => :created, :location => @cargo }
       else
         flash[:notice] = '创建货源失败'
         @stock_cargo=StockCargo.find_by_id(@cargo.stock_cargo_id)

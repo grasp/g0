@@ -100,7 +100,7 @@ class UserContactsController < ApplicationController
     
     
     #if already exsit , do nothing
-   if UserContact.find_by_user_id(session[:user_id]).nil?
+   if UserContact.find_by_user_id(session[:user_id]).blank?
     @user=User.find(session[:user_id])
     @user_contact = UserContact.new
     @user_contact.email=@user.email
@@ -132,9 +132,11 @@ class UserContactsController < ApplicationController
   def create
      params[:usercontact][:user_id]=session[:user_id]
      @user_contact = UserContact.new(params[:usercontact])
+     
     respond_to do |format|
       if @user_contact.save
         flash[:notice] = '成功创建了联系人,还需要创建你的公司'
+        User.collection.update({:_id=>"session[:user_id]"},{'$set'=>{:user_contact_id=>@user_contact.id}})
          format.html { redirect_to(:controller=>"companies",:action=>"new")}
       else
         flash[:notice] = '创建联系人失败'
@@ -148,18 +150,18 @@ class UserContactsController < ApplicationController
   # PUT /contact_people/1.xml
   def update
     @user_contact=UserContact.find(params[:id])
-    @user_contact = update_contact_from_param(params)
+  #  @user_contact = update_contact_from_param(params)
     #update for myself
-    if @user_contact.user_id==session[:user_id]
-      @user=User.find_by_id(@user_contact.user_id)
-      @user.update_attribute(:name,@user_contact.name)
-      @user.update_attribute(:contact_id,@user_contact.id)
-    end
+   # if @user_contact.user_id==session[:user_id]
+    #  @user=User.find_by_id(@user_contact.user_id)
+    #  @user.update_attribute(:name,@user_contact.name)
+   #   @user.update_attribute(:contact_id,@user_contact.id)
+  #  end
 
     respond_to do |format|
-      if @user_contact
+      if @user_contact.update_attributes(params[:usercontact])
         flash[:notice] ="成功更新了联系人#{@user_contact.name}"
-        format.html { render :action => "show"  }
+        format.html { render :layout=>'public',:action => "show"  }
         format.xml  { head :ok }
       else
          flash[:notice] ="更新联系人失败"

@@ -52,7 +52,7 @@
           <td><%= truck.status %></td>
           <td>
              <%unless session[:user_id].nil?%>
-             <%if truck.user_id==session[:user_id]%>
+             <%if truck.user_id.to_s==session[:user_id].to_s%>
             车主
             <%elsif truck.from_site=="local"%>
               <a class="baojia" href="/trucks/<%=truck.id%>/inqueries/new">询价</a>

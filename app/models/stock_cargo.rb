@@ -16,19 +16,18 @@ class StockCargo
       #expired/invalid/normal
       key :stock_status,String
       
-      #weight and buld
+      #weight and bulk
       key :ku_weight,String
-      key :ku_bulk,String
-     
+      key :ku_bulk,String    
       
-      key :sent_weight,String
-      key :sent_bulk,String
+      key :sent_weight,Float
+      key :sent_bulk,Float
       
       #define for search
       key :cangku_id,ObjectId
       key :user_id,ObjectId
-      key  :company_id ,ObjectId 
-      key  :scstatistic_id,ObjectId
+      key :company_id ,ObjectId 
+      key :scstatistic_id,ObjectId
       
       #Statistic
       key :valid_cargo,Integer

@@ -33,6 +33,10 @@ class Truck
      # external search
       key  :company_id,ObjectId
       key  :user_id,ObjectId
+      
+      key :user_name,String 
+      key :company_name,String
+      
       key  :stock_truck_id,ObjectId
       key  :user_contact_id,ObjectId
        
@@ -53,12 +57,18 @@ class Truck
      key :total_match,Integer
      key :total_click,Integer
    
-       validate :check_unique
+   #chenjiao record
+   
+      key :cj_cargo_id,ObjectId
+      key :cj_quote_id,ObjectId
+      key :cj_user_id,ObjectId
+      key :cj_company_id,ObjectId 
+      validate :check_unique
       
      timestamps!
 
    def check_unique
-    repeated=Truck.where(:paizhao=>self.paizhao,:line=>self.line,:user_id=>self.user_id,:status=>"配货")
+    repeated=Truck.where(:paizhao=>self.paizhao,:line=>self.line,:user_id=>self.user_id,:status=>"正在配货")
     puts "repeated.size=#{repeated.size}"
     unless repeated.size==0
       errors.add_to_base("不能重复发布车源信息")

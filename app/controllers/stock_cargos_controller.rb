@@ -66,6 +66,8 @@ class StockCargosController < ApplicationController
    params[:stockcargo][:valid_cargo]=0
    params[:stockcargo][:total_cargo]=0
    params[:stockcargo][:expired_cargo]=0
+   params[:stockcargo][:sent_weight]=0
+   params[:stockcargo][:sent_bulk]=0
     @stock_cargo = StockCargo.new(params[:stockcargo])    
     respond_to do |format|
       if @stock_cargo.save

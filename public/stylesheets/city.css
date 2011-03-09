@@ -128,6 +128,7 @@ div.region ul li {
 }
 
 #from_data_load ,#to_data_load,.line_from_label,.line_to_label{
+    padding-left: 15px;
     float:left;
     display: inline;
 }

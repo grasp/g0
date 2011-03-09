@@ -5,7 +5,7 @@
 
 function request_chenjiao(){
     $("a.request_chenjiao").live("click",function(){
-        var answer=confirm("注意:该条货源将改为已成交状态,成交的货源和车源不能再接收新报价，请确保你已经联系并核实过该条车源,对方同意成交后，再确认请点击OK"); 
+        var answer=confirm("注意:该条货源将改为已成交状态,成交的货源和车源不能再接收新报价，请确保你已经联系并核实过该条车源,对方同意成交后再点击OK .确认请点击OK,取消请点Cancel"); 
         if(answer)
          { 
             $('#show').load(this.href); 
@@ -13,7 +13,6 @@ function request_chenjiao(){
             $('#float_show').css("display","none");
             $('tr').css("background-color","white");             
          }
-    
             if($.browser.msie) {
             event.returnValue = false;
             event.preventDefault();
@@ -34,7 +33,7 @@ function confirm_chenjiao(){
               $('#float_show').css("display","none");              
          }
     
-              if($.browser.msie) {
+            if($.browser.msie) {
             event.returnValue = false;
             event.preventDefault();
             return false;
@@ -62,8 +61,6 @@ function float_load_layer1(){
            inquery_new_validation();
            quote_new_validation();
            stock_truck_update_validation();
-           request_chenjiao();
-           confirm_chenjiao();
        });  
 
        css_class= $(this).attr("class");  

@@ -208,3 +208,11 @@ div.feedback_form{
 #stocktruck_edit {
    
 }
+div.public_view {
+    margin-top:30px;
+    margin-bottom: 20px;
+}
+
+.field2 select{
+    height:25px;
+}

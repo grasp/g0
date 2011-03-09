@@ -15,7 +15,9 @@ gem 'will_paginate',:git => 'http://github.com/mislav/will_paginate.git',:branch
 gem 'thin'
 #gem 'unicorn'
 gem "mongo_mapper"
-gem 'bson_ext'
+#gem 'bson_ext'
+#gem "mongoid", "2.0.0.rc.6"
+gem "bson_ext", "~> 1.2"
 gem 'memcache-client'
 #gem 'dalli'
 

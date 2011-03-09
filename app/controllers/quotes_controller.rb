@@ -170,21 +170,42 @@ class QuotesController < ApplicationController
   #only for owner of cargo
   def request_chenjiao
     @quote = Quote.find(params[:id])
+    if @quote.blank?
+    @quote=Inquery.find(params[:id])
+    end
     
+    @cargo=Cargo.find_by_id(@quote.cargo_id)
+    @truck=Truck.find_by_id(@quote.truck_id)
+    
+    #Cargo.where(:status=>"邀请成交").each {|c| c.status="正在成交";c.save}
+    #Truck.where(:status=>"邀请成交").each {|c| c.status="正在成交";c.save}
+    
+    
+    #if false
    unless @quote.blank?
     #update truck status
-    Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"邀请成交"}})
-    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"邀请成交"}})    
-    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"邀请成交"}}) 
-   else
-    @quote=Inquery.find(params[:id])
-     Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"邀请成交"}})
-     Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"邀请成交"}})
-     Inquery.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"邀请成交"}})
+    
+    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"正在成交"}})    
+    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"正在成交"}}) 
+    Ustatistic.collection.update({'user_id'=>@quote.cargo_user_id},{'$inc'=>{:valid_cargo=>-1}}) 
+    Ustatistic.collection.update({'user_id'=>@quote.truck_user_id},{'$inc'=>{:valid_truck=>-1}}) 
+    StockTruck.collection.update({'_id'=>@truck.stock_truck_id},{'$set'=>{:status=>"正在成交"}},{'$inc'=>{:valid_truck=>-1}}) 
+    Truck.collection.update({'stock_truck_id'=>@truck.stock_truck_id},{'$set'=>{:status=>"成交过期"}})
+    Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"正在成交"}})
+    
+    #Update Cargo chenjiao record
+    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:cj_truck_id=>@truck.id,
+               :cj_user_id=>@truck.user_id,:cj_company_id=>@truck.company_id,:cj_quote_id=>@quote.id}})
+         
+    Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:cj_cargo_id=>@cargo.id,
+               :cj_user_id=>@cargo.user_id,:cj_company_id=>@cargo.company_id,:cj_quote_id=>@quote.id}})
+   
+    #record quote_id or inquery_id chenjiao_truck_id
+  
+    #TODO Line statistic not updated
    end
    #expire line
-    @cargo=Cargo.find_by_id(@quote.cargo_id)
-    @truck=Truck.find_by_id(@quote.cargo_id)
+   
     expire_line_cargo(@cargo.fcity_code,@cargo.tcity_code)
     expire_line_truck(@truck.fcity_code,@truck.tcity_code)
     
@@ -214,12 +235,19 @@ class QuotesController < ApplicationController
   #only for owner of truck
   def confirm_chenjiao    
     @quote = Quote.find(params[:id])
+    if @quote.blank?
+    @quote=Inquery.find(params[:id])
+    end
+    
+    @cargo=Cargo.find_by_id(@quote.cargo_id)
+    @truck=Truck.find_by_id(@quote.truck_id)
+    
     
     #update truck status
     Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"已成交"}})
     Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"已成交"}})
     Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"已成交"}}) 
-
+   StockTruck.collection.update({'_id'=>@truck.stock_truck_id},{'$set'=>{:status=>"车辆闲置"}})
     respond_to do |format|
       format.html { redirect_to(:controller=>"trucks",:action=>"index" )}
     end    

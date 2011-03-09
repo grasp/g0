@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new
-    # @user =create_user(params)
+    logger.info "paramsuser=#{params[:user][:name]}"
     @user.name=params[:user][:name]
     @user.email=params[:user][:email]
     @user.password=params[:user][:password]
@@ -54,15 +54,16 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       if @user.save
-        #send  activation mail here
-        # record the session for authorize
+         #send  activation mail here
+         # record the session for authorize
          session[:user_id]=@user.id
          @ustatistic=Ustatistic.create(:total_stock_cargo=>0,:total_stock_truck=>0,:total_truck=>0,
           :total_cargo=>0,:total_line=>0, :total_driver=>0,:total_custermer=>0,:valid_cargo=>0,
           :valid_truck=>0,:user_id=>@user.id);
         
         #update statistic for user
-        @user.update_attributes({:ustatistic_id=>@ustatistic.id})
+        User.collection.update({:_id=>@user.id},{'$set'=>{:ustatistic_id=>@ustatistic.id}})
+        #@user.update_attributes({:ustatistic_id=>@ustatistic.id})
         # User.update({'_id'=> @user.id,:ustatistic_id=>@ustatistic.id}) # is a bug 
         begin    
           url=url_for("users#activate")
@@ -72,7 +73,7 @@ class UsersController < ApplicationController
           # UserMailer.welcome_email(@user,url).deliver
           flash[:notice] = '用户创建成功，可以登录，邮箱确认邮件已发'
         rescue
-          puts $@
+         # puts $@
           flash[:notice] = '邮件发送失败'
           #应该标记邮件状态，发送失败
           # @user.destroy

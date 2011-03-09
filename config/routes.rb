@@ -27,6 +27,8 @@ G0::Application.routes.draw do
   resources :cstatistics
 
   get "public/index"
+  match '/trucks/quoteinquery/:truck_id' =>'trucks#quoteinquery',:as=>:truckquoteinquery
+  match '/cargos/quoteinquery/:cargo_id' =>'cargos#quoteinquery',:as=>:cargoquoteinquery
   match '/trucks/:truck_id/cargos/:cargo_id/inqueries/new'  =>'inqueries#new',:as=>:inquerienew
   match '/trucks/:truck_id/inqueries/truck' =>'inqueries#truck', :as=>:inquerietruck
   match '/cargos/:cargo_id/inqueries/cargo' =>'inqueries#cargo', :as=>:inqueriescargo

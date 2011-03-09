@@ -1,5 +1,5 @@
   
-  <%@cargos=get_search_cargos(@search.fcity_code,@search.tcity_code)%>
+ <%@cargos=get_search_cargos(@search.fcity_code,@search.tcity_code)%>
 
 <p><%="#{@search.fcity_code}/#{@search.tcity_code}/#{Time.now}"%></p>
 
@@ -40,7 +40,7 @@
           <td>
             <%if cargo[:from_site]=="local"%>
             <%unless session[:user_id].nil?%>
-            <%if cargo.user_id==session[:user_id]%>
+            <%if cargo.user_id.to_s==session[:user_id].to_s%>
              货主
             <%else%>
                 <a class="baojia" href="/cargos/<%=cargo.id%>/quotes/new">报价</a>

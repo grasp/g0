@@ -8,9 +8,8 @@
     <th>有效天数</th>
     <th>发布日期</th>
     <!--  <th>公司</th>-->
-    <th>状态</th>  
-    <th>货主询价</th>
-    <th>我已报价</th>
+    <th>车源状态</th>  
+    <th>货主询价/我已报价</th>
     <th>匹配货源</th>
 </tr>
 
@@ -27,15 +26,18 @@
           <td><%= truck.send_date %>天</td>
           <td><%= truck.created_at.to_s.slice(5,11) %></td>
 
-           <!--   <td><%= Company.find_by_id(truck.company_id).name unless truck.company_id.nil?%></td>-->
-           <%if truck.status=="请求成交"%>
-            <td>确认成交</td>
-           <%else%>
-          <td><%=truck.status%></td>
-          <%end%>
-        
-          <td><a class="show_float" href="/trucks/<%=truck.id%>/inqueries/truck"><%= truck.total_xunjia||0 %>条</a></td>
-          <td><a class="show_float" href="/trucks/<%=truck.id%>/quotes/truck"><%= truck.total_baojia||0 %>条</a></td>
+               <%if truck.status!="正在配货"%>
+                   <%if truck.status=="正在成交"%>
+                 <td style="color:red;"><%=truck.status%>,请确认</td>
+                  <%else%>
+                 <td style="color:red;"><%=truck.status%></td>
+                 <%end%>
+               <%else%>
+                 <td><%=truck.status%></td>
+                <%end%>
+                  
+          <td><a class="link_show" href="/trucks/quoteinquery/<%=truck.id%>"><%= truck.total_xunjia||0 %>条询价/<%= truck.total_baojia||0 %>条报价</a></td>
+
           <%if truck.status=="成交"%>
              <td><a class="show_float " href="/trucks/chenjiao/<%=truck.id%>"><%=truck.status%></a></td>
           <%else%>

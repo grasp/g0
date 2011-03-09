@@ -1,6 +1,6 @@
   <%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
 <% unless user.nil? %>
-  <%ustatistic=Ustatistic.find(user.ustatistic_id)%>
+  <%ustatistic=Ustatistic.find_by_user_id(user.id)%>
 <%end%>
 <hr id="head_line">
      <table class="navi" style="display:inline-block;">
@@ -14,17 +14,18 @@
              <td> <a class="navi_link" href="/trucks/search/100000000000/100000000000/1">车源信息(<%=h Truck.where(:status=>"正在配货").count%>)</a></td>
              <td>  <a class="navi_link navi_truck" href="/users/<%=user.id%>/trucks">我的车源(<%=ustatistic.nil? ? "0":(ustatistic.valid_truck||0)%>)</a></td>
              <td style=" border-right-color: #9AAFE5; border-right-style:solid;border-right-width:2px;">   <a class="navi_link navi_stock_truck" href="/users/<%=user.id%>/stock_trucks">发布车源</a></td>
-             
-              <%company=Company.find_by_user_id(user.id)%>              
-              <%unless company.nil?%>
-              <td>  <a class="navi_link" href="/companies/show/<%=company.id%>">我的公司</a></td>
+                                  
+              <%unless user.company_id.blank?%>
+              <td>  <a class="navi_link" href="/companies/show/<%=user.company_id%>">我的公司</a></td>
               <%else%>
-              <td>  <a  href="/users/<%=user.id%>/companies/new"> 我的公司(未创建)</a> </td>
-              <%end%>                        
-              <td> <a class="navi_link" href="/user_contacts/user/<%=user.id%>">我的联系人</a></td>
-       
-             <!-- <td> <a class="navi_link" href="/user_contacts/user/<%=user.id%>"><div>我的档案</div></a> </td>-->
-       
+              <td>  <a  href="/users/<%=user.id%>/companies/new"> 创建我的公司</a> </td>
+              <%end%>   
+               <%unless user.user_contact_id.blank?%>
+                <td> <a class="navi_link" href="/user_contacts/show/<%=user.user_contact_id%>">我的联系人</a></td>
+               <%else%>
+                 <td> <a href="/user_contacts/new/<%=user.id%>">创建我的联系方式</a></td>
+               <%end%> 
+             <!-- <td> <a class="navi_link" href="/user_contacts/user/<%=user.id%>"><div>我的档案</div></a> </td>-->       
 <!--
           <div class="navi_block">
             <ul>

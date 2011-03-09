@@ -107,7 +107,7 @@ function form_submit(){
 */
 }
 
-
+/*
  $('#companysearch_submit').live("click",function(){
    // alert("quote_submit Hi");
       $('#companysearch_new,#companysearch_edit').ajaxSubmit({
@@ -117,6 +117,7 @@ function form_submit(){
   });
   return false;
 });
+*/
 /*
  $('#company_submit').live("click",function(){
    // alert("quote_submit Hi");

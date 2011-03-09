@@ -36,6 +36,14 @@ class TrucksController < ApplicationController
     end
   end
 
+  def quoteinquery
+    @truck=Truck.find_by_id(params[:truck_id])
+    @baojia=Quote.where(:truck_id => params[:truck_id], :user_id =>session[:user_id])
+    @xunjia=Inquery.where(:truck_id => params[:truck_id]) 
+
+    
+  end
+  
   def search
      @search=Search.new
    if params[:search].nil? then
@@ -201,13 +209,13 @@ class TrucksController < ApplicationController
         flash[:notice] = '车源创建成功'
          #update statistic for truck
          Truck.collection.update({'_id' => @truck.id},{'$set' =>{:total_baojia=>0,:total_xunjia=>0,:total_match=>0,
-          :total_click=>0}});     
+          :total_click=>0}});    
                
-        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
-        Lstatistic.collection.update({'line'=>@truck.line},{'$inc' => {"total_truck" => 1,"truckpeihuo"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
+        Ustatistic.collection.update({'user_id' => BSON::ObjectId(session[:user_id].to_s)},{'$inc' => {"total_truck" => 1,"valid_truck"=>1},'$set' => {"status"=>"正在配货"}})
+        Lstatistic.collection.update({'line'=>@truck.line},{'$inc' => {"total_truck" => 1,"valid_truck"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
         StockTruck.collection.update({'_id' => @truck.stock_truck_id},{'$inc' => {"valid_truck" => 1,"total_truck"=>1},'$set' => {"status"=>"正在配货"}})
 
-       expire_one_line_truck(@truck.fcity_code,@truck.tcity_code)
+        expire_line_truck(@truck.fcity_code,@truck.tcity_code)
         
         format.html { redirect_to(@truck)}
         format.xml  { render :xml => @truck, :status => :created, :location => @truck }

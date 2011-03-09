@@ -38,13 +38,21 @@
 
 
 .show_form  .field label{
-     font-weight: bold;
-     display:-moz-inline-stack;
+      font-weight: bold;
+      display:-moz-inline-stack;
      /*width: 110px; width of labels. Should be smaller than left column (155px) to create some right margin*/
     /* width:50%;*/
      width:20%;
      display:inline-block;
      margin-left:10px;
+}
+
+#cargo_new .field label,#truck_new .field label{
+     font-weight: bold;
+      display:-moz-inline-stack;
+      width:5%;
+      display:inline-block;
+      margin-left:10px;
 }
 
 div.stockcargo_new .field label{
@@ -68,9 +76,12 @@ div.stockcargo_new .field label{
 .show_form input,.show_form select { /*width of text boxes. IE6 does not understand this attribute*/
   margin-left: 10px;
   /* width:80%;*/
-  height:30px;
+  height:20px;
 }
 
+div.field select {
+     height:25px;
+}
 .stock_truck_new field select {
       height:30px;
 }
@@ -257,3 +268,4 @@ text-align: left;
 #stocktruck_edit .field2 input,#inquery_price,#quote_price { width: 80px;   }
 
 #error_explanation{color:red;}
+

@@ -104,13 +104,13 @@ def get_search_truck(fcity_code,tcity_code)
     all_lines
   end
  end
-    def iterate_expire_line(line,from_city,to_city)
+ def iterate_expire_line(line,from_city,to_city)
       line =line+cal_expire_city(from_city,to_city)
       line=line.uniq
       line
-    end
+ end
     
- def expire_one_line_truck(from_city,to_city)   
+ def expire_line_truck(from_city,to_city)   
    all_lines=cal_expire_city(from_city,to_city)   
   
    #rm folder

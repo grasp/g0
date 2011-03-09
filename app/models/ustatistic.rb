@@ -10,6 +10,7 @@ class Ustatistic
       key :total_driver,Integer
       key :total_custermer,Integer
       key :user_id,ObjectId
+      key :status,String
       timestamps!
 
 end
