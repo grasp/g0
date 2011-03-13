@@ -23,11 +23,16 @@ class TrucksController < ApplicationController
     unless @stock_truck.nil?
       @trucks = Truck.where({:user_id =>session[:user_id], :stock_truck_id=>params[:id]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     else
-      unless params[:status].blank?
-        @trucks = Truck.where({:user_id =>session[:user_id], :status =>params[:status]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-      else
-        @trucks = Truck.where(:user_id =>session[:user_id]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     if params[:status]=="peihuo"
+        @trucks = Truck.where({:user_id =>session[:user_id], :status =>"正在配货"}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     elsif params[:status]=="ischenjiao"
+        @trucks = Truck.where({:user_id =>session[:user_id], :status =>"正在成交"}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      elsif params[:status]=="chenjiao"
+        @trucks = Truck.where({:user_id =>session[:user_id], :status =>"已成交"}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     else
+        @trucks = Truck.where({:user_id =>session[:user_id]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
       end
+      
     end
 
     respond_to do |format|

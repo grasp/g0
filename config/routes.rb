@@ -1,6 +1,7 @@
 G0::Application.routes.draw do
   resources :feedbacks
-
+  
+  match '/admin/gethourdata'  =>'admin#gethourdata',:as=>:admingethourdata
   match '/admin/move'  =>'scans#move',:as=>:adminmove
   match '/admin/quzhougrasp'  =>'admin#quzhougrasp',:as=>:adminquzhougrasp
   match '/admin/tf56grasp'  =>'admin#tf56grasp',:as=>:admintf56grasp

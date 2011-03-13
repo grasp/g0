@@ -78,9 +78,13 @@ class CargosController < ApplicationController
     unless params[:stock_cargo_id].nil?
        @cargos=Cargo.where({:user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     else
-    if params[:status]
-        @cargos = Cargo.where(:user_id =>session[:user_id],:status =>params[:status]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
-    else
+    if params[:status]=="peiche"
+        @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"正在配车").order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+    elsif params[:status]=="ischenjiao"
+       @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"正在成交").order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+    elsif params[:status]=="chenjiao"
+       @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"已成交").order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     else
        #@cargos = Cargo.where("user_id = ?",session[:user_id]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>20)
        @cargos = Cargo.where(:user_id =>session[:user_id]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
     end

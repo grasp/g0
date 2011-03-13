@@ -636,6 +636,24 @@ function stock_truck_new_validation(){
                 required: true,
                 maxlength:11,
                 number:true
+            },
+             "stocktruck[bis_name]":{
+                required: true,
+                maxlength:10
+            },
+            "stocktruck[bis_phone]":{
+                required: true,
+                maxlength:11,
+                number:true
+            },
+             "stocktruck[owner_name]":{
+                required: true,
+                maxlength:10
+            },
+            "stocktruck[owner_phone]":{
+                required: true,
+                maxlength:11,
+                number:true
             }
     
         },
@@ -673,6 +691,24 @@ function stock_truck_new_validation(){
                 required: " 没有填写司机电话",
                 maxlength:"长度太长不对",
                 number:"电话号码必须是数字"
+            },
+              "stocktruck[bis_name]":{
+                required: " 没有填写 联系人名称",
+                maxlength:"长度太长不对"
+            },
+            "stocktruck[bis_phone]":{
+                required: " 没有填写联系人电话",
+                maxlength:"长度太长不对",
+                number:"电话号码必须是数字"
+            },
+               "stocktruck[owner_name]":{
+                required: " 没有填写 联系人名称",
+                maxlength:"长度太长不对"
+            },
+            "stocktruck[owner_phone]":{
+                required: " 没有填写联系人电话",
+                maxlength:"长度太长不对",
+                number:"电话号码必须是数字"
             }
         }
     }
@@ -699,6 +735,9 @@ function cargo_new_validation(){
             "cargo[fcity_name]":{
                 required: true
             },
+             "cargo[tcity_name]":{
+                required: true
+            },
              "cargo[cargo_weight]":{
                 required: true
             }
@@ -709,6 +748,9 @@ function cargo_new_validation(){
             {
             "cargo[fcity_name]":{
                 required: "你还没有选择出发地"
+            },
+             "cargo[tcity_name]":{
+                required: "你还没有选择到达地"
             },
             "cargo[cargo_weight]":{
                 required: " 没有填写重量"

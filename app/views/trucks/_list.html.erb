@@ -41,7 +41,7 @@
           <%if truck.status=="成交"%>
              <td><a class="show_float " href="/trucks/chenjiao/<%=truck.id%>"><%=truck.status%></a></td>
           <%else%>
-             <td><a class="show_float" href="/trucks/<%=truck.id%>/match"><%=Lstatistic.find_by_line(truck.line).valid_cargo || 0%> 条</a></td>
+             <td><a class="show_float" href="/trucks/<%=truck.id%>/match">货源速配</a></td>
           <%end%>
 
     <!--   <td><a class="show_float" href="/trucks/<%=truck.id%>/edit">编辑</a>|<a href="/trucks/destroy/<%=truck.id%>">删除</a></td> -->

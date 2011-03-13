@@ -8,12 +8,14 @@
          <% unless user.nil? %>
          <tr class="navi_huo">
            <td> <a class="navi_link" href="/cargos/search/100000000000/100000000000/1">货源信息(<%=h Cargo.where(:status=>"正在配车").count%>)</a></td>
-           <td> <a class="navi_link navi_cargo" href="/users/<%=user.id%>/cargos/"> 我的货源(<%=ustatistic.nil? ? "0":(ustatistic.valid_cargo||0)%>)</a></td>
-           <td style=" border-right-color: #9AAFE5; border-right-style:solid;border-right-width:2px;"> <a class="navi_link navi_stock_cargo" href="/users/<%=user.id%>/stock_cargos">发布货源</a></td>
+           <td > <a class="navi_link navi_stock_cargo" href="/users/<%=user.id%>/stock_cargos">发布货源</a></td>
+           <td style=" border-right-color: #9AAFE5; border-right-style:solid;border-right-width:2px;"> <a class="navi_link navi_cargo" href="/users/<%=user.id%>/cargos/"> 我的货源(<%=ustatistic.nil? ? "0":(ustatistic.valid_cargo||0)%>)</a></td>
+          
           
              <td> <a class="navi_link" href="/trucks/search/100000000000/100000000000/1">车源信息(<%=h Truck.where(:status=>"正在配货").count%>)</a></td>
-             <td>  <a class="navi_link navi_truck" href="/users/<%=user.id%>/trucks">我的车源(<%=ustatistic.nil? ? "0":(ustatistic.valid_truck||0)%>)</a></td>
-             <td style=" border-right-color: #9AAFE5; border-right-style:solid;border-right-width:2px;">   <a class="navi_link navi_stock_truck" href="/users/<%=user.id%>/stock_trucks">发布车源</a></td>
+             <td >   <a class="navi_link navi_stock_truck" href="/users/<%=user.id%>/stock_trucks">发布车源</a></td>
+             <td style=" border-right-color: #9AAFE5; border-right-style:solid;border-right-width:2px;">  <a class="navi_link navi_truck" href="/users/<%=user.id%>/trucks">我的车源(<%=ustatistic.nil? ? "0":(ustatistic.valid_truck||0)%>)</a></td>
+            
                                   
               <%unless user.company_id.blank?%>
               <td>  <a class="navi_link" href="/companies/show/<%=user.company_id%>">我的公司</a></td>

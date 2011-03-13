@@ -2,6 +2,7 @@
 # and open the template in the editor.
 class Move 
     include MongoMapper::Document
+      key :datehour,String
       key :expired_cargo,Integer
       key :expired_truck,Integer
       key :expired_quote,Integer

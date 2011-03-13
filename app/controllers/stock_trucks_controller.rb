@@ -92,7 +92,7 @@ class StockTrucksController < ApplicationController
     @stock_truck = StockTruck.find(params[:id])
 
     respond_to do |format|
-      if @stock_truck.update_attributes(params[:stock_truck])
+      if @stock_truck.update_attributes(params[:stocktruck])
         flash[:notice] = '成功更新了车子基本信息.'
         format.html { redirect_to(@stock_truck) }
         format.xml  { head :ok }

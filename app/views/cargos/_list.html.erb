@@ -37,7 +37,7 @@
          <td> <%=cargo.status%></td>
         <%else%>
          <%l=Lstatistic.find({:line=>cargo.line})%>
-        <td><a class="show_float " href="/cargos/<%=cargo.id%>/match"><%=l.nil? ? 0:l.valid_truck %>个</a></td>
+        <td><a class="show_float " href="/cargos/<%=cargo.id%>/match">车源速配</a></td>
         <%end%>
       </tr>
     <% end %>
