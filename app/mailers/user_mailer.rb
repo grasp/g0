@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
     @user = user
   #  @url  = "http://example.com/login"
     mail(:to => user.email,
-         :subject => "Welcome to My Awesome Site",
+         :subject => "欢迎来到物流零距离",
          :body =>url)
     end
 

@@ -85,6 +85,9 @@ div.field select {
 .stock_truck_new field select {
       height:30px;
 }
+#quote_truck_id {
+    height:30px;
+}
 
 #login #email,#login #password{
     width:50%;

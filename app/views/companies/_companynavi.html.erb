@@ -6,8 +6,8 @@
   <a  href="/companies/new">添加我的公司</a>
   <%else%>
   <a class="page_navi_link" href="/companies/show/<%=@company.id%>">我的公司</a>
-  <a class="page_navi_link" href="/companies/index/<%=@company.id%>/vendor">我的车源供应商</a>
-  <a class="page_navi_link" href="/companies/index/<%=@company.id%>/custermer">我的货源客户</a>
+  <a class="page_navi_link" href="/companies/index/<%=@company.id%>/vendor">历史成交车源公司</a>
+  <a class="page_navi_link" href="/companies/index/<%=@company.id%>/custermer">历史成交货源公司</a>
   <a  href="/companies/<%=@company.id%>/edit">更新我的公司</a>
   <%end%>
 

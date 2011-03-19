@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-  <div>
+
     
   <div class="line">
       <h3><%=@stock_cargo.cate_name%>,<%=@stock_cargo.package_name%>包装, 货源发布</h3>
@@ -29,13 +29,11 @@
 </div>
     
 
- </div>
-
   <%= f.hidden_field(:cate_name, :value=>@stock_cargo.cate_name) %>
   <%= f.hidden_field(:package_name, :value=>@stock_cargo.package_name) %>
   <%= f.hidden_field(:big_category, :value=>@stock_cargo.big_category) %>
 
-<%= f.hidden_field :status%>
+   <%= f.hidden_field :status%>
      <div class="field">
       <label >重量(吨)</label>
       <%= f.text_field :cargo_weight %> 

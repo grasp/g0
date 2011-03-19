@@ -1,6 +1,6 @@
 <%#coding:utf-8%>
-<table>
  <% unless @trucks.blank? %>
+<table>
   <tr>
     <th>车辆</th>
     <th>出发</th>
@@ -38,10 +38,11 @@
                   
           <td><a class="link_show" href="/trucks/quoteinquery/<%=truck.id%>"><%= truck.total_xunjia||0 %>条询价/<%= truck.total_baojia||0 %>条报价</a></td>
 
-          <%if truck.status=="成交"%>
-             <td><a class="show_float " href="/trucks/chenjiao/<%=truck.id%>"><%=truck.status%></a></td>
+          <%if truck.status=="正在配货"%>
+            <td><a class="quick_match" href="/cargos/search/<%=truck.fcity_code%>/<%=truck.tcity_code%>/1">货源速配</a></td>
           <%else%>
-             <td><a class="show_float" href="/trucks/<%=truck.id%>/match">货源速配</a></td>
+           <td><%=truck.status%></td>
+             
           <%end%>
 
     <!--   <td><a class="show_float" href="/trucks/<%=truck.id%>/edit">编辑</a>|<a href="/trucks/destroy/<%=truck.id%>">删除</a></td> -->

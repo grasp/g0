@@ -16,9 +16,7 @@ class StockCargosController < ApplicationController
    # @stock_cargos = StockCargo.where("user_id = ?",session[:user_id]).order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>5)
   # @stock_cargos = StockCargo.all(:user_id =>session[:user_id]).sort(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>5)
     @stock_cargos = StockCargo.where(:user_id =>session[:user_id]).paginate(:page=>params[:page]||1,:per_page=>5)
-    @stock_cargos .each do |p|
-      puts "stock_cargo=#{p}"
-    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @stock_cargos }

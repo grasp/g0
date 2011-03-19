@@ -6,10 +6,11 @@ class UserContactsController < ApplicationController
   protect_from_forgery :except => [:tip,:login]
  #  layout "public"
   layout  "users",:except => [:show,:index,:showf]
+  
   def index
 
-   ## only do this when in admin user
-   #@user_contacts = UserContact.all
+    ## only do this when in admin user
+    #@user_contacts = UserContact.all
 
     #for logined user, we only show person he created
     @user_contact = UserContact.find_by_user_id(session[:user_id])
@@ -24,22 +25,35 @@ class UserContactsController < ApplicationController
 
     #vendor
     if params[:who]=="vendor"
-      Inquery.where(:cargo_user_id =>user_id,:status=>"已成交").each do |inquery|
+      
+      ExpiredInquery.where(:cargo_user_id =>user_id,:status=>"已成交"||"正在成交").each do |inquery|
+        @inquery_user<<inquery.truck_user_id
+      end      
+      Inquery.where(:cargo_user_id =>user_id,:status=>"已成交"||"正在成交").each do |inquery|
         @inquery_user<<inquery.truck_user_id
       end
-      Quote.where(:cargo_company_id =>user_id,:status=>"已成交").each do |quote|
+      
+      ExpiredQuote.where(:cargo_company_id =>user_id,:status=>"已成交"||"正在成交").each do |quote|
+         @quote_user<<quote.truck_user_id
+      end
+      Quote.where(:cargo_company_id =>user_id,:status=>"已成交"||"正在成交").each do |quote|
         @quote_user<<quote.truck_user_id
       end
-
+    @quote_user.uniq!
     elsif params[:who]=="custermer"
-      Inquery.where("truck_user_id =? and status=?",user_id,"已成交").each do |inquery|
+       ExpiredInquery.where(:truck_user_id =>user_id ,:status=>"已成交"||"正在成交").each do |inquery|
         @inquery_user<<inquery.cargo_user_id
       end
-
-      Quote.where("truck_user_id =? and status=?",user_id,"已成交").each do |quote|
+      Inquery.where(:truck_user_id =>user_id ,:status=>"已成交"||"正在成交").each do |inquery|
+        @inquery_user<<inquery.cargo_user_id
+      end
+      ExpiredQuote.where(:truck_user_id =>user_id, :status=>"已成交"||"正在成交").each do |quote|
         @quote_user<<quote.cargo_user_id
       end
-
+      Quote.where(:truck_user_id =>user_id, :status=>"已成交"||"正在成交").each do |quote|
+        @quote_user<<quote.cargo_user_id
+      end
+      @quote_user.uniq!
     else
       #this is for logined user
       @user_contacts = Company.where(:user_id =>session[:user_id]).first #only one company actully

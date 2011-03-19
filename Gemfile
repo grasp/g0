@@ -20,7 +20,6 @@ gem "mongo_mapper"
 gem "bson_ext", "~> 1.2"
 gem 'memcache-client'
 #gem 'dalli'
-
 # Use unicorn as the web server
 # gem 'unicorn'
 

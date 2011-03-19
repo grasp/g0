@@ -15,7 +15,7 @@ class CitiesController < ApplicationController
     
      if code.nil? || code=="100000000000"
       code="330100000000" #default open ZheJiang Province
-      puts "code is nil !!!"
+     # puts "code is nil !!!"
     end    
     @code=code
     @selected_city_code=code  

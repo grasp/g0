@@ -117,5 +117,4 @@ function float_load_layer1(){
     });
 
 
-
 }

@@ -14,21 +14,37 @@ class CompaniesController < ApplicationController
     @companies=Array.new
     #vendor
     if params[:who]=="vendor"
-      Inquery.where(:cargo_company_id =>@company.id,:status=>"已成交").each do |inquery|
+      ExpiredInquery.where(:cargo_company_id =>@company.id,:status=>"已成交"||"正在成交").each do |inquery|
+        @inquery_company<<inquery.truck_company_id
+      end 
+      
+      Inquery.where(:cargo_company_id =>@company.id,:status=>"已成交"||"正在成交").each do |inquery|
         @inquery_company<<inquery.truck_company_id
       end
-      Quote.where(:cargo_company_id =>@company.id,:status=>"已成交").each do |quote|
+      
+     ExpiredQuote.where(:cargo_company_id =>@company.id,:status=>"已成交"||"正在成交").each do |quote|
         @quote_company<<quote.truck_company_id
       end
-
+      
+      Quote.where(:cargo_company_id =>@company.id,:status=>"已成交"||"正在成交").each do |quote|
+        @quote_company<<quote.truck_company_id
+      end
+      @quote_company.uniq!
+      
     elsif params[:who]=="custermer"
+     ExpiredInquery.where(:truck_company_id =>@company.id, :status=>"已成交").each do |inquery|
+        @inquery_company<<inquery.cargo_company_id
+      end
+      ExpiredQuote.where(:truck_company_id =>@company.id,:status=>"已成交").each do |quote|
+        @quote_company<<quote.cargo_company_id
+      end
       Inquery.where(:truck_company_id =>@company.id, :status=>"已成交").each do |inquery|
         @inquery_company<<inquery.cargo_company_id
       end
       Quote.where(:truck_company_id =>@company.id,:status=>"已成交").each do |quote|
         @quote_company<<quote.cargo_company_id
       end
-    
+    @quote_company.uniq!
     else
       #this is for logined user
       @company = Company.where(:user_id =>session[:user_id]).first #only one company actully

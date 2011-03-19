@@ -1,7 +1,7 @@
 <%#coding:utf-8%>
-
+ <%unless @cargos.blank?%>
 <table>
-   <%unless @cargos.blank?%>
+  
   <tr>
    
     <th>货物</th>    
@@ -37,7 +37,7 @@
          <td> <%=cargo.status%></td>
         <%else%>
          <%l=Lstatistic.find({:line=>cargo.line})%>
-        <td><a class="show_float " href="/cargos/<%=cargo.id%>/match">车源速配</a></td>
+        <td><a class="quick_match" href="/trucks/search/<%=cargo.fcity_code%>/<%=cargo.tcity_code%>/1">车源速配</a></td>
         <%end%>
       </tr>
     <% end %>

@@ -1,3 +1,4 @@
+<%if @mycargo.size>0%>
 <%= form_for(@inquery,:as=>:inquery,:html => {:class => "show_form"}) do |f| %>
   <% if @inquery.errors.any? %>
     <div id="error_explanation">
@@ -39,3 +40,6 @@
    
   </div>
 <% end %>
+<%else%>
+<p>你不能询价， 你没有正在配车的货源</p>
+<%end%>

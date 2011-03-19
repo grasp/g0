@@ -1,8 +1,8 @@
 <%#coding=utf-8%>
-<h1>我的全部车子</h1>
-
-<table>
+<p style="margin-top:20px;">请点击每个车子的<b style="color:blue;">发布车源</b>来发布该车子的车源</p>
   <%unless @stock_trucks.blank?%>
+<table>
+
   <tr>
     <th>车子</th>
     <th>状态</th>
@@ -14,7 +14,6 @@
     <th>车主电话</th>
     <th>发布车源</th>
     <th>更新联系方式</th>
-
   </tr>
   <% @stock_trucks.each do |stock_truck| %>
     <tr>
