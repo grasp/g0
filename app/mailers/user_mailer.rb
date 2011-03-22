@@ -1,3 +1,4 @@
+#coding:utf-8
 class UserMailer < ActionMailer::Base
   default :from => "hunter.wxhu@gmail.com"
   
