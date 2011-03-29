@@ -1,14 +1,15 @@
 class LineAd
-   include MongoMapper::Document
-      key :line,String
-      key :fcity_name,String
-      key :tcity_name,String
-      key :company_name,String
-      key :url,String
-      key :one_word,String
-      key :contact_phone,String
-      key :user_id,ObjectId
-      key :company_id,ObjectId
-      key :lstatistic_id,String
-      timestamps!
+   include Mongoid::Document
+   include Mongoid::Timestamps
+      field :line,:type=>String
+      field :fcity_name,:type=>String
+      field :tcity_name,:type=>String
+      field :company_name,:type=>String
+      field :url,:type=>String
+      field :one_word,:type=>String
+      field :contact_phone,:type=>String
+      embeds_one :users
+      embeds_one:companies
+      embeds_one :lstatistics
+     # timestamps!
 end

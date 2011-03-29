@@ -26,17 +26,17 @@ end
   # This is for view cache purpose
 def get_search_truck(fcity_code,tcity_code)    
  if fcity_code=="100000000000" && tcity_code=="100000000000" then   
-     @trucks=Truck.where(:status=>"正在配货").sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     @trucks=Truck.where(:status=>"正在配货").desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
    elsif fcity_code=="100000000000" && tcity_code!="100000000000"
       result=get_max_min_code(tcity_code)
       min=result[0]
       max=result[1]
       if result[2]
         @trucks=Truck.where({:tcity_code=>min,:status=>"正在配货"}).
-                       sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+                       desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
       else
          @trucks=Truck.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"正在配货"}).
-                       sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+                       desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
       end
     elsif tcity_code=="100000000000" && fcity_code!="100000000000"
      result=get_max_min_code(fcity_code)
@@ -44,10 +44,10 @@ def get_search_truck(fcity_code,tcity_code)
      max=result[1]
      if result[2]
        @trucks=Truck.where({:fcity_code =>min,:status=>"正在配货"}).
-                          sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+                          desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
      else
        @trucks=Truck.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"正在配货"}).
-                          sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+                          desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
      end
  
     else
@@ -61,19 +61,19 @@ def get_search_truck(fcity_code,tcity_code)
       if resultt[2]==false && resultf[2]==false
       #  puts "两个都不是县级市"
           @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配货"}).
-                                 sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
+                                 desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20 )
        elsif resultt[2]==true && resultf[2]==false
        #   puts "到达是县级市"
           @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code=>mint,:status=>"正在配货"}).
-                                 sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
+                                 desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20 )
        elsif resultt[2]==false && resultf[2]==true
         #   puts "出发是县级市"
           @trucks=Truck.where({:fcity_code =>minf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配货"}).
-                                 sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20 )
+                                 desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20 )
        else
        #  puts "两个都是县级市"
           @trucks=Truck.where({:fcity_code =>minf,:tcity_code=>mint,:status=>"正在配货"}).
-                                 sort(:updated_at.desc).all.paginate(:page=>params[:page]||1,:per_page=>20 )
+                                 desc(:updated_at).all.paginate(:page=>params[:page]||1,:per_page=>20 )
       end
     end    
   end

@@ -12,7 +12,7 @@ class StockTrucksController < ApplicationController
 
    # @stock_trucks = StockTruck.all
   #  @stock_trucks = StockTruck.where("user_id = ?",session[:user_id]).order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>5)
-    @stock_trucks = StockTruck.where(:user_id =>session[:user_id]).sort(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>5)
+    @stock_trucks = StockTruck.where(:user_id =>session[:user_id]).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>5)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @stock_trucks }
@@ -33,7 +33,7 @@ class StockTrucksController < ApplicationController
   # GET /stock_trucks/new.xml
   def new
     @stock_truck = StockTruck.new
-    @user=User.find_by_id(session[:user_id])
+    @user=User.find(session[:user_id])
     @stock_truck.user_id=@user.id
     @stock_truck.status="空闲"
     @stock_truck.company_id=@user.company_id unless @user.nil?

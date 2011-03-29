@@ -1,12 +1,13 @@
 class AdminController < ApplicationController
   layout "admin"
-    before_filter:admin_authorize,:except=>[:index] #for debug purpose
+ #   before_filter:admin_authorize,:except=>[:index] #for debug purpose
+  before_filter:admin_authorize #for debug purpose
   def index
     
   end
   
   def tf56grasp
-    @grasps=GraspRecord.where(:from_site=>"tf56").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+    @grasps=GraspRecord.where(:from_site=>"tf56").desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
         respond_to do |format|
       format.html{render :template=>"/admin/grasp"} # index.html.erb
       format.xml  { render :xml => @scans }
@@ -14,7 +15,7 @@ class AdminController < ApplicationController
   end
   
   def quzhougrasp
-    @grasps=GraspRecord.where(:from_site=>"quzhou").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+    @grasps=GraspRecord.where(:from_site=>"quzhou").desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
         respond_to do |format|
       format.html{render :template=>"/admin/grasp"} # index.html.erb
       format.xml  { render :xml => @scans }

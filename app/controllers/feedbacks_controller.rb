@@ -17,7 +17,6 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks/1.xml
   def show
     @feedback = Feedback.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @feedback }
@@ -45,7 +44,7 @@ class FeedbacksController < ApplicationController
   def create
     params[:feedback][:user_id]=session[:user_id]
     params[:feedback][:ip]=request.remote_ip  
-    params[:feedback][:user_name]=User.find_by_id(params[:feedback][:user_id]) unless params[:feedback][:user_id].nil?
+    params[:feedback][:user_name]=User.find(params[:feedback][:user_id]).name unless params[:feedback][:user_id].nil?
     @feedback = Feedback.new(params[:feedback])
     respond_to do |format|
       if @feedback.save

@@ -1,52 +1,54 @@
 # coding: utf-8
 class StockTruck 
-   include MongoMapper::Document
+   include Mongoid::Document
+   include Mongoid::Timestamps
   #  belongs_to :users
    # has_many :trucks
     #stock truck basic info
-      key :paizhao,String
-      key :dun_wei,String
-      key :che_length,String
-      key :truck_usage,String
-      key :truck_shape,String
-      key :truck_gps,String
+      field :paizhao,:type=>String
+      field :dun_wei,:type=>String
+      field :che_length,:type=>String
+      field :truck_usage,:type=>String
+      field :truck_shape,:type=>String
+      field :truck_gps,:type=>String
 
       #Manufacture info
-      key :truck_pinpai,String
-      key :truck_xinghao,String
-      key :truck_year,String
+      field :truck_pinpai,:type=>String
+      field :truck_xinghao,:type=>String
+      field :truck_year,:type=>String
 
 
       #driver info
-      key :driver_name,String
-      key :driver_phone,String
+      field :driver_name,:type=>String
+      field :driver_phone,:type=>String
       
       #owner info
-      key :owner_name,String
-      key :owner_phone,String
+      field :owner_name,:type=>String
+      field :owner_phone,:type=>String
       
       #owner info
-      key :bis_name,String
-      key :bis_phone,String
+      field :bis_name,:type=>String
+      field :bis_phone,:type=>String
 
       # contact inforamtion
-      key :company_id,ObjectId
-      key :car_phone,String
-      key :user_id,ObjectId
+
+      field :car_phone,:type=>String
+      field :company_id,:type=>String
+      field :user_id,:type=>String
       
       #Statistic
-      key :valid_truck,Integer
-      key :total_truck,Integer
-      key :expired_truck,Integer
+      field :valid_truck,:type=>Integer
+      field :total_truck,:type=>Integer
+      field :expired_truck,:type=>Integer
 
       #status
-      key :status,String
+      field :status,:type=>String
 
       # for feature usage
-      key :truck_license_id,ObjectId
-      key :truck_owner_id,ObjectId
+      field :truck_license_id,:type=>String
+      field :truck_owner_id,:type=>String
       
       validates_uniqueness_of :paizhao ,:message=>"该牌照车子已经存在."
 
-      timestamps!
+     # timestamps!
 end

@@ -1,23 +1,24 @@
 class Scan 
     cattr_reader :per_page
      @@per_page = 20
-    include MongoMapper::Document
-      key :total_user,Integer
-      key :total_stock_truck,Integer
-      key :total_stock_cargo,Integer
-      key :idle_stock_truck,Integer
-      key :idle_stock_cargo,Integer
-      key :total_cargo,Integer
-      key :total_truck,Integer
-      key :valid_cargo,Integer
-      key :valid_truck,Integer
-      key :expired_cargo,Integer
-      key :expired_truck,Integer
-      key :chenjiao_truck,Integer
-      key :chenjiao_cargo,Integer
-      key :total_line,Integer
-      key :total_company,Integer
-      key :cost_time,String
-      key :user_id,ObjectId
-       timestamps!
+    include Mongoid::Document
+    include Mongoid::Timestamps
+      field :total_user,:type=>Integer
+      field :total_stock_truck,:type=>Integer
+      field :total_stock_cargo,:type=>Integer
+      field :idle_stock_truck,:type=>Integer
+      field :idle_stock_cargo,:type=>Integer
+      field :total_cargo,:type=>Integer
+      field :total_truck,:type=>Integer
+      field :valid_cargo,:type=>Integer
+      field :valid_truck,:type=>Integer
+      field :expired_cargo,:type=>Integer
+      field :expired_truck,:type=>Integer
+      field :chenjiao_truck,:type=>Integer
+      field :chenjiao_cargo,:type=>Integer
+      field :total_line,:type=>Integer
+      field :total_company,:type=>Integer
+      field :cost_time,:type=>String
+     embeds_one :users
+      # timestamps!
 end

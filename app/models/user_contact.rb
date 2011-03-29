@@ -1,19 +1,20 @@
 class UserContact 
-include MongoMapper::Document
+include Mongoid::Document
+include Mongoid::Timestamps
   # belongs_to :users
   
-      key :name,String
-      key :email,String
-      key :mphone,String
-      key :quhao,String
-      key :fixphone,String
-      key :QQ,String
-      key :website,String
-      key :city_name,String
-      key :city_code,String
-      key :address,String
-      key :company_id,ObjectId
-      key :user_id,ObjectId
-      timestamps!
+      field :name,:type=>String
+      field :email,:type=>String
+      field :mphone,:type=>String
+      field :quhao,:type=>String
+      field :fixphone,:type=>String
+      field :QQ,:type=>String
+      field :website,:type=>String
+      field :city_name,:type=>String
+      field :city_code,:type=>String
+      field :address,:type=>String
+      embeds_one :companies
+      embeds_one :users
+     # timestamps!
  
 end

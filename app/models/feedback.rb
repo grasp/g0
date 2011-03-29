@@ -1,17 +1,18 @@
 # coding: utf-8
 class Feedback 
-  include MongoMapper::Document
+include Mongoid::Document
+include Mongoid::Timestamps
   
  
-      key  :pingjia,String
-      key  :satisfy,String
-      key  :hate,String
-      key  :improve,String
+     field :pingjia,:type=>String
+     field :satisfy,:type=>String
+     field :hate,:type=>String
+     field :improve,:type=>String
       #for statistic
-      key  :user_id
-      key  :user_name
-      key  :ip
-      
-     timestamps!
+
+     field :user_name,:type=>String
+     field :ip,:type=>String
+     embeds_one :users      
+     #timestamps!
  
 end

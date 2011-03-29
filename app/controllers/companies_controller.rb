@@ -2,10 +2,22 @@
 class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.xml
+  before_filter :choose_layout
+  before_filter:admin_authorize,:only=>[:index] #for debug purpose
   before_filter:authorize
   protect_from_forgery :except => [:tip,:login]
   include CompaniesHelper
-  layout  "users",:except => [:show,:index,:search,:showf]
+#  layout  "users",:except => [:show,:index,:search,:showf]
+  layout :choose_layout
+  
+    def choose_layout
+      return 'admin'  if action_name =='admin'      
+      return 'users' if action_name=="new" || action_name=="edit"
+     end
+     
+   def admin
+   @companies = Company.paginate(:page=>params[:page]||1,:per_page=>20)
+   end
 
   def index
     @company = Company.where(:user_id =>session[:user_id]).first #only one company actully
@@ -51,7 +63,6 @@ class CompaniesController < ApplicationController
     end
 
     #calculate companies
-
     @inquery_company.each do |company_id|
       @companies<<Company.find(company_id)
     end

@@ -1,41 +1,44 @@
 class StockCargo
   #  belongs_to :users
-   include MongoMapper::Document
+   include Mongoid::Document
+   include Mongoid::Timestamps
     #category related
-      key :big_category,String
-      key :cate_name,String
-      key :cate_code,String
+      field :big_category,:type=>String
+      field :cate_name,:type=>String
+      field :cate_code,:type=>String
 
       #packakge related
-      key :package_name,String
-      key :package_code,String
+      field :package_name,:type=>String
+      field :package_code,:type=>String
 
       #cargo property and status
-      key :cargo_property,String
+      field :cargo_property,:type=>String
 
       #expired/invalid/normal
-      key :stock_status,String
+      field :stock_status,:type=>String
       
       #weight and bulk
-      key :ku_weight,String
-      key :ku_bulk,String    
+      field :ku_weight,:type=>String
+      field :ku_bulk,:type=>String    
       
-      key :sent_weight,Float
-      key :sent_bulk,Float
-      
-      #define for search
-      key :cangku_id,ObjectId
-      key :user_id,ObjectId
-      key :company_id ,ObjectId 
-      key :scstatistic_id,ObjectId
+      field :sent_weight,:type=>Float
+      field :sent_bulk,:type=>Float     
+
       
       #Statistic
-      key :valid_cargo,Integer
-      key :total_cargo,Integer
-      key :expired_cargo,Integer
+      field :valid_cargo,:type=>Integer
+      field :total_cargo,:type=>Integer
+      field :expired_cargo,:type=>Integer
 
       #status
-      key :status,String
+      field :status,:type=>String
+      
+      #define for search
+      field :cangkus
+      field :user_id,:type=>String
+      field :company_id,:type=>String
+      field :scstatistic_id,:type=>String
+    #  referenced_in :cargo
 
-      timestamps!
+      #timestamps!
 end

@@ -12,7 +12,7 @@ G0::Application.routes.draw do
 
   get "quzhou_wuliu/index"
   get "quzhou_wuliu/show"
-   match '/scans/uinfoscan'  =>'scans#uinfoscan',:as=>:scanuinfoscan
+  match '/scans/uinfoscan'  =>'scans#uinfoscan',:as=>:scanuinfoscan
   match '/scans/expiretimer'  =>'scans#expiretimer',:as=>:scanexpiretimer
   match '/scans/truckexpire'  =>'scans#truckexpire',:as=>:scantruckexpire
   match '/scans/cargoexpire'  =>'scans#cargoexpire',:as=>:scancargoexpire
@@ -80,6 +80,7 @@ G0::Application.routes.draw do
   match '/companies/show/:id/(:who)' =>'companies#show',:as=>:companiesshow
   match '/companies/search' =>'companies#search',:as=>:companiessearch
   match '/companies/create' =>'companies#create',:as=>:companiescreate
+  match '/companies/admin' =>'companies#admin',:as=>:companiesadmin
   resources :companies
 
   match '/stock_trucks/:stock_truck_id/trucks/part' =>'trucks#part', :as=>:truckspart

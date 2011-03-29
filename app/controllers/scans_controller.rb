@@ -13,30 +13,46 @@ class ScansController < ApplicationController
    expired_cargo=0
    start_time=Time.now
    truck_expire_line=Array.new
-   cargo_expire_line=Array.new
-   
+   cargo_expire_line=Array.new   
     truck_scan_start=Time.now
     #scan truck at first
     Truck.where(:status=>"正在配货").each do |truck|
+     # Rails.logger.info "scan truck for expire!!"
      # puts "truck.created_at=#{truck.created_at || truck.updated_at},truck.send_date=#{truck.send_date}"
-      if compare_time_expired(truck,truck.created_at ||truck.updated_at,truck.send_date || "1")==true
+      if compare_time_expired(truck.updated_at,truck.send_date || "1")==true
         #only for first time 过期
-        if truck.status=="正在配货"
+        
+        if truck.status =="正在配货"
         #first change truck status
+        Rails.logger.info "#{truck.paizhao},status=#{truck.status}"
         truck.update_attributes(:status=>"超时过期")
+                               
         expired_truck+=1
         start=Time.now
         #update line statistic
-        Lstatistic.collection.update({'line'=>truck.line},
-        {'$inc' => {"valid_truck" => -1,"expired_truck"=> 1}},{:upsert =>true})       
+        @lstatistic=Lstatistic.first(:conditions=>{:line=>truck.line})
+        @lstatistic.inc(:valid_truck,-1); @lstatistic.inc(:expired_truck,1) unless @lstatistic.nil?
+      #  Lstatistic.collection.update({'line'=>truck.line},
+      #  {'$inc' => {"valid_truck" => -1,"expired_truck"=> 1}},{:upsert =>true})       
         #decrement valid truck for stock truck
-        StockTruck.collection.update({:_id=>truck.stock_truck_id},{'$inc' => {"valid_truck" => -1}}) 
-        if truck.from_site=="local"
-        User.collection.update({:_id=>truck.user_id},{'$inc' =>{:valid_truck=>-1}}) 
+        @stock_truck= StockTruck.find(truck.stock_truck_id)  unless( truck.nil?  || truck.stock_truck_id.nil?) 
+        @stock_truck.inc(:valid_truck,-1) unless @stock_truck.nil?
+        
+         # StockTruck.collection.update({:_id=>truck.stock_truck_id},{'$inc' => {"valid_truck" => -1}}) 
+        if truck.from_site=="local"          
+           @user=User.find(truck.user_id) unless truck.nil?
+           @user.inc(:valid_truck,-1) unless @user.nil?
+           # User.collection.update({:_id=>truck.user_id},{'$inc' =>{:valid_truck=>-1}})         
         end
+        
         #change all inquery and quote status 
-        Inquery.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})
-        Quote.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})  
+        
+
+        Inquery.where(:conditions=>{:truck_id=>truck.id}).each {|inquery| inquery.update_attributes(:status=>"超时过期")}
+        Quote.where(:conditions=>{:truck_id=>truck.id}).each {|quote| quote.update_attributes(:status=>"超时过期")}
+       # Inquery.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})
+        #Quote.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})  
+        
         end_time=Time.now
         Rails.logger.info "update time=#{end_time-start}sec"
         #expire line
@@ -47,11 +63,12 @@ class ScansController < ApplicationController
        #   raise
          # Rails.logger.info "exception #{$@}for expire line truck#{truck.fcity_code} to #{truck.tcity_code}"
         end
-         end_time=Time.now
+        end_time=Time.now
         Rails.logger.info "quick truck exprie time=#{end_time-start}sec"
         expire_page(:controller=>"trucks",:action=>"show",:id=>truck.id)
         end
       end
+
     end
      truck_expire_line.each do |line|
           FileUtils.rm_rf Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}"       
@@ -63,30 +80,41 @@ class ScansController < ApplicationController
     #initialize the status if no any truck issued
     StockTruck.where.each do |stock_truck|
       if stock_truck.valid_truck.blank? || stock_truck.valid_truck==0 
-         StockTruck.collection.update({:_id=>stock_truck.id},{'$set' => {"status" => "车辆闲置"}})
+        # StockTruck.collection.update({:_id=>stock_truck.id},{'$set' => {"status" => "车辆闲置"}})
+         stock_truck.update_attributes("status" => "车辆闲置")
       end
     end
     cargo_scan_start=Time.now
     Cargo.where(:status=>"正在配车").each do |cargo|
     #   puts "cargo.created_at=#{cargo.created_at},cargo.send_date=#{cargo.send_date}"
-      if compare_time_expired(cargo,cargo.created_at ||cargo.updated_at,cargo.send_date || "1")==true
+      if compare_time_expired(cargo.updated_at,cargo.send_date || "1")==true
         if cargo.status=="正在配车"
           # first update cargo status
           cargo.update_attributes(:status=>"超时过期")
-          expired_cargo+=1
+           expired_cargo+=1
+           lstatistic=Lstatistic.first(:conditions=>{:line=>cargo.line})
+           lstatistic.inc(:valid_cargo,-1);lstatistic.inc(:expired_cargo,1) unless  lstatistic.nil?
          #update line statistic
-         Lstatistic.collection.update({'line'=>cargo.line},
-         {'$inc' => {"valid_cargo" => -1,"expired_cargo"=> 1}},{:upsert =>true})
+         #Lstatistic.collection.update({'line'=>cargo.line},
+         #{'$inc' => {"valid_cargo" => -1,"expired_cargo"=> 1}},{:upsert =>true})
 
           #decrement valid cargo for stock cargo
-          StockCargo.collection.update({:_id=>cargo.stock_cargo_id},{'$inc' => {"valid_cargo" => -1}})
+          stockcargo=StockCargo.find(cargo.stock_cargo_id)
+          stockcargo.inc(:valid_cargo,-1) unless stockcargo.nil?
+        #  StockCargo.collection.update({:_id=>cargo.stock_cargo_id},{'$inc' => {"valid_cargo" => -1}})
+          
         if cargo.from_site=="local"
-         User.collection.update({:_id=>cargo.user_id},{'$inc' =>{:valid_cargo=>-1}}) 
+          @user=User.find(cargo.user_id)
+          @user.inc(:valid_cargo,-1) unless @user.nil?
+         # User.collection.update({:_id=>cargo.user_id},{'$inc' =>{:valid_cargo=>-1}}) 
         end
           
         #change all inquery and quote status 
-        Inquery.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
-        Quote.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
+        Inquery.where(:conditions=>{:cargo_id=>cargo.id}).each {|inquery| inquery.update_attributes(:status=>"超时过期")}
+        Quote.where(:conditions=>{:cargo_id=>cargo.id}).each {|quote| quote.update_attributes(:status=>"超时过期")}
+
+       # Inquery.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
+       # Quote.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
         begin
         iterate_expire_line(cargo_expire_line,cargo.fcity_code,cargo.tcity_code)
         rescue
@@ -107,7 +135,8 @@ class ScansController < ApplicationController
   #initialize all stockcargo
    StockCargo.where.each do |stock_cargo|
       if stock_cargo.valid_cargo .blank?||stock_cargo.valid_cargo==0
-         StockCargo.collection.update({:_id=>stock_cargo.id},{'$set' => {"status" => "货物闲置"}})
+        # StockCargo.collection.update({:_id=>stock_cargo.id},{'$set' => {"status" => "货物闲置"}})
+        stock_cargo.update_attributes("status" => "货物闲置")
       end
     end
 
@@ -170,7 +199,7 @@ class ScansController < ApplicationController
     Cargo.where(:status=>"超时过期").each do |cargo|
       expiredcargo=ExpiredCargo.new(:id=>cargo.id)
       cargo.keys.each do |key| 
-      expiredcargo[key[0]]=cargo[key[0]]
+        expiredcargo[key[0]]=cargo[key[0]]
       end
       expiredcargo.save
       cargo.destroy
@@ -217,18 +246,19 @@ class ScansController < ApplicationController
    @cargolines=Array.new
    @grasps=GraspRecord.where({:cargostatus=>"notexpired"})
    Rails.logger.debug "grasps size=="+@grasps.size.to_s
-   puts @grasps
+  # puts @grasps
    @grasps.each do |grasp|
      @cargolines+=grasp.cargo_lines unless grasp.cargo_lines.nil? 
-     GraspRecord.collection.update({"_id"=>grasp.id},{'$set'=>{:cargostatus=>"expired"}}) 
-     Rails.logger.debug grasp.cargo_lines    
+    # GraspRecord.collection.update({"_id"=>grasp.id},{'$set'=>{:cargostatus=>"expired"}}) 
+     grasp.update_attributes(:cargostatus=>"expired")
+    # Rails.logger.debug grasp.cargo_lines    
    end
 
    @cargolines=@cargolines.uniq   
    unless @cargolines.size==0
       @cargolines.each do |line|
        FileUtils.rm_rf Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"       
-       Rails.logger.debug "expire "+Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"
+      # Rails.logger.debug "expire "+Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"
     end
    end
     respond_to do |format|
@@ -244,7 +274,8 @@ class ScansController < ApplicationController
 
    @grasps.each do |grasp|
      @trucklines+=grasp.truck_lines unless grasp.truck_lines.nil? 
-     GraspRecord.collection.update({"_id"=>grasp.id},{'$set'=>{:truckstatus=>"expired"}})        
+    # GraspRecord.collection.update({"_id"=>grasp.id},{'$set'=>{:truckstatus=>"expired"}})        
+     grasp.update_attributes(:truckstatus=>"expired")
    end
 
    @trucklines=@trucklines.uniq   
@@ -276,12 +307,14 @@ class ScansController < ApplicationController
      Ustatistic.all.each do |ustatistic|
        valid_cargo=Cargo.where(:status=>"正在配车",:user_id=>ustatistic.user_id).count
        if ustatistic.valid_cargo !=valid_cargo
-       Ustatistic.collection.update({:user_id=>ustatistic.user_id},{'$set'=>{:valid_cargo=>valid_cargo}})
-       Rails.logger.debug "found not correct valid_cargo for user "
+       # Ustatistic.collection.update({:user_id=>ustatistic.user_id},{'$set'=>{:valid_cargo=>valid_cargo}})
+        ustatistic.update_attributes(:valid_cargo=>valid_cargo)
+        Rails.logger.debug "found not correct valid_cargo for user "
        end
        valid_truck=Truck.where(:status=>"正在配货",:user_id=>ustatistic.user_id).count
        if ustatistic.valid_truck !=valid_truck
        Ustatistic.collection.update({:user_id=>ustatistic.user_id},{'$set'=>{:valid_truck=>valid_truck}})
+        ustatistic.update_attributes(:valid_truck=>valid_truck)
        end
      end
     

@@ -1,5 +1,6 @@
 class SiteqzHuo
-   include MongoMapper::Document
+   include Mongoid::Document
+   include Mongoid::Timestamps
      cattr_reader :per_page
      @@per_page = 3
     # belongs_to :users
@@ -8,33 +9,33 @@ class SiteqzHuo
    #  has_one :cstatistic 
    
    # cargo self info
-      key :cargo_weight,String
-      key :cargo_zuhuo,String
-      key :cargo_bulk,String
-      key :send_date,String
-      key :comments,String
-      key :status,String
+      field :cargo_weight,:type=>String
+      field :cargo_zuhuo,:type=>String
+      field :cargo_bulk,:type=>String
+      field :send_date,:type=>String
+      field :comments,:type=>String
+      field :status,:type=>String
 
       #for not go back to find stock_cargo
-      key :cate_name,String
-      key :package_name,String
-      key :big_category,String
+      field :cate_name,:type=>String
+      field :package_name,:type=>String
+      field :big_category,:type=>String
 
       # important line info
-      key :line,String
-      key :fcity_name,String
-      key :tcity_name,String
-      key :fcity_code,String
-      key :tcity_code,String      
+      field :line,:type=>String
+      field :fcity_name,:type=>String
+      field :tcity_name,:type=>String
+      field :fcity_code,:type=>String
+      field :tcity_code,:type=>String      
 
 
       #future usage
-      key :pingjia_id,ObjectId
-      key :cstatistic_id,ObjectId
+      field :pingjia_id,:type=>String
+      field :cstatistic_id,:type=>String
       
       # for compatible local model
-      key :user_id,ObjectId
+      embeds_one :users
       
       
-     timestamps!
+   #  timestamps!
 end

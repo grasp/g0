@@ -1,14 +1,13 @@
+
 <h1>Listing users</h1>
 
 <table>
   <tr>
     <th>Email</th>
     <th>Name</th>
-    <th>Nick name</th>
-    <th>Hashed password</th>
-    <th>Salt</th>
     <th>Status</th>
     <th>Activate</th>
+     <th>created_at</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,11 +17,9 @@
   <tr>
     <td><%= user.email %></td>
     <td><%= user.name %></td>
-    <td><%= user.nick_name %></td>
-    <td><%= user.hashed_password %></td>
-    <td><%= user.salt %></td>
     <td><%= user.status %></td>
     <td><%= user.activate %></td>
+    <td><%= user.created_at.localtime.to_s %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -3,8 +3,20 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   #include UsersHelper
+  before_filter :choose_layout
+  before_filter:admin_authorize,:only=>[:index] #for debug purpose
+  # layout "users",:except => [:index]
+  #layout "users"
+  layout :choose_layout
   
-  layout "users",:except => [:index]
+  
+  def choose_layout
+    if action_name =='index'
+       return 'admin'
+     else
+       return 'users'
+     end
+  end
 
   def index
     @users = User.all
@@ -85,7 +97,7 @@ class UsersController < ApplicationController
         format.html { redirect_to(:controller=>"user_contacts",:action=>"new",:email=>"#{@user.email}")}
         #User create fail
       else
-        if User.find_by_email(params[:email])
+        if User.first(:conditions=>{:email=>params[:email]})
           flash[:notice] = 'email已经存在'
         else
           flash[:notice] = '用户验证出错'
@@ -133,8 +145,7 @@ class UsersController < ApplicationController
   end
 
   def pwreset
-    @user=User.find_by_name(params[:username])
-    
+    @user=User.first(:conditions=>{:name=>params[:username]})    
     #get the user from the hash
     if  params[:password] !=  params[:password_confirmation]
       flash[:notice] = "确认密码不对，请重新输入 "
@@ -155,7 +166,7 @@ class UsersController < ApplicationController
   def pw_sent_confirm
 
     #get user from email
-    @user=User.find_by_email(params[:email])
+    @user=User.first(:conditions=>{:email=>params[:email]})
 
     if @user.nil?
       respond_to do |format|
@@ -178,7 +189,7 @@ class UsersController < ApplicationController
   end
 
   def  change_password_confirm
-    @user=User.find_by_name(params[:username])
+    @user=User.first(:conditions=>{:name=>params[:username]})
     # need check the code of activate field from the
     respond_to do |format|
       if  @user.activate!= params[:activate]
@@ -229,7 +240,7 @@ class UsersController < ApplicationController
   def activate
     name=params[:name]
     code=params[:code]
-    @user=User.find_by_name(name)
+    @user=User.first(:conditions=>{:name=>name})
     if (code==@user.activate)
       #@user.status="actived"
       @user.update_attributes(:status=>"actived")

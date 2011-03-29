@@ -18,19 +18,21 @@ class TrucksController < ApplicationController
 
   def index
     unless params[:id].nil?
-      @stock_truck=StockTruck.find_by_id(params[:id])
+     # @stock_truck=StockTruck.find(params[:id])
+     # @stock_truck=StockTruck.find(params[:id])
+     @stock_truck=StockTruck.find(params[:id])
     end
     unless @stock_truck.nil?
-      @trucks = Truck.where({:user_id =>session[:user_id], :stock_truck_id=>params[:id]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      @trucks = Truck.where({:user_id =>session[:user_id], :stock_truck_id=>params[:id]}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     else
      if params[:status]=="peihuo"
-        @trucks = Truck.where({:user_id =>session[:user_id], :status =>"正在配货"}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+        @trucks = Truck.where({:user_id =>session[:user_id], :status =>"正在配货"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
      elsif params[:status]=="ischenjiao"
-        @trucks = Truck.where({:user_id =>session[:user_id], :status =>"正在成交"}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+        @trucks = Truck.where({:user_id =>session[:user_id], :status =>"正在成交"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
       elsif params[:status]=="chenjiao"
-        @trucks = Truck.where({:user_id =>session[:user_id], :status =>"已成交"}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+        @trucks = Truck.where({:user_id =>session[:user_id], :status =>"已成交"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
      else
-        @trucks = Truck.where({:user_id =>session[:user_id]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+        @trucks = Truck.where({:user_id =>session[:user_id]}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
       end
       
     end
@@ -42,7 +44,8 @@ class TrucksController < ApplicationController
   end
 
   def quoteinquery
-    @truck=Truck.find_by_id(params[:truck_id])
+   # @truck=Truck.find(params[:truck_id])
+    @truck=Truck.find(params[:truck_id])
     @baojia=Quote.where(:truck_id => params[:truck_id], :user_id =>session[:user_id])
     @xunjia=Inquery.where(:truck_id => params[:truck_id]) 
 
@@ -81,7 +84,7 @@ class TrucksController < ApplicationController
   end
   
   def part
-    @stock_truck=StockTruck.find_by_id(params[:stock_truck_id])
+    @stock_truck=StockTruck.find(params[:stock_truck_id])
     @trucks=Truck.where(:stock_truck_id =>params[:stock_truck_id],:user_id =>session[:user_id]).paginate(:page=>params[:page]||1,:per_page=>20)
     respond_to do |format|
       format.html # part.html.erb
@@ -90,7 +93,8 @@ class TrucksController < ApplicationController
   end
 
   def match
-    @truck = Truck.find_by_id(params[:truck_id])
+   # @truck = Truck.find(params[:truck_id])
+    @truck = Truck.find(params[:truck_id])
     @search=Search.new
     @search.fcity_name=@truck.fcity_name
     @search.tcity_name=@truck.tcity_name
@@ -98,22 +102,22 @@ class TrucksController < ApplicationController
     @search.tcity_code=@truck.tcity_code
     
        if @search.fcity_code=="100000000000" && @search.tcity_code=="100000000000" then
-       @cargos=Cargo.where(:status=>"正在配车").sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos=Cargo.where(:status=>"正在配车").desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     elsif @search.fcity_code=="100000000000" && @search.tcity_code!="100000000000"
      min=get_max_min_code(@search.tcity_code)[0]
      max=get_max_min_code(@search.tcity_code)[1]
       
-      @cargos=Cargo.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"正在配车"}).sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      @cargos=Cargo.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"正在配车"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     elsif @search.tcity_code=="100000000000" && @search.fcity_code!="100000000000"
      min=get_max_min_code(@search.fcity_code)[0]
      max=get_max_min_code(@search.fcity_code)[1]
-      @cargos=Cargo.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"正在配车"}).sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      @cargos=Cargo.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"正在配车"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     else
       mint=get_max_min_code(@search.tcity_code)[0]
       maxt=get_max_min_code(@search.tcity_code)[1]
       minf=get_max_min_code(@search.fcity_code)[0]
       maxf=get_max_min_code(@search.fcity_code)[1]
-      @cargos=Cargo.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配车"}).sort(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      @cargos=Cargo.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"正在配车"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     end
   
     respond_to do |format|
@@ -126,8 +130,9 @@ class TrucksController < ApplicationController
   # GET /trucks/1.xml
   def show
     
-    @truck = Truck.find(params[:id])
-    @stock_truck = StockTruck.find_by_id(@truck.stock_truck_id) if @truck.from_site=="local"
+    # @truck = Truck.find(params[:id])
+    @truck = Truck.first(:conditions=>{:_id=>params[:id].to_s})
+    @stock_truck = StockTruck.find(@truck.stock_truck_id) if @truck.from_site=="local"
    # @line_ad=LineAd.find_by_line(get_line(@truck.fcity_code,@truck.tcity_code))
     
     if @line_ad.nil?
@@ -136,8 +141,10 @@ class TrucksController < ApplicationController
      # @line_ad.tcity_name=@truck.tcity_name
     end
     
-    @user_contact=UserContact.find_by_id(@truck.user_id)
-    @company=Company.find_by_id(@truck.company_id)
+   # @user_contact=UserContact.find(@truck.user_id)
+   @user_contact=UserContact.first(:conditions=>{:user_id=>@truck.user_id})
+  # @company=Company.find(@truck.company_id)
+   @user_contact=Company.first(:conditions=>{:_id=>@truck.company_id})
     
     respond_to do |format|
       format.html # show.html.erb
@@ -148,11 +155,12 @@ class TrucksController < ApplicationController
   # GET /trucks/new
   # GET /trucks/new.xml
   def new
-    @stock_truck=StockTruck.find_by_id(params[:id])    
+    @stock_truck=StockTruck.find(params[:id])    
     @truck = Truck.new
-    @user=User.find_by_id(session[:user_id])
-    @user_contact=UserContact.find_by_user_id(@user.id)
-    @company=Company.find_by_user_id(@user.id)
+    @user=User.find(session[:user_id])
+   # @user_contact=UserContact.find_by_user_id(@user.id)
+    @user_contact=@user.user_contact
+    @company=@user.company
     
     @truck.stock_truck_id=@stock_truck.id
     @truck.paizhao=@stock_truck.paizhao
@@ -168,9 +176,11 @@ class TrucksController < ApplicationController
 
     @truck.user_id=@stock_truck.user_id
     @truck.company_id=@stock_truck.company_id
-    @truck.user_contact_id=UserContact.find_by_user_id(@truck.user_id).id
+  #  @truck.user_contact_id=UserContact.find_by_user_id(@truck.user_id).id
+  @truck.user_contact_id=@user_contact.id
    
-     @user_contact=UserContact.find_by_user_id(session[:user_id])
+    # @user_contact=UserContact.find_by_user_id(session[:user_id])
+     @user_contact=@user.user_contact
      @truck.user_contact_id=@user_contact.id unless @user_contact.nil?
 
     if @user_contact.blank?
@@ -178,8 +188,8 @@ class TrucksController < ApplicationController
       render(:template=>"shared/new_contact")
       return;
     end
-    @company=Company.find_by_user_id(@user.id)
-    @truck.company_id=@company.id unless @company.nil?
+   # @company=Company.find_by_user_id(@user.id)
+   # @truck.company_id=@company.id unless @company.nil?
 
     if @company.blank?
       flash[:notice]="你的公司信息没有填写"
@@ -197,7 +207,7 @@ class TrucksController < ApplicationController
   # GET /trucks/1/edit
   def edit
     @truck = Truck.find(params[:id])
-    @stock_truck=StockTruck.find_by_id(@truck.stock_truck_id)
+    @stock_truck=StockTruck.find(@truck.stock_truck_id)
   end
 
   # POST /trucks
@@ -226,7 +236,7 @@ class TrucksController < ApplicationController
         format.xml  { render :xml => @truck, :status => :created, :location => @truck }
       else
         flash[:notice] = '车源创建失败，重复发布'
-       # @stock_truck=StockTruck.find_by_id(@truck.stock_truck_id)
+       # @stock_truck=StockTruck.find(@truck.stock_truck_id)
         format.html { render :action => "new" }
         format.xml  { render :xml => @truck.errors, :status => :unprocessable_entity }
       end
@@ -237,7 +247,7 @@ class TrucksController < ApplicationController
   # PUT /trucks/1.xml
   def update
     @truck = Truck.find(params[:id])
-    @stock_truck=StockTruck.find_by_id(@truck.stock_truck_id)
+    @stock_truck=StockTruck.find(@truck.stock_truck_id)
     #  @trucks = update_truck_info_from_params(params)    
     respond_to do |format|
       if @truck.update_attributes( params[:truck])

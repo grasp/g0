@@ -2,37 +2,27 @@
 class ExpiredQuote 
   # belongs_to :cargos
   # belongs_to :trucks
-   include MongoMapper::Document
+   include Mongoid::Document
      #basic infor
-      key :price,Integer
-      key :comments,String
-      key :cargo_id,ObjectId
-      key :truck_id,ObjectId
-      key :truck_user_id,ObjectId
-      key :truck_company_id,ObjectId
-      key :cargo_user_id,ObjectId
-      key :cargo_company_id,ObjectId
-      key :user_id,ObjectId
+      field :price,:type=>Integer
+      field :comments,:type=>String
+      field :cargo_id,:type=>String
+      field :truck_id,:type=>String
+      field :truck_user_id,:type=>String
+      field :truck_company_id,:type=>String
+      field :cargo_user_id,:type=>String
+      field :cargo_company_id,:type=>String
+      field :user_id,:type=>String
 
       #status of quotes
-      key:status,String
+      field:status,:type=>String
 
 
       # for future usage
-      key :ismailed,Boolean
-      key :isaccepted,Boolean
+      field :ismailed,:type=>Boolean
+      field :isaccepted,:type=>Boolean
       
 
-      timestamps!
-      
-     validate :check_unique
-  def check_unique
-    repeated=Quote.where(:cargo_id=>self.cargo_id,:truck_id=>self.truck_id)
-       unless repeated.size==0
-      errors.add_to_base("不能重复报价")
-      return false
-    end
-    return true
-  end
+      #timestamps!
 
 end

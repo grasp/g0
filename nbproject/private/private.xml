@@ -3,15 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
         <file>
             <url>app/controllers/users_controller.rb</url>
-            <line>265</line>
+            <line>276</line>
         </file>
     </editor-bookmarks>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/D:/vob/g0/app/views/cargos/_form.html.erb</file>
-        <file>file:/D:/vob/g0/app/views/cargos/new.html.erb</file>
-        <file>file:/D:/vob/g0/app/views/stock_cargos/index.html.erb</file>
-        <file>file:/D:/vob/g0/app/views/stock_trucks/index.html.erb</file>
-        <file>file:/D:/vob/g0/app/views/users/_form.html.erb</file>
-        <file>file:/D:/vob/g0/app/mailers/user_mailer.rb</file>
-    </open-files>
 </project-private>

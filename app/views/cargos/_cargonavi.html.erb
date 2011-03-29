@@ -3,7 +3,7 @@
 
 <div class="bottom_link">
 
-<a class="page_navi_link" href="/cargos/index/peiche">正在配车(<%=Ustatistic.find_by_user_id(session[:user_id]).valid_cargo||0%>)</a>
+<a class="page_navi_link" href="/cargos/index/peiche">正在配车(<%=Ustatistic.first(:conditions=>{:user_id=>session[:user_id]}).valid_cargo||0%>)</a>
 <a class="page_navi_link" href="/cargos/index/ischenjiao">正在成交</a>
 <a style="margin-right: 50px" class="page_navi_link" href="/cargos/index/chenjiao">已成交</a>
 <!--<a class="page_navi_link" href="/cargos/index/过期">过期货源</a>

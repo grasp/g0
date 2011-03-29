@@ -4,16 +4,11 @@
    <th>差别车子</th>
    <th>本次货物</th>
    <th>本次车子</th>
-   <th>总共货物</th>
-   <th>总共车子</th>
-
    <th>重复车子</th>
    <th>重复货物</th>
    <th>缺失车子</th>
    <th>缺失货物</th>
-   
-   <th>失败次数</th>
-    <th>成功次数</th>
+    
     <th>耗时(秒)</th>
    <th>采集时间</th>
   <th>货物状态</th>
@@ -26,16 +21,12 @@
   <td><%=grasp.diff_che%></td>
   <td><%=grasp.cycle_huo%></td>
   <td><%=grasp.cycle_che%></td>
-  <td><%=grasp.total_huo%></td>
-  <td><%=grasp.total_che%></td>  
-  <td><%=grasp.miss_field_che%></td>
-  <td><%=grasp.miss_field_huo%></td>
    <td><%=grasp.repeat_che%></td>
   <td><%=grasp.repeat_huo%></td>
-    <td><%=grasp.fail_counter%></td>
-  <td><%=grasp.succ_counter%></td>
-   <td><%=grasp.cost_time%></td>
-  <td><%=grasp.created_at%></td>
+  <td><%=grasp.miss_field_che%></td>
+  <td><%=grasp.miss_field_huo%></td>
+  <td><%=grasp.cost_time%></td>
+  <td><%=grasp.created_at.localtime.to_s.slice(0,16)%></td>
   <td><%=grasp.cargostatus%></td>
   <td><%=grasp.truckstatus%></td>
 </tr>

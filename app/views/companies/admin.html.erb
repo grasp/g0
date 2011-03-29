@@ -1,5 +1,7 @@
 <%#coding: utf-8%>
 
+
+
  <%  unless @companies.blank? %>
 <table  >
   <thead>
@@ -34,11 +36,8 @@
 
   </tbody>
 </table>
+<%= will_paginate @companies ,:class=>"page_navi_link"%>
 <p id="notice"><%= notice %></p>
-
-
-
-
 <br />
 
 <%#= link_to 'New Company', new_company_path %>

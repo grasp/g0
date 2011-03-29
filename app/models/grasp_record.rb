@@ -2,23 +2,24 @@
 # and open the template in the editor.
 
 class GraspRecord
-    include MongoMapper::Document
-      key :diff_che,Integer
-      key :diff_huo,Integer
-      key :cycle_che,Integer
-      key :cycle_huo,Integer
-      key :total_che,Integer
-      key :total_huo,Integer      
-      key :cost_time,String 
-      key :fail_counter,Integer
-      key :succ_counter,Integer
+include Mongoid::Document
+include Mongoid::Timestamps
+      field :diff_che,:type=>Integer
+      field :diff_huo,:type=>Integer
+      field :cycle_che,:type=>Integer
+      field :cycle_huo,:type=>Integer
+      field :total_che,:type=>Integer
+      field :total_huo,:type=>Integer      
+      field :cost_time,:type=>String
+      field :fail_counter,:type=>Integer
+      field :succ_counter,:type=>Integer
       
-      key :miss_field_huo,Integer
-      key :miss_field_che,Integer      
-      key :repeat_huo,Integer
-      key :repeat_che,Integer
-      key :cargos_lines,Array
-      key :trucks_lines,Array
-      timestamps!    
+      field :miss_field_huo,:type=>Integer
+      field :miss_field_che,:type=>Integer      
+      field :repeat_huo,:type=>Integer
+      field :repeat_che,:type=>Integer
+      field :cargos_lines,:type=>Array
+      field :trucks_lines,:type=>Array
+     # timestamps!    
 end
 

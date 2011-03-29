@@ -26,7 +26,7 @@ class QuotesController < ApplicationController
 
 
   def part
-    @truck=Truck.find_by_id(params[:truck_id])
+    @truck=Truck.find(params[:truck_id])
     @quotes=Quote.where(:truck_id =>params[:truck_id], :user_id =>session[:user_id])
 
     respond_to do |format|
@@ -36,7 +36,7 @@ class QuotesController < ApplicationController
   end
   #one cargo's all truck baojia
   def cargo
-    @cargo=Cargo.find_by_id(params[:cargo_id])
+    @cargo=Cargo.find(params[:cargo_id])
     #only belong to me
     @bao_or_xun_record=Quote.where(:cargo_id => params[:cargo_id])
     respond_to do |format|
@@ -47,7 +47,7 @@ class QuotesController < ApplicationController
 
   #one trucks's all baojia
   def truck
-    @truck=Truck.find_by_id(params[:truck_id])
+    @truck=Truck.find(params[:truck_id])
     @bao_or_xun_record=Quote.where(:truck_id => params[:truck_id], :user_id =>session[:user_id])
     respond_to do |format|
       format.html # part.html.erb
@@ -60,7 +60,7 @@ class QuotesController < ApplicationController
   # GET /quotes/1.xml
   def show
     @quote = Quote.find(params[:id])
-    @cargo=Cargo.find_by_id(@quote.cargo_id)
+    @cargo=Cargo.find(@quote.cargo_id)
     @trucks = Truck.where(:user_id =>session[:user_id])
     @mytruck=Hash.new
     @trucks.each do |truck|
@@ -137,9 +137,11 @@ class QuotesController < ApplicationController
     respond_to do |format|
       if @quote.save
         #update statistic
-        Cargo.collection.update({'_id' => @quote.cargo_id},{'$inc' => {"total_baojia" => 1}})         
+       # Cargo.collection.update({'_id' => @quote.cargo_id},{'$inc' => {"total_baojia" => 1}}) 
+        @cargo.inc(:total_baojia,1)        
         #update  tstatistic
-        Truck.collection.update({'_id' => @quote.truck_id},{'$inc' => {"total_baojia" => 1}})  
+       # Truck.collection.update({'_id' => @quote.truck_id},{'$inc' => {"total_baojia" => 1}})  
+        @truck.inc(:total_baojia,1)  
         flash[:notice]= "创建报价成功！"
         format.html { redirect_to(@quote, :notice => '创建报价成功.') }
         format.xml  { render :xml => @quote, :status => :created, :location => @quote }
@@ -174,8 +176,8 @@ class QuotesController < ApplicationController
     @quote=Inquery.find(params[:id])
     end
     
-    @cargo=Cargo.find_by_id(@quote.cargo_id)
-    @truck=Truck.find_by_id(@quote.truck_id)
+    @cargo=Cargo.find(@quote.cargo_id)
+    @truck=Truck.find(@quote.truck_id)
     
     #Cargo.where(:status=>"邀请成交").each {|c| c.status="正在成交";c.save}
     #Truck.where(:status=>"邀请成交").each {|c| c.status="正在成交";c.save}
@@ -185,20 +187,34 @@ class QuotesController < ApplicationController
    unless @quote.blank?
     #update truck status
     
-    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"正在成交"}})    
-    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"正在成交"}}) 
-    Ustatistic.collection.update({'user_id'=>@quote.cargo_user_id},{'$inc'=>{:valid_cargo=>-1}}) 
-    Ustatistic.collection.update({'user_id'=>@quote.truck_user_id},{'$inc'=>{:valid_truck=>-1}}) 
-    StockTruck.collection.update({'_id'=>@truck.stock_truck_id},{'$set'=>{:status=>"正在成交"}},{'$inc'=>{:valid_truck=>-1}}) 
-    Truck.collection.update({'stock_truck_id'=>@truck.stock_truck_id},{'$set'=>{:status=>"成交过期"}})
-    Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"正在成交"}})
+   # Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"正在成交"}})
+   # Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"正在成交"}}) 
+    @cargo.update_attributes(:status=>"正在成交")
+    
+
+   # Ustatistic.collection.update({'user_id'=>@quote.cargo_user_id},{'$inc'=>{:valid_cargo=>-1}}) 
+    #Ustatistic.collection.update({'user_id'=>@quote.truck_user_id},{'$inc'=>{:valid_truck=>-1}}) 
+       
+     Ustatistic.where(:user_id=>@quote.cargo_user_id).first.inc(:valid_cargo,-1)
+     Ustatistic.where(:user_id=>@quote.truck_user_id).first.inc(:valid_truck,-1)
+     
+     # StockTruck.collection.update({'_id'=>@truck.stock_truck_id},{'$set'=>{:status=>"正在成交"}},{'$inc'=>{:valid_truck=>-1}}) 
+     @stocktruck=StockTruck.find(@truck.stock_truck_id)
+     @stocktruck.update_attributes(:status=>"正在成交")
+     @stocktruck.inc(:valid_truck,-1)
+   
+    Truck.where(:stock_truck_id=>@truck.stock_truck_id).each {|truck| truck.update_attributes(:status=>"成交过期")}
+    #Truck.collection.update({'stock_truck_id'=>@truck.stock_truck_id},{'$set'=>{:status=>"成交过期"}})    
+    # Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"正在成交"}})
+     
+    @truck.update_attributes(:status=>"正在成交") #recover 
     
     #Update Cargo chenjiao record
-    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:cj_truck_id=>@truck.id,
-               :cj_user_id=>@truck.user_id,:cj_company_id=>@truck.company_id,:cj_quote_id=>@quote.id}})
+   @cargo.update_attributes(:cj_truck_id=>@truck.id,
+               :cj_user_id=>@truck.user_id,:cj_company_id=>@truck.company_id,:cj_quote_id=>@quote.id)
          
-    Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:cj_cargo_id=>@cargo.id,
-               :cj_user_id=>@cargo.user_id,:cj_company_id=>@cargo.company_id,:cj_quote_id=>@quote.id}})
+   @truck.update_attributes(:cj_cargo_id=>@cargo.id,
+               :cj_user_id=>@cargo.user_id,:cj_company_id=>@cargo.company_id,:cj_quote_id=>@quote.id)
    
     #record quote_id or inquery_id chenjiao_truck_id
   
@@ -211,20 +227,23 @@ class QuotesController < ApplicationController
     
     #TOTO:notify all other related truck
     #All quotes to from this truck change to chenjiao
-    @quotes=Quote.where(:truck_id =>@quote.truck_id , :status =>"正在配货")
-    if  @quotes.size>0
-      @quotes.each do |quote|
-        Quote.collection.update({'truck_id'=>@quote.truck_id },{'$set'=>{:status=>"成交过期"}})
-      end
-    end
+  #  @quotes=Quote.where(:truck_id =>@quote.truck_id , :status =>"正在配货")
+   # if  @quotes.size>0
+   #   @quotes.each do |quote|
+   #     Quote.collection.update({'truck_id'=>@quote.truck_id },{'$set'=>{:status=>"成交过期"}})
+   #   end
+  #  end
+  #  
+  Quote.where(:truck_id =>@quote.truck_id , :status =>"正在配货").each {|quote| quote.update_attributes(:status=>"成交过期")}
     #All Inquers from this cargo neec change to chenjiao
-    @inqueries=Inquery.where(:cargo_id =>@quote.cargo_id,:status=>"正在配货")
-    if  @inqueries.size>0
-      @inqueries.each do |inquery|
-        Inquery.collection.update({'cargo_id'=>@quote.cargo_id },{'$set'=>{:status=>"成交过期"}})
-      end
-    end
-
+   # @inqueries=Inquery.where(:cargo_id =>@quote.cargo_id,:status=>"正在配货")
+   # if  @inqueries.size>0
+   #   @inqueries.each do |inquery|
+   #     Inquery.collection.update({'cargo_id'=>@quote.cargo_id },{'$set'=>{:status=>"成交过期"}})
+   #   end
+   # end
+  Inquery.where(:cargo_id =>@quote.cargo_id,:status=>"正在配货").each {|inquery| inquery.update_attributes(:status=>"成交过期")}
+    
     respond_to do |format|
       format.html { redirect_to(:controller=>"cargos",:action=>"index" )}
     end
@@ -239,15 +258,20 @@ class QuotesController < ApplicationController
     @quote=Inquery.find(params[:id])
     end
     
-    @cargo=Cargo.find_by_id(@quote.cargo_id)
-    @truck=Truck.find_by_id(@quote.truck_id)
+    @cargo=Cargo.find(@quote.cargo_id)
+    @truck=Truck.find(@quote.truck_id)
     
     
     #update truck status
-    Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"已成交"}})
-    Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"已成交"}})
-    Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"已成交"}}) 
-   StockTruck.collection.update({'_id'=>@truck.stock_truck_id},{'$set'=>{:status=>"车辆闲置"}})
+    @truck.update_attributes(:status=>"已成交")
+    @cargo.update_attributes(:status=>"已成交")
+    @quote.update_attributes(:status=>"已成交")    
+   # Truck.collection.update({'_id'=>@quote.truck_id},{'$set'=>{:status=>"已成交"}})
+   # Cargo.collection.update({'_id'=>@quote.cargo_id},{'$set'=>{:status=>"已成交"}})
+   # Quote.collection.update({'_id'=>@quote.id},{'$set'=>{:status=>"已成交"}}) 
+   # StockTruck.collection.update({'_id'=>@truck.stock_truck_id},{'$set'=>{:status=>"车辆闲置"}})
+   
+   StockTruck.find(@truck.stock_truck_id).update_attributes(:status=>"车辆闲置")
     respond_to do |format|
       format.html { redirect_to(:controller=>"trucks",:action=>"index" )}
     end    

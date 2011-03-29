@@ -1,7 +1,7 @@
 # coding: utf-8
 
 class CargosController < ApplicationController
- # include Soku
+  # include Soku
   # GET /cargos
   # GET /cargos.xml
   include CargosHelper
@@ -68,7 +68,8 @@ class CargosController < ApplicationController
   end
 
   def quoteinquery
-    @cargo=Cargo.find_by_id(params[:cargo_id])
+   # @cargo=Cargo.find(params[:cargo_id])
+   @cargo=Cargo.find(params[:cargo_id])
 
     @xunjia=Inquery.where(:cargo_id => params[:cargo_id])
     @baojia=Quote.where(:cargo_id => params[:cargo_id])
@@ -76,17 +77,17 @@ class CargosController < ApplicationController
   
   def index
     unless params[:stock_cargo_id].nil?
-       @cargos=Cargo.where({:user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos=Cargo.where({:user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     else
     if params[:status]=="peiche"
-        @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"正在配车").order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+        @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"正在配车").desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     elsif params[:status]=="ischenjiao"
-       @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"正在成交").order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"正在成交").desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     elsif params[:status]=="chenjiao"
-       @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"已成交").order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"已成交").desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
      else
        #@cargos = Cargo.where("user_id = ?",session[:user_id]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>20)
-       @cargos = Cargo.where(:user_id =>session[:user_id]).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos = Cargo.where(:user_id =>session[:user_id]).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     end
    end    
     
@@ -98,30 +99,31 @@ class CargosController < ApplicationController
   end
   
   def match
-      @cargo = Cargo.find_by_id(params[:cargo_id])
+    #  @cargo = Cargo.find(params[:cargo_id])
+    @cargo = Cargo.find(params[:cargo_id])
       @search=Search.new
       @search.fcity_name=@cargo.fcity_name
       @search.tcity_name=@cargo.tcity_name
       @search.fcity_code=@cargo.fcity_code
       @search.tcity_code=@cargo.tcity_code
       
-     # @trucks=Truck.where(:fcity_code =>@cargo.fcity_code,:tcity_code =>@cargo.tcity_code).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     # @trucks=Truck.where(:fcity_code =>@cargo.fcity_code,:tcity_code =>@cargo.tcity_code).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     if @search.fcity_code=="100000000000" && @search.tcity_code=="100000000000" then   
-     @trucks=Truck.where.order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     @trucks=Truck.where.desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
    elsif @search.fcity_code=="100000000000" && @search.tcity_code!="100000000000"
      min=get_max_min_code(@search.tcity_code)[0]
      max=get_max_min_code(@search.tcity_code)[1]
-      @trucks=Truck.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"配货"}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+      @trucks=Truck.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"配货"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     elsif @search.tcity_code=="100000000000" && @search.fcity_code!="100000000000"
      min=get_max_min_code(@search.fcity_code)[0]
      max=get_max_min_code(@search.fcity_code)[1]     
-     @trucks=Truck.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"配货"}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     @trucks=Truck.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"配货"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     else
       mint=get_max_min_code(@search.tcity_code)[0]
       maxt=get_max_min_code(@search.tcity_code)[1]
       minf=get_max_min_code(@search.fcity_code)[0]
       maxf=get_max_min_code(@search.fcity_code)[1]
-     @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"配货"}).order(:updated_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+     @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"配货"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     end
     @search.save
     respond_to do |format|
@@ -132,7 +134,8 @@ class CargosController < ApplicationController
   end
 
   def part
-    @stock_cargo = StockCargo.find_by_id(params[:stock_cargo_id])
+   # @stock_cargo = StockCargo.find(params[:stock_cargo_id])
+   @stock_cargo = StockCargo.find(params[:stock_cargo_id])
     @cargos=Cargo.where({:stock_cargo_id => params[:stock_cargo_id],:user_id =>session[:user_id]}).paginate(:page=>params[:page]||1,:per_page=>20)
     respond_to do |format|
       format.html # part.html.erb
@@ -143,7 +146,8 @@ class CargosController < ApplicationController
   # GET /cargos/1
   # GET /cargos/1.xml
   def show
-    @cargo = Cargo.find_by_id(params[:id])
+   # @cargo = Cargo.find(params[:id].to_s) #why not work ????
+   @cargo = Cargo.first(:conditions=>{:_id=>params[:id].to_s})
     @stock_cargo=StockCargo.find(@cargo.stock_cargo_id) if @cargo.from_site=="local"
   #  @line_ad=LineAd.find({:line=>get_line(@cargo.fcity_code,@cargo.tcity_code)})
     
@@ -152,8 +156,8 @@ class CargosController < ApplicationController
       #@line_ad.fcity_name=@cargo.fcity_name
       #@line_ad.tcity_name=@cargo.tcity_name
     end
-    # @user_contact=ContactPerson.find_by_id(@cargo.user_id)
-    #  @company=Company.find_by_id(@cargo.company_id)
+    # @user_contact=ContactPerson.find(@cargo.user_id)
+    #  @company=Company.find(@cargo.company_id)
     
     respond_to do |format|
       format.html # show.html.erb
@@ -166,23 +170,29 @@ class CargosController < ApplicationController
   def new
     #check conact first
     @cargo = Cargo.new
-    @stock_cargo=StockCargo.find_by_id(params[:id])
-    puts "@stock_cargo=nil" if @stock_cargo.blank?
-    puts "@stock_cargo.cate_name=#{@stock_cargo.cate_name}"
+   # @stock_cargo=StockCargo.find(params[:id])
+   #  @stock_cargo=StockCargo.find(BSON::ObjectID(params[:id].to_s))
+    @stock_cargo=StockCargo.first(:conditions=>{:_id=>params[:id]}) #mongo insert is _id,and what is mongoid
+   # puts "@stock_cargo=nil" if @stock_cargo.blank?
+   # puts "@stock_cargo.cate_name=#{@stock_cargo.cate_name}"
     @cargo.stock_cargo_id=@stock_cargo.id
-    @user=User.find_by_id(session[:user_id])
-    @cargo.user_id=@user.id    
+   # @user=User.find(session[:user_id])
+   # @user=User.find(session[:user_id])
+    @user=User.first(:conditions=>{:_id=>session[:user_id]})
+    @cargo.user_id=@user.id
     @cargo.status="正在配车"
 
-    @user_contact=UserContact.find_by_user_id(session[:user_id])
+    #@user_contact=UserContact.find_by_user_id(session[:user_id])
+    @user_contact=@user.user_contact
+   # @cargo.user_contact_id=@user_contact.id unless @user_contact.nil?
     @cargo.user_contact_id=@user_contact.id unless @user_contact.nil?
-
     if @user_contact.blank?
       flash[:notice]="发布货源必须要知道你的联系方式和姓名."
       render(:template=>"shared/new_contact")
       return;
     end
-    @company=Company.find_by_user_id(@user.id)
+  #  @company=Company.find_by_user_id(@user.id)
+    @company=@user.company
     @cargo.company_id=@company.id unless @company.nil?
 
     if @company.blank?
@@ -205,7 +215,8 @@ class CargosController < ApplicationController
     if @cargo.nil?
       puts "你编辑了一个空的"
     end
-    @stock_cargo=StockCargo.find_by_id(@cargo.stock_cargo_id)
+   # @stock_cargo=StockCargo.find(@cargo.stock_cargo_id)
+   @stock_cargo=@cargo.stock_cargo
 
   end
 
@@ -227,24 +238,39 @@ class CargosController < ApplicationController
         #update statistic for cargo
         #update need use mongo way to avoid use model method
         #be carefull when use foreign object_id,otherwise ,will not update !!!!
-        Ustatistic.collection.update({:user_id => BSON::ObjectId(session[:user_id].to_s)}, {'$set' => {:status=>"正在配车"}})
-        Ustatistic.collection.update({:user_id => BSON::ObjectId(session[:user_id].to_s)},{'$inc' => {:total_cargo =>1,:valid_cargo=>1}})
-        
-        Lstatistic.collection.update({:line=>@cargo.line},{'$set' =>{:status=>"正在配车"}});
-        Lstatistic.collection.update({:line=>@cargo.line},{'$inc' => {:total_cargo =>1,:valid_cargo=>1}})
+      #  Ustatistic.collection.update({:user_id => BSON::ObjectId(session[:user_id].to_s)}, {'$set' => {:status=>"正在配车"}})
+       # Ustatistic.collection.update({:user_id => BSON::ObjectId(session[:user_id].to_s)},{'$inc' => {:total_cargo =>1,:valid_cargo=>1}})
+        Ustatistic.find(session[:user_id]).update_attributes(:status=>"正在配车")
+       # Lstatistic.collection.update({:line=>@cargo.line},{'$set' =>{:status=>"正在配车"}});
+       # Lstatistic.collection.update({:line=>@cargo.line},{'$inc' => {:total_cargo =>1,:valid_cargo=>1}})
+       @lstatistic=Lstatistic.where(:line=>@cargo.line).first
+       unless @lstatistic.nil?
+        @lstatistic.inc(:total_cargo,1)
+        @lstatistic.inc(:total_truck,1)
+       else
+         Lstatistic.create(:line=>@cargo.line,:total_cargo =>1,:valid_cargo=>1)
+       end
+      
         
         #$inc and $set could not be used together !!!!!!!???
         # $db[:stock_cargos].update({'_id' => @cargo.stock_cargo_id},{'$inc' =>{"valid_cargo" =>1},'$set' =>{"status"=>"正在配车"}})
-        StockCargo.collection.update({:_id => @cargo.stock_cargo_id},{'$set' =>{:status=>"正在配车"}})
-        StockCargo.collection.update({:_id => @cargo.stock_cargo_id},
-         {'$inc' =>{:valid_cargo=>1,:total_cargo=>1,:sent_weight=>@cargo.cargo_weight.to_f,:sent_bulk=>@cargo.cargo_bulk.to_f}},{:upsert =>true})
+       # StockCargo.collection.update({:_id => @cargo.stock_cargo_id},{'$set' =>{:status=>"正在配车"}})
+        @stock_cargo=StockCargo.find(@cargo.stock_cargo_id)
+        @stock_cargo.update_attributes(:status=>"正在配车")
+        @stock_cargo.inc(:valid_cargo,1)
+        @stock_cargo.inc(:total_cargo,1)
+        @stock_cargo.inc(:sent_weight,@cargo.cargo_weight.to_f)
+        @stock_cargo.inc(:sent_bulk,@cargo.cargo_bulk.to_f)
+       
+       # StockCargo.collection.update({:_id => @cargo.stock_cargo_id},
+       #  {'$inc'=>{:valid_cargo=>1,:total_cargo=>1,:sent_weight=>@cargo.cargo_weight.to_f,:sent_bulk=>@cargo.cargo_bulk.to_f}},{:upsert =>true})
       
         format.html { redirect_to(:controller=>"cargos",:action => "index",:stock_cargo_id=>@cargo.stock_cargo_id)}
       #  format.xml  { render :xml => @cargo, :status => :created, :location => @cargo }
       else
-        flash[:notice] = '创建货源失败'
-        @stock_cargo=StockCargo.find_by_id(@cargo.stock_cargo_id)
-        format.html { render :controller=>"cargos",:action => "new" }
+        flash[:notice] = '创建货源失败,重复发布货源'
+       # @stock_cargo=StockCargo.find(@cargo.stock_cargo_id)
+        format.html { render :template=>"/cargos/repeat_error" }
         format.xml  { render :xml => @cargo.errors, :status => :unprocessable_entity }
       end
     end
@@ -255,7 +281,7 @@ class CargosController < ApplicationController
   def update
     
     @cargo = Cargo.find(params[:id])
-    @stock_cargo=StockTruck.find_by_id(@cargo.stock_cargo_id)
+    @stock_cargo=StockTruck.find(@cargo.stock_cargo_id)
 
     #  @cargo =update_cargo_info_from_params(params)
     

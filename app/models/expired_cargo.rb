@@ -1,55 +1,72 @@
 # coding: utf-8
 class  ExpiredCargo
-    include MongoMapper::Document
-     cattr_reader :per_page
+     include Mongoid::Document
+     include Mongoid::Timestamps
+         cattr_reader :per_page
      @@per_page = 20
     # belongs_to :users
    #  has_many :quotes
     # has_many :inqueries
    #  has_one :cstatistic 
-   
+      
    # cargo self info
-      key :cargo_weight,String
-      key :cargo_zuhuo,String
-      key :cargo_bulk,String
-      key :send_date,String
-      key :comments,String
-      key :status,String
+      field :cargo_weight, :type=>String
+      field :cargo_zuhuo, :type=>String
+      field :cargo_bulk, :type=>String
+      field :send_date, :type=>String
+      field :comments, :type=>String
+      field :status, :type=>String
 
       #for not go back to find stock_cargo
-      key :cate_name,String
-      key :package_name,String
-      key :big_category,String
+      field :cate_name, :type=>String
+      field :package_name, :type=>String
+      field :big_category, :type=>String
 
       # important line info
-      key :line,String
-      key :fcity_name,String
-      key :tcity_name,String
-      key :fcity_code,String
-      key :tcity_code,String
+      field :line, :type=>String
+      field :fcity_name, :type=>String
+      field :tcity_name, :type=>String
+      field :fcity_code, :type=>String
+      field :tcity_code, :type=>String
       
-      # for contact
-      key :user_id,ObjectId
-      key :company_id,ObjectId
-      key :stock_cargo_id,ObjectId
-      key :user_contact_id,ObjectId
+
+
+      
+      field :stock_cargo_id,:type=>String
+      field :user_contact_id,:type=>String
 
       #important information
-      key :zhuang_addr,String
-      key :zhuang_time,String
-      key :xie_addr,String
+      field :zhuang_addr, :type=>String
+      field :zhuang_time, :type=>String
+      field :xie_addr, :type=>String
 
-      #future usage
-      key :pingjia_id,ObjectId
-      key :cstatistic_id,ObjectId
+
       
-      key :price,String
-      key :price_unit,String
+      field :price, :type=>String
+      field :price_unit, :type=>String
       
   # from site
-     key :from_site,String         
+      field :from_site, :type=>String
+     
+    # statistic
+      field :total_baojia, :type=>Integer
+      field :total_xunjia, :type=>Integer
+      field :total_match, :type=>Integer
+      field :total_click, :type=>Integer
       
-     timestamps!
-  
+      field :cj_truck_id,:type=>String
+      field :cj_quote_id,:type=>String
+      field :cj_user_id,:type=>String
+      field :cj_company_id,:type=>String 
+      
+        # for contact
+      embeds_one :users     
+      embeds_one :companies
+      
+        #future usage
+      embeds_many :pingjias
+      embeds_one :cstatistics  
+      
+     #timestamps!
      
 end

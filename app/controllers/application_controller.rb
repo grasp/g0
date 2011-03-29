@@ -19,13 +19,15 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   private
   def admin_authorize
-    unless  session[:user_name]=="admin"
-       flash[:notice]="只有管理员才能操作"
+
+     unless  session[:user_name]=="admin"
+        flash[:notice]="只有管理员才能操作"
        redirect_to root_path
-    end
+     end
   end
 
-  def authorize   
+  def authorize
+    
      return if session[:user_id] #if already authorized
      #coockie login
       unless cookies.signed[:remember_me].blank?

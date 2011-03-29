@@ -1,10 +1,10 @@
 module ScansHelper
 
-def compare_time_expired(info,created_time,expired)
+def compare_time_expired(created_time,expired)
 unless created_time.nil? || expired.nil?
    current_time=Time.now   
    case expired
-   when "0"
+    when "0"
      expired_time=Time.parse(created_time.to_s).end_of_day # must have to_s
     when "1"
       expired_time=1.days.since(created_time)
@@ -29,5 +29,5 @@ unless created_time.nil? || expired.nil?
 else
   return false #keep those illegal ?
 end
-  end
+end
 end

@@ -1,6 +1,6 @@
   <%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
 <% unless user.nil? %>
-  <%ustatistic=Ustatistic.find_by_user_id(user.id)%>
+  <%ustatistic=user.ustatistic%>
 <%end%>
 <hr id="head_line">
      <table class="navi" style="display:inline-block;">

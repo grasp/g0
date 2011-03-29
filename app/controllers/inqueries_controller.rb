@@ -17,7 +17,7 @@ class InqueriesController < ApplicationController
   end
 
   def cargo
-    @cargo=Cargo.find_by_id(params[:cargo_id])
+    @cargo=Cargo.find(params[:cargo_id])
     @bao_or_xun_record=Inquery.where(:cargo_id => params[:cargo_id])
     respond_to do |format|
       format.html # cargo.html.erb
@@ -27,7 +27,7 @@ class InqueriesController < ApplicationController
 
   #one trucks's all baojia
   def truck
-    @truck=Truck.find_by_id(params[:truck_id])
+    @truck=Truck.find(params[:truck_id])
     @bao_or_xun_record=Inquery.where(:truck_id => params[:truck_id])
     respond_to do |format|
       format.html # part.html.erb
@@ -38,12 +38,12 @@ class InqueriesController < ApplicationController
   def part
     
     unless params[:cargo_id].nil?
-      @cargo=Cargo.find_by_id(params[:cargo_id])
+      @cargo=Cargo.find(params[:cargo_id])
       @inqueries=Inquery.where(:cargo_id =>params[:cargo_id],:user_id =>session[:user_id])
     end
 
     unless params[:truck_id].nil?
-      @truck=Truck.find_by_id(params[:truck_id])
+      @truck=Truck.find(params[:truck_id])
       @inqueries=Inquery.where(:truck_id =>params[:truck_id],:userb_id =>session[:user_id])
     end
    
@@ -131,9 +131,10 @@ class InqueriesController < ApplicationController
          # before= Cstatistic.where({'cargo_id' => @inquery.cargo_id}).first.total_xunjia
          # before1= Tstatistic.where({'truck_id'=>@inquery.truck_id}).first.total_xunjia
         #  puts "更新询价统计cargo before=#{before},truck before=#{before1}"
-
-          Cargo.collection.update({'_id' => @inquery.cargo_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true}) 
-          Truck.collection.update({'_id'=>@inquery.truck_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true})
+          @cargo.inc(:total_xunjia,1)
+          Truck.find(@inquery.truck_id).inc(:total_xunjia,1)
+         # Cargo.collection.update({'_id' => @inquery.cargo_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true}) 
+         # Truck.collection.update({'_id'=>@inquery.truck_id},{'$inc' => {"total_xunjia" => 1}},{:upsert =>true})
 
           #  after= Cstatistic.where({'cargo_id' => @inquery.cargo_id}).first.total_xunjia
           #  after1=Tstatistic.where({'truck_id'=>@inquery.truck_id}).first.total_xunjia
@@ -155,7 +156,7 @@ class InqueriesController < ApplicationController
   # PUT /inqueries/1.xml
   def update
     @inquery = Inquery.find(params[:id])
-    @truck=Truck.find_by_id(@inquery.truck_id)
+    @truck=Truck.find(@inquery.truck_id)
     @inquery.paizhao=@truck.paizhao
     @inquery.fcity_name=@truck.fcity_name
     @inquery.tcity_name=@truck.tcity_name

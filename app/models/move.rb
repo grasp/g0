@@ -1,13 +1,14 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 class Move 
-    include MongoMapper::Document
-      key :datehour,String
-      key :expired_cargo,Integer
-      key :expired_truck,Integer
-      key :expired_quote,Integer
-      key :expired_inquery,Integer
-      key :cost_time,String
-      key :user_id,ObjectId
-      timestamps!
+    include Mongoid::Document
+    include Mongoid::Timestamps
+      field :datehour,:type=>String
+      field :expired_cargo,:type=>Integer
+      field :expired_truck,:type=>Integer
+      field :expired_quote,:type=>Integer
+      field :expired_inquery,:type=>Integer
+      field :cost_time,:type=>String
+      embeds_one :users
+      #timestamps!
 end

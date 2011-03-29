@@ -1,16 +1,17 @@
 class Ustatistic
-    include MongoMapper::Document
-      key :total_stock_cargo,Integer
-      key :total_stock_truck,Integer
-      key :total_cargo,Integer      
-      key :total_truck,Integer
-      key :valid_cargo,Integer
-      key :valid_truck,Integer
-      key :total_line,Integer
-      key :total_driver,Integer
-      key :total_custermer,Integer
-      key :user_id,ObjectId
-      key :status,String
-      timestamps!
+    include Mongoid::Document
+    include Mongoid::Timestamps
+      field :total_stock_cargo,:type=>Integer
+      field :total_stock_truck,:type=>Integer
+      field :total_cargo,:type=>Integer      
+      field :total_truck,:type=>Integer
+      field :valid_cargo,:type=>Integer
+      field :valid_truck,:type=>Integer
+      field :total_line,:type=>Integer
+      field :total_driver,:type=>Integer
+      field :total_custermer,:type=>Integer
+      field :status,:type=>String
+      referenced_in :user
+     # timestamps!
 
 end

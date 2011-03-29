@@ -1,41 +1,42 @@
  # coding: utf-8
 class User 
-  include MongoMapper::Document
+  include Mongoid::Document
+  include Mongoid::Timestamps
  # include UsersHelper
   
   attr_accessor:password_confirmation,:email_confirm
   
-  key :email,String
-  key :name,String
-  key :admin,Boolean, :default=>false
-  key :real_name,String
-  key :hashed_password,String
-  key :salt,String
-  key :status,String
-  key :activate,String
-  key :company_id,ObjectId
-  key :user_contact_id,ObjectId
-  key :ustatistic_id,ObjectId
-  key :preference,Integer
+  field :email,:type=>String
+  field :name,:type=>String
+  field :admin,:type=>Boolean, :default=>false
+  field :real_name,:type=>String
+  field :hashed_password,:type=>String
+  field :salt,:type=>String
+  field :status,:type=>String
+  field :activate,:type=>String
+  field :preference,:type=>Integer
+  references_one :user_contact
+  references_one :ustatistic
+  references_one :company
   
-  validates_presence_of :email,:name,:message=>"用户名和email必须填写."
-  validates_uniqueness_of :name ,:message=>"该用户名已经存在."
-  validates_uniqueness_of :email ,:message=>"该email已经存在."
-  timestamps!
+  #validates_presence_of :email,:name,:message=>"用户名和email必须填写."
+  #validates_uniqueness_of :name ,:message=>"该用户名已经存在."
+  #validates_uniqueness_of :email ,:message=>"该email已经存在."
+ # timestamps!
   
- 
   
    def self.authenticated_with_token(user_id, stored_salt)
-     u = find_by_id(user_id)
+     u = self.criteria.id(user_id)
      u && u.salt == stored_salt ? u : nil
    end
   
   def self.authenticate(email_or_name,password)
 
     if(email_or_name.match(/.*@.*\..*/))
-     user=self.find_by_email(email_or_name.to_s)
+     user=self.first(:conditions => { :email=>email_or_name.to_s })
+     
     else
-      user=self.find_by_name(email_or_name.to_s)
+      user=self.first(:conditions => { :name=>email_or_name.to_s })
     end
     if user
       expected_password=encrypted_password(password,user.salt)

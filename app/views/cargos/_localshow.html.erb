@@ -23,7 +23,7 @@
 </td>
 
 <td>
-  <%usercontact=UserContact.find_by_user_id(@cargo.user_id)%>
+  <%usercontact=UserContact.first(:conditions=>{:user_id=>@cargo.user_id})%>
   <%= usercontact.mphone %>
   <%= usercontact.quhao+"-"+usercontact.fixphone %>
 </td>

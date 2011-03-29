@@ -1,6 +1,6 @@
   <%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
 <% unless user.nil? %>
-  <%ustatistic=Ustatistic.find(user.ustatistic_id)%>
+  <%ustatistic=user.ustatistic%>
 <%end%>
 <hr id="head_line">
      <table class="navi">
@@ -18,8 +18,8 @@
               <a class="navi_scan_link" href="/admin/quzhougrasp">quzhou采集信息</a>            
          </td>  
          <td class="navi_user">
-               <a class="navi_scan_link" href="/admin/users/">用户管理</a>
-               <a class="navi_scan_link" href="/admin/companies/">公司管理</a>
+               <a class="navi_scan_link" href="/users/">用户管理</a>
+               <a class="navi_scan_link" href="/companies/admin">公司管理</a>
         </td>
 
          </tr>

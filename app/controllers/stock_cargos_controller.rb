@@ -15,7 +15,7 @@ class StockCargosController < ApplicationController
     #this if for logined user only
    # @stock_cargos = StockCargo.where("user_id = ?",session[:user_id]).order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>5)
   # @stock_cargos = StockCargo.all(:user_id =>session[:user_id]).sort(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>5)
-    @stock_cargos = StockCargo.where(:user_id =>session[:user_id]).paginate(:page=>params[:page]||1,:per_page=>5)
+    @stock_cargos = StockCargo.where(:user_id =>session[:user_id].to_s).paginate(:page=>params[:page]||1,:per_page=>20)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,7 +37,7 @@ class StockCargosController < ApplicationController
   # GET /stock_cargos/new.xml
   def new
     @stock_cargo = StockCargo.new
-    @user=User.find_by_id(session[:user_id])
+    @user=User.find(session[:user_id])
     @stock_cargo.user_id=@user.id
     @stock_cargo.company_id=@user.company_id unless @user.company_id.nil?
     @stock_cargo.status="闲置"
@@ -61,11 +61,11 @@ class StockCargosController < ApplicationController
     params[:stockcargo][:cargocount]=0 #init value
     params[:stockcargo][:status]="货物闲置" #init value
     #must initialilize ,otherwise $inc  in update will not work
-   params[:stockcargo][:valid_cargo]=0
-   params[:stockcargo][:total_cargo]=0
-   params[:stockcargo][:expired_cargo]=0
-   params[:stockcargo][:sent_weight]=0
-   params[:stockcargo][:sent_bulk]=0
+    params[:stockcargo][:valid_cargo]=0
+    params[:stockcargo][:total_cargo]=0
+    params[:stockcargo][:expired_cargo]=0
+    params[:stockcargo][:sent_weight]=0
+    params[:stockcargo][:sent_bulk]=0
     @stock_cargo = StockCargo.new(params[:stockcargo])    
     respond_to do |format|
       if @stock_cargo.save

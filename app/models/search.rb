@@ -1,12 +1,13 @@
 class Search 
-   include MongoMapper::Document
+   include Mongoid::Document
+   include Mongoid::Timestamps
         cattr_reader :per_page
         @@per_page = 10
-    key :fcity_code,String
-    key :fcity_name,String
-    key :tcity_code,String
-    key :tcity_name,String
-    key :stype,String
-     timestamps!
+    field :fcity_code,:type=>String
+    field :fcity_name,:type=>String
+    field :tcity_code,:type=>String
+    field :tcity_name,:type=>String
+    field :stype,:type=>String
+    # timestamps!
     
 end

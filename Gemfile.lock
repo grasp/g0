@@ -45,8 +45,7 @@ GEM
       abstract (>= 1.0.0)
     eventmachine (0.12.10)
     i18n (0.5.0)
-    jnunemaker-validatable (1.8.4)
-      activesupport (>= 2.3.4)
+    kgio (2.3.2)
     mail (2.2.15)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
@@ -56,12 +55,11 @@ GEM
     mime-types (1.16)
     mongo (1.2.4)
       bson (>= 1.2.4)
-    mongo_mapper (0.8.6)
-      activesupport (>= 2.3.4)
-      jnunemaker-validatable (~> 1.8.4)
-      plucky (~> 0.3.6)
-    plucky (0.3.6)
-      mongo (~> 1.1)
+    mongoid (2.0.0.rc.8)
+      activemodel (~> 3.0)
+      mongo (~> 1.2)
+      tzinfo (~> 0.3.22)
+      will_paginate (~> 3.0.pre)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -90,6 +88,9 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
+    unicorn (3.5.0)
+      kgio (~> 2.3)
+      rack
 
 PLATFORMS
   ruby
@@ -97,7 +98,8 @@ PLATFORMS
 DEPENDENCIES
   bson_ext (~> 1.2)
   memcache-client
-  mongo_mapper
+  mongoid (= 2.0.0.rc.8)
   rails (= 3.0.5)
   thin
+  unicorn
   will_paginate!

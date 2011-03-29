@@ -2,21 +2,24 @@
 # and open the template in the editor.
 
 class HourData 
-    include MongoMapper::Document
-      key :datehour,String
-      key :user_new,Integer
-      key :total_user,Integer
-      key :contact_new,Integer
-      key :total_contact,Integer
-      key :company_new,Integer
-      key :total_company,Integer
-      key :cargo_new,Integer
-      key :total_cargo,Integer
-      key :truck_new,Integer
-      key :total_truck,Integer
-      key :total_quote,Integer
-      key :total_inquery,Integer
-      key :user_id,ObjectId      
-      timestamps!
+    include Mongoid::Document
+    include Mongoid::Timestamps
+      field :datehour,:type=>String
+      field :user_new,:type=>Integer
+      field :total_user,:type=>Integer
+      field :contact_new,:type=>Integer
+      field :total_contact,:type=>Integer
+      field :company_new,:type=>Integer
+      field :total_company,:type=>Integer
+      field :cargo_new,:type=>Integer
+      field :total_cargo,:type=>Integer
+      field :truck_new,:type=>Integer
+       field :quote_new,:type=>Integer
+       field :inquery_new,:type=>Integer
+      field :total_truck,:type=>Integer
+      field :total_quote,:type=>Integer
+      field :total_inquery,:type=>Integer
+      referenced_in :user   
+     # timestamps!
 end
 

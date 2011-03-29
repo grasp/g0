@@ -9,11 +9,10 @@
     <th>到达</th>
     <th>重量体积</th>
     <th>有效天数</th>
-     <th>发布时间</th>
+    <th>发布时间</th>
     <th>货源状态</th>
-   <th>车主报价/货主询价</th>  
+    <th>车主报价/货主询价</th>  
     <th>车源速配</th>
-
    
   </tr>
  
@@ -36,7 +35,7 @@
         <%if cargo.status!="正在配车"%>
          <td> <%=cargo.status%></td>
         <%else%>
-         <%l=Lstatistic.find({:line=>cargo.line})%>
+         <%l=Lstatistic.first(:conditions=>{:line=>cargo.line})%>
         <td><a class="quick_match" href="/trucks/search/<%=cargo.fcity_code%>/<%=cargo.tcity_code%>/1">车源速配</a></td>
         <%end%>
       </tr>

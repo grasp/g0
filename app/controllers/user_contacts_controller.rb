@@ -13,7 +13,7 @@ class UserContactsController < ApplicationController
     #@user_contacts = UserContact.all
 
     #for logined user, we only show person he created
-    @user_contact = UserContact.find_by_user_id(session[:user_id])
+    @user_contact = UserContact.first(:conditions=>{:user_id=>session[:user_id]})
     user_id=session[:user_id]
 
    # @company = Company.where("user_id =?",session[:user_id]).first #only one company actully
@@ -82,7 +82,7 @@ class UserContactsController < ApplicationController
   # GET /contact_people/1.xml
   def show
     if params[:user_id]
-     @user_contact = UserContact.find_by_user_id(params[:user_id])
+     @user_contact = UserContact.first(:conditions=>{:user_id=>params[:user_id]})
     else
     @user_contact = UserContact.find(params[:id])
      end
@@ -93,7 +93,7 @@ class UserContactsController < ApplicationController
   end
     def showf
     if params[:user_id]
-     @user_contact = UserContact.find_by_user_id(params[:user_id])
+     @user_contact = UserContact.first(:conditions=>{:user_id=>params[:user_id]})
     else
     @user_contact = UserContact.find(params[:id])
      end
@@ -114,7 +114,7 @@ class UserContactsController < ApplicationController
     
     
     #if already exsit , do nothing
-   if UserContact.find_by_user_id(session[:user_id]).blank?
+   if UserContact.first(:conditions=>{:user_id=>session[:user_id]}).blank?
     @user=User.find(session[:user_id])
     @user_contact = UserContact.new
     @user_contact.email=@user.email
@@ -132,7 +132,7 @@ class UserContactsController < ApplicationController
   # GET /contact_people/1/edit
   def edit
        unless params[:id].nil?
-          @user_contact= UserContact.find_by_id(params[:id])
+          @user_contact= UserContact.find(params[:id])
     else
       @user_contact=UserContact.where(:name =>session[:user_name],:email =>session[:user_email]).first
       @user_contact.name=session[:user_name]
