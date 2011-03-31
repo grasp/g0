@@ -6,7 +6,7 @@ class ScansController < ApplicationController
   include TrucksHelper
   include CargosHelper
   layout "admin"
-  before_filter:admin_authorize,:except=>[:cargoexpire,:truckexpire,:expiretimer,:uinfoscan]
+  before_filter:admin_authorize,:except=>[:cargoexpire,:truckexpire,:expiretimer,:uinfoscan,:scan,:move]
   
   def scan 
    expired_truck=0
@@ -25,7 +25,7 @@ class ScansController < ApplicationController
         if truck.status =="正在配货"
         #first change truck status
         Rails.logger.info "#{truck.paizhao},status=#{truck.status}"
-        truck.update_attributes(:status=>"超时过期")
+       # truck.update_attributes(:status=>"超时过期") #for debug purpose
                                
         expired_truck+=1
         start=Time.now
@@ -47,9 +47,10 @@ class ScansController < ApplicationController
         
         #change all inquery and quote status 
         
-
-        Inquery.where(:conditions=>{:truck_id=>truck.id}).each {|inquery| inquery.update_attributes(:status=>"超时过期")}
-        Quote.where(:conditions=>{:truck_id=>truck.id}).each {|quote| quote.update_attributes(:status=>"超时过期")}
+   #Debug Scan
+      #  Inquery.where(:conditions=>{:truck_id=>truck.id}).each {|inquery| inquery.update_attributes(:status=>"超时过期")}
+      #  Quote.where(:conditions=>{:truck_id=>truck.id}).each {|quote| quote.update_attributes(:status=>"超时过期")}
+       
        # Inquery.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})
         #Quote.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})  
         
@@ -81,7 +82,7 @@ class ScansController < ApplicationController
     StockTruck.where.each do |stock_truck|
       if stock_truck.valid_truck.blank? || stock_truck.valid_truck==0 
         # StockTruck.collection.update({:_id=>stock_truck.id},{'$set' => {"status" => "车辆闲置"}})
-         stock_truck.update_attributes("status" => "车辆闲置")
+        # stock_truck.update_attributes("status" => "车辆闲置")
       end
     end
     cargo_scan_start=Time.now
@@ -90,7 +91,7 @@ class ScansController < ApplicationController
       if compare_time_expired(cargo.updated_at,cargo.send_date || "1")==true
         if cargo.status=="正在配车"
           # first update cargo status
-          cargo.update_attributes(:status=>"超时过期")
+        #  cargo.update_attributes(:status=>"超时过期")
            expired_cargo+=1
            lstatistic=Lstatistic.first(:conditions=>{:line=>cargo.line})
            lstatistic.inc(:valid_cargo,-1);lstatistic.inc(:expired_cargo,1) unless  lstatistic.nil?
@@ -99,7 +100,7 @@ class ScansController < ApplicationController
          #{'$inc' => {"valid_cargo" => -1,"expired_cargo"=> 1}},{:upsert =>true})
 
           #decrement valid cargo for stock cargo
-          stockcargo=StockCargo.find(cargo.stock_cargo_id)
+          stockcargo=StockCargo.find(cargo.stock_cargo_id) unless( cargo.nil?  || cargo.stock_cargo_id.nil?) 
           stockcargo.inc(:valid_cargo,-1) unless stockcargo.nil?
         #  StockCargo.collection.update({:_id=>cargo.stock_cargo_id},{'$inc' => {"valid_cargo" => -1}})
           
@@ -110,8 +111,8 @@ class ScansController < ApplicationController
         end
           
         #change all inquery and quote status 
-        Inquery.where(:conditions=>{:cargo_id=>cargo.id}).each {|inquery| inquery.update_attributes(:status=>"超时过期")}
-        Quote.where(:conditions=>{:cargo_id=>cargo.id}).each {|quote| quote.update_attributes(:status=>"超时过期")}
+       # Inquery.where(:conditions=>{:cargo_id=>cargo.id}).each {|inquery| inquery.update_attributes(:status=>"超时过期")}
+       # Quote.where(:conditions=>{:cargo_id=>cargo.id}).each {|quote| quote.update_attributes(:status=>"超时过期")}
 
        # Inquery.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
        # Quote.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
@@ -136,7 +137,7 @@ class ScansController < ApplicationController
    StockCargo.where.each do |stock_cargo|
       if stock_cargo.valid_cargo .blank?||stock_cargo.valid_cargo==0
         # StockCargo.collection.update({:_id=>stock_cargo.id},{'$set' => {"status" => "货物闲置"}})
-        stock_cargo.update_attributes("status" => "货物闲置")
+      #  stock_cargo.update_attributes("status" => "货物闲置")
       end
     end
 
@@ -176,6 +177,10 @@ class ScansController < ApplicationController
       format.html{ render :template=>"/scans/index"} # index.html.erb
       format.xml  { render :xml => @scans }
     end
+  end
+  
+  def scaninfo
+     @scans = Scan.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
   end
   
   #move out expired cargo/truck/inquery/quote, this can keep simple  and fast for main function  

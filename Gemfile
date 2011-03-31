@@ -12,7 +12,7 @@ gem 'rails', '3.0.5'
 #gem 'ancestry'
 gem 'will_paginate',:git => 'http://github.com/mislav/will_paginate.git',:branch=>'rails3'
 #gem "mongrel", '>= 1.2.0.pre2'
-gem 'thin'
+#gem 'thin'
 gem 'unicorn'
 #gem "mongo_mapper"
 gem "mongoid", "2.0.0.rc.8"

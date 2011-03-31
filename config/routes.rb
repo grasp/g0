@@ -1,8 +1,11 @@
 G0::Application.routes.draw do
   resources :feedbacks
+  match '/admin/hourscan'  =>'admin#hourscan',:as=>:adminhourscan
+  match '/admin/hourscaninfo'  =>'admin#hourscaninfo',:as=>:adminhourscaninfo
   
-  match '/admin/gethourdata'  =>'admin#gethourdata',:as=>:admingethourdata
-  match '/admin/move'  =>'scans#move',:as=>:adminmove
+  match '/admin/move'  =>'admin#move',:as=>:adminmove
+  match '/admin/moveinfo'  =>'admin#moveinfo',:as=>:adminmoveinfo
+  
   match '/admin/quzhougrasp'  =>'admin#quzhougrasp',:as=>:adminquzhougrasp
   match '/admin/tf56grasp'  =>'admin#tf56grasp',:as=>:admintf56grasp
   get "admin/index"
@@ -12,11 +15,13 @@ G0::Application.routes.draw do
 
   get "quzhou_wuliu/index"
   get "quzhou_wuliu/show"
+
   match '/scans/uinfoscan'  =>'scans#uinfoscan',:as=>:scanuinfoscan
   match '/scans/expiretimer'  =>'scans#expiretimer',:as=>:scanexpiretimer
   match '/scans/truckexpire'  =>'scans#truckexpire',:as=>:scantruckexpire
   match '/scans/cargoexpire'  =>'scans#cargoexpire',:as=>:scancargoexpire
   match '/scans/scan'  =>'scans#scan',:as=>:scanscan
+    match '/scans/scaninfo'  =>'scans#scaninfo',:as=>:scaninfo
   resources :scans
 
   resources :lstatistics
