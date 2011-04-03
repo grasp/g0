@@ -7,6 +7,9 @@
               
          <% unless user.nil? %>
          <tr class="navi_huo">
+           <%if user.name=="admin"%>
+            <td> <a href="/admin">网站管理</a></td>
+           <%end%>
            <td> <a class="navi_link" href="/cargos/search/100000000000/100000000000/1">货源信息(<%=h Cargo.where(:status=>"正在配车").count%>)</a></td>
            <td > <a class="navi_link navi_stock_cargo" href="/users/<%=user.id%>/stock_cargos">发布货源</a></td>
            <td style=" border-right-color: #9AAFE5; border-right-style:solid;border-right-width:2px;"> <a class="navi_link navi_cargo" href="/users/<%=user.id%>/cargos/"> 我的货源(<%=ustatistic.nil? ? "0":(ustatistic.valid_cargo||0)%>)</a></td>

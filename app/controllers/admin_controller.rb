@@ -2,7 +2,7 @@
 class AdminController < ApplicationController
   layout "admin"
  #   before_filter:admin_authorize,:except=>[:index] #for debug purpose
-  before_filter:admin_authorize, :except=>[:gethourdata,:move] #for debug purpose
+  before_filter:admin_authorize, :except=>[:hourscan,:move] #for debug purpose
   def index
     
   end
@@ -24,7 +24,7 @@ class AdminController < ApplicationController
   end
   
   def hourscan
-       if HourData.where(:datehour=>Time.now.to_s.slice(0,13)).first.blank?
+   
       @lastdata=HourData.last
       @hourdata=HourData.new
       @hourdata.total_user=User.count
@@ -53,13 +53,13 @@ class AdminController < ApplicationController
       @hourdata.inquery_new=0
       @hourdata.save
       end
-    end
+ 
   end
   
   def hourscaninfo
 
     
-    @all_hourdata=HourData.where.paginate(:page=>params[:page]||1,:per_page=>20)
+    @all_hourdata=HourData.all.desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
 
   end
   
@@ -72,7 +72,7 @@ class AdminController < ApplicationController
     start_time=Time.now
     Truck.where(:status=>"超时过期").each do |truck|
       expiredtruck=ExpiredTruck.new
-      truck.keys.each do |key| 
+      truck.raw_attributes.keys.each do |key| 
       expiredtruck[key[0]]=truck[key[0]]
       end
       expiredtruck.save      
@@ -82,7 +82,7 @@ class AdminController < ApplicationController
     Rails.logger.debug "expiredtruck.count=#{ExpiredTruck.count}"
     Cargo.where(:status=>"超时过期").each do |cargo|
       expiredcargo=ExpiredCargo.new(:id=>cargo.id)
-      cargo.keys.each do |key| 
+      cargo.raw_attributes.keys.each do |key| 
         expiredcargo[key[0]]=cargo[key[0]]
       end
       expiredcargo.save
@@ -93,7 +93,7 @@ class AdminController < ApplicationController
     
     Quote.where(:status=>"超时过期").each do |quote|
       expiredquote=ExpiredQuote.new
-      quote.keys.each do |key| 
+      quote.raw_attributes.keys.each do |key| 
       expiredquote[key[0]]=quote[key[0]]
       end
       expiredquote.save
@@ -103,7 +103,7 @@ class AdminController < ApplicationController
    Rails.logger.debug "expiredquote.count=#{ExpiredQuote.count}"
    Inquery.where(:status=>"超时过期").each do |inquery|
       expiredinquery=ExpiredInquery.new
-      inquery.keys.each do |key| 
+      inquery.raw_attributes.keys.each do |key| 
         expiredinquery[key[0]]=inquery[key[0]]
       end
       expiredinquery.save

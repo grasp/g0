@@ -48,7 +48,7 @@
 }
 
 #cargo_new .field label,#truck_new .field label{
-     font-weight: bold;
+      font-weight: bold;
       display:-moz-inline-stack;
       width:5%;
       display:inline-block;

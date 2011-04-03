@@ -65,7 +65,7 @@ class Truck
       field  :user_contact_id,:type=>String
       index ([[:updated_at,Mongo::ASCENDING],[:status,Mongo::ASCENDING],[:fcity_code,Mongo::ASCENDING],[:tcity_code,Mongo::ASCENDING]])
   
-     validate :check_unique
+     validate :check_unique,:on=>:create
       
     def check_unique
     repeated=Truck.where(:paizhao=>self.paizhao,:line=>self.line,:user_id=>self.user_id,:status=>"正在配货")

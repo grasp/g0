@@ -24,16 +24,20 @@ class ScansController < ApplicationController
         
         if truck.status =="正在配货"
         #first change truck status
-        Rails.logger.info "#{truck.paizhao},status=#{truck.status}"
-       # truck.update_attributes(:status=>"超时过期") #for debug purpose
-                               
+       # Rails.logger.info "#{truck.paizhao},status=#{truck.status}"
+        truck.update_attributes(:status=>"超时过期") #for debug purpose
         expired_truck+=1
         start=Time.now
         #update line statistic
         @lstatistic=Lstatistic.first(:conditions=>{:line=>truck.line})
-        @lstatistic.inc(:valid_truck,-1); @lstatistic.inc(:expired_truck,1) unless @lstatistic.nil?
-      #  Lstatistic.collection.update({'line'=>truck.line},
-      #  {'$inc' => {"valid_truck" => -1,"expired_truck"=> 1}},{:upsert =>true})       
+        unless @lstatistic.nil?
+        @lstatistic.inc(:valid_truck,-1)
+        @lstatistic.inc(:expired_truck,1) 
+        end
+        
+       # Lstatistic.collection.update({'line'=>truck.line},
+       # {'$inc' => {"valid_truck" => -1,"expired_truck"=> 1}},{:upsert =>true})  
+      
         #decrement valid truck for stock truck
         @stock_truck= StockTruck.find(truck.stock_truck_id)  unless( truck.nil?  || truck.stock_truck_id.nil?) 
         @stock_truck.inc(:valid_truck,-1) unless @stock_truck.nil?
@@ -42,20 +46,20 @@ class ScansController < ApplicationController
         if truck.from_site=="local"          
            @user=User.find(truck.user_id) unless truck.nil?
            @user.inc(:valid_truck,-1) unless @user.nil?
-           # User.collection.update({:_id=>truck.user_id},{'$inc' =>{:valid_truck=>-1}})         
+          # User.collection.update({:_id=>truck.user_id},{'$inc' =>{:valid_truck=>-1}})         
         end
         
         #change all inquery and quote status 
         
    #Debug Scan
-      #  Inquery.where(:conditions=>{:truck_id=>truck.id}).each {|inquery| inquery.update_attributes(:status=>"超时过期")}
-      #  Quote.where(:conditions=>{:truck_id=>truck.id}).each {|quote| quote.update_attributes(:status=>"超时过期")}
+       Inquery.where(:conditions=>{:truck_id=>truck.id}).each {|inquery| inquery.update_attributes(:status=>"超时过期")}
+       Quote.where(:conditions=>{:truck_id=>truck.id}).each {|quote| quote.update_attributes(:status=>"超时过期")}
        
        # Inquery.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})
-        #Quote.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})  
+       # Quote.collection.update({:truck_id=>truck.id},{'$set' =>{:status=>"超时过期"}})  
         
         end_time=Time.now
-        Rails.logger.info "update time=#{end_time-start}sec"
+       # Rails.logger.info "update time=#{end_time-start}sec"
         #expire line
         start=Time.now
         begin
@@ -65,7 +69,7 @@ class ScansController < ApplicationController
          # Rails.logger.info "exception #{$@}for expire line truck#{truck.fcity_code} to #{truck.tcity_code}"
         end
         end_time=Time.now
-        Rails.logger.info "quick truck exprie time=#{end_time-start}sec"
+        #Rails.logger.info "quick truck exprie time=#{end_time-start}sec"
         expire_page(:controller=>"trucks",:action=>"show",:id=>truck.id)
         end
       end
@@ -73,16 +77,16 @@ class ScansController < ApplicationController
     end
      truck_expire_line.each do |line|
           FileUtils.rm_rf Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}"       
-          Rails.logger.debug "expire "+Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}"
+        #  Rails.logger.debug "expire "+Rails.public_path+"/trucks/search"+"/#{line[0]}"+"/#{line[1]}"
        end
      end_time=Time.now
-     Rails.logger.info "total truck exprie time=#{end_time-truck_scan_start}sec"
+    # Rails.logger.info "total truck exprie time=#{end_time-truck_scan_start}sec"
      
     #initialize the status if no any truck issued
     StockTruck.where.each do |stock_truck|
       if stock_truck.valid_truck.blank? || stock_truck.valid_truck==0 
         # StockTruck.collection.update({:_id=>stock_truck.id},{'$set' => {"status" => "车辆闲置"}})
-        # stock_truck.update_attributes("status" => "车辆闲置")
+         stock_truck.update_attributes("status" => "车辆闲置")
       end
     end
     cargo_scan_start=Time.now
@@ -91,16 +95,24 @@ class ScansController < ApplicationController
       if compare_time_expired(cargo.updated_at,cargo.send_date || "1")==true
         if cargo.status=="正在配车"
           # first update cargo status
-        #  cargo.update_attributes(:status=>"超时过期")
+         cargo.update_attributes(:status=>"超时过期")
            expired_cargo+=1
            lstatistic=Lstatistic.first(:conditions=>{:line=>cargo.line})
-           lstatistic.inc(:valid_cargo,-1);lstatistic.inc(:expired_cargo,1) unless  lstatistic.nil?
+           unless  lstatistic.nil?
+            lstatistic.inc(:valid_cargo,-1)
+            lstatistic.inc(:expired_cargo,1) 
+           end
          #update line statistic
          #Lstatistic.collection.update({'line'=>cargo.line},
          #{'$inc' => {"valid_cargo" => -1,"expired_cargo"=> 1}},{:upsert =>true})
 
           #decrement valid cargo for stock cargo
+          begin
           stockcargo=StockCargo.find(cargo.stock_cargo_id) unless( cargo.nil?  || cargo.stock_cargo_id.nil?) 
+          rescue
+            Rails.logger.info "miss stock_cargo_id for expired cargo"
+            next
+          end
           stockcargo.inc(:valid_cargo,-1) unless stockcargo.nil?
         #  StockCargo.collection.update({:_id=>cargo.stock_cargo_id},{'$inc' => {"valid_cargo" => -1}})
           
@@ -111,8 +123,8 @@ class ScansController < ApplicationController
         end
           
         #change all inquery and quote status 
-       # Inquery.where(:conditions=>{:cargo_id=>cargo.id}).each {|inquery| inquery.update_attributes(:status=>"超时过期")}
-       # Quote.where(:conditions=>{:cargo_id=>cargo.id}).each {|quote| quote.update_attributes(:status=>"超时过期")}
+        Inquery.where(:conditions=>{:cargo_id=>cargo.id}).each {|inquery| inquery.update_attributes(:status=>"超时过期")}
+        Quote.where(:conditions=>{:cargo_id=>cargo.id}).each {|quote| quote.update_attributes(:status=>"超时过期")}
 
        # Inquery.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
        # Quote.collection.update({:truck_id=>cargo.id},{'$set' =>{:status=>"超时过期"}})
@@ -128,10 +140,10 @@ class ScansController < ApplicationController
     
      cargo_expire_line.each do |line|
           FileUtils.rm_rf Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"       
-          Rails.logger.debug "expire "+Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"
+         # Rails.logger.debug "expire "+Rails.public_path+"/cargos/search"+"/#{line[0]}"+"/#{line[1]}"
        end
      end_time=Time.now
-     Rails.logger.info "total cargo exprie time=#{end_time-cargo_scan_start}sec"
+    # Rails.logger.info "total cargo exprie time=#{end_time-cargo_scan_start}sec"
     
   #initialize all stockcargo
    StockCargo.where.each do |stock_cargo|
@@ -200,7 +212,7 @@ class ScansController < ApplicationController
       truck.destroy
       @move.expired_truck+=1
     end
-    Rails.logger.debug "expiredtruck.count=#{ExpiredTruck.count}"
+   # Rails.logger.debug "expiredtruck.count=#{ExpiredTruck.count}"
     Cargo.where(:status=>"超时过期").each do |cargo|
       expiredcargo=ExpiredCargo.new(:id=>cargo.id)
       cargo.keys.each do |key| 
@@ -210,7 +222,7 @@ class ScansController < ApplicationController
       cargo.destroy
       @move.expired_cargo+=1
     end
-    Rails.logger.debug "expiredcargo.count=#{ExpiredCargo.count}"
+   # Rails.logger.debug "expiredcargo.count=#{ExpiredCargo.count}"
     
     Quote.where(:status=>"超时过期").each do |quote|
       expiredquote=ExpiredQuote.new
@@ -221,7 +233,7 @@ class ScansController < ApplicationController
       quote.destroy
       @move.expired_quote+=1
    end
-   Rails.logger.debug "expiredquote.count=#{ExpiredQuote.count}"
+  # Rails.logger.debug "expiredquote.count=#{ExpiredQuote.count}"
    Inquery.where(:status=>"超时过期").each do |inquery|
       expiredinquery=ExpiredInquery.new
       inquery.keys.each do |key| 
@@ -231,7 +243,7 @@ class ScansController < ApplicationController
       inquery.destroy
       @move.expired_inquery+=1
    end
-   Rails.logger.debug "expiredinquery.count=#{ExpiredInquery.count}"
+  # Rails.logger.debug "expiredinquery.count=#{ExpiredInquery.count}"
     end_time=Time.now
     @move.cost_time=end_time-start_time
     

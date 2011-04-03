@@ -23,17 +23,17 @@ class Inquery
    #feature usage
       field :ismailed,:type=>Boolean
       field :isaccepted,:type=>Boolean
-        index [[:cargo_id,Mongo::ASCENDING],[:truck_id,Mongo::ASCENDING]]
-      #timestamps!
-     #validate :check_unique
+      index [[:cargo_id,Mongo::ASCENDING],[:truck_id,Mongo::ASCENDING]]
+
+     validate :check_unique,:on=>:create
      
- # def check_unique
- #   repeated=Inquery.where(:cargo_id=>self.cargo_id,:truck_id=>self.truck_id)
- #      unless repeated.size==0
- #     errors.add_to_base("不能重复询价")
- #     return false
- #   end
- #   return true
- # end
+  def check_unique
+    repeated=Inquery.where(:cargo_id=>self.cargo_id,:truck_id=>self.truck_id)
+      unless repeated.size==0
+      errors.add_to_base("不能重复询价")
+      return false
+    end
+    return true
+  end
 
 end
