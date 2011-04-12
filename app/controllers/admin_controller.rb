@@ -31,7 +31,7 @@ class AdminController < ApplicationController
       @hourdata.total_contact=UserContact.count
       @hourdata.total_company=Company.count
       @hourdata.total_cargo=Cargo.count
-      @hourdata.total_truck=Cargo.count
+      @hourdata.total_truck=Truck.count
       @hourdata.total_quote=Quote.count
       @hourdata.total_inquery=Inquery.count
       unless @lastdata.blank?  

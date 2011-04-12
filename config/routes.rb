@@ -1,4 +1,6 @@
 G0::Application.routes.draw do
+  resources :lib_companies
+
   resources :feedbacks
   match '/admin/hourscan'  =>'admin#hourscan',:as=>:adminhourscan
   match '/admin/hourscaninfo'  =>'admin#hourscaninfo',:as=>:adminhourscaninfo

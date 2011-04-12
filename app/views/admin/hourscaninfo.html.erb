@@ -1,9 +1,10 @@
 <table>
   <tr>
-    <th>新增用户</th>
-    <th>新增公司</th>
+
     <th>新增货源</th>
     <th>新增车源</th>
+    <th>新增用户</th>
+    <th>新增公司</th>
     <th>新增报价</th>
     <th>新增询价</th>
     <th>用户总数</th>
@@ -24,10 +25,11 @@
 
   <%@all_hourdata.each do |hourdata|%>
     <tr>
-      <td><%=hourdata.user_new%></td>
-      <td><%=hourdata.company_new%></td>
+
       <td><%=hourdata.cargo_new%></td>
       <td><%=hourdata.truck_new%></td>
+      <td><%=hourdata.user_new%></td>
+      <td><%=hourdata.company_new%></td>
       <td><%=hourdata.quote_new%></td>
       <td><%=hourdata.inquery_new%></td>
       <td><%=hourdata.total_user%></td>
