@@ -12,6 +12,10 @@ class LibCompany
   field :city, :type => String
   field :addr, :type => String
   field :from_site, :type => String
+  #for mail sent statistic
+  field :last_sent_time,:type=>String
+  field :sent_counter,:type=>Integer
+
 end
 class LibCompanyTest
   include Mongoid::Document

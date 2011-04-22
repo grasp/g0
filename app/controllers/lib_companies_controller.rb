@@ -4,7 +4,7 @@ class LibCompaniesController < ApplicationController
   layout "admin"
   def index
    # @lib_companies = LibCompanyTest.desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>50)
-   @lib_companies = LibCompany.desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>50)
+   @lib_companies = LibCompany.desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>500)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @lib_companies }

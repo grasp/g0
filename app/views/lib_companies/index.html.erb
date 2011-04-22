@@ -14,6 +14,8 @@
     <th>City</th>
     <th>Addr</th>
     <th>from_site</th>
+    <th>Last Sent</th>
+    <th>TotalSent</th>
     <th></th>
     <th></th>
     <th></th>
@@ -33,6 +35,8 @@
     <td><%= lib_company.city %></td>
     <td><%= lib_company.addr %></td>
       <td><%= lib_company.from_site %></td>
+        <td><%= lib_company.last_sent_time %></td>
+          <td><%= lib_company.sent_counter %></td>
     <td><%#= link_to 'Show', lib_company %></td>
     <td><%#= link_to 'Edit', edit_lib_company_path(lib_company) %></td>
     <td><%#= link_to 'Destroy', lib_company, :confirm => 'Are you sure?', :method => :delete %></td>

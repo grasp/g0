@@ -1,4 +1,6 @@
 G0::Application.routes.draw do
+  resources :mail_accounts
+
   resources :lib_companies
 
   resources :feedbacks
