@@ -25,7 +25,7 @@
       <%unless cargo.nil? %>
         <tr>
           <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
-           <%= cargo.cate_name %></a> </td>
+           <%= cargo.cate_name ||"未知货物"%></a> </td>
           <td><%= cargo.fcity_name %></td>
           <td><%= cargo.tcity_name %></td>
           <td><%= cargo.cargo_weight || "0" %>吨<%= cargo.cargo_bulk %></td>

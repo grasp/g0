@@ -17,9 +17,11 @@ G0::Application.configure do
 
   # If you have no front-end server that supports something like X-Sendfile,
   # just comment this out and Rails will serve the files
-
+  
+   config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}#{Date.today.to_s}.log", "daily")
+  
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+   config.log_level = :info
 
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new

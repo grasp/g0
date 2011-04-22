@@ -8,6 +8,9 @@ G0::Application.configure do
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
+  
+  #log rotation
+  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}#{Date.today.to_s}.log", "daily")
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
