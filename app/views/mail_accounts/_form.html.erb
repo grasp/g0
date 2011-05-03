@@ -45,7 +45,7 @@
   </div>
   <div class="field">
     <%= f.label :last_use %><br />
-    <%= f.date_select :last_use %>
+    <%= f.text_field :last_use %>
   </div>
   <div class="field">
     <%= f.label :rejected %><br />
@@ -54,6 +54,18 @@
   <div class="field">
     <%= f.label :status %><br />
     <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :day_max %><br />
+    <%= f.text_field :day_max %>
+  </div>
+  <div class="field">
+    <%= f.label :receiver_max %><br />
+    <%= f.text_field :receiver_max %>
+  </div>
+  <div class="field">
+    <%= f.label :send_interval %><br />
+    <%= f.text_field :send_interval %>
   </div>
   <div class="actions">
     <%= f.submit %>

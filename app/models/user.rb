@@ -19,10 +19,9 @@ class User
   references_one :ustatistic
   references_one :company
   
-  #validates_presence_of :email,:name,:message=>"用户名和email必须填写."
-  #validates_uniqueness_of :name ,:message=>"该用户名已经存在."
-  #validates_uniqueness_of :email ,:message=>"该email已经存在."
- # timestamps!
+  validates_presence_of :email,:name,:message=>"用户名和email必须填写."
+  validates_uniqueness_of :name ,:message=>"该用户名已经存在."
+  validates_uniqueness_of :email ,:message=>"该email已经存在."
   
   
    def self.authenticated_with_token(user_id, stored_salt)
@@ -57,7 +56,6 @@ class User
     @password
   end  
   
-
   #here will generate password ,each result is different even have same password
   def password=(pwd)
     @password=pwd

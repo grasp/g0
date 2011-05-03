@@ -1,0 +1,1179 @@
+# Logfile created on 2011-04-30 16:48:20 +0800 by logger.rb/25413
+MongoDB logging. Please note that logging negatively impacts performance and should be disabled for high-performance production apps.
+MongoDB logging. Please note that logging negatively impacts performance and should be disabled for high-performance production apps.
+MongoDB logging. Please note that logging negatively impacts performance and should be disabled for high-performance production apps.
+MONGODB admin['$cmd'].find({:ismaster=>1})
+MONGODB admin['$cmd'].find({:ismaster=>1})
+
+
+Started GET "/" for 192.168.56.1 at 2011-04-30 16:52:27 +0800
+  Processing by CargosController#search as HTML
+MONGODB admin['$cmd'].find({:ismaster=>1})
+MONGODB admin['$cmd'].find({:ismaster=>1})
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dbbcdcc0b3b970512000001'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-04-30 08:52:28 UTC, "created_at"=>2011-04-30 08:52:28 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB cursor.close 4441123846298003850
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20)
+Rendered cargos/_cargolist.html.erb (449.4ms)
+Rendered shared/_html_header.erb (51.1ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (15.9ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered cargos/search.html.erb within layouts/public (798.7ms)
+Completed 200 OK in 987ms (Views: 978.7ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-04-30 16:53:15 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dbbcdfd0b3b970512000002'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-04-30 08:53:17 UTC, "created_at"=>2011-04-30 08:53:17 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB cursor.close 8904414080314157099
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20)
+Rendered cargos/_cargolist.html.erb (16.7ms)
+Rendered shared/_html_header.erb (49.2ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (6.7ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered cargos/search.html.erb within layouts/public (320.4ms)
+Completed 200 OK in 450ms (Views: 447.1ms)
+
+
+Started GET "/cities/from/100000000000" for 192.168.56.1 at 2011-04-30 16:55:44 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"100000000000"}
+Rendered cities/index.html.erb (4.4ms)
+Write page /mnt/shared/g0/public/cities/from/100000000000.html (11.5ms)
+Completed 200 OK in 80ms (Views: 67.4ms)
+
+
+Started GET "/users/login" for 192.168.56.1 at 2011-04-30 16:58:53 +0800
+  Processing by UsersController#login as HTML
+Rendered shared/_html_header.erb (47.8ms)
+Rendered users/_user_annoucement.html.erb (1.2ms)
+Rendered shared/_float_show.html (1.0ms)
+Rendered users/login.html.erb within layouts/users (258.1ms)
+Completed 200 OK in 377ms (Views: 376.2ms)
+
+
+Started GET "/users/authenticate?email=admin&password=grasp56%23" for 192.168.56.1 at 2011-04-30 16:59:04 +0800
+  Processing by UsersController#authenticate as HTML
+  Parameters: {"email"=>"admin", "password"=>"[FILTERED]"}
+MONGODB g0_development['users'].find({:name=>"admin"})
+Redirected to http://192.168.56.4/
+Completed 302 Found in 45ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-04-30 16:59:07 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dbbcf5d0b3b970512000004'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-04-30 08:59:09 UTC, "created_at"=>2011-04-30 08:59:09 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB cursor.close 8593119897287001772
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20)
+Rendered cargos/_cargolist.html.erb (18.0ms)
+Rendered shared/_html_header.erb (47.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (13.2ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered cargos/search.html.erb within layouts/public (327.1ms)
+Completed 200 OK in 451ms (Views: 448.0ms)
+
+
+Started GET "/admin" for 192.168.56.1 at 2011-04-30 16:59:17 +0800
+  Processing by AdminController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:created_at=>{"$lte"=>2011-04-30 08:59:20 UTC, "$gte"=>2011-04-29 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:created_at=>{"$lte"=>2011-04-30 08:59:20 UTC, "$gte"=>2011-04-29 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"quotes", "query"=>{:created_at=>{"$lte"=>2011-04-30 08:59:20 UTC, "$gte"=>2011-04-29 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"inqueries", "query"=>{:created_at=>{"$lte"=>2011-04-30 08:59:20 UTC, "$gte"=>2011-04-29 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:created_at=>{"$lte"=>2011-04-30 08:59:20 UTC, "$gte"=>2011-04-29 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{:created_at=>{"$lte"=>2011-04-30 08:59:20 UTC, "$gte"=>2011-04-29 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:created_at=>{"$lte"=>2011-04-29 08:59:20 UTC, "$gte"=>2011-04-28 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:created_at=>{"$lte"=>2011-04-29 08:59:20 UTC, "$gte"=>2011-04-28 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"quotes", "query"=>{:created_at=>{"$lte"=>2011-04-29 08:59:20 UTC, "$gte"=>2011-04-28 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"inqueries", "query"=>{:created_at=>{"$lte"=>2011-04-29 08:59:20 UTC, "$gte"=>2011-04-28 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:created_at=>{"$lte"=>2011-04-29 08:59:20 UTC, "$gte"=>2011-04-28 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{:created_at=>{"$lte"=>2011-04-29 08:59:20 UTC, "$gte"=>2011-04-28 08:59:20 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"expired_cargos", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"expired_trucks", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (49.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.2ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered admin/index.html.erb within layouts/admin (261.5ms)
+Completed 200 OK in 468ms (Views: 384.9ms)
+
+
+Started GET "/mail_accounts" for 192.168.56.1 at 2011-04-30 16:59:22 +0800
+  Processing by MailAccountsController#index as HTML
+MONGODB g0_development['mail_accounts'].find({})
+Rendered shared/_html_header.erb (53.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (11.2ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered mail_accounts/index.html.erb within layouts/admin (304.5ms)
+Completed 200 OK in 430ms (Views: 429.7ms)
+
+
+Started GET "/mail_accounts" for 192.168.56.1 at 2011-04-30 17:03:26 +0800
+  Processing by MailAccountsController#index as HTML
+MONGODB g0_development['mail_accounts'].find({})
+Rendered shared/_html_header.erb (47.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.4ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered mail_accounts/index.html.erb within layouts/admin (247.1ms)
+Completed 200 OK in 371ms (Views: 370.5ms)
+
+
+Started GET "/mail_accounts/4db138380b3b970453000008/edit" for 192.168.56.1 at 2011-04-30 17:03:52 +0800
+  Processing by MailAccountsController#edit as HTML
+  Parameters: {"id"=>"4db138380b3b970453000008"}
+MONGODB g0_development['mail_accounts'].find({:_id=>BSON::ObjectId('4db138380b3b970453000008')})
+Rendered mail_accounts/_form.html.erb (108.2ms)
+Rendered shared/_html_header.erb (51.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.4ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered mail_accounts/edit.html.erb within layouts/admin (414.3ms)
+Completed 200 OK in 533ms (Views: 530.4ms)
+
+
+Started POST "/mail_accounts/4db138380b3b970453000008" for 192.168.56.1 at 2011-04-30 17:04:04 +0800
+  Processing by MailAccountsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"u8/ByhCc9ZtKWEAV5YFi0u0VRqL6L8fcmsG8ADPUZqM=", "mail_account"=>{"address"=>"smtp.gmail.com", "port"=>"587", "username"=>"w090.001", "password"=>"[FILTERED]", "authentication"=>"plain", "enable_startttls"=>"true", "today_sent"=>"", "total_sent"=>"", "last_use(1i)"=>"2011", "last_use(2i)"=>"4", "last_use(3i)"=>"30", "rejected"=>"[]", "status"=>"", "day_max"=>"49", "receiver_max"=>"200"}, "commit"=>"Update Mail account", "id"=>"4db138380b3b970453000008"}
+MONGODB g0_development['mail_accounts'].find({:_id=>BSON::ObjectId('4db138380b3b970453000008')})
+MONGODB g0_development['mail_accounts'].update({"_id"=>BSON::ObjectId('4db138380b3b970453000008')}, {"$set"=>{"last_use(3i)"=>"30", "day_max"=>49, "receiver_max"=>200}})
+Redirected to http://192.168.56.4/mail_accounts/4db138380b3b970453000008
+Completed 302 Found in 7ms
+
+
+Started GET "/mail_accounts/4db138380b3b970453000008" for 192.168.56.1 at 2011-04-30 17:04:07 +0800
+  Processing by MailAccountsController#show as HTML
+  Parameters: {"id"=>"4db138380b3b970453000008"}
+MONGODB g0_development['mail_accounts'].find({:_id=>BSON::ObjectId('4db138380b3b970453000008')})
+Rendered shared/_html_header.erb (48.9ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.2ms)
+Rendered shared/_float_show.html (0.3ms)
+Rendered mail_accounts/show.html.erb within layouts/admin (244.9ms)
+Completed 200 OK in 372ms (Views: 370.1ms)
+
+
+Started GET "/mail_accounts" for 192.168.56.1 at 2011-04-30 17:04:13 +0800
+  Processing by MailAccountsController#index as HTML
+MONGODB g0_development['mail_accounts'].find({})
+Rendered shared/_html_header.erb (47.1ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.7ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered mail_accounts/index.html.erb within layouts/admin (246.7ms)
+Completed 200 OK in 369ms (Views: 368.9ms)
+
+
+Started GET "/companies/admin" for 192.168.56.1 at 2011-04-30 17:04:50 +0800
+  Processing by CompaniesController#admin as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['companies'].find({}).limit(20)
+Rendered shared/_html_header.erb (47.9ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.6ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered companies/admin.html.erb within layouts/admin (242.5ms)
+Completed 200 OK in 367ms (Views: 362.6ms)
+
+
+Started GET "/lib_companies" for 192.168.56.1 at 2011-04-30 17:04:59 +0800
+  Processing by LibCompaniesController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (49.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.4ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (371.7ms)
+Completed 200 OK in 1163ms (Views: 511.7ms)
+
+
+Started GET "/mail_accounts" for 192.168.56.1 at 2011-04-30 21:09:07 +0800
+  Processing by MailAccountsController#index as HTML
+MONGODB g0_development['mail_accounts'].find({})
+Rendered shared/_html_header.erb (99.1ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (12.5ms)
+Rendered shared/_float_show.html (0.5ms)
+Rendered mail_accounts/index.html.erb within layouts/admin (291.9ms)
+Completed 200 OK in 415ms (Views: 414.1ms)
+
+
+Started GET "/mail_accounts/4db138380b3b970453000008/edit" for 192.168.56.1 at 2011-04-30 21:09:12 +0800
+  Processing by MailAccountsController#edit as HTML
+  Parameters: {"id"=>"4db138380b3b970453000008"}
+MONGODB g0_development['mail_accounts'].find({:_id=>BSON::ObjectId('4db138380b3b970453000008')})
+Rendered mail_accounts/_form.html.erb (64.0ms)
+Rendered shared/_html_header.erb (66.6ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.9ms)
+Rendered shared/_float_show.html (1.0ms)
+Rendered mail_accounts/edit.html.erb within layouts/admin (459.2ms)
+Completed 200 OK in 594ms (Views: 591.7ms)
+
+
+Started POST "/mail_accounts/4db138380b3b970453000008" for 192.168.56.1 at 2011-04-30 21:09:26 +0800
+  Processing by MailAccountsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"u8/ByhCc9ZtKWEAV5YFi0u0VRqL6L8fcmsG8ADPUZqM=", "mail_account"=>{"address"=>"smtp.gmail.com", "port"=>"587", "username"=>"w090.001", "password"=>"[FILTERED]", "authentication"=>"plain", "enable_startttls"=>"true", "today_sent"=>"", "total_sent"=>"", "last_use(1i)"=>"2011", "last_use(2i)"=>"4", "last_use(3i)"=>"30", "rejected"=>"[]", "status"=>"enabled", "day_max"=>"49", "receiver_max"=>"200"}, "commit"=>"Update Mail account", "id"=>"4db138380b3b970453000008"}
+MONGODB g0_development['mail_accounts'].find({:_id=>BSON::ObjectId('4db138380b3b970453000008')})
+MONGODB g0_development['mail_accounts'].update({"_id"=>BSON::ObjectId('4db138380b3b970453000008')}, {"$set"=>{"status"=>"enabled"}})
+Redirected to http://192.168.56.4/mail_accounts/4db138380b3b970453000008
+Completed 302 Found in 6ms
+
+
+Started GET "/mail_accounts/4db138380b3b970453000008" for 192.168.56.1 at 2011-04-30 21:09:29 +0800
+  Processing by MailAccountsController#show as HTML
+  Parameters: {"id"=>"4db138380b3b970453000008"}
+MONGODB g0_development['mail_accounts'].find({:_id=>BSON::ObjectId('4db138380b3b970453000008')})
+Rendered shared/_html_header.erb (48.1ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.1ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered mail_accounts/show.html.erb within layouts/admin (249.9ms)
+Completed 200 OK in 375ms (Views: 373.0ms)
+
+
+Started GET "/mail_accounts" for 192.168.56.1 at 2011-04-30 21:09:34 +0800
+  Processing by MailAccountsController#index as HTML
+MONGODB g0_development['mail_accounts'].find({})
+Rendered shared/_html_header.erb (48.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.4ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered mail_accounts/index.html.erb within layouts/admin (251.0ms)
+Completed 200 OK in 377ms (Views: 376.8ms)
+
+
+Started GET "/lib_companies" for 192.168.56.1 at 2011-04-30 22:16:25 +0800
+  Processing by LibCompaniesController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (47.9ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.1ms)
+Rendered shared/_float_show.html (0.5ms)
+Rendered lib_companies/index.html.erb within layouts/admin (372.0ms)
+Completed 200 OK in 617ms (Views: 489.9ms)
+
+
+Started GET "/lib_companies" for 192.168.56.1 at 2011-04-30 22:49:43 +0800
+  Processing by LibCompaniesController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (47.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (11.1ms)
+Rendered shared/_float_show.html (0.5ms)
+Rendered lib_companies/index.html.erb within layouts/admin (367.6ms)
+Completed 200 OK in 618ms (Views: 495.2ms)
+
+
+Started GET "/lib_companies?page=73" for 192.168.56.1 at 2011-04-30 22:51:21 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"73"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(36000).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.7ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.8ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (378.9ms)
+Completed 200 OK in 965ms (Views: 500.3ms)
+
+
+Started GET "/lib_companies" for 192.168.56.1 at 2011-04-30 22:53:35 +0800
+  Processing by LibCompaniesController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.9ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (314.7ms)
+Completed 200 OK in 612ms (Views: 438.3ms)
+
+
+Started GET "/mail_accounts" for 192.168.56.1 at 2011-04-30 23:16:08 +0800
+  Processing by MailAccountsController#index as HTML
+MONGODB g0_development['mail_accounts'].find({})
+Rendered shared/_html_header.erb (49.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.3ms)
+Rendered shared/_float_show.html (0.7ms)
+Rendered mail_accounts/index.html.erb within layouts/admin (245.8ms)
+Completed 200 OK in 372ms (Views: 371.3ms)
+
+
+Started GET "/mail_accounts" for 192.168.56.1 at 2011-04-30 23:17:42 +0800
+  Processing by MailAccountsController#index as HTML
+MONGODB g0_development['mail_accounts'].find({})
+Rendered shared/_html_header.erb (50.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.4ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered mail_accounts/index.html.erb within layouts/admin (257.1ms)
+Completed 200 OK in 383ms (Views: 382.4ms)
+
+
+Started GET "/companies/admin" for 192.168.56.1 at 2011-04-30 23:19:12 +0800
+  Processing by CompaniesController#admin as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['companies'].find({}).limit(20)
+Rendered shared/_html_header.erb (61.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (11.5ms)
+Rendered shared/_float_show.html (0.5ms)
+Rendered companies/admin.html.erb within layouts/admin (300.9ms)
+Completed 200 OK in 442ms (Views: 436.2ms)
+
+
+Started GET "/lib_companies" for 192.168.56.1 at 2011-04-30 23:19:15 +0800
+  Processing by LibCompaniesController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (61.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (12.9ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (395.4ms)
+Completed 200 OK in 662ms (Views: 540.6ms)
+
+
+Started GET "/lib_companies" for 192.168.56.1 at 2011-04-30 23:33:22 +0800
+  Processing by LibCompaniesController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.2ms)
+Rendered shared/_float_show.html (0.7ms)
+Rendered lib_companies/index.html.erb within layouts/admin (314.1ms)
+Completed 200 OK in 558ms (Views: 432.1ms)
+
+
+Started GET "/lib_companies" for 192.168.56.1 at 2011-04-30 23:36:53 +0800
+  Processing by LibCompaniesController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (53.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (13.0ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (328.5ms)
+Completed 200 OK in 578ms (Views: 457.7ms)
+
+
+Started GET "/lib_companies?page=73" for 192.168.56.1 at 2011-04-30 23:37:06 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"73"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(36000).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.6ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.0ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (337.7ms)
+Completed 200 OK in 924ms (Views: 465.2ms)
+
+
+Started GET "/lib_companies?page=2" for 192.168.56.1 at 2011-04-30 23:37:16 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"2"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (46.9ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.9ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (314.1ms)
+Completed 200 OK in 564ms (Views: 434.2ms)
+
+
+Started GET "/lib_companies?page=2" for 192.168.56.1 at 2011-04-30 23:37:20 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"2"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.9ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.6ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (314.3ms)
+Completed 200 OK in 566ms (Views: 435.2ms)
+
+
+Started GET "/lib_companies" for 192.168.56.1 at 2011-04-30 23:38:03 +0800
+  Processing by LibCompaniesController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.1ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.2ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (321.5ms)
+Completed 200 OK in 578ms (Views: 453.5ms)
+
+
+Started GET "/lib_companies?page=2" for 192.168.56.1 at 2011-04-30 23:38:15 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"2"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (57.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.0ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (317.6ms)
+Completed 200 OK in 568ms (Views: 423.7ms)
+
+
+Started GET "/lib_companies?page=3" for 192.168.56.1 at 2011-04-30 23:38:22 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"3"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(1000).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.8ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (319.1ms)
+Completed 200 OK in 571ms (Views: 446.4ms)
+
+
+Started GET "/lib_companies?page=3" for 192.168.56.1 at 2011-04-30 23:38:25 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"3"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(1000).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.2ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (329.0ms)
+Completed 200 OK in 590ms (Views: 456.1ms)
+
+
+Started GET "/lib_companies?page=73" for 192.168.56.1 at 2011-04-30 23:45:39 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"73"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(36000).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (47.9ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.6ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (323.5ms)
+Completed 200 OK in 907ms (Views: 449.9ms)
+
+
+Started GET "/lib_companies?page=73" for 192.168.56.1 at 2011-04-30 23:45:42 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"73"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(36000).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.7ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.0ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (323.1ms)
+Completed 200 OK in 909ms (Views: 448.8ms)
+
+
+Started GET "/lib_companies?page=73" for 192.168.56.1 at 2011-04-30 23:45:46 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"73"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(36000).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.6ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.2ms)
+Rendered shared/_float_show.html (0.1ms)
+Rendered lib_companies/index.html.erb within layouts/admin (329.1ms)
+Completed 200 OK in 907ms (Views: 456.9ms)
+
+
+Started GET "/lib_companies?page=73" for 192.168.56.1 at 2011-04-30 23:45:49 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"73"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(36000).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (42.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (11.1ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (295.8ms)
+Completed 200 OK in 881ms (Views: 423.1ms)
+
+
+Started GET "/lib_companies?page=72" for 192.168.56.1 at 2011-04-30 23:46:55 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"72"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(35500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (49.6ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.4ms)
+Rendered shared/_float_show.html (0.5ms)
+Rendered lib_companies/index.html.erb within layouts/admin (321.7ms)
+Completed 200 OK in 882ms (Views: 449.5ms)
+
+
+Started GET "/lib_companies?page=72" for 192.168.56.1 at 2011-04-30 23:46:59 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"72"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(35500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (93.9ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (38.0ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (680.4ms)
+Completed 200 OK in 1974ms (Views: 943.9ms)
+
+
+Started GET "/lib_companies?page=72" for 192.168.56.1 at 2011-04-30 23:47:03 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"72"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(35500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.5ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (324.2ms)
+Completed 200 OK in 905ms (Views: 451.1ms)
+
+
+Started GET "/lib_companies?page=72" for 192.168.56.1 at 2011-04-30 23:47:08 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"72"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(35500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.3ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.8ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (325.3ms)
+Completed 200 OK in 890ms (Views: 448.1ms)
+
+
+Started GET "/lib_companies?page=72" for 192.168.56.1 at 2011-04-30 23:47:12 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"72"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(35500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.5ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (317.8ms)
+Completed 200 OK in 877ms (Views: 423.7ms)
+
+
+Started GET "/lib_companies?page=72" for 192.168.56.1 at 2011-04-30 23:47:15 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"72"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(35500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (52.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.8ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (343.5ms)
+Completed 200 OK in 928ms (Views: 470.2ms)
+
+
+Started GET "/lib_companies?page=72" for 192.168.56.1 at 2011-04-30 23:47:19 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"72"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(35500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (47.7ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.8ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (322.0ms)
+Completed 200 OK in 896ms (Views: 446.7ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:47:22 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.2ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (312.5ms)
+Completed 200 OK in 866ms (Views: 442.2ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:47:26 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (47.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.3ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (321.3ms)
+Completed 200 OK in 864ms (Views: 447.8ms)
+
+
+Started GET "/lib_companies?page=72" for 192.168.56.1 at 2011-04-30 23:47:29 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"72"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(35500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.8ms)
+Rendered shared/_float_show.html (0.3ms)
+Rendered lib_companies/index.html.erb within layouts/admin (328.2ms)
+Completed 200 OK in 893ms (Views: 454.8ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:47:33 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.7ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (320.0ms)
+Completed 200 OK in 884ms (Views: 449.4ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:47:37 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.6ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (334.7ms)
+Completed 200 OK in 874ms (Views: 462.7ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:47:40 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.7ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.7ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (315.7ms)
+Completed 200 OK in 865ms (Views: 439.0ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:47:44 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.5ms)
+Rendered shared/_float_show.html (0.5ms)
+Rendered lib_companies/index.html.erb within layouts/admin (328.7ms)
+Completed 200 OK in 917ms (Views: 447.0ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:47:47 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.8ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (375.1ms)
+Completed 200 OK in 917ms (Views: 496.8ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:47:51 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.8ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (389.9ms)
+Completed 200 OK in 946ms (Views: 516.9ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:47:54 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.6ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.7ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (321.4ms)
+Completed 200 OK in 863ms (Views: 450.1ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:47:58 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.9ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (11.1ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (329.8ms)
+Completed 200 OK in 897ms (Views: 451.1ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:48:01 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.9ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (11.5ms)
+Rendered shared/_float_show.html (0.5ms)
+Rendered lib_companies/index.html.erb within layouts/admin (335.7ms)
+Completed 200 OK in 871ms (Views: 446.3ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:48:05 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.1ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (12.2ms)
+Rendered shared/_float_show.html (0.9ms)
+Rendered lib_companies/index.html.erb within layouts/admin (325.2ms)
+Completed 200 OK in 979ms (Views: 453.1ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:48:08 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (48.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (11.2ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (325.7ms)
+Completed 200 OK in 1013ms (Views: 446.7ms)
+
+
+Started GET "/lib_companies?page=66" for 192.168.56.1 at 2011-04-30 23:48:12 +0800
+  Processing by LibCompaniesController#index as HTML
+  Parameters: {"page"=>"66"}
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['lib_companies'].find({}).skip(32500).limit(500)
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (50.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d6a09830b3b970916000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.1ms)
+Rendered shared/_float_show.html (0.4ms)
+Rendered lib_companies/index.html.erb within layouts/admin (329.1ms)
+Completed 200 OK in 870ms (Views: 458.1ms)

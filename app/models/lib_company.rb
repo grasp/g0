@@ -15,6 +15,7 @@ class LibCompany
   #for mail sent statistic
   field :last_sent_time,:type=>String
   field :sent_counter,:type=>Integer
+  field :status,:type=>String
 
 end
 class LibCompanyTest

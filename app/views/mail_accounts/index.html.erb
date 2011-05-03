@@ -13,6 +13,10 @@
     <th>Last use</th>
     <th>Rejected</th>
     <th>Status</th>
+    <th>day_max</th>
+    <th>receiver_max</th>
+    <th>send_interval</th>
+    <th>fail_counter</th>
     <th></th>
     <th></th>
     <th></th>
@@ -31,6 +35,10 @@
     <td><%= mail_account.last_use %></td>
     <td><%= mail_account.rejected %></td>
     <td><%= mail_account.status %></td>
+    <td><%= mail_account.day_max %></td>
+    <td><%= mail_account.receiver_max %></td>
+    <td><%= mail_account.send_interval%></td>
+     <td><%= mail_account.fail_counter%></td>
     <td><%= link_to 'Show', mail_account %></td>
     <td><%= link_to 'Edit', edit_mail_account_path(mail_account) %></td>
     <td><%= link_to 'Destroy', mail_account, :confirm => 'Are you sure?', :method => :delete %></td>
