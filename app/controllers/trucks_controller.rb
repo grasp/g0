@@ -159,8 +159,8 @@ class TrucksController < ApplicationController
     @truck = Truck.new
     @user=User.find(session[:user_id])
    # @user_contact=UserContact.find_by_user_id(@user.id)
-    @user_contact=@user.user_contact
-    @company=@user.company
+  #  @user_contact=@user.user_contact_id
+ #   @company=@user.company_id
     
     @truck.stock_truck_id=@stock_truck.id
     @truck.paizhao=@stock_truck.paizhao
@@ -174,27 +174,27 @@ class TrucksController < ApplicationController
     @truck.status="正在配货"
 
 
-    @truck.user_id=@stock_truck.user_id
-    @truck.company_id=@stock_truck.company_id
+    @truck.user_id=@user.id
+    @truck.company_id=@user.company_id
   #  @truck.user_contact_id=UserContact.find_by_user_id(@truck.user_id).id
-  @truck.user_contact_id=@user_contact.id
+  @truck.user_contact_id=@user.user_contact_id
    
     # @user_contact=UserContact.find_by_user_id(session[:user_id])
-     @user_contact=@user.user_contact
-     @truck.user_contact_id=@user_contact.id unless @user_contact.nil?
+  #   @user_contact=@user.user_contact
+  #   @truck.user_contact_id=@user_contact.id unless @user_contact.nil?
 
-    if @user_contact.blank?
-      flash[:notice]="发布车源必须要知道你的联系方式和姓名."
-      render(:template=>"shared/new_contact")
-      return;
+    if @user.user_contact_id.blank?
+      flash[:notice]="填写更多联系方式能增加成交机会；"
+     # render(:template=>"shared/new_contact")
+    #  return;
     end
    # @company=Company.find_by_user_id(@user.id)
    # @truck.company_id=@company.id unless @company.nil?
 
-    if @company.blank?
-      flash[:notice]="你的公司信息没有填写"
-      render(:template=>"shared/new_company")
-      return;
+    if @user.company_id.blank?
+      flash[:notice]="填写公司信息能增加成交机会"
+     # render(:template=>"shared/new_company")
+   #  return;
     end
    
     respond_to do |format|
@@ -218,18 +218,44 @@ class TrucksController < ApplicationController
     params[:truck][:from_site]="local"
     @truck=Truck.new(params[:truck])  
     @truck.line=@truck.fcity_code+"#"+@truck.tcity_code     
-
+  @user=User.find(session[:user_id])
     respond_to do |format|
       if @truck.save
         flash[:notice] = '车源创建成功'
          #update statistic for truck
-         Truck.collection.update({'_id' => @truck.id},{'$set' =>{:total_baojia=>0,:total_xunjia=>0,:total_match=>0,
-          :total_click=>0}});    
-               
-        Ustatistic.collection.update({'user_id' => BSON::ObjectId(session[:user_id].to_s)},{'$inc' => {"total_truck" => 1,"valid_truck"=>1},'$set' => {"status"=>"正在配货"}})
-        Lstatistic.collection.update({'line'=>@truck.line},{'$inc' => {"total_truck" => 1,"valid_truck"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
-        StockTruck.collection.update({'_id' => @truck.stock_truck_id},{'$inc' => {"valid_truck" => 1,"total_truck"=>1},'$set' => {"status"=>"正在配货"}})
+        # Truck.collection.update({'_id' => @truck.id},{'$set' =>{:total_baojia=>0,:total_xunjia=>0,:total_match=>0,
+      #    :total_click=>0}});
 
+           @truck.update_attributes(:total_baojia=>0,:total_xunjia=>0,:total_match=>0,
+          :total_click=>0,:user_id=>session[:user_id],:truck_id=>@truck.id);
+                      begin
+       ustatistic= Ustatistic.find(@user.ustatistic_id)
+       rescue
+       end
+       unless ustatistic.blank?
+         ustatistic.update_attributes(:status=>"正在配货")
+         ustatistic.inc("total_truck",1)
+         ustatistic.inc("valid_truck",1)
+       else
+         Ustatistic.create("user_id"=>session[:user_id],:status=>"正在配货",:total_truck =>1,:valid_truck=>1)
+       end
+     #   Ustatistic.collection.update({'user_id' => BSON::ObjectId(session[:user_id].to_s)},{'$inc' => {"total_truck" => 1,"valid_truck"=>1},'$set' => {"status"=>"正在配货"}})
+              @lstatistic=Lstatistic.where(:line=>@truck.line).first
+       unless @lstatistic.blank?
+        @lstatistic.inc(:total_truck,1)
+         @lstatistic.inc(:valid_truck,1)
+       else
+         Lstatistic.create(:line=>@truck.line,:total_truck =>1,:valid_truck=>1)
+       end
+
+      #  Lstatistic.collection.update({'line'=>@truck.line},{'$inc' => {"total_truck" => 1,"valid_truck"=>1},'$set' => {"status"=>"正在配货"}},{:upsert =>true})
+     #   StockTruck.collection.update({'_id' => @truck.stock_truck_id},{'$inc' => {"valid_truck" => 1,"total_truck"=>1},'$set' => {"status"=>"正在配货"}})
+        @stock_truck=StockTruck.find(@truck.stock_truck_id)
+        @stock_truck.update_attributes(:status=>"正在配货")
+        @stock_truck.inc(:valid_truck,1)
+        @stock_truck.inc(:total_truck,1)
+       # @stock_truck.inc(:sent_weight,@cargo.cargo_weight.to_f)
+     # @stock_truck.inc(:sent_bulk,@cargo.cargo_bulk.to_f)
         expire_line_truck(@truck.fcity_code,@truck.tcity_code)
         
         format.html { redirect_to(@truck)}

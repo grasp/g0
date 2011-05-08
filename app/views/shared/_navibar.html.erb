@@ -1,6 +1,6 @@
   <%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
 <% unless user.nil? %>
-  <%ustatistic=user.ustatistic%>
+  <%ustatistic=Ustatistic.find(user.ustatistic_id)%>
 <%end%>
 <hr id="head_line">
      <table class="navi" style="display:inline-block;">
@@ -23,12 +23,12 @@
               <%unless user.company_id.blank?%>
               <td>  <a class="navi_link" href="/companies/show/<%=user.company_id%>">我的公司</a></td>
               <%else%>
-              <td>  <a  href="/users/<%=user.id%>/companies/new"> 创建我的公司</a> </td>
+              <td >  <a style="color:red;" href="/users/<%=user.id%>/companies/new"> 创建我的公司</a> </td>
               <%end%>   
                <%unless user.user_contact_id.blank?%>
                 <td> <a class="navi_link" href="/user_contacts/show/<%=user.user_contact_id%>">我的联系人</a></td>
                <%else%>
-                 <td> <a href="/user_contacts/new/<%=user.id%>">创建我的联系方式</a></td>
+                 <td > <a style="color:red;" href="/user_contacts/new/<%=user.id%>">创建我的联系方式</a></td>
                <%end%> 
              <!-- <td> <a class="navi_link" href="/user_contacts/user/<%=user.id%>"><div>我的档案</div></a> </td>-->       
 <!--

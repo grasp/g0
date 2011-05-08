@@ -1,0 +1,2741 @@
+# Logfile created on 2011-05-07 12:15:45 +0800 by logger.rb/25413
+MongoDB logging. Please note that logging negatively impacts performance and should be disabled for high-performance production apps.
+MONGODB admin['$cmd'].find({:ismaster=>1})
+MONGODB admin['$cmd'].find({:ismaster=>1})
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 12:16:04 +0800
+  Processing by CargosController#search as HTML
+MONGODB admin['$cmd'].find({:ismaster=>1})
+MONGODB admin['$cmd'].find({:ismaster=>1})
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4c78448a6ee0d3b000001'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 04:16:04 UTC, "created_at"=>2011-05-07 04:16:04 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (62.3ms)
+Rendered shared/_html_header.erb (11.6ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (41.2ms)
+Rendered cargos/search.html.erb within layouts/public (215.0ms)
+Completed   in 227ms
+
+ActionView::Template::Error (undefined method `company_id' for #<User:0x00000005f7f9e0>):
+    20:              <td style=" border-right-color: #9AAFE5; border-right-style:solid;border-right-width:2px;">  <a class="navi_link navi_truck" href="/users/<%=user.id%>/trucks">我的车源(<%=ustatistic.nil? ? "0":(ustatistic.valid_truck||0)%>)</a></td>
+    21:             
+    22:                                   
+    23:               <%unless user.company_id.blank?%>
+    24:               <td>  <a class="navi_link" href="/companies/show/<%=user.company_id%>">我的公司</a></td>
+    25:               <%else%>
+    26:               <td>  <a  href="/users/<%=user.id%>/companies/new"> 创建我的公司</a> </td>
+  app/views/shared/_navibar.html.erb:23:in `_app_views_shared__navibar_html_erb__3033180421932083510_48328040_3615859732318081771'
+  app/views/layouts/public.html.erb:28:in `_app_views_layouts_public_html_erb___4009458671114560636_46033480_3739550783763801841'
+  app/controllers/cargos_controller.rb:65:in `block (2 levels) in search'
+  app/controllers/cargos_controller.rb:61:in `search'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.8ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.3ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (12.8ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 12:36:50 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4cc6548a6ee0d3b000002'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 04:36:53 UTC, "created_at"=>2011-05-07 04:36:53 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (41.1ms)
+Rendered shared/_html_header.erb (5.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered shared/_navibar.html.erb (16.8ms)
+Rendered cargos/search.html.erb within layouts/public (74.2ms)
+Completed   in 80ms
+
+ActionView::Template::Error (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+    20:              <td style=" border-right-color: #9AAFE5; border-right-style:solid;border-right-width:2px;">  <a class="navi_link navi_truck" href="/users/<%=user.id%>/trucks">我的车源(<%=ustatistic.nil? ? "0":(ustatistic.valid_truck||0)%>)</a></td>
+    21:             
+    22:                                   
+    23:               <%unless user.company.id.blank?%>
+    24:               <td>  <a class="navi_link" href="/companies/show/<%=user.company.id%>">我的公司</a></td>
+    25:               <%else%>
+    26:               <td>  <a  href="/users/<%=user.id%>/companies/new"> 创建我的公司</a> </td>
+  app/views/shared/_navibar.html.erb:23:in `_app_views_shared__navibar_html_erb__3033180421932083510_45434660_3615859732318081771'
+  app/views/layouts/public.html.erb:28:in `_app_views_layouts_public_html_erb___4009458671114560636_47097360_3739550783763801841'
+  app/controllers/cargos_controller.rb:65:in `block (2 levels) in search'
+  app/controllers/cargos_controller.rb:61:in `search'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.5ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (16.5ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 12:37:11 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4cc7948a6ee0d3b000003'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 04:37:13 UTC, "created_at"=>2011-05-07 04:37:13 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (43.9ms)
+Rendered shared/_html_header.erb (3.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered shared/_navibar.html.erb (19.0ms)
+Rendered cargos/search.html.erb within layouts/public (76.1ms)
+Completed   in 82ms
+
+ActionView::Template::Error (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+    25:               <%else%>
+    26:               <td>  <a  href="/users/<%=user.id%>/companies/new"> 创建我的公司</a> </td>
+    27:               <%end%>   
+    28:                <%unless user.user_contact.id.blank?%>
+    29:                 <td> <a class="navi_link" href="/user_contacts/show/<%=user.user_contact.id%>">我的联系人</a></td>
+    30:                <%else%>
+    31:                  <td> <a href="/user_contacts/new/<%=user.id%>">创建我的联系方式</a></td>
+  app/views/shared/_navibar.html.erb:28:in `_app_views_shared__navibar_html_erb__3033180421932083510_44340360_3615859732318081771'
+  app/views/layouts/public.html.erb:28:in `_app_views_layouts_public_html_erb___4009458671114560636_45241260_3739550783763801841'
+  app/controllers/cargos_controller.rb:65:in `block (2 levels) in search'
+  app/controllers/cargos_controller.rb:61:in `search'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.1ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.1ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (98.4ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 12:37:36 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4cc9248a6ee0d3b000004'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 04:37:38 UTC, "created_at"=>2011-05-07 04:37:38 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (45.7ms)
+Rendered shared/_html_header.erb (3.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered shared/_navibar.html.erb (17.8ms)
+Rendered shared/_float_show.html.erb (0.3ms)
+Rendered cargos/search.html.erb within layouts/public (78.0ms)
+Completed 200 OK in 86ms (Views: 81.3ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:09:17 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d3ff48a6ee0d3b000005'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:09:19 UTC, "created_at"=>2011-05-07 05:09:19 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (47.0ms)
+Rendered shared/_html_header.erb (2.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered shared/_navibar.html.erb (18.5ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered cargos/search.html.erb within layouts/public (79.9ms)
+Completed 200 OK in 86ms (Views: 82.4ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:09:25 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d40848a6ee0d3b000006'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:09:28 UTC, "created_at"=>2011-05-07 05:09:28 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (41.9ms)
+Rendered shared/_html_header.erb (2.7ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (10.2ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered cargos/search.html.erb within layouts/public (66.0ms)
+Completed 200 OK in 71ms (Views: 67.8ms)
+
+
+Started GET "/users/login" for 192.168.56.1 at 2011-05-07 13:09:31 +0800
+  Processing by UsersController#login as HTML
+Rendered shared/_html_header.erb (4.3ms)
+Rendered users/_user_annoucement.html.erb (0.8ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered users/login.html.erb within layouts/users (91.1ms)
+Completed 200 OK in 95ms (Views: 93.9ms)
+
+
+Started GET "/users/authenticate?email=admin&password=grasp56%23" for 192.168.56.1 at 2011-05-07 13:09:49 +0800
+  Processing by UsersController#authenticate as HTML
+  Parameters: {"email"=>"admin", "password"=>"[FILTERED]"}
+MONGODB g0_development['users'].find({:name=>"admin"})
+Redirected to http://192.168.56.101:3000/
+Completed 302 Found in 5ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:09:51 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d42248a6ee0d3b000008'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:09:54 UTC, "created_at"=>2011-05-07 05:09:54 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (43.4ms)
+Rendered shared/_html_header.erb (3.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered shared/_navibar.html.erb (22.8ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered cargos/search.html.erb within layouts/public (79.6ms)
+Completed 200 OK in 85ms (Views: 82.2ms)
+
+
+Started GET "/admin" for 192.168.56.1 at 2011-05-07 13:09:58 +0800
+  Processing by AdminController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:10:00 UTC, "$gte"=>2011-05-06 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:10:00 UTC, "$gte"=>2011-05-06 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"quotes", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:10:00 UTC, "$gte"=>2011-05-06 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"inqueries", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:10:00 UTC, "$gte"=>2011-05-06 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:10:00 UTC, "$gte"=>2011-05-06 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:10:00 UTC, "$gte"=>2011-05-06 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:10:00 UTC, "$gte"=>2011-05-05 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:10:00 UTC, "$gte"=>2011-05-05 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"quotes", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:10:00 UTC, "$gte"=>2011-05-05 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"inqueries", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:10:00 UTC, "$gte"=>2011-05-05 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:10:00 UTC, "$gte"=>2011-05-05 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:10:00 UTC, "$gte"=>2011-05-05 05:10:00 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"expired_cargos", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"expired_trucks", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (4.3ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.3ms)
+Rendered shared/_float_show.html.erb (0.9ms)
+Rendered admin/index.html.erb within layouts/admin (39.5ms)
+Completed 200 OK in 109ms (Views: 42.5ms)
+
+
+Started GET "/users/" for 192.168.56.1 at 2011-05-07 13:10:03 +0800
+  Processing by UsersController#index as HTML
+MONGODB g0_development['users'].find({})
+Rendered shared/_html_header.erb (3.6ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.0ms)
+Rendered shared/_float_show.html.erb (0.7ms)
+Rendered users/index.html.erb within layouts/admin (30.1ms)
+Completed 200 OK in 34ms (Views: 33.1ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:10:34 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d44d48a6ee0d3b000009'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:10:37 UTC, "created_at"=>2011-05-07 05:10:37 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (43.5ms)
+Rendered shared/_html_header.erb (3.1ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered shared/_navibar.html.erb (19.7ms)
+Rendered shared/_float_show.html.erb (0.7ms)
+Rendered cargos/search.html.erb within layouts/public (77.8ms)
+Completed 200 OK in 86ms (Views: 80.6ms)
+
+
+Started GET "/cargos/search/100000000000/100000000000/1" for 192.168.56.1 at 2011-05-07 13:10:40 +0800
+  Processing by CargosController#search as HTML
+  Parameters: {"from"=>"100000000000", "to"=>"100000000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d45348a6ee0d3b00000a'), "fcity_code"=>"100000000000", "fcity_name"=>nil, "tcity_code"=>"100000000000", "tcity_name"=>nil, "updated_at"=>2011-05-07 05:10:43 UTC, "created_at"=>2011-05-07 05:10:43 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (41.8ms)
+Rendered cargos/search.html.erb (43.3ms)
+Completed 200 OK in 49ms (Views: 45.4ms)
+
+
+Started GET "/cities/from/100000000000" for 192.168.56.1 at 2011-05-07 13:10:46 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"100000000000"}
+Rendered cities/index.html.erb (4.2ms)
+Write page /opt/vob/g0/public/cities/from/100000000000.html (1.0ms)
+Completed 200 OK in 9ms (Views: 6.4ms)
+
+
+Started GET "/cities/to/100000000000" for 192.168.56.1 at 2011-05-07 13:10:51 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to", "code"=>"100000000000"}
+Rendered cities/index.html.erb (3.6ms)
+Write page /opt/vob/g0/public/cities/to/100000000000.html (0.4ms)
+Completed 200 OK in 8ms (Views: 5.9ms)
+
+
+Started GET "/users/4dc4c71248a6ee0d26000003/companies/new" for 192.168.56.1 at 2011-05-07 13:12:09 +0800
+  Processing by CompaniesController#new as HTML
+  Parameters: {"user_id"=>"4dc4c71248a6ee0d26000003"}
+Completed   in 2ms
+
+NoMethodError (undefined method `find_by_id' for User:Class):
+  app/controllers/companies_controller.rb:105:in `new'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.5ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.1ms)
+
+
+Started GET "/users/4dc4c71248a6ee0d26000003/companies/new" for 192.168.56.1 at 2011-05-07 13:13:02 +0800
+  Processing by CompaniesController#new as HTML
+  Parameters: {"user_id"=>"4dc4c71248a6ee0d26000003"}
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['user_contacts'].find({:user_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered companies/_form.html.erb (17.4ms)
+Rendered shared/_html_header.erb (3.9ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered users/_user_annoucement.html.erb (0.8ms)
+Rendered shared/_float_show.html.erb (1.3ms)
+Rendered companies/new.html.erb within layouts/users (31.8ms)
+Completed 200 OK in 42ms (Views: 35.4ms)
+
+
+Started GET "/cities/from" for 192.168.56.1 at 2011-05-07 13:13:19 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from"}
+Rendered cities/index.html.erb (5.4ms)
+Write page /opt/vob/g0/public/cities/from.html (0.6ms)
+Completed 200 OK in 9ms (Views: 7.5ms)
+
+
+Started GET "/cities/from/330103000000" for 192.168.56.1 at 2011-05-07 13:13:23 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"330103000000"}
+Rendered cities/index.html.erb (3.7ms)
+Write page /opt/vob/g0/public/cities/from/330103000000.html (0.7ms)
+Completed 200 OK in 8ms (Views: 5.8ms)
+
+
+Started POST "/companies" for 192.168.56.1 at 2011-05-07 13:14:03 +0800
+  Processing by CompaniesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"K+IRFdCsxrqwIKLvmm/epoJDsimh0ZF555TxfaFndkE=", "company"=>{"name"=>"山河科技2", "about"=>"山河科技2山河科技2山河科技2", "num_employ"=>"12", "self_che"=>"12", "contact_name"=>"刘先生", "city_code"=>"330103000000", "city_name"=>"浙江杭州市下城区", "address"=>"山印路598号", "fix_phone"=>"8976543", "mobile_phone"=>"19918765346", "email"=>"hunter.wxhu6@gmail.com", "user_id"=>"4dc4c71248a6ee0d26000003", "user_name"=>"hunter", "ispersonal"=>"0"}, "quhao"=>"021", "commit"=>"确定"}
+MONGODB g0_development['companies'].insert([{"name"=>"山河科技2", "about"=>"山河科技2山河科技2山河科技2", "num_employ"=>12, "self_che"=>12, "contact_name"=>"刘先生", "city_code"=>"330103000000", "city_name"=>"浙江杭州市下城区", "address"=>"山印路598号", "fix_phone"=>"021-8976543", "mobile_phone"=>"19918765346", "email"=>"hunter.wxhu6@gmail.com", "user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003'), "user_name"=>"hunter", "ispersonal"=>0, "_id"=>BSON::ObjectId('4dc4d51e48a6ee0d3b00000d'), "updated_at"=>2011-05-07 05:14:06 UTC, "created_at"=>2011-05-07 05:14:06 UTC}])
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].update({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}, {"$set"=>{:company_id=>BSON::ObjectId('4dc4d51e48a6ee0d3b00000d')}})
+Redirected to http://192.168.56.101:3000/
+Completed 302 Found in 11ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:14:06 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d52148a6ee0d3b00000e'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:14:09 UTC, "created_at"=>2011-05-07 05:14:09 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (47.4ms)
+Rendered shared/_html_header.erb (4.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered shared/_navibar.html.erb (20.9ms)
+Rendered shared/_float_show.html.erb (1.7ms)
+Rendered cargos/search.html.erb within layouts/public (82.2ms)
+Completed 200 OK in 88ms (Views: 84.6ms)
+
+
+Started GET "/companies/show/4dc4d51e48a6ee0d3b00000d" for 192.168.56.1 at 2011-05-07 13:14:11 +0800
+  Processing by CompaniesController#show as HTML
+  Parameters: {"id"=>"4dc4d51e48a6ee0d3b00000d"}
+MONGODB g0_development['companies'].find({:_id=>BSON::ObjectId('4dc4d51e48a6ee0d3b00000d')})
+Rendered companies/_cityform.html.erb (2.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered companies/_private.html.erb (3.6ms)
+Rendered companies/_companynavi.html.erb (1.0ms)
+Rendered companies/show.html.erb (11.0ms)
+Completed 200 OK in 17ms (Views: 13.3ms)
+
+
+Started GET "/user_contacts/new/4dc4c71248a6ee0d26000003" for 192.168.56.1 at 2011-05-07 13:14:16 +0800
+  Processing by UserContactsController#new as HTML
+  Parameters: {"id"=>"4dc4c71248a6ee0d26000003"}
+MONGODB g0_development['user_contacts'].find({:user_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered user_contacts/_form.html.erb (8.8ms)
+Rendered shared/_html_header.erb (4.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered users/_user_annoucement.html.erb (1.4ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered user_contacts/new.html.erb within layouts/users (25.1ms)
+Completed 200 OK in 33ms (Views: 27.8ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:15:10 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d56148a6ee0d3b000010'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:15:13 UTC, "created_at"=>2011-05-07 05:15:13 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (45.6ms)
+Rendered shared/_html_header.erb (5.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered shared/_navibar.html.erb (18.8ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered cargos/search.html.erb within layouts/public (77.9ms)
+Completed 200 OK in 84ms (Views: 80.3ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:15:26 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d57148a6ee0d3b000011'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:15:29 UTC, "created_at"=>2011-05-07 05:15:29 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (124.4ms)
+Rendered shared/_html_header.erb (3.6ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered shared/_navibar.html.erb (18.6ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered cargos/search.html.erb within layouts/public (158.7ms)
+Completed 200 OK in 164ms (Views: 161.6ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:15:56 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d58e48a6ee0d3b000012'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:15:58 UTC, "created_at"=>2011-05-07 05:15:58 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (43.1ms)
+Rendered shared/_html_header.erb (1.1ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered shared/_navibar.html.erb (19.0ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered cargos/search.html.erb within layouts/public (78.4ms)
+Completed 200 OK in 84ms (Views: 81.1ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:16:13 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d59f48a6ee0d3b000013'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:16:15 UTC, "created_at"=>2011-05-07 05:16:15 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (47.9ms)
+Rendered shared/_html_header.erb (5.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered shared/_navibar.html.erb (19.1ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered cargos/search.html.erb within layouts/public (80.8ms)
+Completed 200 OK in 91ms (Views: 86.6ms)
+
+
+Started GET "/cargos/show/4da6e4237516fd0ea6000001" for 192.168.56.1 at 2011-05-07 13:16:32 +0800
+  Processing by CargosController#show as HTML
+  Parameters: {"id"=>"4da6e4237516fd0ea6000001"}
+MONGODB g0_development['cargos'].find({:_id=>BSON::ObjectId('4da6e4237516fd0ea6000001')})
+Rendered cargos/_tf56show.html.erb (0.8ms)
+Rendered cargos/show.html.erb (4.0ms)
+Completed 200 OK in 9ms (Views: 6.3ms)
+
+
+Started POST "/user_contacts" for 192.168.56.1 at 2011-05-07 13:17:10 +0800
+  Processing by UserContactsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"K+IRFdCsxrqwIKLvmm/epoJDsimh0ZF555TxfaFndkE=", "usercontact"=>{"name"=>"Hu Hunter", "mphone"=>"19918765348", "quhao"=>"123", "fixphone"=>"98765412", "QQ"=>"", "email"=>"hunter.wxhu@gmail.com"}, "commit"=>"确定"}
+MONGODB g0_development['user_contacts'].insert([{"name"=>"Hu Hunter", "mphone"=>"19918765348", "quhao"=>"123", "fixphone"=>"98765412", "QQ"=>"", "email"=>"hunter.wxhu@gmail.com", "user_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003'), "_id"=>BSON::ObjectId('4dc4d5d948a6ee0d3b000014'), "updated_at"=>2011-05-07 05:17:13 UTC, "created_at"=>2011-05-07 05:17:13 UTC}])
+MONGODB g0_development['users'].update({:_id=>"session[:user_id]"}, {"$set"=>{:user_contact_id=>BSON::ObjectId('4dc4d5d948a6ee0d3b000014')}})
+Redirected to http://192.168.56.101:3000/companies/new
+Completed 302 Found in 10ms
+
+
+Started GET "/companies/new" for 192.168.56.1 at 2011-05-07 13:17:13 +0800
+  Processing by CompaniesController#new as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['user_contacts'].find({:user_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered companies/_form.html.erb (1.5ms)
+Rendered shared/_html_header.erb (4.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered users/_user_annoucement.html.erb (0.5ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered companies/new.html.erb within layouts/users (25.4ms)
+Completed 200 OK in 37ms (Views: 30.2ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:19:36 +0800
+  Processing by CargosController#search as 
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d66b48a6ee0d3b000016'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:19:39 UTC, "created_at"=>2011-05-07 05:19:39 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (41.6ms)
+Rendered shared/_html_header.erb (4.3ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered shared/_navibar.html.erb (18.7ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered cargos/search.html.erb within layouts/public (74.4ms)
+Completed 200 OK in 80ms (Views: 77.1ms)
+
+
+Started GET "/admin" for 192.168.56.1 at 2011-05-07 13:19:48 +0800
+  Processing by AdminController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:19:50 UTC, "$gte"=>2011-05-06 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:19:50 UTC, "$gte"=>2011-05-06 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"quotes", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:19:50 UTC, "$gte"=>2011-05-06 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"inqueries", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:19:50 UTC, "$gte"=>2011-05-06 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:19:50 UTC, "$gte"=>2011-05-06 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:19:50 UTC, "$gte"=>2011-05-06 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:19:50 UTC, "$gte"=>2011-05-05 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:19:50 UTC, "$gte"=>2011-05-05 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"quotes", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:19:50 UTC, "$gte"=>2011-05-05 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"inqueries", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:19:50 UTC, "$gte"=>2011-05-05 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:19:50 UTC, "$gte"=>2011-05-05 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:19:50 UTC, "$gte"=>2011-05-05 05:19:50 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"expired_cargos", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"expired_trucks", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (3.1ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.6ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered admin/index.html.erb within layouts/admin (37.9ms)
+Completed 200 OK in 60ms (Views: 40.3ms)
+
+
+Started GET "/users/" for 192.168.56.1 at 2011-05-07 13:19:53 +0800
+  Processing by UsersController#index as HTML
+MONGODB g0_development['users'].find({})
+Rendered shared/_html_header.erb (4.6ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (10.3ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/index.html.erb within layouts/admin (104.5ms)
+Completed 200 OK in 108ms (Views: 107.1ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:20:26 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d69c48a6ee0d3b000017'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:20:28 UTC, "created_at"=>2011-05-07 05:20:28 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (49.3ms)
+Rendered shared/_html_header.erb (5.1ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered shared/_navibar.html.erb (18.1ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered cargos/search.html.erb within layouts/public (81.8ms)
+Completed 200 OK in 89ms (Views: 85.2ms)
+
+
+Started GET "/users/logout" for 192.168.56.1 at 2011-05-07 13:20:31 +0800
+  Processing by UsersController#logout as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"admin", :_id=>{"$ne"=>BSON::ObjectId('4d598eb67516fd47d6000002')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"w22812@motorola.com", :_id=>{"$ne"=>BSON::ObjectId('4d598eb67516fd47d6000002')}}, "fields"=>nil})
+Redirected to http://192.168.56.101:3000/
+Completed 302 Found in 43ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:20:34 +0800
+  Processing by CargosController#search as HTML
+cookies.signed[:preference]=0
+cookies.signed[:remember_me]=[BSON::ObjectId('4d598eb67516fd47d6000002'), "52761200.9261332248305655", 0]
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d6a448a6ee0d3b000018'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:20:36 UTC, "created_at"=>2011-05-07 05:20:36 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (38.1ms)
+Rendered shared/_html_header.erb (0.8ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (11.2ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered cargos/search.html.erb within layouts/public (65.2ms)
+Completed 200 OK in 72ms (Views: 67.9ms)
+
+
+Started GET "/users/new" for 192.168.56.1 at 2011-05-07 13:20:37 +0800
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (3.4ms)
+Rendered shared/_html_header.erb (5.0ms)
+Rendered users/_user_annoucement.html.erb (0.5ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/new.html.erb within layouts/users (16.5ms)
+Completed 200 OK in 21ms (Views: 19.3ms)
+
+
+Started POST "/users" for 192.168.56.1 at 2011-05-07 13:20:59 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FMgnW0HikO6rhTUq+x3f25Bdva4Oa7rG5EGpnIY2UjI=", "user"=>{"name"=>"mayun", "email"=>"mayun@gmail.com", "email_confirm"=>"mayun@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"确定"}
+paramsuser=mayun
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"mayun"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mayun@gmail.com"}, "fields"=>nil})
+MONGODB g0_development['users'].insert([{"admin"=>false, "_id"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a'), "name"=>"mayun", "email"=>"mayun@gmail.com", "salt"=>"444597200.08638187487551952", "hashed_password"=>"fee4fb375af89c50e7e86cef790e616ab9ef6246", "activate"=>"38895792", "status"=>"new_register", "updated_at"=>2011-05-07 05:21:01 UTC, "created_at"=>2011-05-07 05:21:01 UTC}])
+MONGODB g0_development['ustatistics'].insert([{"total_stock_cargo"=>0, "total_stock_truck"=>0, "total_truck"=>0, "total_cargo"=>0, "total_line"=>0, "total_driver"=>0, "total_custermer"=>0, "valid_cargo"=>0, "valid_truck"=>0, "user_id"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a'), "_id"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001b'), "updated_at"=>2011-05-07 05:21:01 UTC, "created_at"=>2011-05-07 05:21:01 UTC}])
+MONGODB g0_development['users'].update({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')}, {"$set"=>{:ustatistic_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001b')}})
+Redirected to http://192.168.56.101:3000/
+Completed 302 Found in 12ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:21:01 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d6c048a6ee0d3b00001c'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:21:04 UTC, "created_at"=>2011-05-07 05:21:04 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (45.1ms)
+Rendered shared/_html_header.erb (4.1ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+Rendered shared/_navibar.html.erb (18.5ms)
+Rendered shared/_float_show.html.erb (0.8ms)
+Rendered cargos/search.html.erb within layouts/public (77.5ms)
+Completed 200 OK in 84ms (Views: 80.0ms)
+
+
+Started GET "/user_contacts/new/4dc4d6bd48a6ee0d3b00001a" for 192.168.56.1 at 2011-05-07 13:21:45 +0800
+  Processing by UserContactsController#new as HTML
+  Parameters: {"id"=>"4dc4d6bd48a6ee0d3b00001a"}
+MONGODB g0_development['user_contacts'].find({:user_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+Rendered user_contacts/_form.html.erb (6.2ms)
+Rendered shared/_html_header.erb (5.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.4ms)
+Rendered user_contacts/new.html.erb within layouts/users (20.9ms)
+Completed 200 OK in 35ms (Views: 30.2ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:22:14 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d70948a6ee0d3b00001e'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:22:17 UTC, "created_at"=>2011-05-07 05:22:17 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (45.8ms)
+Rendered shared/_html_header.erb (4.3ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+Rendered shared/_navibar.html.erb (101.8ms)
+Rendered shared/_float_show.html.erb (0.9ms)
+Rendered cargos/search.html.erb within layouts/public (164.0ms)
+Completed 200 OK in 169ms (Views: 165.8ms)
+
+
+Started GET "/cargos/search/100000000000/100000000000/1" for 192.168.56.1 at 2011-05-07 13:22:32 +0800
+  Processing by CargosController#search as HTML
+  Parameters: {"from"=>"100000000000", "to"=>"100000000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d71b48a6ee0d3b00001f'), "fcity_code"=>"100000000000", "fcity_name"=>nil, "tcity_code"=>"100000000000", "tcity_name"=>nil, "updated_at"=>2011-05-07 05:22:35 UTC, "created_at"=>2011-05-07 05:22:35 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (47.3ms)
+Rendered cargos/search.html.erb (50.8ms)
+Completed 200 OK in 56ms (Views: 52.4ms)
+
+
+Started GET "/users/logout" for 192.168.56.1 at 2011-05-07 13:25:53 +0800
+
+NameError (undefined local variable or method `type' for User:Class):
+  app/models/user.rb:18:in `<class:User>'
+  app/models/user.rb:2:in `<top (required)>'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.5ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.4ms)
+
+
+Started GET "/users/logout" for 192.168.56.1 at 2011-05-07 13:26:13 +0800
+  Processing by UsersController#logout as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Completed   in 3ms
+
+NoMethodError (undefined method `moble_phone' for #<User:0x000000055fdae8>):
+  app/controllers/users_controller.rb:271:in `logout'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.5ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.1ms)
+
+
+Started GET "/users/logout" for 192.168.56.1 at 2011-05-07 13:26:34 +0800
+  Processing by UsersController#logout as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"hunter.wxhu@gmail.com", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobile_phone=>nil, :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+Redirected to http://192.168.56.101:3000/
+Completed 302 Found in 13ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:26:36 +0800
+  Processing by CargosController#search as HTML
+cookies.signed[:preference]=0
+cookies.signed[:remember_me]=[BSON::ObjectId('4dc4c71248a6ee0d26000003'), "443257000.8228823896268875", 0]
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d80f48a6ee0d3b000020'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:26:39 UTC, "created_at"=>2011-05-07 05:26:39 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (48.0ms)
+Rendered shared/_html_header.erb (4.3ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (11.9ms)
+Rendered shared/_float_show.html.erb (1.7ms)
+Rendered cargos/search.html.erb within layouts/public (157.4ms)
+Completed 200 OK in 165ms (Views: 160.3ms)
+
+
+Started GET "/users/new" for 192.168.56.1 at 2011-05-07 13:26:43 +0800
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (18.3ms)
+Rendered users/new.html.erb within layouts/users (20.4ms)
+Completed   in 26ms
+
+ActionView::Template::Error (undefined method `mobile_phone' for #<ActionView::Helpers::FormBuilder:0x000000055dbb78>):
+    38: 
+    39:   <div class="field">
+    40:     <label>联系手机*:</label>
+    41:     <%= f.mobile_phone :mobile_phone %>
+    42:   </div>
+    43: 
+    44:   <div class="actions">
+  app/views/users/_form.html.erb:41:in `block in _app_views_users__form_html_erb___3337648440771844839_45096720__1447408021113333126'
+  app/views/users/_form.html.erb:3:in `_app_views_users__form_html_erb___3337648440771844839_45096720__1447408021113333126'
+  app/views/users/new.html.erb:5:in `_app_views_users_new_html_erb___2240315109407591598_45133880_3739550783763801841'
+  app/controllers/users_controller.rb:45:in `new'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.6ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (12.6ms)
+
+
+Started GET "/users/new" for 192.168.56.1 at 2011-05-07 13:27:45 +0800
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (2.9ms)
+Rendered shared/_html_header.erb (1.9ms)
+Rendered users/_user_annoucement.html.erb (0.9ms)
+Rendered shared/_float_show.html.erb (1.2ms)
+Rendered users/new.html.erb within layouts/users (15.9ms)
+Completed 200 OK in 20ms (Views: 18.6ms)
+
+
+Started GET "/users/new" for 192.168.56.1 at 2011-05-07 13:28:21 +0800
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (4.5ms)
+Rendered shared/_html_header.erb (2.6ms)
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/new.html.erb within layouts/users (17.4ms)
+Completed 200 OK in 22ms (Views: 20.3ms)
+
+
+Started GET "/users/new" for 192.168.56.1 at 2011-05-07 13:28:36 +0800
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (4.0ms)
+Rendered shared/_html_header.erb (4.4ms)
+Rendered users/_user_annoucement.html.erb (1.0ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/new.html.erb within layouts/users (18.1ms)
+Completed 200 OK in 23ms (Views: 21.2ms)
+
+
+Started POST "/users" for 192.168.56.1 at 2011-05-07 13:29:46 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "user"=>{"name"=>"hunter3", "email"=>"mark.xiansheng@gmail.com", "email_confirm"=>"mark.xiansheng@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobile_phone"=>"19918765346"}, "commit"=>"确定"}
+paramsuser=hunter3
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter3"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mark.xiansheng@gmail.com"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobile_phone=>nil}, "fields"=>nil})
+MONGODB g0_development['users'].find({:email=>nil})
+Rendered users/_form.html.erb (8.9ms)
+Rendered shared/_html_header.erb (4.1ms)
+Rendered users/_user_annoucement.html.erb (0.2ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered users/new.html.erb within layouts/users (22.0ms)
+Completed 200 OK in 36ms (Views: 24.8ms)
+
+
+Started GET "/users/logout" for 192.168.56.1 at 2011-05-07 13:31:12 +0800
+  Processing by UsersController#logout as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"mayun", :_id=>{"$ne"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mayun@gmail.com", :_id=>{"$ne"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobile_phone=>nil, :_id=>{"$ne"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')}}, "fields"=>nil})
+Redirected to http://192.168.56.101:3000/
+Completed 302 Found in 12ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:31:15 +0800
+  Processing by CargosController#search as HTML
+cookies.signed[:preference]=0
+cookies.signed[:remember_me]=[BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a'), "444597200.08638187487551952", 0]
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d92648a6ee0d3b000026'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:31:18 UTC, "created_at"=>2011-05-07 05:31:18 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (45.0ms)
+Rendered shared/_html_header.erb (2.9ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (10.6ms)
+Rendered shared/_float_show.html.erb (0.7ms)
+Rendered cargos/search.html.erb within layouts/public (67.4ms)
+Completed 200 OK in 77ms (Views: 71.6ms)
+
+
+Started GET "/users/login" for 192.168.56.1 at 2011-05-07 13:31:20 +0800
+  Processing by UsersController#login as HTML
+Rendered shared/_html_header.erb (4.1ms)
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/login.html.erb within layouts/users (13.3ms)
+Completed 200 OK in 18ms (Views: 16.3ms)
+
+
+Started GET "/users/authenticate?email=admin&password=grasp56%23" for 192.168.56.1 at 2011-05-07 13:31:27 +0800
+  Processing by UsersController#authenticate as HTML
+  Parameters: {"email"=>"admin", "password"=>"[FILTERED]"}
+MONGODB g0_development['users'].find({:name=>"admin"})
+Redirected to http://192.168.56.101:3000/
+Completed 302 Found in 5ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:31:30 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4d93548a6ee0d3b000028'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:31:33 UTC, "created_at"=>2011-05-07 05:31:33 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (45.3ms)
+Rendered shared/_html_header.erb (3.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered shared/_navibar.html.erb (17.6ms)
+Rendered shared/_float_show.html.erb (0.2ms)
+Rendered cargos/search.html.erb within layouts/public (76.5ms)
+Completed 200 OK in 82ms (Views: 79.0ms)
+
+
+Started GET "/admin" for 192.168.56.1 at 2011-05-07 13:31:37 +0800
+  Processing by AdminController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:31:40 UTC, "$gte"=>2011-05-06 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:31:40 UTC, "$gte"=>2011-05-06 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"quotes", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:31:40 UTC, "$gte"=>2011-05-06 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"inqueries", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:31:40 UTC, "$gte"=>2011-05-06 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:31:40 UTC, "$gte"=>2011-05-06 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{:created_at=>{"$lte"=>2011-05-07 05:31:40 UTC, "$gte"=>2011-05-06 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:31:40 UTC, "$gte"=>2011-05-05 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:31:40 UTC, "$gte"=>2011-05-05 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"quotes", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:31:40 UTC, "$gte"=>2011-05-05 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"inqueries", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:31:40 UTC, "$gte"=>2011-05-05 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:31:40 UTC, "$gte"=>2011-05-05 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{:created_at=>{"$lte"=>2011-05-06 05:31:40 UTC, "$gte"=>2011-05-05 05:31:40 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"expired_cargos", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"expired_trucks", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (4.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (9.2ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered admin/index.html.erb within layouts/admin (40.0ms)
+Completed 200 OK in 63ms (Views: 43.1ms)
+
+
+Started GET "/users/" for 192.168.56.1 at 2011-05-07 13:31:41 +0800
+  Processing by UsersController#index as HTML
+MONGODB g0_development['users'].find({})
+Rendered shared/_html_header.erb (3.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (8.9ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/index.html.erb within layouts/admin (30.2ms)
+Completed 200 OK in 34ms (Views: 32.9ms)
+
+
+Started POST "/users" for 192.168.56.1 at 2011-05-07 13:32:22 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "user"=>{"name"=>"hunter3", "email"=>"mark.xiansheng@gmail.com", "email_confirm"=>"mark.xiansheng@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobile_phone"=>"19918765346"}, "commit"=>"确定"}
+paramsuser=hunter3
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter3"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mark.xiansheng@gmail.com"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobile_phone=>nil}, "fields"=>nil})
+MONGODB g0_development['users'].find({:email=>nil})
+Rendered users/_form.html.erb (8.7ms)
+Rendered shared/_html_header.erb (4.0ms)
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/new.html.erb within layouts/users (21.8ms)
+Completed 200 OK in 37ms (Views: 24.8ms)
+
+
+Started POST "/users" for 192.168.56.1 at 2011-05-07 13:33:07 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "user"=>{"name"=>"hunter3", "email"=>"mark.xiansheng@gmail.com", "email_confirm"=>"mark.xiansheng@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobile_phone"=>"19918765346"}, "commit"=>"确定"}
+paramsuser=hunter3
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter3"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mark.xiansheng@gmail.com"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>nil}, "fields"=>nil})
+MONGODB g0_development['users'].find({:email=>nil})
+Rendered users/_form.html.erb (7.9ms)
+Rendered shared/_html_header.erb (4.2ms)
+Rendered users/_user_annoucement.html.erb (1.1ms)
+Rendered shared/_float_show.html.erb (0.8ms)
+Rendered users/new.html.erb within layouts/users (20.5ms)
+Completed 200 OK in 34ms (Views: 23.0ms)
+
+
+Started POST "/users" for 192.168.56.1 at 2011-05-07 13:35:33 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "user"=>{"name"=>"hunter3", "email"=>"mark.xiansheng@gmail.com", "email_confirm"=>"mark.xiansheng@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobile_phone"=>"19918765346"}, "commit"=>"确定"}
+paramsuser=hunter3
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter3"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mark.xiansheng@gmail.com"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>nil}, "fields"=>nil})
+MONGODB g0_development['users'].find({:email=>nil})
+Rendered users/_form.html.erb (10.7ms)
+Rendered shared/_html_header.erb (5.3ms)
+Rendered users/_user_annoucement.html.erb (1.4ms)
+Rendered shared/_float_show.html.erb (0.4ms)
+Rendered users/new.html.erb within layouts/users (26.0ms)
+Completed 200 OK in 43ms (Views: 28.1ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 13:36:49 +0800
+  Processing by CargosController#search as HTML
+cookies.signed[:preference]=0
+cookies.signed[:remember_me]=[BSON::ObjectId('4dc4c71248a6ee0d26000003'), "443257000.8228823896268875", 0]
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4da7348a6ee0d3b00002c'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 05:36:51 UTC, "created_at"=>2011-05-07 05:36:51 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (46.4ms)
+Rendered shared/_html_header.erb (4.9ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (11.7ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered cargos/search.html.erb within layouts/public (72.0ms)
+Completed 200 OK in 81ms (Views: 74.9ms)
+
+
+Started GET "/users/new" for 192.168.56.1 at 2011-05-07 13:36:54 +0800
+  Processing by UsersController#new as HTML
+Rendered users/_form.html.erb (1.7ms)
+Rendered shared/_html_header.erb (4.2ms)
+Rendered users/_user_annoucement.html.erb (0.3ms)
+Rendered shared/_float_show.html.erb (1.5ms)
+Rendered users/new.html.erb within layouts/users (17.5ms)
+Completed 200 OK in 23ms (Views: 20.3ms)
+
+
+Started POST "/users" for 192.168.56.1 at 2011-05-07 13:37:17 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "user"=>{"name"=>"hunter3", "email"=>"mark1@gmail.com", "email_confirm"=>"mark1@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobilephone"=>"15678765432"}, "commit"=>"确定"}
+paramsuser=hunter3
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter3"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mark1@gmail.com"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>nil}, "fields"=>nil})
+MONGODB g0_development['users'].find({:email=>nil})
+Rendered users/_form.html.erb (10.1ms)
+Rendered shared/_html_header.erb (5.1ms)
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/new.html.erb within layouts/users (24.2ms)
+Completed 200 OK in 40ms (Views: 27.8ms)
+
+
+Started POST "/users" for 192.168.56.1 at 2011-05-07 14:00:19 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "user"=>{"name"=>"hunter3", "email"=>"mark1@gmail.com", "email_confirm"=>"mark1@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobilephone"=>"15678765432"}, "commit"=>"确定"}
+paramsuser=hunter3
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter3"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mark1@gmail.com"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>nil}, "fields"=>nil})
+MONGODB g0_development['users'].find({:email=>nil})
+Rendered users/_form.html.erb (8.2ms)
+Rendered shared/_html_header.erb (3.9ms)
+Rendered users/_user_annoucement.html.erb (0.9ms)
+Rendered shared/_float_show.html.erb (1.2ms)
+Rendered users/new.html.erb within layouts/users (24.7ms)
+Completed 200 OK in 40ms (Views: 27.3ms)
+
+
+Started GET "/users/4dc4d6bd48a6ee0d3b00001a/edit" for 192.168.56.1 at 2011-05-07 14:01:21 +0800
+  Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"4dc4d6bd48a6ee0d3b00001a"}
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+Rendered users/_form.html.erb (6.4ms)
+Rendered shared/_html_header.erb (3.3ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered users/_user_annoucement.html.erb (0.7ms)
+Rendered shared/_float_show.html.erb (0.4ms)
+Rendered users/edit.html.erb within layouts/users (21.2ms)
+Completed 200 OK in 27ms (Views: 23.8ms)
+
+
+Started POST "/users/4dc4d6bd48a6ee0d3b00001a" for 192.168.56.1 at 2011-05-07 14:01:40 +0800
+  Processing by UsersController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"+rJtH5yTWXqQSP0ESRJgyi4xFPpDSjw8mEfwAh0iRtA=", "user"=>{"name"=>"mayun", "email"=>"mayun@gmail.com", "email_confirm"=>"mayun@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobilephone"=>"123456789"}, "commit"=>"确定", "id"=>"4dc4d6bd48a6ee0d3b00001a"}
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"mayun", :_id=>{"$ne"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mayun@gmail.com", :_id=>{"$ne"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>"123456789", :_id=>{"$ne"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')}}, "fields"=>nil})
+MONGODB g0_development['users'].update({"_id"=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')}, {"$set"=>{"salt"=>"453367000.9283868573433501", "hashed_password"=>"da989154f7cc945f85f277f68c02fff87a18d669", "mobilephone"=>"123456789", "updated_at"=>2011-05-07 06:01:42 UTC}})
+Redirected to http://192.168.56.101:3000/users/4dc4d6bd48a6ee0d3b00001a
+Completed 302 Found in 13ms
+
+
+Started GET "/users/4dc4d6bd48a6ee0d3b00001a" for 192.168.56.1 at 2011-05-07 14:01:42 +0800
+  Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4dc4d6bd48a6ee0d3b00001a"}
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+Rendered users/show.html.erb within layouts/users (1.9ms)
+Completed   in 8ms
+
+ActionView::Template::Error (undefined method `nick_name' for #<User:0x00000005beac08>):
+    12: 
+    13: <p>
+    14:   <b>Nick name:</b>
+    15:   <%= @user.nick_name %>
+    16: </p>
+    17: 
+    18: <p>
+  app/views/users/show.html.erb:15:in `_app_views_users_show_html_erb___1829703761020143914_48130900_3739550783763801841'
+  app/controllers/users_controller.rb:34:in `show'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.6ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (15.3ms)
+
+
+Started GET "/users/4dc4d6bd48a6ee0d3b00001a" for 192.168.56.1 at 2011-05-07 14:02:17 +0800
+  Processing by UsersController#show as 
+  Parameters: {"id"=>"4dc4d6bd48a6ee0d3b00001a"}
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4d6bd48a6ee0d3b00001a')})
+Rendered shared/_html_header.erb (1.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered users/_user_annoucement.html.erb (0.8ms)
+Rendered shared/_float_show.html.erb (0.3ms)
+Rendered users/show.html.erb within layouts/users (16.2ms)
+Completed 200 OK in 22ms (Views: 18.9ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 14:02:24 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e07248a6ee0d3b000030'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 06:02:26 UTC, "created_at"=>2011-05-07 06:02:26 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (41.6ms)
+Rendered shared/_html_header.erb (81.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered shared/_navibar.html.erb (20.7ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered cargos/search.html.erb within layouts/public (159.2ms)
+Completed 200 OK in 166ms (Views: 162.3ms)
+
+
+Started GET "/admin" for 192.168.56.1 at 2011-05-07 14:02:27 +0800
+  Processing by AdminController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:created_at=>{"$lte"=>2011-05-07 06:02:30 UTC, "$gte"=>2011-05-06 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:created_at=>{"$lte"=>2011-05-07 06:02:30 UTC, "$gte"=>2011-05-06 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"quotes", "query"=>{:created_at=>{"$lte"=>2011-05-07 06:02:30 UTC, "$gte"=>2011-05-06 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"inqueries", "query"=>{:created_at=>{"$lte"=>2011-05-07 06:02:30 UTC, "$gte"=>2011-05-06 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:created_at=>{"$lte"=>2011-05-07 06:02:30 UTC, "$gte"=>2011-05-06 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{:created_at=>{"$lte"=>2011-05-07 06:02:30 UTC, "$gte"=>2011-05-06 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:created_at=>{"$lte"=>2011-05-06 06:02:30 UTC, "$gte"=>2011-05-05 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:created_at=>{"$lte"=>2011-05-06 06:02:30 UTC, "$gte"=>2011-05-05 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"quotes", "query"=>{:created_at=>{"$lte"=>2011-05-06 06:02:30 UTC, "$gte"=>2011-05-05 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"inqueries", "query"=>{:created_at=>{"$lte"=>2011-05-06 06:02:30 UTC, "$gte"=>2011-05-05 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:created_at=>{"$lte"=>2011-05-06 06:02:30 UTC, "$gte"=>2011-05-05 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{:created_at=>{"$lte"=>2011-05-06 06:02:30 UTC, "$gte"=>2011-05-05 06:02:30 UTC}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"companies", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"expired_cargos", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"expired_trucks", "query"=>{}, "fields"=>nil})
+Rendered shared/_html_header.erb (5.4ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (12.8ms)
+Rendered shared/_float_show.html.erb (0.7ms)
+Rendered admin/index.html.erb within layouts/admin (44.3ms)
+Completed 200 OK in 70ms (Views: 48.6ms)
+
+
+Started GET "/users/" for 192.168.56.1 at 2011-05-07 14:02:33 +0800
+  Processing by UsersController#index as HTML
+MONGODB g0_development['users'].find({})
+Rendered shared/_html_header.erb (3.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (11.1ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered users/index.html.erb within layouts/admin (31.2ms)
+Completed 200 OK in 35ms (Views: 33.8ms)
+
+
+Started GET "/users/4dc4c71248a6ee0d26000003/edit" for 192.168.56.1 at 2011-05-07 14:02:38 +0800
+  Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"4dc4c71248a6ee0d26000003"}
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered users/_form.html.erb (4.6ms)
+Rendered shared/_html_header.erb (4.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.2ms)
+Rendered users/edit.html.erb within layouts/users (22.2ms)
+Completed 200 OK in 28ms (Views: 23.8ms)
+
+
+Started POST "/users/4dc4c71248a6ee0d26000003" for 192.168.56.1 at 2011-05-07 14:02:52 +0800
+  Processing by UsersController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"+rJtH5yTWXqQSP0ESRJgyi4xFPpDSjw8mEfwAh0iRtA=", "user"=>{"name"=>"hunter", "email"=>"hunter.wxhu@gmail.com", "email_confirm"=>"hunter.wxhu@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobilephone"=>"23455667879"}, "commit"=>"确定", "id"=>"4dc4c71248a6ee0d26000003"}
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"hunter.wxhu@gmail.com", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>"23455667879", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['users'].update({"_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}, {"$set"=>{"salt"=>"489694800.47281139539580275", "hashed_password"=>"452c51096d4de918f10dec4cc46734b97dd12bd7", "mobilephone"=>"23455667879", "updated_at"=>2011-05-07 06:02:54 UTC}})
+Redirected to http://192.168.56.101:3000/users/4dc4c71248a6ee0d26000003
+Completed 302 Found in 12ms
+
+
+Started GET "/users/4dc4c71248a6ee0d26000003" for 192.168.56.1 at 2011-05-07 14:02:54 +0800
+  Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4dc4c71248a6ee0d26000003"}
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4c71248a6ee0d26000003')})
+Rendered shared/_html_header.erb (2.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/show.html.erb within layouts/users (24.8ms)
+Completed 200 OK in 29ms (Views: 26.9ms)
+
+
+Started GET "/users" for 192.168.56.1 at 2011-05-07 14:02:58 +0800
+  Processing by UsersController#index as HTML
+MONGODB g0_development['users'].find({})
+Rendered shared/_html_header.erb (3.7ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"scans", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"moves", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"grasp_records", "query"=>{}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"lib_companies", "query"=>{}, "fields"=>nil})
+Rendered shared/_adminbar.html.erb (11.9ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered users/index.html.erb within layouts/admin (31.2ms)
+Completed 200 OK in 34ms (Views: 33.6ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 14:03:02 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e09948a6ee0d3b000031'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 06:03:05 UTC, "created_at"=>2011-05-07 06:03:05 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (43.5ms)
+Rendered shared/_html_header.erb (4.6ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4d598eb67516fd47d6000002')})
+Rendered shared/_navibar.html.erb (19.0ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered cargos/search.html.erb within layouts/public (77.3ms)
+Completed 200 OK in 83ms (Views: 80.1ms)
+
+
+Started POST "/users" for 192.168.56.1 at 2011-05-07 14:03:34 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "user"=>{"name"=>"hunter3", "email"=>"mark1@gmail.com", "email_confirm"=>"mark1@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobilephone"=>"12367891234"}, "commit"=>"确定"}
+paramsuser=hunter3
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter3"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mark1@gmail.com"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>nil}, "fields"=>nil})
+MONGODB g0_development['users'].find({:email=>nil})
+Rendered users/_form.html.erb (8.3ms)
+Rendered shared/_html_header.erb (2.7ms)
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/new.html.erb within layouts/users (21.9ms)
+Completed 200 OK in 37ms (Views: 24.8ms)
+
+
+Started POST "/users" for 192.168.56.1 at 2011-05-07 14:05:17 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "user"=>{"name"=>"hunter3", "email"=>"mark1@gmail.com", "email_confirm"=>"mark1@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobilephone"=>"13768901234"}, "commit"=>"确定"}
+paramsuser=hunter3
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter3"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mark1@gmail.com"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>nil}, "fields"=>nil})
+MONGODB g0_development['users'].find({:email=>nil})
+Rendered users/_form.html.erb (7.4ms)
+Rendered shared/_html_header.erb (4.8ms)
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered users/new.html.erb within layouts/users (22.1ms)
+Completed 200 OK in 38ms (Views: 25.6ms)
+
+
+Started POST "/users" for 192.168.56.1 at 2011-05-07 14:07:02 +0800
+  Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "user"=>{"name"=>"hunter3", "email"=>"mark1@gmail.com", "email_confirm"=>"mark1@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "mobilephone"=>"137789932345"}, "commit"=>"确定"}
+paramsuser=hunter3
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter3"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mark1@gmail.com"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>"137789932345"}, "fields"=>nil})
+MONGODB g0_development['users'].insert([{"admin"=>false, "_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034'), "name"=>"hunter3", "email"=>"mark1@gmail.com", "salt"=>"458540600.5324316049635205", "hashed_password"=>"ccaabe5b9c671f1ba34ff18900d7581bb966b478", "activate"=>"1139840882", "status"=>"new_register", "mobilephone"=>"137789932345", "updated_at"=>2011-05-07 06:07:05 UTC, "created_at"=>2011-05-07 06:07:05 UTC}])
+MONGODB g0_development['ustatistics'].insert([{"total_stock_cargo"=>0, "total_stock_truck"=>0, "total_truck"=>0, "total_cargo"=>0, "total_line"=>0, "total_driver"=>0, "total_custermer"=>0, "valid_cargo"=>0, "valid_truck"=>0, "user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034'), "_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000035'), "updated_at"=>2011-05-07 06:07:05 UTC, "created_at"=>2011-05-07 06:07:05 UTC}])
+MONGODB g0_development['users'].update({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$set"=>{:ustatistic_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000035')}})
+Redirected to http://192.168.56.101:3000/
+Completed 302 Found in 16ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 14:07:05 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e18b48a6ee0d3b000036'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 06:07:07 UTC, "created_at"=>2011-05-07 06:07:07 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (44.8ms)
+Rendered shared/_html_header.erb (2.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (22.2ms)
+Rendered shared/_float_show.html.erb (1.3ms)
+Rendered cargos/search.html.erb within layouts/public (82.8ms)
+Completed 200 OK in 88ms (Views: 84.4ms)
+
+
+Started GET "/cities/from/430000000000" for 192.168.56.1 at 2011-05-07 14:31:57 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"430000000000"}
+Rendered cities/index.html.erb (4.5ms)
+Write page /opt/vob/g0/public/cities/from/430000000000.html (1.1ms)
+Completed 200 OK in 10ms (Views: 7.0ms)
+
+
+Started GET "/cities/to/520000000000" for 192.168.56.1 at 2011-05-07 14:32:00 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to", "code"=>"520000000000"}
+Rendered cities/index.html.erb (5.6ms)
+Write page /opt/vob/g0/public/cities/to/520000000000.html (0.5ms)
+Completed 200 OK in 11ms (Views: 9.1ms)
+
+
+Started GET "/cities/to/330109000000" for 192.168.56.1 at 2011-05-07 14:32:03 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to", "code"=>"330109000000"}
+Rendered cities/index.html.erb (3.1ms)
+Write page /opt/vob/g0/public/cities/to/330109000000.html (0.7ms)
+Completed 200 OK in 9ms (Views: 6.9ms)
+
+
+Started GET "/cargos/search/430000000000/520121000000/1" for 192.168.56.1 at 2011-05-07 14:32:06 +0800
+  Processing by CargosController#search as HTML
+  Parameters: {"from"=>"430000000000", "to"=>"520121000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e76948a6ee0d3b000037'), "fcity_code"=>"430000000000", "fcity_name"=>"湖南", "tcity_code"=>"520121000000", "tcity_name"=>"开阳县", "updated_at"=>2011-05-07 06:32:09 UTC, "created_at"=>2011-05-07 06:32:09 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:fcity_code=>{"$gte"=>"430000000000", "$lt"=>"440000000000"}, :tcity_code=>"520121000000", :status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:fcity_code=>{"$gte"=>"430000000000", "$lt"=>"440000000000"}, :tcity_code=>"520121000000", :status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (32.9ms)
+Rendered cargos/search.html.erb (34.9ms)
+Completed 200 OK in 42ms (Views: 37.7ms)
+
+
+Started GET "/cargos/search/100000000000/100000000000/1" for 192.168.56.1 at 2011-05-07 14:32:11 +0800
+  Processing by CargosController#search as HTML
+  Parameters: {"from"=>"100000000000", "to"=>"100000000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e76e48a6ee0d3b000038'), "fcity_code"=>"100000000000", "fcity_name"=>nil, "tcity_code"=>"100000000000", "tcity_name"=>nil, "updated_at"=>2011-05-07 06:32:14 UTC, "created_at"=>2011-05-07 06:32:14 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (44.2ms)
+Rendered cargos/search.html.erb (49.1ms)
+Completed 200 OK in 55ms (Views: 51.2ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_cargos" for 192.168.56.1 at 2011-05-07 14:32:15 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20)
+Rendered stock_cargos/index.html.erb (1.9ms)
+Completed 200 OK in 10ms (Views: 5.6ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/cargos/" for 192.168.56.1 at 2011-05-07 14:32:17 +0800
+  Processing by CargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_list.html.erb (1.8ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_cargonavi.html.erb (4.0ms)
+Rendered cargos/index.html.erb (9.4ms)
+Completed 200 OK in 31ms (Views: 11.9ms)
+
+
+Started GET "/trucks/search/100000000000/100000000000/1" for 192.168.56.1 at 2011-05-07 14:32:20 +0800
+  Processing by TrucksController#search as HTML
+  Parameters: {"from"=>"100000000000", "to"=>"100000000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e77648a6ee0d3b000039'), "fcity_code"=>"100000000000", "fcity_name"=>nil, "tcity_code"=>"100000000000", "tcity_name"=>nil, "updated_at"=>2011-05-07 06:32:22 UTC, "created_at"=>2011-05-07 06:32:22 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['trucks'].find({:status=>"正在配货"}).limit(20).sort([[:updated_at, :desc]])
+Rendered trucks/_trucklist.html.erb (77.3ms)
+Rendered trucks/search.html.erb (81.2ms)
+Completed 200 OK in 88ms (Views: 84.7ms)
+
+
+Started GET "/cargos/search/100000000000/100000000000/1" for 192.168.56.1 at 2011-05-07 14:32:22 +0800
+  Processing by CargosController#search as HTML
+  Parameters: {"from"=>"100000000000", "to"=>"100000000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e77948a6ee0d3b00003a'), "fcity_code"=>"100000000000", "fcity_name"=>nil, "tcity_code"=>"100000000000", "tcity_name"=>nil, "updated_at"=>2011-05-07 06:32:25 UTC, "created_at"=>2011-05-07 06:32:25 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (48.1ms)
+Rendered cargos/search.html.erb (52.6ms)
+Completed 200 OK in 59ms (Views: 55.0ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_cargos" for 192.168.56.1 at 2011-05-07 14:32:25 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20)
+Rendered stock_cargos/index.html.erb (1.9ms)
+Completed 200 OK in 8ms (Views: 4.2ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/cargos/" for 192.168.56.1 at 2011-05-07 14:32:28 +0800
+  Processing by CargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_list.html.erb (1.7ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_cargonavi.html.erb (4.6ms)
+Rendered cargos/index.html.erb (10.8ms)
+Completed 200 OK in 34ms (Views: 13.0ms)
+
+
+Started GET "/trucks/search/100000000000/100000000000/1" for 192.168.56.1 at 2011-05-07 14:32:30 +0800
+  Processing by TrucksController#search as HTML
+  Parameters: {"from"=>"100000000000", "to"=>"100000000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e78148a6ee0d3b00003b'), "fcity_code"=>"100000000000", "fcity_name"=>nil, "tcity_code"=>"100000000000", "tcity_name"=>nil, "updated_at"=>2011-05-07 06:32:33 UTC, "created_at"=>2011-05-07 06:32:33 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['trucks'].find({:status=>"正在配货"}).limit(20).sort([[:updated_at, :desc]])
+Rendered trucks/_trucklist.html.erb (28.4ms)
+Rendered trucks/search.html.erb (30.5ms)
+Completed 200 OK in 37ms (Views: 33.3ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_trucks" for 192.168.56.1 at 2011-05-07 14:32:33 +0800
+  Processing by StockTrucksController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_trucks", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_trucks'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(5).sort([[:created_at, :desc]])
+Rendered stock_trucks/index.html.erb (0.7ms)
+Completed 200 OK in 9ms (Views: 4.9ms)
+
+
+Started GET "/trucks/show/4da6e4237516fd0ea6000004" for 192.168.56.1 at 2011-05-07 14:32:52 +0800
+  Processing by TrucksController#show as HTML
+  Parameters: {"id"=>"4da6e4237516fd0ea6000004"}
+MONGODB g0_development['trucks'].find({:_id=>BSON::ObjectId('4da6e4237516fd0ea6000004')})
+MONGODB g0_development['user_contacts'].find({:user_id=>nil})
+MONGODB g0_development['companies'].find({:_id=>nil})
+Rendered trucks/_tf56show.html.erb (1.0ms)
+Rendered trucks/show.html.erb (3.8ms)
+Completed 200 OK in 12ms (Views: 6.0ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/companies/new" for 192.168.56.1 at 2011-05-07 14:32:58 +0800
+  Processing by CompaniesController#new as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered companies/_form.html.erb (12.9ms)
+Rendered shared/_html_header.erb (3.2ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered users/_user_annoucement.html.erb (0.3ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered companies/new.html.erb within layouts/users (34.0ms)
+Completed 200 OK in 122ms (Views: 116.8ms)
+
+
+Started GET "/cities/from" for 192.168.56.1 at 2011-05-07 14:33:20 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from"}
+Rendered cities/index.html.erb (3.4ms)
+Write page /opt/vob/g0/public/cities/from.html (0.5ms)
+Completed 200 OK in 9ms (Views: 7.1ms)
+
+
+Started GET "/cities/from/540000000000" for 192.168.56.1 at 2011-05-07 14:33:25 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"540000000000"}
+Rendered cities/index.html.erb (4.0ms)
+Write page /opt/vob/g0/public/cities/from/540000000000.html (0.4ms)
+Completed 200 OK in 8ms (Views: 6.3ms)
+
+
+Started POST "/companies" for 192.168.56.1 at 2011-05-07 14:33:45 +0800
+  Processing by CompaniesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "company"=>{"name"=>"山河科技", "about"=>"mark1@gmail.commark1@gmail.commark1@gmail.com", "num_employ"=>"15", "self_che"=>"13", "contact_name"=>"刘先生", "city_code"=>"540126000000", "city_name"=>"西藏拉萨市达孜县", "address"=>"阿道夫", "fix_phone"=>"19918765346", "mobile_phone"=>"19918765346", "email"=>"hunter.wxhu@gmail.com", "user_id"=>"4dc4e18948a6ee0d3b000034", "user_name"=>"hunter3", "ispersonal"=>"0"}, "quhao"=>"346", "commit"=>"确定"}
+MONGODB g0_development['companies'].insert([{"name"=>"山河科技", "about"=>"mark1@gmail.commark1@gmail.commark1@gmail.com", "num_employ"=>15, "self_che"=>13, "contact_name"=>"刘先生", "city_code"=>"540126000000", "city_name"=>"西藏拉萨市达孜县", "address"=>"阿道夫", "fix_phone"=>"346-19918765346", "mobile_phone"=>"19918765346", "email"=>"hunter.wxhu@gmail.com", "user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034'), "user_name"=>"hunter3", "ispersonal"=>0, "_id"=>BSON::ObjectId('4dc4e7cc48a6ee0d3b00003d'), "updated_at"=>2011-05-07 06:33:48 UTC, "created_at"=>2011-05-07 06:33:48 UTC}])
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['users'].update({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$set"=>{:company_id=>BSON::ObjectId('4dc4e7cc48a6ee0d3b00003d')}})
+Redirected to http://192.168.56.101:3000/
+Completed 302 Found in 15ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 14:33:48 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e7ce48a6ee0d3b00003e'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 06:33:50 UTC, "created_at"=>2011-05-07 06:33:50 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (43.7ms)
+Rendered shared/_html_header.erb (4.3ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (19.8ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered cargos/search.html.erb within layouts/public (78.8ms)
+Completed 200 OK in 85ms (Views: 81.9ms)
+
+
+Started GET "/companies/show/4dc4e7cc48a6ee0d3b00003d" for 192.168.56.1 at 2011-05-07 14:33:53 +0800
+  Processing by CompaniesController#show as HTML
+  Parameters: {"id"=>"4dc4e7cc48a6ee0d3b00003d"}
+MONGODB g0_development['companies'].find({:_id=>BSON::ObjectId('4dc4e7cc48a6ee0d3b00003d')})
+Rendered companies/_cityform.html.erb (2.3ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered companies/_private.html.erb (3.7ms)
+Rendered companies/_companynavi.html.erb (0.9ms)
+Rendered companies/show.html.erb (11.8ms)
+Completed 200 OK in 17ms (Views: 13.9ms)
+
+
+Started GET "/user_contacts/new/4dc4e18948a6ee0d3b000034" for 192.168.56.1 at 2011-05-07 14:33:56 +0800
+  Processing by UserContactsController#new as HTML
+  Parameters: {"id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['user_contacts'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered user_contacts/_form.html.erb (8.5ms)
+Rendered shared/_html_header.erb (2.5ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered users/_user_annoucement.html.erb (1.7ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered user_contacts/new.html.erb within layouts/users (24.5ms)
+Completed 200 OK in 33ms (Views: 27.8ms)
+
+
+Started POST "/user_contacts" for 192.168.56.1 at 2011-05-07 14:34:47 +0800
+  Processing by UserContactsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "usercontact"=>{"name"=>" 马山山", "mphone"=>"15908765346", "quhao"=>"021", "fixphone"=>"15908765", "QQ"=>"2345698", "email"=>"mark1@gmail.com"}, "commit"=>"确定"}
+MONGODB g0_development['user_contacts'].insert([{"name"=>" 马山山", "mphone"=>"15908765346", "quhao"=>"021", "fixphone"=>"15908765", "QQ"=>"2345698", "email"=>"mark1@gmail.com", "user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034'), "_id"=>BSON::ObjectId('4dc4e80948a6ee0d3b000040'), "updated_at"=>2011-05-07 06:34:49 UTC, "created_at"=>2011-05-07 06:34:49 UTC}])
+MONGODB g0_development['users'].update({:_id=>"session[:user_id]"}, {"$set"=>{:user_contact_id=>BSON::ObjectId('4dc4e80948a6ee0d3b000040')}})
+Redirected to http://192.168.56.101:3000/companies/new
+Completed 302 Found in 7ms
+
+
+Started GET "/companies/new" for 192.168.56.1 at 2011-05-07 14:34:49 +0800
+  Processing by CompaniesController#new as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered companies/_form.html.erb (11.7ms)
+Rendered shared/_html_header.erb (4.7ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.5ms)
+Rendered companies/new.html.erb within layouts/users (27.9ms)
+Completed 200 OK in 39ms (Views: 31.8ms)
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 14:36:15 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e86148a6ee0d3b000042'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 06:36:17 UTC, "created_at"=>2011-05-07 06:36:17 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (46.7ms)
+Rendered shared/_html_header.erb (2.8ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (20.4ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered cargos/search.html.erb within layouts/public (82.9ms)
+Completed 200 OK in 91ms (Views: 86.0ms)
+
+
+Started GET "/cargos/search/100000000000/100000000000/1" for 192.168.56.1 at 2011-05-07 14:36:37 +0800
+  Processing by CargosController#search as HTML
+  Parameters: {"from"=>"100000000000", "to"=>"100000000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4e87748a6ee0d3b000043'), "fcity_code"=>"100000000000", "fcity_name"=>nil, "tcity_code"=>"100000000000", "tcity_name"=>nil, "updated_at"=>2011-05-07 06:36:39 UTC, "created_at"=>2011-05-07 06:36:39 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (45.3ms)
+Rendered cargos/search.html.erb (47.9ms)
+Completed 200 OK in 54ms (Views: 51.1ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_cargos" for 192.168.56.1 at 2011-05-07 14:36:39 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20)
+Rendered stock_cargos/index.html.erb (1.4ms)
+Completed 200 OK in 8ms (Views: 3.5ms)
+
+
+Started GET "/stock_cargos/new" for 192.168.56.1 at 2011-05-07 14:36:44 +0800
+  Processing by StockCargosController#new as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered stock_cargos/_form.html.erb (7.5ms)
+Rendered stock_cargos/new.html.erb (11.5ms)
+Completed 200 OK in 17ms (Views: 12.8ms)
+
+
+Started GET "/cargo_categories/show/040000" for 192.168.56.1 at 2011-05-07 14:36:50 +0800
+  Processing by CargoCategoriesController#show as HTML
+  Parameters: {"code"=>"040000"}
+Rendered cargo_categories/show.html.erb (2.2ms)
+Completed 200 OK in 5ms (Views: 4.6ms)
+
+
+Started GET "/cargo_categories/show/040000" for 192.168.56.1 at 2011-05-07 14:37:00 +0800
+  Processing by CargoCategoriesController#show as HTML
+  Parameters: {"code"=>"040000"}
+Rendered cargo_categories/show.html.erb (1.6ms)
+Completed 200 OK in 6ms (Views: 4.8ms)
+
+
+Started GET "/cargo_categories/show/030000" for 192.168.56.1 at 2011-05-07 14:37:03 +0800
+  Processing by CargoCategoriesController#show as HTML
+  Parameters: {"code"=>"030000"}
+Rendered cargo_categories/show.html.erb (2.7ms)
+Completed 200 OK in 6ms (Views: 5.9ms)
+
+
+Started GET "/cargo_categories/show/040300" for 192.168.56.1 at 2011-05-07 14:37:05 +0800
+  Processing by CargoCategoriesController#show as HTML
+  Parameters: {"code"=>"040300"}
+Completed   in 1ms
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.[]):
+  app/controllers/cargo_categories_controller.rb:24:in `show'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (120.4ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.1ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (130.2ms)
+
+
+Started GET "/package_categories/show/1000" for 192.168.56.1 at 2011-05-07 14:37:08 +0800
+  Processing by PackageCategoriesController#show as HTML
+  Parameters: {"code"=>"1000"}
+Rendered package_categories/show.html.erb (1.5ms)
+Completed 200 OK in 5ms (Views: 4.1ms)
+
+
+Started GET "/package_categories/show/5000" for 192.168.56.1 at 2011-05-07 14:37:12 +0800
+  Processing by PackageCategoriesController#show as HTML
+  Parameters: {"code"=>"5000"}
+Rendered package_categories/show.html.erb (1.6ms)
+Completed 200 OK in 5ms (Views: 4.0ms)
+
+
+Started GET "/package_categories/show/1A4" for 192.168.56.1 at 2011-05-07 14:37:14 +0800
+  Processing by PackageCategoriesController#show as HTML
+  Parameters: {"code"=>"1A4"}
+Rendered package_categories/show.html.erb (1.5ms)
+Completed 200 OK in 5ms (Views: 4.0ms)
+
+
+Started POST "/stock_cargos" for 192.168.56.1 at 2011-05-07 14:37:17 +0800
+  Processing by StockCargosController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "stockcargo"=>{"big_category"=>"001", "cate_code"=>"040300", "cate_name"=>"\t钢锭坯", "package_code"=>"1A4", "package_name"=>"镀锌开口钢桶", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "status"=>"闲置"}, "commit"=>"确定"}
+MONGODB g0_development['stock_cargos'].insert([{"big_category"=>"001", "cate_code"=>"040300", "cate_name"=>"\t钢锭坯", "package_code"=>"1A4", "package_name"=>"镀锌开口钢桶", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "status"=>"货物闲置", "cargocount"=>0, "valid_cargo"=>0, "total_cargo"=>0, "expired_cargo"=>0, "sent_weight"=>0.0, "sent_bulk"=>0.0, "_id"=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045'), "updated_at"=>2011-05-07 06:37:19 UTC, "created_at"=>2011-05-07 06:37:19 UTC}])
+MONGODB g0_development['ustatistics'].update({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$inc"=>{"total_stock_cargo"=>1}})
+Redirected to http://192.168.56.101:3000/stock_cargos/4dc4e89f48a6ee0d3b000045
+Completed 302 Found in 12ms
+
+
+Started GET "/stock_cargos/4dc4e89f48a6ee0d3b000045" for 192.168.56.1 at 2011-05-07 14:37:19 +0800
+  Processing by StockCargosController#show as 
+  Parameters: {"id"=>"4dc4e89f48a6ee0d3b000045"}
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045')})
+Rendered stock_cargos/show.html.erb (2.2ms)
+Completed 200 OK in 7ms (Views: 4.6ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_cargos" for 192.168.56.1 at 2011-05-07 14:37:22 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20)
+Rendered stock_cargos/index.html.erb (1.3ms)
+Completed 200 OK in 9ms (Views: 4.8ms)
+
+
+Started GET "/public/navibar" for 192.168.56.1 at 2011-05-07 14:37:25 +0800
+  Processing by PublicController#navibar as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (19.9ms)
+Rendered public/navibar.html.erb (22.2ms)
+Completed 200 OK in 25ms (Views: 24.3ms)
+
+
+Started GET "/cargos/new/4dc4e89f48a6ee0d3b000045" for 192.168.56.1 at 2011-05-07 14:37:29 +0800
+  Processing by CargosController#new as HTML
+  Parameters: {"id"=>"4dc4e89f48a6ee0d3b000045"}
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_form.html.erb (6.5ms)
+Rendered cargos/new.html.erb (9.3ms)
+Completed 200 OK in 22ms (Views: 11.9ms)
+
+
+Started GET "/cities/from" for 192.168.56.1 at 2011-05-07 14:37:33 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from"}
+Rendered cities/index.html.erb (6.3ms)
+Write page /opt/vob/g0/public/cities/from.html (1.1ms)
+Completed 200 OK in 12ms (Views: 8.0ms)
+
+
+Started GET "/cities/to" for 192.168.56.1 at 2011-05-07 14:37:39 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to"}
+Rendered cities/index.html.erb (4.4ms)
+Write page /opt/vob/g0/public/cities/to.html (0.4ms)
+Completed 200 OK in 10ms (Views: 7.6ms)
+
+
+Started GET "/cities/to/630000000000" for 192.168.56.1 at 2011-05-07 14:37:43 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to", "code"=>"630000000000"}
+Rendered cities/index.html.erb (0.3ms)
+Write page /opt/vob/g0/public/cities/to/630000000000.html (0.5ms)
+Completed 200 OK in 9ms (Views: 6.6ms)
+
+
+Started GET "/cities/to/330327000000" for 192.168.56.1 at 2011-05-07 14:37:46 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to", "code"=>"330327000000"}
+Rendered cities/index.html.erb (4.7ms)
+Write page /opt/vob/g0/public/cities/to/330327000000.html (0.4ms)
+Completed 200 OK in 10ms (Views: 7.7ms)
+
+
+Started POST "/cargos" for 192.168.56.1 at 2011-05-07 14:37:55 +0800
+  Processing by CargosController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "cargo"=>{"fcity_code"=>"430221000000", "fcity_name"=>"湖南株洲市株洲县", "tcity_code"=>"330327000000", "tcity_name"=>"浙江温州市苍南县", "cate_name"=>"\t钢锭坯", "package_name"=>"镀锌开口钢桶", "big_category"=>"001", "status"=>"正在配车", "cargo_weight"=>"12", "cargo_bulk"=>"12", "send_date"=>"1", "cargo_zuhuo"=>"001", "stock_cargo_id"=>"4dc4e89f48a6ee0d3b000045", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040"}, "commit"=>"确定"}
+MONGODB g0_development['cargos'].find({:cate_name=>"\t钢锭坯", :line=>"430221000000#330327000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配车"})
+MONGODB g0_development['cargos'].insert([{"fcity_code"=>"430221000000", "fcity_name"=>"湖南株洲市株洲县", "tcity_code"=>"330327000000", "tcity_name"=>"浙江温州市苍南县", "cate_name"=>"\t钢锭坯", "package_name"=>"镀锌开口钢桶", "big_category"=>"001", "status"=>"正在配车", "cargo_weight"=>"12", "cargo_bulk"=>"12", "send_date"=>"1", "cargo_zuhuo"=>"001", "stock_cargo_id"=>"4dc4e89f48a6ee0d3b000045", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040", "from_site"=>"local", "_id"=>BSON::ObjectId('4dc4e8c548a6ee0d3b000047'), "line"=>"430221000000#330327000000", "updated_at"=>2011-05-07 06:37:57 UTC, "created_at"=>2011-05-07 06:37:57 UTC}])
+MONGODB g0_development['cargos'].update({"_id"=>BSON::ObjectId('4dc4e8c548a6ee0d3b000047')}, {"$set"=>{"total_baojia"=>0, "total_xunjia"=>0, "total_match"=>0, "total_click"=>0, "cargo_id"=>BSON::ObjectId('4dc4e8c548a6ee0d3b000047')}})
+MONGODB g0_development['ustatistics'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Completed   in 22ms
+
+Mongoid::Errors::DocumentNotFound (Document not found for class Ustatistic with id(s) 4dc4e18948a6ee0d3b000034.):
+  app/controllers/cargos_controller.rb:243:in `block in create'
+  app/controllers/cargos_controller.rb:233:in `create'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.0ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (8.0ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (17.9ms)
+
+
+Started POST "/cargos" for 192.168.56.1 at 2011-05-07 15:20:01 +0800
+  Processing by CargosController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "cargo"=>{"fcity_code"=>"430221000000", "fcity_name"=>"湖南株洲市株洲县", "tcity_code"=>"330327000000", "tcity_name"=>"浙江温州市苍南县", "cate_name"=>"\t钢锭坯", "package_name"=>"镀锌开口钢桶", "big_category"=>"001", "status"=>"正在配车", "cargo_weight"=>"12", "cargo_bulk"=>"12", "send_date"=>"1", "cargo_zuhuo"=>"001", "stock_cargo_id"=>"4dc4e89f48a6ee0d3b000045", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040"}, "commit"=>"确定"}
+MONGODB g0_development['cargos'].find({:cate_name=>"\t钢锭坯", :line=>"430221000000#330327000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配车"})
+Rendered cargos/repeat_error.html.erb (0.5ms)
+Completed 200 OK in 11ms (Views: 3.3ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/cargos/" for 192.168.56.1 at 2011-05-07 15:20:03 +0800
+  Processing by CargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20).sort([[:updated_at, :desc]])
+MONGODB g0_development['lstatistics'].find({:line=>"430221000000#330327000000"})
+Rendered cargos/_list.html.erb (18.4ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_cargonavi.html.erb (4.2ms)
+Rendered cargos/index.html.erb (25.8ms)
+Completed 200 OK in 48ms (Views: 29.4ms)
+
+
+Started GET "/public/navibar" for 192.168.56.1 at 2011-05-07 15:20:06 +0800
+  Processing by PublicController#navibar as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (21.8ms)
+Rendered public/navibar.html.erb (23.7ms)
+Completed 200 OK in 27ms (Views: 26.0ms)
+
+
+Started GET "/cargos/search/100000000000/100000000000/1" for 192.168.56.1 at 2011-05-07 15:21:06 +0800
+  Processing by CargosController#search as HTML
+  Parameters: {"from"=>"100000000000", "to"=>"100000000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc4f2e548a6ee0d3b000049'), "fcity_code"=>"100000000000", "fcity_name"=>nil, "tcity_code"=>"100000000000", "tcity_name"=>nil, "updated_at"=>2011-05-07 07:21:09 UTC, "created_at"=>2011-05-07 07:21:09 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (48.7ms)
+Rendered cargos/search.html.erb (50.9ms)
+Completed 200 OK in 59ms (Views: 53.7ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_cargos" for 192.168.56.1 at 2011-05-07 15:21:10 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20)
+Rendered stock_cargos/index.html.erb (2.2ms)
+Completed 200 OK in 8ms (Views: 3.9ms)
+
+
+Started GET "/cargos/new/4dc4e89f48a6ee0d3b000045" for 192.168.56.1 at 2011-05-07 15:21:16 +0800
+  Processing by CargosController#new as HTML
+  Parameters: {"id"=>"4dc4e89f48a6ee0d3b000045"}
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_form.html.erb (5.7ms)
+Rendered cargos/new.html.erb (8.9ms)
+Completed 200 OK in 22ms (Views: 10.7ms)
+
+
+Started GET "/cities/from" for 192.168.56.1 at 2011-05-07 15:21:20 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from"}
+Rendered cities/index.html.erb (3.7ms)
+Write page /opt/vob/g0/public/cities/from.html (1.2ms)
+Completed 200 OK in 11ms (Views: 7.9ms)
+
+
+Started GET "/cities/from/410000000000" for 192.168.56.1 at 2011-05-07 15:21:23 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"410000000000"}
+Rendered cities/index.html.erb (6.1ms)
+Write page /opt/vob/g0/public/cities/from/410000000000.html (0.6ms)
+Completed 200 OK in 12ms (Views: 9.0ms)
+
+
+Started GET "/cities/to" for 192.168.56.1 at 2011-05-07 15:21:26 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to"}
+Rendered cities/index.html.erb (4.2ms)
+Write page /opt/vob/g0/public/cities/to.html (0.8ms)
+Completed 200 OK in 8ms (Views: 6.3ms)
+
+
+Started GET "/cities/from/350000000000" for 192.168.56.1 at 2011-05-07 15:21:29 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"350000000000"}
+Rendered cities/index.html.erb (4.8ms)
+Write page /opt/vob/g0/public/cities/from/350000000000.html (0.4ms)
+Completed 200 OK in 10ms (Views: 7.1ms)
+
+
+Started GET "/cities/to" for 192.168.56.1 at 2011-05-07 15:21:31 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to"}
+Rendered cities/index.html.erb (4.8ms)
+Write page /opt/vob/g0/public/cities/to.html (0.8ms)
+Completed 200 OK in 11ms (Views: 8.0ms)
+
+
+Started GET "/cities/from/450000000000" for 192.168.56.1 at 2011-05-07 15:21:35 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"450000000000"}
+Rendered cities/index.html.erb (3.8ms)
+Write page /opt/vob/g0/public/cities/from/450000000000.html (0.5ms)
+Completed 200 OK in 10ms (Views: 8.0ms)
+
+
+Started GET "/cities/to" for 192.168.56.1 at 2011-05-07 15:21:38 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to"}
+Rendered cities/index.html.erb (4.6ms)
+Write page /opt/vob/g0/public/cities/to.html (0.9ms)
+Completed 200 OK in 10ms (Views: 7.7ms)
+
+
+Started GET "/cities/from/360000000000" for 192.168.56.1 at 2011-05-07 15:21:44 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"360000000000"}
+Rendered cities/index.html.erb (4.5ms)
+Write page /opt/vob/g0/public/cities/from/360000000000.html (0.9ms)
+Completed 200 OK in 11ms (Views: 7.2ms)
+
+
+Started GET "/cities/to" for 192.168.56.1 at 2011-05-07 15:21:48 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to"}
+Rendered cities/index.html.erb (4.6ms)
+Write page /opt/vob/g0/public/cities/to.html (0.7ms)
+Completed 200 OK in 10ms (Views: 7.0ms)
+
+
+Started GET "/cities/to/430000000000" for 192.168.56.1 at 2011-05-07 15:21:52 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to", "code"=>"430000000000"}
+Rendered cities/index.html.erb (4.5ms)
+Write page /opt/vob/g0/public/cities/to/430000000000.html (0.5ms)
+Completed 200 OK in 9ms (Views: 6.7ms)
+
+
+Started POST "/cargos" for 192.168.56.1 at 2011-05-07 15:22:03 +0800
+  Processing by CargosController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "cargo"=>{"fcity_code"=>"360000000000", "fcity_name"=>"江西", "tcity_code"=>"430000000000", "tcity_name"=>"湖南", "cate_name"=>"\t钢锭坯", "package_name"=>"镀锌开口钢桶", "big_category"=>"001", "status"=>"正在配车", "cargo_weight"=>"12", "cargo_bulk"=>"12", "send_date"=>"1", "cargo_zuhuo"=>"001", "stock_cargo_id"=>"4dc4e89f48a6ee0d3b000045", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040"}, "commit"=>"确定"}
+MONGODB g0_development['cargos'].find({:cate_name=>"\t钢锭坯", :line=>"360000000000#430000000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配车"})
+MONGODB g0_development['cargos'].insert([{"fcity_code"=>"360000000000", "fcity_name"=>"江西", "tcity_code"=>"430000000000", "tcity_name"=>"湖南", "cate_name"=>"\t钢锭坯", "package_name"=>"镀锌开口钢桶", "big_category"=>"001", "status"=>"正在配车", "cargo_weight"=>"12", "cargo_bulk"=>"12", "send_date"=>"1", "cargo_zuhuo"=>"001", "stock_cargo_id"=>"4dc4e89f48a6ee0d3b000045", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040", "from_site"=>"local", "_id"=>BSON::ObjectId('4dc4f31d48a6ee0d3b00004b'), "line"=>"360000000000#430000000000", "updated_at"=>2011-05-07 07:22:05 UTC, "created_at"=>2011-05-07 07:22:05 UTC}])
+MONGODB g0_development['cargos'].update({"_id"=>BSON::ObjectId('4dc4f31d48a6ee0d3b00004b')}, {"$set"=>{"total_baojia"=>0, "total_xunjia"=>0, "total_match"=>0, "total_click"=>0, "cargo_id"=>BSON::ObjectId('4dc4f31d48a6ee0d3b00004b')}})
+MONGODB g0_development['ustatistics'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Completed   in 25ms
+
+Mongoid::Errors::DocumentNotFound (Document not found for class Ustatistic with id(s) 4dc4e18948a6ee0d3b000034.):
+  app/controllers/cargos_controller.rb:243:in `block in create'
+  app/controllers/cargos_controller.rb:233:in `create'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.3ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (15.6ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_cargos" for 192.168.56.1 at 2011-05-07 15:23:12 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20)
+Rendered stock_cargos/index.html.erb (2.3ms)
+Completed 200 OK in 9ms (Views: 4.5ms)
+
+
+Started GET "/cargos/new/4dc4e89f48a6ee0d3b000045" for 192.168.56.1 at 2011-05-07 15:23:16 +0800
+  Processing by CargosController#new as HTML
+  Parameters: {"id"=>"4dc4e89f48a6ee0d3b000045"}
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_form.html.erb (7.3ms)
+Rendered cargos/new.html.erb (9.6ms)
+Completed 200 OK in 22ms (Views: 11.9ms)
+
+
+Started GET "/cities/from" for 192.168.56.1 at 2011-05-07 15:23:19 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from"}
+Rendered cities/index.html.erb (4.6ms)
+Write page /opt/vob/g0/public/cities/from.html (0.5ms)
+Completed 200 OK in 9ms (Views: 7.1ms)
+
+
+Started GET "/cities/from/220000000000" for 192.168.56.1 at 2011-05-07 15:23:23 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"220000000000"}
+Rendered cities/index.html.erb (3.9ms)
+Write page /opt/vob/g0/public/cities/from/220000000000.html (0.4ms)
+Completed 200 OK in 8ms (Views: 6.8ms)
+
+
+Started GET "/cities/to" for 192.168.56.1 at 2011-05-07 15:23:28 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to"}
+Rendered cities/index.html.erb (3.8ms)
+Write page /opt/vob/g0/public/cities/to.html (0.5ms)
+Completed 200 OK in 9ms (Views: 6.7ms)
+
+
+Started GET "/cities/to/620000000000" for 192.168.56.1 at 2011-05-07 15:23:33 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to", "code"=>"620000000000"}
+Rendered cities/index.html.erb (4.1ms)
+Write page /opt/vob/g0/public/cities/to/620000000000.html (0.5ms)
+Completed 200 OK in 9ms (Views: 7.8ms)
+
+
+Started POST "/cargos" for 192.168.56.1 at 2011-05-07 15:23:41 +0800
+  Processing by CargosController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "cargo"=>{"fcity_code"=>"220000000000", "fcity_name"=>"吉林", "tcity_code"=>"620000000000", "tcity_name"=>"甘肃", "cate_name"=>"\t钢锭坯", "package_name"=>"镀锌开口钢桶", "big_category"=>"001", "status"=>"正在配车", "cargo_weight"=>"13", "cargo_bulk"=>"12", "send_date"=>"1", "cargo_zuhuo"=>"001", "stock_cargo_id"=>"4dc4e89f48a6ee0d3b000045", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040"}, "commit"=>"确定"}
+MONGODB g0_development['cargos'].find({:cate_name=>"\t钢锭坯", :line=>"220000000000#620000000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配车"})
+MONGODB g0_development['cargos'].insert([{"fcity_code"=>"220000000000", "fcity_name"=>"吉林", "tcity_code"=>"620000000000", "tcity_name"=>"甘肃", "cate_name"=>"\t钢锭坯", "package_name"=>"镀锌开口钢桶", "big_category"=>"001", "status"=>"正在配车", "cargo_weight"=>"13", "cargo_bulk"=>"12", "send_date"=>"1", "cargo_zuhuo"=>"001", "stock_cargo_id"=>"4dc4e89f48a6ee0d3b000045", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040", "from_site"=>"local", "_id"=>BSON::ObjectId('4dc4f37f48a6ee0d3b00004d'), "line"=>"220000000000#620000000000", "updated_at"=>2011-05-07 07:23:43 UTC, "created_at"=>2011-05-07 07:23:43 UTC}])
+MONGODB g0_development['cargos'].update({"_id"=>BSON::ObjectId('4dc4f37f48a6ee0d3b00004d')}, {"$set"=>{"total_baojia"=>0, "total_xunjia"=>0, "total_match"=>0, "total_click"=>0, "cargo_id"=>BSON::ObjectId('4dc4f37f48a6ee0d3b00004d')}})
+MONGODB g0_development['ustatistics'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].insert([{"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034'), "status"=>"正在配车", "total_cargo"=>1, "valid_cargo"=>1, "_id"=>BSON::ObjectId('4dc4f37f48a6ee0d3b00004e'), "updated_at"=>2011-05-07 07:23:43 UTC, "created_at"=>2011-05-07 07:23:43 UTC}])
+MONGODB g0_development['lstatistics'].find({:line=>"220000000000#620000000000"})
+MONGODB g0_development['lstatistics'].insert([{"line"=>"220000000000#620000000000", "total_cargo"=>1, "valid_cargo"=>1, "_id"=>BSON::ObjectId('4dc4f37f48a6ee0d3b00004f'), "updated_at"=>2011-05-07 07:23:43 UTC, "created_at"=>2011-05-07 07:23:43 UTC}])
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045')})
+MONGODB g0_development['stock_cargos'].update({"_id"=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045')}, {"$set"=>{"status"=>"正在配车", "updated_at"=>2011-05-07 07:23:43 UTC}})
+MONGODB g0_development['stock_cargos'].update({"_id"=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045')}, {"$inc"=>{:valid_cargo=>1}})
+MONGODB g0_development['stock_cargos'].update({"_id"=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045')}, {"$inc"=>{:total_cargo=>1}})
+MONGODB g0_development['stock_cargos'].update({"_id"=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045')}, {"$inc"=>{:sent_weight=>13.0}})
+MONGODB g0_development['stock_cargos'].update({"_id"=>BSON::ObjectId('4dc4e89f48a6ee0d3b000045')}, {"$inc"=>{:sent_bulk=>12.0}})
+Redirected to http://192.168.56.101:3000/stock_cargos/4dc4e89f48a6ee0d3b000045/cargos
+Completed 302 Found in 43ms
+
+
+Started GET "/stock_cargos/4dc4e89f48a6ee0d3b000045/cargos" for 192.168.56.1 at 2011-05-07 15:23:43 +0800
+  Processing by CargosController#index as 
+  Parameters: {"stock_cargo_id"=>"4dc4e89f48a6ee0d3b000045"}
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034", :stock_cargo_id=>"4dc4e89f48a6ee0d3b000045"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034", :stock_cargo_id=>"4dc4e89f48a6ee0d3b000045"}).limit(20).sort([[:updated_at, :desc]])
+MONGODB g0_development['lstatistics'].find({:line=>"220000000000#620000000000"})
+MONGODB g0_development['lstatistics'].find({:line=>"360000000000#430000000000"})
+MONGODB g0_development['lstatistics'].find({:line=>"430221000000#330327000000"})
+Rendered cargos/_list.html.erb (8.5ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_cargonavi.html.erb (3.9ms)
+Rendered cargos/index.html.erb (15.7ms)
+Completed 200 OK in 24ms (Views: 18.8ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/cargos/" for 192.168.56.1 at 2011-05-07 15:23:46 +0800
+  Processing by CargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20).sort([[:updated_at, :desc]])
+MONGODB g0_development['lstatistics'].find({:line=>"220000000000#620000000000"})
+MONGODB g0_development['lstatistics'].find({:line=>"360000000000#430000000000"})
+MONGODB g0_development['lstatistics'].find({:line=>"430221000000#330327000000"})
+Rendered cargos/_list.html.erb (7.7ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_cargonavi.html.erb (5.7ms)
+Rendered cargos/index.html.erb (16.4ms)
+Completed 200 OK in 39ms (Views: 19.2ms)
+
+
+Started GET "/public/navibar" for 192.168.56.1 at 2011-05-07 15:23:49 +0800
+  Processing by PublicController#navibar as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (23.4ms)
+Rendered public/navibar.html.erb (25.0ms)
+Completed 200 OK in 28ms (Views: 27.7ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_cargos" for 192.168.56.1 at 2011-05-07 15:24:08 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20)
+Rendered stock_cargos/index.html.erb (1.8ms)
+Completed 200 OK in 9ms (Views: 4.6ms)
+
+
+Started GET "/stock_cargos/new" for 192.168.56.1 at 2011-05-07 15:25:31 +0800
+  Processing by StockCargosController#new as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered stock_cargos/_form.html.erb (9.1ms)
+Rendered stock_cargos/new.html.erb (11.4ms)
+Completed 200 OK in 18ms (Views: 13.5ms)
+
+
+Started GET "/cargo_categories/show/040000" for 192.168.56.1 at 2011-05-07 15:25:37 +0800
+  Processing by CargoCategoriesController#show as HTML
+  Parameters: {"code"=>"040000"}
+Rendered cargo_categories/show.html.erb (2.1ms)
+Completed 200 OK in 6ms (Views: 4.7ms)
+
+
+Started GET "/cargo_categories/show/020000" for 192.168.56.1 at 2011-05-07 15:25:40 +0800
+  Processing by CargoCategoriesController#show as HTML
+  Parameters: {"code"=>"020000"}
+Rendered cargo_categories/show.html.erb (0.5ms)
+Completed 200 OK in 6ms (Views: 4.8ms)
+
+
+Started GET "/cargo_categories/show/070000" for 192.168.56.1 at 2011-05-07 15:25:43 +0800
+  Processing by CargoCategoriesController#show as HTML
+  Parameters: {"code"=>"070000"}
+Rendered cargo_categories/show.html.erb (1.9ms)
+Completed 200 OK in 5ms (Views: 4.2ms)
+
+
+Started GET "/cargo_categories/show/020400" for 192.168.56.1 at 2011-05-07 15:25:45 +0800
+  Processing by CargoCategoriesController#show as HTML
+  Parameters: {"code"=>"020400"}
+Completed   in 1ms
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.[]):
+  app/controllers/cargo_categories_controller.rb:24:in `show'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.5ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.1ms)
+
+
+Started GET "/package_categories/show/1000" for 192.168.56.1 at 2011-05-07 15:25:48 +0800
+  Processing by PackageCategoriesController#show as HTML
+  Parameters: {"code"=>"1000"}
+Rendered package_categories/show.html.erb (1.4ms)
+Completed 200 OK in 5ms (Views: 4.1ms)
+
+
+Started GET "/package_categories/show/9000" for 192.168.56.1 at 2011-05-07 15:25:52 +0800
+  Processing by PackageCategoriesController#show as HTML
+  Parameters: {"code"=>"9000"}
+Rendered package_categories/show.html.erb (1.0ms)
+Completed 200 OK in 5ms (Views: 4.3ms)
+
+
+Started GET "/package_categories/show/9994" for 192.168.56.1 at 2011-05-07 15:25:56 +0800
+  Processing by PackageCategoriesController#show as HTML
+  Parameters: {"code"=>"9994"}
+Rendered package_categories/show.html.erb (1.8ms)
+Completed 200 OK in 6ms (Views: 4.9ms)
+
+
+Started POST "/stock_cargos" for 192.168.56.1 at 2011-05-07 15:26:00 +0800
+  Processing by StockCargosController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "stockcargo"=>{"big_category"=>"001", "cate_code"=>"020400", "cate_name"=>"\t柴 油", "package_code"=>"9994", "package_name"=>"裸装", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "status"=>"闲置"}, "commit"=>"确定"}
+MONGODB g0_development['stock_cargos'].insert([{"big_category"=>"001", "cate_code"=>"020400", "cate_name"=>"\t柴 油", "package_code"=>"9994", "package_name"=>"裸装", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "status"=>"货物闲置", "cargocount"=>0, "valid_cargo"=>0, "total_cargo"=>0, "expired_cargo"=>0, "sent_weight"=>0.0, "sent_bulk"=>0.0, "_id"=>BSON::ObjectId('4dc4f40b48a6ee0d3b000051'), "updated_at"=>2011-05-07 07:26:03 UTC, "created_at"=>2011-05-07 07:26:03 UTC}])
+MONGODB g0_development['ustatistics'].update({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$inc"=>{"total_stock_cargo"=>1}})
+Redirected to http://192.168.56.101:3000/stock_cargos/4dc4f40b48a6ee0d3b000051
+Completed 302 Found in 7ms
+
+
+Started GET "/stock_cargos/4dc4f40b48a6ee0d3b000051" for 192.168.56.1 at 2011-05-07 15:26:03 +0800
+  Processing by StockCargosController#show as 
+  Parameters: {"id"=>"4dc4f40b48a6ee0d3b000051"}
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc4f40b48a6ee0d3b000051')})
+Rendered stock_cargos/show.html.erb (1.5ms)
+Completed 200 OK in 7ms (Views: 3.8ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_cargos" for 192.168.56.1 at 2011-05-07 15:26:05 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20)
+Rendered stock_cargos/index.html.erb (1.6ms)
+Completed 200 OK in 8ms (Views: 4.2ms)
+
+
+Started GET "/public/navibar" for 192.168.56.1 at 2011-05-07 15:26:08 +0800
+  Processing by PublicController#navibar as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (21.7ms)
+Rendered public/navibar.html.erb (23.5ms)
+Completed 200 OK in 27ms (Views: 25.6ms)
+
+
+Started GET "/cargos/new/4dc4f40b48a6ee0d3b000051" for 192.168.56.1 at 2011-05-07 15:26:12 +0800
+  Processing by CargosController#new as HTML
+  Parameters: {"id"=>"4dc4f40b48a6ee0d3b000051"}
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc4f40b48a6ee0d3b000051')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_form.html.erb (6.8ms)
+Rendered cargos/new.html.erb (8.8ms)
+Completed 200 OK in 22ms (Views: 11.1ms)
+
+
+Started GET "/cities/from" for 192.168.56.1 at 2011-05-07 15:26:16 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from"}
+Rendered cities/index.html.erb (1.0ms)
+Write page /opt/vob/g0/public/cities/from.html (2.1ms)
+Completed 200 OK in 12ms (Views: 5.8ms)
+
+
+Started GET "/cities/to" for 192.168.56.1 at 2011-05-07 15:26:22 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to"}
+Rendered cities/index.html.erb (4.1ms)
+Write page /opt/vob/g0/public/cities/to.html (0.7ms)
+Completed 200 OK in 9ms (Views: 6.5ms)
+
+
+Started GET "/cities/to/500000000000" for 192.168.56.1 at 2011-05-07 15:26:26 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to", "code"=>"500000000000"}
+Rendered cities/index.html.erb (3.4ms)
+Write page /opt/vob/g0/public/cities/to/500000000000.html (0.4ms)
+Completed 200 OK in 7ms (Views: 5.8ms)
+
+
+Started POST "/cargos" for 192.168.56.1 at 2011-05-07 15:26:33 +0800
+  Processing by CargosController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "cargo"=>{"fcity_code"=>"410000000000", "fcity_name"=>"河南", "tcity_code"=>"500000000000", "tcity_name"=>"重庆市", "cate_name"=>"\t柴 油", "package_name"=>"裸装", "big_category"=>"001", "status"=>"正在配车", "cargo_weight"=>"13", "cargo_bulk"=>"12", "send_date"=>"1", "cargo_zuhuo"=>"001", "stock_cargo_id"=>"4dc4f40b48a6ee0d3b000051", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040"}, "commit"=>"确定"}
+MONGODB g0_development['cargos'].find({:cate_name=>"\t柴 油", :line=>"410000000000#500000000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配车"})
+MONGODB g0_development['cargos'].insert([{"fcity_code"=>"410000000000", "fcity_name"=>"河南", "tcity_code"=>"500000000000", "tcity_name"=>"重庆市", "cate_name"=>"\t柴 油", "package_name"=>"裸装", "big_category"=>"001", "status"=>"正在配车", "cargo_weight"=>"13", "cargo_bulk"=>"12", "send_date"=>"1", "cargo_zuhuo"=>"001", "stock_cargo_id"=>"4dc4f40b48a6ee0d3b000051", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040", "from_site"=>"local", "_id"=>BSON::ObjectId('4dc4f42c48a6ee0d3b000053'), "line"=>"410000000000#500000000000", "updated_at"=>2011-05-07 07:26:36 UTC, "created_at"=>2011-05-07 07:26:36 UTC}])
+MONGODB g0_development['cargos'].update({"_id"=>BSON::ObjectId('4dc4f42c48a6ee0d3b000053')}, {"$set"=>{"total_baojia"=>0, "total_xunjia"=>0, "total_match"=>0, "total_click"=>0, "cargo_id"=>BSON::ObjectId('4dc4f42c48a6ee0d3b000053')}})
+MONGODB g0_development['ustatistics'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].insert([{"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034'), "status"=>"正在配车", "total_cargo"=>1, "valid_cargo"=>1, "_id"=>BSON::ObjectId('4dc4f42c48a6ee0d3b000054'), "updated_at"=>2011-05-07 07:26:36 UTC, "created_at"=>2011-05-07 07:26:36 UTC}])
+MONGODB g0_development['lstatistics'].find({:line=>"410000000000#500000000000"})
+MONGODB g0_development['lstatistics'].insert([{"line"=>"410000000000#500000000000", "total_cargo"=>1, "valid_cargo"=>1, "_id"=>BSON::ObjectId('4dc4f42c48a6ee0d3b000055'), "updated_at"=>2011-05-07 07:26:36 UTC, "created_at"=>2011-05-07 07:26:36 UTC}])
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc4f40b48a6ee0d3b000051')})
+MONGODB g0_development['stock_cargos'].update({"_id"=>BSON::ObjectId('4dc4f40b48a6ee0d3b000051')}, {"$set"=>{"status"=>"正在配车", "updated_at"=>2011-05-07 07:26:36 UTC}})
+MONGODB g0_development['stock_cargos'].update({"_id"=>BSON::ObjectId('4dc4f40b48a6ee0d3b000051')}, {"$inc"=>{:valid_cargo=>1}})
+MONGODB g0_development['stock_cargos'].update({"_id"=>BSON::ObjectId('4dc4f40b48a6ee0d3b000051')}, {"$inc"=>{:total_cargo=>1}})
+MONGODB g0_development['stock_cargos'].update({"_id"=>BSON::ObjectId('4dc4f40b48a6ee0d3b000051')}, {"$inc"=>{:sent_weight=>13.0}})
+MONGODB g0_development['stock_cargos'].update({"_id"=>BSON::ObjectId('4dc4f40b48a6ee0d3b000051')}, {"$inc"=>{:sent_bulk=>12.0}})
+Redirected to http://192.168.56.101:3000/stock_cargos/4dc4f40b48a6ee0d3b000051/cargos
+Completed 302 Found in 27ms
+
+
+Started GET "/stock_cargos/4dc4f40b48a6ee0d3b000051/cargos" for 192.168.56.1 at 2011-05-07 15:26:36 +0800
+  Processing by CargosController#index as 
+  Parameters: {"stock_cargo_id"=>"4dc4f40b48a6ee0d3b000051"}
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034", :stock_cargo_id=>"4dc4f40b48a6ee0d3b000051"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034", :stock_cargo_id=>"4dc4f40b48a6ee0d3b000051"}).limit(20).sort([[:updated_at, :desc]])
+MONGODB g0_development['lstatistics'].find({:line=>"410000000000#500000000000"})
+Rendered cargos/_list.html.erb (5.3ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_cargonavi.html.erb (3.7ms)
+Rendered cargos/index.html.erb (12.2ms)
+Completed 200 OK in 19ms (Views: 14.3ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/cargos/" for 192.168.56.1 at 2011-05-07 15:26:38 +0800
+  Processing by CargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20).sort([[:updated_at, :desc]])
+MONGODB g0_development['lstatistics'].find({:line=>"410000000000#500000000000"})
+MONGODB g0_development['lstatistics'].find({:line=>"220000000000#620000000000"})
+MONGODB g0_development['lstatistics'].find({:line=>"360000000000#430000000000"})
+MONGODB g0_development['lstatistics'].find({:line=>"430221000000#330327000000"})
+Rendered cargos/_list.html.erb (9.6ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered cargos/_cargonavi.html.erb (4.5ms)
+Rendered cargos/index.html.erb (17.4ms)
+Completed 200 OK in 38ms (Views: 19.4ms)
+
+
+Started GET "/public/navibar" for 192.168.56.1 at 2011-05-07 15:26:41 +0800
+  Processing by PublicController#navibar as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (19.9ms)
+Rendered public/navibar.html.erb (22.2ms)
+Completed 200 OK in 25ms (Views: 24.4ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_cargos" for 192.168.56.1 at 2011-05-07 15:26:55 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20)
+Rendered stock_cargos/index.html.erb (1.8ms)
+Completed 200 OK in 9ms (Views: 4.3ms)
+
+
+Started GET "/trucks/search/100000000000/100000000000/1" for 192.168.56.1 at 2011-05-07 16:47:27 +0800
+  Processing by TrucksController#search as HTML
+  Parameters: {"from"=>"100000000000", "to"=>"100000000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc5072248a6ee0d3b000056'), "fcity_code"=>"100000000000", "fcity_name"=>nil, "tcity_code"=>"100000000000", "tcity_name"=>nil, "updated_at"=>2011-05-07 08:47:30 UTC, "created_at"=>2011-05-07 08:47:30 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['trucks'].find({:status=>"正在配货"}).limit(20).sort([[:updated_at, :desc]])
+Rendered trucks/_trucklist.html.erb (38.0ms)
+Rendered trucks/search.html.erb (42.1ms)
+Completed 200 OK in 49ms (Views: 45.4ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_trucks" for 192.168.56.1 at 2011-05-07 16:47:32 +0800
+  Processing by StockTrucksController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_trucks", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_trucks'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(5).sort([[:created_at, :desc]])
+Rendered stock_trucks/index.html.erb (1.9ms)
+Completed 200 OK in 10ms (Views: 4.6ms)
+
+
+Started GET "/stock_trucks/new" for 192.168.56.1 at 2011-05-07 16:49:01 +0800
+  Processing by StockTrucksController#new as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered stock_trucks/_form.html.erb (113.9ms)
+Rendered stock_trucks/new.html.erb (117.8ms)
+Completed 200 OK in 125ms (Views: 120.7ms)
+
+
+Started POST "/stock_trucks" for 192.168.56.1 at 2011-05-07 16:50:22 +0800
+  Processing by StockTrucksController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "stocktruck"=>{"paizhao"=>"浙A12345", "dun_wei"=>"12", "che_length"=>"12", "truck_usage"=>"001", "truck_shape"=>"001", "truck_gps"=>"有", "bis_name"=>"马山山", "bis_phone"=>"16787651234", "driver_name"=>"马山山2", "driver_phone"=>"16787651235", "owner_name"=>"马山山3", "owner_phone"=>"16787651236", "truck_pinpai"=>"100", "truck_xinghao"=>"123", "truck_year"=>"1", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "status"=>"空闲"}, "commit"=>"确定"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_trucks", "query"=>{:paizhao=>"浙A12345"}, "fields"=>nil})
+MONGODB g0_development['stock_trucks'].insert([{"paizhao"=>"浙A12345", "dun_wei"=>"12", "che_length"=>"12", "truck_usage"=>"001", "truck_shape"=>"001", "truck_gps"=>"有", "bis_name"=>"马山山", "bis_phone"=>"16787651234", "driver_name"=>"马山山2", "driver_phone"=>"16787651235", "owner_name"=>"马山山3", "owner_phone"=>"16787651236", "truck_pinpai"=>"100", "truck_xinghao"=>"123", "truck_year"=>"1", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "status"=>"车辆闲置", "truckcount"=>0, "valid_truck"=>0, "total_truck"=>0, "expired_truck"=>0, "_id"=>BSON::ObjectId('4dc507d148a6ee0d3b000058'), "updated_at"=>2011-05-07 08:50:25 UTC, "created_at"=>2011-05-07 08:50:25 UTC}])
+MONGODB g0_development['ustatistics'].update({"_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$inc"=>{"valid_stock_truck"=>1}})
+Redirected to http://192.168.56.101:3000/stock_trucks/4dc507d148a6ee0d3b000058
+Completed 302 Found in 16ms
+
+
+Started GET "/stock_trucks/4dc507d148a6ee0d3b000058" for 192.168.56.1 at 2011-05-07 16:50:25 +0800
+  Processing by StockTrucksController#show as 
+  Parameters: {"id"=>"4dc507d148a6ee0d3b000058"}
+MONGODB g0_development['stock_trucks'].find({:_id=>BSON::ObjectId('4dc507d148a6ee0d3b000058')})
+Rendered stock_trucks/show.html.erb (1.9ms)
+Completed 200 OK in 8ms (Views: 5.0ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_trucks" for 192.168.56.1 at 2011-05-07 16:50:28 +0800
+  Processing by StockTrucksController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_trucks", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_trucks'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(5).sort([[:created_at, :desc]])
+Rendered stock_trucks/index.html.erb (2.3ms)
+Completed 200 OK in 9ms (Views: 5.1ms)
+
+
+Started GET "/public/navibar" for 192.168.56.1 at 2011-05-07 16:50:31 +0800
+  Processing by PublicController#navibar as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (24.6ms)
+Rendered public/navibar.html.erb (28.9ms)
+Completed 200 OK in 32ms (Views: 31.1ms)
+
+
+Started GET "/trucks/new/4dc507d148a6ee0d3b000058" for 192.168.56.1 at 2011-05-07 17:13:18 +0800
+  Processing by TrucksController#new as HTML
+  Parameters: {"id"=>"4dc507d148a6ee0d3b000058"}
+MONGODB g0_development['stock_trucks'].find({:_id=>BSON::ObjectId('4dc507d148a6ee0d3b000058')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered trucks/_form.html.erb (113.4ms)
+Rendered trucks/new.html.erb (116.8ms)
+Completed 200 OK in 134ms (Views: 119.4ms)
+
+
+Started GET "/cities/from" for 192.168.56.1 at 2011-05-07 19:47:41 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from"}
+Rendered cities/index.html.erb (3.0ms)
+Write page /opt/vob/g0/public/cities/from.html (0.8ms)
+Completed 200 OK in 10ms (Views: 7.2ms)
+
+
+Started GET "/cities/to" for 192.168.56.1 at 2011-05-07 19:47:47 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to"}
+Rendered cities/index.html.erb (4.1ms)
+Write page /opt/vob/g0/public/cities/to.html (0.8ms)
+Completed 200 OK in 9ms (Views: 6.4ms)
+
+
+Started POST "/trucks" for 192.168.56.1 at 2011-05-07 19:47:53 +0800
+  Processing by TrucksController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "truck"=>{"fcity_code"=>"410000000000", "fcity_name"=>"河南", "tcity_code"=>"430000000000", "tcity_name"=>"湖南", "stock_truck_id"=>"4dc507d148a6ee0d3b000058", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040", "paizhao"=>"浙A12345", "dunwei"=>"12", "length"=>"12", "usage"=>"001", "shape"=>"001", "driver_name"=>"马山山2", "driver_phone"=>"16787651235", "car_phone"=>"", "status"=>"正在配货", "send_date"=>"1", "huicheng"=>"001"}, "commit"=>"确定"}
+MONGODB g0_development['trucks'].find({:paizhao=>"浙A12345", :line=>"410000000000#430000000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配货"})
+MONGODB g0_development['trucks'].find({:paizhao=>"浙A12345", :line=>"410000000000#430000000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配货"})
+MONGODB g0_development['trucks'].insert([{"fcity_code"=>"410000000000", "fcity_name"=>"河南", "tcity_code"=>"430000000000", "tcity_name"=>"湖南", "stock_truck_id"=>"4dc507d148a6ee0d3b000058", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040", "paizhao"=>"浙A12345", "dunwei"=>"12", "length"=>"12", "usage"=>"001", "shape"=>"001", "driver_name"=>"马山山2", "driver_phone"=>"16787651235", "car_phone"=>"", "status"=>"正在配货", "send_date"=>"1", "huicheng"=>"001", "from_site"=>"local", "_id"=>BSON::ObjectId('4dc5316c48a6ee0d3b00005a'), "line"=>"410000000000#430000000000", "updated_at"=>2011-05-07 11:47:56 UTC, "created_at"=>2011-05-07 11:47:56 UTC}])
+MONGODB g0_development['trucks'].update({"_id"=>BSON::ObjectId('4dc5316c48a6ee0d3b00005a')}, {"$set"=>{"total_baojia"=>0, "total_xunjia"=>0, "total_match"=>0, "total_click"=>0, "truck_id"=>BSON::ObjectId('4dc5316c48a6ee0d3b00005a')}})
+MONGODB g0_development['ustatistics'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].update({"_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$set"=>{"status"=>"正在配货", "updated_at"=>2011-05-07 11:47:56 UTC}})
+MONGODB g0_development['ustatistics'].update({"_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$inc"=>{"total_truck"=>1}})
+MONGODB g0_development['ustatistics'].update({"_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$inc"=>{"valid_truck"=>1}})
+Completed   in 170ms
+
+NoMethodError (undefined method `line' for nil:NilClass):
+  app/controllers/trucks_controller.rb:243:in `block in create'
+  app/controllers/trucks_controller.rb:222:in `create'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (8.9ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (16.6ms)
+
+
+Started POST "/trucks" for 192.168.56.1 at 2011-05-07 19:51:18 +0800
+  Processing by TrucksController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "truck"=>{"fcity_code"=>"410000000000", "fcity_name"=>"河南", "tcity_code"=>"430000000000", "tcity_name"=>"湖南", "stock_truck_id"=>"4dc507d148a6ee0d3b000058", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040", "paizhao"=>"浙A12345", "dunwei"=>"12", "length"=>"12", "usage"=>"001", "shape"=>"001", "driver_name"=>"马山山2", "driver_phone"=>"16787651235", "car_phone"=>"", "status"=>"正在配货", "send_date"=>"1", "huicheng"=>"001"}, "commit"=>"确定"}
+MONGODB g0_development['trucks'].find({:paizhao=>"浙A12345", :line=>"410000000000#430000000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配货"})
+MONGODB g0_development['trucks'].find({:paizhao=>"浙A12345", :line=>"410000000000#430000000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配货"})
+DEPRECATION WARNING: Errors#add_to_base(msg) has been deprecated, use Errors#add(:base, msg) instead. (called from check_unique at /opt/vob/g0/app/models/truck.rb:74)
+Rendered trucks/_form.html.erb (2.3ms)
+Rendered trucks/new.html.erb (5.8ms)
+Completed 200 OK in 18ms (Views: 9.3ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/trucks" for 192.168.56.1 at 2011-05-07 19:51:21 +0800
+  Processing by TrucksController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['trucks'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20).sort([[:updated_at, :desc]])
+Rendered trucks/_list.html.erb (3.0ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered trucks/_trucknavi.html.erb (3.5ms)
+Rendered trucks/index.html.erb (10.4ms)
+Completed 200 OK in 28ms (Views: 13.8ms)
+
+
+Started GET "/public/navibar" for 192.168.56.1 at 2011-05-07 19:51:24 +0800
+  Processing by PublicController#navibar as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (22.9ms)
+Rendered public/navibar.html.erb (24.7ms)
+Completed 200 OK in 28ms (Views: 27.3ms)
+
+
+Started GET "/stock_trucks" for 192.168.56.1 at 2011-05-07 19:52:04 +0800
+  Processing by StockTrucksController#index as HTML
+MONGODB g0_development['$cmd'].find({"count"=>"stock_trucks", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_trucks'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(5).sort([[:created_at, :desc]])
+Rendered stock_trucks/index.html.erb (2.8ms)
+Completed 200 OK in 11ms (Views: 6.0ms)
+
+
+Started GET "/trucks/new/4dc507d148a6ee0d3b000058" for 192.168.56.1 at 2011-05-07 19:52:27 +0800
+  Processing by TrucksController#new as HTML
+  Parameters: {"id"=>"4dc507d148a6ee0d3b000058"}
+MONGODB g0_development['stock_trucks'].find({:_id=>BSON::ObjectId('4dc507d148a6ee0d3b000058')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered trucks/_form.html.erb (7.9ms)
+Rendered trucks/new.html.erb (10.3ms)
+Completed 200 OK in 25ms (Views: 12.6ms)
+
+
+Started GET "/cities/from" for 192.168.56.1 at 2011-05-07 19:52:31 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from"}
+Rendered cities/index.html.erb (5.3ms)
+Write page /opt/vob/g0/public/cities/from.html (1.4ms)
+Completed 200 OK in 11ms (Views: 7.7ms)
+
+
+Started GET "/cities/to" for 192.168.56.1 at 2011-05-07 19:52:37 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to"}
+Rendered cities/index.html.erb (4.3ms)
+Write page /opt/vob/g0/public/cities/to.html (1.0ms)
+Completed 200 OK in 12ms (Views: 7.1ms)
+
+
+Started POST "/trucks" for 192.168.56.1 at 2011-05-07 19:52:44 +0800
+  Processing by TrucksController#create as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z55TmEJ5YEwoOMm2BpvXWwMq1uTeKieYa8yXNGItyJE=", "truck"=>{"fcity_code"=>"410000000000", "fcity_name"=>"河南", "tcity_code"=>"500000000000", "tcity_name"=>"重庆市", "stock_truck_id"=>"4dc507d148a6ee0d3b000058", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040", "paizhao"=>"浙A12345", "dunwei"=>"12", "length"=>"12", "usage"=>"001", "shape"=>"001", "driver_name"=>"马山山2", "driver_phone"=>"16787651235", "car_phone"=>"", "status"=>"正在配货", "send_date"=>"1", "huicheng"=>"001"}, "commit"=>"确定"}
+MONGODB g0_development['trucks'].find({:paizhao=>"浙A12345", :line=>"410000000000#500000000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配货"})
+MONGODB g0_development['trucks'].find({:paizhao=>"浙A12345", :line=>"410000000000#500000000000", :user_id=>"4dc4e18948a6ee0d3b000034", :status=>"正在配货"})
+MONGODB g0_development['trucks'].insert([{"fcity_code"=>"410000000000", "fcity_name"=>"河南", "tcity_code"=>"500000000000", "tcity_name"=>"重庆市", "stock_truck_id"=>"4dc507d148a6ee0d3b000058", "user_id"=>"4dc4e18948a6ee0d3b000034", "company_id"=>"4dc4e7cc48a6ee0d3b00003d", "user_contact_id"=>"4dc4e80948a6ee0d3b000040", "paizhao"=>"浙A12345", "dunwei"=>"12", "length"=>"12", "usage"=>"001", "shape"=>"001", "driver_name"=>"马山山2", "driver_phone"=>"16787651235", "car_phone"=>"", "status"=>"正在配货", "send_date"=>"1", "huicheng"=>"001", "from_site"=>"local", "_id"=>BSON::ObjectId('4dc5328f48a6ee0d3b00005d'), "line"=>"410000000000#500000000000", "updated_at"=>2011-05-07 11:52:47 UTC, "created_at"=>2011-05-07 11:52:47 UTC}])
+MONGODB g0_development['trucks'].update({"_id"=>BSON::ObjectId('4dc5328f48a6ee0d3b00005d')}, {"$set"=>{"total_baojia"=>0, "total_xunjia"=>0, "total_match"=>0, "total_click"=>0, "truck_id"=>BSON::ObjectId('4dc5328f48a6ee0d3b00005d')}})
+MONGODB g0_development['ustatistics'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].update({"_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$inc"=>{"total_truck"=>1}})
+MONGODB g0_development['ustatistics'].update({"_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$inc"=>{"valid_truck"=>1}})
+MONGODB g0_development['lstatistics'].find({:line=>"410000000000#500000000000"})
+MONGODB g0_development['lstatistics'].update({"_id"=>BSON::ObjectId('4dc4f42c48a6ee0d3b000055')}, {"$inc"=>{:total_truck=>1}})
+MONGODB g0_development['lstatistics'].update({"_id"=>BSON::ObjectId('4dc4f42c48a6ee0d3b000055')}, {"$inc"=>{:valid_truck=>1}})
+MONGODB g0_development['stock_trucks'].find({:_id=>BSON::ObjectId('4dc507d148a6ee0d3b000058')})
+MONGODB g0_development['$cmd'].find({"count"=>"stock_trucks", "query"=>{:paizhao=>"浙A12345", :_id=>{"$ne"=>BSON::ObjectId('4dc507d148a6ee0d3b000058')}}, "fields"=>nil})
+MONGODB g0_development['stock_trucks'].update({"_id"=>BSON::ObjectId('4dc507d148a6ee0d3b000058')}, {"$set"=>{"status"=>"正在配货", "updated_at"=>2011-05-07 11:52:47 UTC}})
+MONGODB g0_development['stock_trucks'].update({"_id"=>BSON::ObjectId('4dc507d148a6ee0d3b000058')}, {"$inc"=>{:valid_truck=>1}})
+MONGODB g0_development['stock_trucks'].update({"_id"=>BSON::ObjectId('4dc507d148a6ee0d3b000058')}, {"$inc"=>{:total_truck=>1}})
+expire /opt/vob/g0/public/trucks/search/410000000000/500000000000
+expire /opt/vob/g0/public/trucks/search/100000000000/500000000000
+expire /opt/vob/g0/public/trucks/search/410000000000/100000000000
+Redirected to http://192.168.56.101:3000/trucks/4dc5328f48a6ee0d3b00005d
+Completed 302 Found in 40ms
+
+
+Started GET "/trucks/4dc5328f48a6ee0d3b00005d" for 192.168.56.1 at 2011-05-07 19:52:47 +0800
+  Processing by TrucksController#show as 
+  Parameters: {"id"=>"4dc5328f48a6ee0d3b00005d"}
+MONGODB g0_development['trucks'].find({:_id=>BSON::ObjectId('4dc5328f48a6ee0d3b00005d')})
+MONGODB g0_development['stock_trucks'].find({:_id=>BSON::ObjectId('4dc507d148a6ee0d3b000058')})
+MONGODB g0_development['user_contacts'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['companies'].find({:_id=>BSON::ObjectId('4dc4e7cc48a6ee0d3b00003d')})
+Rendered trucks/_localshow.html.erb (1.5ms)
+Rendered trucks/show.html.erb (5.3ms)
+Completed 200 OK in 20ms (Views: 8.3ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/trucks" for 192.168.56.1 at 2011-05-07 19:52:50 +0800
+  Processing by TrucksController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['trucks'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20).sort([[:updated_at, :desc]])
+Rendered trucks/_list.html.erb (4.3ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered trucks/_trucknavi.html.erb (3.4ms)
+Rendered trucks/index.html.erb (11.2ms)
+Completed 200 OK in 26ms (Views: 13.3ms)
+
+
+Started GET "/public/navibar" for 192.168.56.1 at 2011-05-07 19:52:53 +0800
+  Processing by PublicController#navibar as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['ustatistics'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['companies'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['user_contacts'].find({"user_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered shared/_navibar.html.erb (23.1ms)
+Rendered public/navibar.html.erb (25.7ms)
+Completed 200 OK in 29ms (Views: 28.4ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/trucks" for 192.168.56.1 at 2011-05-07 19:54:04 +0800
+  Processing by TrucksController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['trucks'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20).sort([[:updated_at, :desc]])
+Rendered trucks/_list.html.erb (2.6ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered trucks/_trucknavi.html.erb (4.2ms)
+Rendered trucks/index.html.erb (11.7ms)
+Completed 200 OK in 28ms (Views: 14.1ms)
+
+
+Started GET "/trucks/search/100000000000/100000000000/1" for 192.168.56.1 at 2011-05-07 19:54:30 +0800
+  Processing by TrucksController#search as HTML
+  Parameters: {"from"=>"100000000000", "to"=>"100000000000", "page"=>"1"}
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc532f948a6ee0d3b00005e'), "fcity_code"=>"100000000000", "fcity_name"=>nil, "tcity_code"=>"100000000000", "tcity_name"=>nil, "updated_at"=>2011-05-07 11:54:33 UTC, "created_at"=>2011-05-07 11:54:33 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+MONGODB g0_development['trucks'].find({:status=>"正在配货"}).limit(20).sort([[:updated_at, :desc]])
+Rendered trucks/_trucklist.html.erb (32.7ms)
+Rendered trucks/search.html.erb (34.5ms)
+Completed 200 OK in 42ms (Views: 38.2ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/stock_trucks" for 192.168.56.1 at 2011-05-07 19:54:34 +0800
+  Processing by StockTrucksController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"stock_trucks", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['stock_trucks'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(5).sort([[:created_at, :desc]])
+Rendered stock_trucks/index.html.erb (2.2ms)
+Completed 200 OK in 11ms (Views: 5.1ms)
+
+
+Started GET "/stock_trucks/4dc507d148a6ee0d3b000058/edit" for 192.168.56.1 at 2011-05-07 19:55:42 +0800
+  Processing by StockTrucksController#edit as HTML
+  Parameters: {"id"=>"4dc507d148a6ee0d3b000058"}
+MONGODB g0_development['stock_trucks'].find({:_id=>BSON::ObjectId('4dc507d148a6ee0d3b000058')})
+Rendered stock_trucks/_editform.html.erb (10.2ms)
+Rendered stock_trucks/edit.html.erb (13.9ms)
+Completed 200 OK in 21ms (Views: 17.9ms)
+
+
+Started GET "/users/4dc4e18948a6ee0d3b000034/trucks" for 192.168.56.1 at 2011-05-07 19:55:50 +0800
+  Processing by TrucksController#index as HTML
+  Parameters: {"user_id"=>"4dc4e18948a6ee0d3b000034"}
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:user_id=>"4dc4e18948a6ee0d3b000034"}, "fields"=>nil})
+MONGODB g0_development['trucks'].find({:user_id=>"4dc4e18948a6ee0d3b000034"}).limit(20).sort([[:updated_at, :desc]])
+Rendered trucks/_list.html.erb (2.6ms)
+MONGODB g0_development['ustatistics'].find({:user_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered trucks/_trucknavi.html.erb (4.5ms)
+Rendered trucks/index.html.erb (11.8ms)
+Completed 200 OK in 28ms (Views: 16.1ms)
+
+
+Started GET "/companies/show/4dc4e7cc48a6ee0d3b00003d" for 192.168.56.1 at 2011-05-07 19:55:53 +0800
+  Processing by CompaniesController#show as HTML
+  Parameters: {"id"=>"4dc4e7cc48a6ee0d3b00003d"}
+MONGODB g0_development['companies'].find({:_id=>BSON::ObjectId('4dc4e7cc48a6ee0d3b00003d')})
+Rendered companies/_cityform.html.erb (2.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+Rendered companies/_private.html.erb (4.6ms)
+Rendered companies/_companynavi.html.erb (1.0ms)
+Rendered companies/show.html.erb (11.8ms)
+Completed 200 OK in 18ms (Views: 15.2ms)
+
+
+Started GET "/users/logout" for 192.168.56.1 at 2011-05-07 20:03:48 +0800
+  Processing by UsersController#logout as HTML
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter3", :_id=>{"$ne"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"mark1@gmail.com", :_id=>{"$ne"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>"137789932345", :_id=>{"$ne"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}}, "fields"=>nil})
+MONGODB g0_development['users'].update({"_id"=>BSON::ObjectId('4dc4e18948a6ee0d3b000034')}, {"$set"=>{"preference"=>0, "updated_at"=>2011-05-07 12:03:51 UTC}})
+Redirected to http://192.168.56.101:3000/
+Completed 302 Found in 17ms
+
+
+Started GET "/" for 192.168.56.1 at 2011-05-07 20:03:51 +0800
+  Processing by CargosController#search as HTML
+cookies.signed[:preference]=0
+cookies.signed[:remember_me]=[BSON::ObjectId('4dc4e18948a6ee0d3b000034'), "458540600.5324316049635205", 0]
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dc5352a48a6ee0d3b00005f'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-07 12:03:54 UTC, "created_at"=>2011-05-07 12:03:54 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (51.1ms)
+Rendered shared/_html_header.erb (4.5ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (12.0ms)
+Rendered shared/_float_show.html.erb (0.8ms)
+Rendered cargos/search.html.erb within layouts/public (77.0ms)
+Completed 200 OK in 84ms (Views: 79.6ms)
+
+
+Started GET "/users/login" for 192.168.56.1 at 2011-05-07 20:03:56 +0800
+  Processing by UsersController#login as HTML
+Rendered shared/_html_header.erb (3.4ms)
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered users/login.html.erb within layouts/users (17.4ms)
+Completed 200 OK in 20ms (Views: 18.9ms)
+
+
+Started GET "/users/pw_reset_request" for 192.168.56.1 at 2011-05-07 20:04:01 +0800
+  Processing by UsersController#pw_reset_request as HTML
+Rendered shared/_html_header.erb (4.9ms)
+Rendered users/_user_annoucement.html.erb (0.6ms)
+Rendered shared/_float_show.html.erb (0.6ms)
+Rendered users/pw_reset_request.html.erb within layouts/users (13.7ms)
+Completed 200 OK in 18ms (Views: 17.0ms)
+
+
+Started GET "/users/pw_sent_confirm?email=hunter.wxhu%40gmail.com" for 192.168.56.1 at 2011-05-07 20:04:07 +0800
+  Processing by UsersController#pw_sent_confirm as HTML
+  Parameters: {"email"=>"hunter.wxhu@gmail.com"}
+MONGODB g0_development['users'].find({:email=>"hunter.wxhu@gmail.com"})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"hunter.wxhu@gmail.com", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>"23455667879", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['users'].update({"_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}, {"$set"=>{"activate"=>"615997886", "updated_at"=>2011-05-07 12:04:10 UTC}})
+Completed   in 15ms
+
+NameError (uninitialized constant UsersController::ActivateMail):
+  app/controllers/users_controller.rb:185:in `pw_sent_confirm'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.4ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.0ms)
+
+
+Started GET "/users/pw_sent_confirm?email=hunter.wxhu%40gmail.com" for 192.168.56.1 at 2011-05-07 20:09:02 +0800
+  Processing by UsersController#pw_sent_confirm as HTML
+  Parameters: {"email"=>"hunter.wxhu@gmail.com"}
+MONGODB g0_development['users'].find({:email=>"hunter.wxhu@gmail.com"})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"hunter.wxhu@gmail.com", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>"23455667879", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['users'].update({"_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}, {"$set"=>{"activate"=>"828431266", "updated_at"=>2011-05-07 12:09:05 UTC}})
+Completed   in 205ms
+
+NoMethodError (undefined method `diliver' for #<Mail::Message:0x00000004f3d370>):
+  app/controllers/users_controller.rb:185:in `pw_sent_confirm'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.9ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (19.4ms)
+
+
+Started GET "/users/pw_sent_confirm?email=hunter.wxhu%40gmail.com" for 192.168.56.1 at 2011-05-07 20:09:21 +0800
+  Processing by UsersController#pw_sent_confirm as HTML
+  Parameters: {"email"=>"hunter.wxhu@gmail.com"}
+MONGODB g0_development['users'].find({:email=>"hunter.wxhu@gmail.com"})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:name=>"hunter", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:email=>"hunter.wxhu@gmail.com", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"users", "query"=>{:mobilephone=>"23455667879", :_id=>{"$ne"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}}, "fields"=>nil})
+MONGODB g0_development['users'].update({"_id"=>BSON::ObjectId('4dc4c71248a6ee0d26000003')}, {"$set"=>{"activate"=>"955557417", "updated_at"=>2011-05-07 12:09:24 UTC}})
+
+Sent mail to hunter.wxhu@gmail.com (11159ms)
+Date: Sat, 07 May 2011 20:09:24 +0800
+From: hunter.wxhu@gmail.com
+To: hunter.wxhu@gmail.com
+Message-ID: <4dc5367455fd0_d3bdc3c1451956@HD64.mail>
+Subject: =?UTF-8?Q?=E5=AF=86=E7=A0=81=E4=BF=AE=E6=94=B9?=
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+http://192.168.56.101:3000/users/change_password_confirm/hunter/955557417
+Redirected to http://192.168.56.101:3000/users/login
+Completed 302 Found in 11195ms
+
+
+Started GET "/users/login" for 192.168.56.1 at 2011-05-07 20:09:35 +0800
+  Processing by UsersController#login as HTML
+Rendered shared/_html_header.erb (5.6ms)
+Rendered users/_user_annoucement.html.erb (1.5ms)
+Rendered shared/_float_show.html.erb (0.9ms)
+Rendered users/login.html.erb within layouts/users (122.8ms)
+Completed 200 OK in 130ms (Views: 127.9ms)

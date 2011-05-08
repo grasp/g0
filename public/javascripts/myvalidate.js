@@ -238,8 +238,12 @@ function user_new_validation(){
                 minlength:6,
                 maxlength:20,
                 Check_same_password:true
+            },
+            "user[mobilephone]": {
+                required: true,
+                minlength:11,
+                maxlength:11
             }
-
 
         },
         messages: {
@@ -273,6 +277,16 @@ function user_new_validation(){
                 required: "确认密码不能为空",
                 minlength:"密码长度不能小于6位",
                 maxlength:"密码长度不能大于20位"
+            },
+                        "user[password_confirmation]": {
+                required: "确认密码不能为空",
+                minlength:"密码长度不能小于6位",
+                maxlength:"密码长度不能大于20位"
+            }       ,
+            "user[mobilephone]": {
+                required: "联系手机不能为空",
+                minlength:"手机长度不能小于11位",
+                maxlength:"手机长度不能大于11位"
             }
         }
 

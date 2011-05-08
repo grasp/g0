@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
-   def get_line(from_code,to_code)
-     
+   def get_line(from_code,to_code)     
     if from_code<to_code
       return from_code+to_code
     elsif from_code>to_code
@@ -19,15 +18,13 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   private
   def admin_authorize
-
      unless  session[:user_name]=="admin"
         flash[:notice]="只有管理员才能操作"
        redirect_to root_path
      end
   end
 
-  def authorize
-    
+  def authorize    
      return if session[:user_id] #if already authorized
      #coockie login
       unless cookies.signed[:remember_me].blank?
@@ -52,9 +49,8 @@ class ApplicationController < ActionController::Base
        logger.debug "session not exsist"
        flash[:notice]="请您先登录"
        logger.debug "request url=#{request.path},root_path=#{root_path}"
-       redirect_to root_path      
-
-   end
+       redirect_to root_path
+     end
 
   #without redirect
    def authorize_public

@@ -7,7 +7,6 @@ class StockCargosController < ApplicationController
   protect_from_forgery :except => [:tip,:login]
   # layout "public"
   layout :nil
-
   def index
     #for admin purpose
     #@stock_cargos = StockCargo.all
@@ -39,9 +38,8 @@ class StockCargosController < ApplicationController
     @stock_cargo = StockCargo.new
     @user=User.find(session[:user_id])
     @stock_cargo.user_id=@user.id
-    @stock_cargo.company_id=@user.company_id unless @user.company_id.nil?
+    @stock_cargo.company_id=@user.company_id unless @user.company_id.blank?
     @stock_cargo.status="闲置"
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @stock_cargo }
@@ -70,7 +68,9 @@ class StockCargosController < ApplicationController
     respond_to do |format|
       if @stock_cargo.save
         flash[:notice] = '货物创建成功！'
-        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_stock_cargo" => 1}}) 
+
+        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_stock_cargo" => 1}})
+        
         format.html { redirect_to(@stock_cargo) }
         format.xml  { render :xml => @stock_cargo, :status => :created, :location => @stock_cargo }
       else

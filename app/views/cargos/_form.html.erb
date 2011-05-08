@@ -55,12 +55,12 @@
 
    <div class="field">
     <label >联系人：</label>
-    <%=@user_contact.name||@user.name%>    
+    <%=(@user_contact||@user).name%>
    </div>
 
    <div class="field">
     <label >联系电话：</label>
-    <%=@user_contact.mphone||"无"%>    
+    <%=(@user_contact||@user).mobilephone||"无"%>
    </div>
 
     <div class="actions">
@@ -68,9 +68,9 @@
     </div>   
 
     <%= f.hidden_field :stock_cargo_id%>
-    <%= f.hidden_field :user_id%>
-    <%= f.hidden_field :company_id%>
-    <%= f.hidden_field :user_contact_id%>
+    <%#= f.hidden_field :user_id%>
+    <%#= f.hidden_field :company_id%>
+    <%#= f.hidden_field :user_contact_id%>
 
   <% end %>
 <div>

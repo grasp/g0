@@ -15,14 +15,23 @@ class User
   field :status,:type=>String
   field :activate,:type=>String
   field :preference,:type=>Integer
-  references_one :user_contact
-  references_one :ustatistic
-  references_one :company
+  field :mobilephone,:type=>String
+
+  field  :user_contact_id
+  field  :ustatistic_id
+  field  :company_id
+  #field  :stock_cargo_ids
+ # field  :cargo_ids
+ # field  :stock_truck_ids
+#  field  :truck_ids
+ #field :inquery_ids
+# field :quote_ids
   
   validates_presence_of :email,:name,:message=>"用户名和email必须填写."
+  validates_presence_of :mobilephone,:message=>"手机必须填写."
   validates_uniqueness_of :name ,:message=>"该用户名已经存在."
   validates_uniqueness_of :email ,:message=>"该email已经存在."
-  
+  validates_uniqueness_of :mobilephone ,:message=>"该手机已经存在."
   
    def self.authenticated_with_token(user_id, stored_salt)
      u = self.criteria.id(user_id)
@@ -30,10 +39,8 @@ class User
    end
   
   def self.authenticate(email_or_name,password)
-
     if(email_or_name.match(/.*@.*\..*/))
-     user=self.first(:conditions => { :email=>email_or_name.to_s })
-     
+     user=self.first(:conditions => { :email=>email_or_name.to_s })     
     else
       user=self.first(:conditions => { :name=>email_or_name.to_s })
     end

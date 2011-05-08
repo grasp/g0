@@ -63,6 +63,8 @@ class UsersController < ApplicationController
     @user.password=params[:user][:password]
     @user.activate=rand(Time.now.to_i).to_s
     @user.status="new_register"
+
+     @user.mobilephone=params[:user][:mobilephone]
     
     respond_to do |format|
       if @user.save
@@ -74,8 +76,8 @@ class UsersController < ApplicationController
           :valid_truck=>0,:user_id=>@user.id);
         
         #update statistic for user
-        User.collection.update({:_id=>@user.id},{'$set'=>{:ustatistic_id=>@ustatistic.id}})
-        #@user.update_attributes({:ustatistic_id=>@ustatistic.id})
+       # User.collection.update({:_id=>@user.id},{'$set'=>{:ustatistic_id=>@ustatistic.id}})
+        @user.update_attributes({:ustatistic_id=>@ustatistic.id})
         # User.update({'_id'=> @user.id,:ustatistic_id=>@ustatistic.id}) # is a bug 
         begin    
           url=url_for("users#activate")
@@ -93,8 +95,9 @@ class UsersController < ApplicationController
         end
 
         # create contact is next
-        flash[:notice]="需要填写你的联系信息，以便客户能够联系你"
-        format.html { redirect_to(:controller=>"user_contacts",:action=>"new",:email=>"#{@user.email}")}
+        flash[:notice]="恭喜你，注册成功！"
+      #  format.html { redirect_to(:controller=>"user_contacts",:action=>"new",:email=>"#{@user.email}")}
+        format.html { redirect_to root_path}
         #User create fail
       else
         if User.first(:conditions=>{:email=>params[:email]})
@@ -179,7 +182,9 @@ class UsersController < ApplicationController
       @user.update_attributes(:activate=>rand(Time.now.to_i).to_s)
       url=url_for(:controller=>'users',:action => 'change_password_confirm')
       url=url+"/#{@user.name}/#{@user.activate}"
-      ActivateMail.deliver_sent_pw_change(url,@user.email,@user.name)
+    UserMailer.sent_confirm_email(url,@user.email,@user.name).deliver
+     # ActivateMail.deliver_sent_pw_change(url,@user.email,@user.name)
+      
       respond_to do |format|
         flash[:notice] = "请到你的邮件收件箱，点击密码重置链接，然后重置密码"
         #redirect to login if not actived,even authenticate is pass

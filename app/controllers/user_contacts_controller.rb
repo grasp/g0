@@ -149,9 +149,10 @@ class UserContactsController < ApplicationController
      
     respond_to do |format|
       if @user_contact.save
-        flash[:notice] = '成功创建了联系人,还需要创建你的公司'
+        flash[:notice] = '联系信息创建成功'
         User.collection.update({:_id=>"session[:user_id]"},{'$set'=>{:user_contact_id=>@user_contact.id}})
-         format.html { redirect_to(:controller=>"companies",:action=>"new")}
+       #  format.html { redirect_to(:controller=>"companies",:action=>"new")}
+        format.html {  redirect_to root_path}
       else
         flash[:notice] = '创建联系人失败'
         format.html { render :action => "new" }

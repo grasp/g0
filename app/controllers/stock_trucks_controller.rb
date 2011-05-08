@@ -73,9 +73,8 @@ class StockTrucksController < ApplicationController
     respond_to do |format|
       if @stock_truck.save
         flash[:notice] = '成功创建车辆'
-        Ustatistic.collection.update({'_id'=>session[:user_id]},
-        {'$inc' => {"valid_stock_truck" => 1}},{:upsert =>true})
-
+        Ustatistic.collection.update({'user_id'=>session[:user_id]},
+        {'$inc' => {"total_stock_truck" => 1}},{:upsert =>true})
         format.html { redirect_to(@stock_truck) }
         format.xml  { render :xml => @stock_truck, :status => :created, :location => @stock_truck }
       else

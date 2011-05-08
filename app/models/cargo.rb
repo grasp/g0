@@ -51,22 +51,17 @@ class  Cargo
       field :cj_user_id,:type=>String
       field :cj_company_id,:type=>String 
       
+    #future usage
+   has_many :pingjias
+ field :user_id
+   field :company_id
+ #  has_one :user_contact
+ #  has_one :cstatistic
+ field :stock_cargo_id
 
       
-       #future usage
-      references_many :pingjias
-      field :cstatistics_id
-      
-         # for contact
-      field :user_id   ,:type=>String 
-      field :company_id,:type=>String 
-      
-      field :stock_cargo_id,:type=>String 
-      field :user_contact_id,:type=>String 
-      
      index ([[:updated_at,Mongo::ASCENDING],[:status,Mongo::ASCENDING],[:fcity_code,Mongo::ASCENDING],[:tcity_code,Mongo::ASCENDING]])
-     validates_presence_of :cate_name,:fcity_code,:tcity_code
-     
+     validates_presence_of :cate_name,:fcity_code,:tcity_code     
     validate :check_unique,:on=>:create
   def check_unique
     repeated=Cargo.where(:cate_name=>self.cate_name,:line=>self.line,:user_id=>self.user_id,:status=>"正在配车")

@@ -170,39 +170,39 @@ class CargosController < ApplicationController
   def new
     #check conact first
     @cargo = Cargo.new
-   # @stock_cargo=StockCargo.find(params[:id])
-   #  @stock_cargo=StockCargo.find(BSON::ObjectID(params[:id].to_s))
-    @stock_cargo=StockCargo.first(:conditions=>{:_id=>params[:id]}) #mongo insert is _id,and what is mongoid
+    @stock_cargo=StockCargo.find(params[:id])
+    @cargo .stock_cargo_id=@stock_cargo.id
+    #  @stock_cargo=StockCargo.find(BSON::ObjectID(params[:id].to_s))
+   # @stock_cargo=StockCargo.first(:conditions=>{:_id=>params[:id]}) #mongo insert is _id,and what is mongoid
    # puts "@stock_cargo=nil" if @stock_cargo.blank?
    # puts "@stock_cargo.cate_name=#{@stock_cargo.cate_name}"
-    @cargo.stock_cargo_id=@stock_cargo.id
+    #@cargo.stock_cargo=@stock_cargo
    # @user=User.find(session[:user_id])
-   # @user=User.find(session[:user_id])
-    @user=User.first(:conditions=>{:_id=>session[:user_id]})
+    @user=User.find(session[:user_id])
+ #   @user=User.first(:conditions=>{:_id=>session[:user_id]})
     @cargo.user_id=@user.id
     @cargo.status="正在配车"
 
     #@user_contact=UserContact.find_by_user_id(session[:user_id])
-    @user_contact=@user.user_contact
+  # @user_contact=UserContact.find(@user.user_contact_id)
    # @cargo.user_contact_id=@user_contact.id unless @user_contact.nil?
-    @cargo.user_contact_id=@user_contact.id unless @user_contact.nil?
-    if @user_contact.blank?
-      flash[:notice]="发布货源必须要知道你的联系方式和姓名."
-      render(:template=>"shared/new_contact")
-      return;
+  
+    if @user.user_contact_id.blank?
+      flash[:notice]="填写更多的联系信息，可以增加成交机会"
+    #  render(:template=>"shared/new_contact")
+   #   return;
     end
   #  @company=Company.find_by_user_id(@user.id)
-    @company=@user.company
-    @cargo.company_id=@company.id unless @company.nil?
+  #  @company=@user.company
+   # @cargo.company=@user.company unless @user.company.blank?
 
-    if @company.blank?
-      flash[:notice]="你的公司信息没有填写"
-      render(:template=>"shared/new_company")
-      return;
+    if @user.company_id.blank?
+      flash[:notice]<<";填写公司信息能够增加成交机会"
+     # render(:template=>"shared/new_company")
+    #  return;
     end
 
     respond_to do |format|
-
       format.html # new.html.erb
       format.xml  { render :xml => @cargo }
     end
@@ -224,10 +224,10 @@ class CargosController < ApplicationController
   # POST /cargos.xml
   def create
      params[:cargo][:from_site]="local"
- 
-    @cargo=Cargo.new(params[:cargo])
-  
-    # @cargo=get_cargo_info_from_params(params)
+     @user=User.find(session[:user_id])
+     @cargo=Cargo.new(params[:cargo])
+    @cargo.user_contact_id=UserContact.find(@user.user_contact_id) unless @user.user_contact_id .nil?
+    @cargo.company_id=Company.find(@user.company_id) unless @user.company_id .nil?
     @cargo.line=@cargo.fcity_code+"#"+@cargo.tcity_code
 
     respond_to do |format|
@@ -240,13 +240,25 @@ class CargosController < ApplicationController
         #be carefull when use foreign object_id,otherwise ,will not update !!!!
       #  Ustatistic.collection.update({:user_id => BSON::ObjectId(session[:user_id].to_s)}, {'$set' => {:status=>"正在配车"}})
        # Ustatistic.collection.update({:user_id => BSON::ObjectId(session[:user_id].to_s)},{'$inc' => {:total_cargo =>1,:valid_cargo=>1}})
-        Ustatistic.find(session[:user_id]).update_attributes(:status=>"正在配车")
+       begin
+       ustatistic= Ustatistic.find(  @user.ustatistic_id)
+       rescue
+       end
+       unless ustatistic.blank?
+       logger.info  "inc cargo ustatisc"
+         ustatistic.update_attributes(:status=>"正在配车")
+         ustatistic.inc(:total_cargo,1)
+         ustatistic.inc(:valid_cargo,1)
+       else
+         Ustatistic.create("user_id"=>session[:user_id],:status=>"正在配车",:total_cargo =>1,:valid_cargo=>1)
+   logger.info  "create ustatisc for cargo create"
+       end
        # Lstatistic.collection.update({:line=>@cargo.line},{'$set' =>{:status=>"正在配车"}});
        # Lstatistic.collection.update({:line=>@cargo.line},{'$inc' => {:total_cargo =>1,:valid_cargo=>1}})
        @lstatistic=Lstatistic.where(:line=>@cargo.line).first
        unless @lstatistic.nil?
         @lstatistic.inc(:total_cargo,1)
-        @lstatistic.inc(:total_truck,1)
+        @lstatistic.inc(:valid_cargo,1)
        else
          Lstatistic.create(:line=>@cargo.line,:total_cargo =>1,:valid_cargo=>1)
        end

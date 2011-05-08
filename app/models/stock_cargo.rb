@@ -34,10 +34,10 @@ class StockCargo
       field :status,:type=>String
       
       #define for search
-      field :cangkus
-      field :user_id,:type=>String
-      field :company_id,:type=>String
-      field :scstatistic_id,:type=>String
+     field :cangkus
+     field :user_id
+     field :company_id
+     field :scstatistic_id
     #  referenced_in :cargo
 
       #timestamps!

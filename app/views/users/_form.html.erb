@@ -22,8 +22,7 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <label>确认Email*:</label>
-   
+    <label>确认Email*:</label>   
      <%= f.text_field :email_confirm %>
   </div>
 
@@ -36,6 +35,10 @@
     <%= f.password_field :password_confirmation %>
   </div>
 
+  <div class="field">
+    <label>联系手机*:</label>
+    <%= f.text_field :mobilephone %>
+  </div>
 
   <div class="actions">
     <%= f.submit("确定") %>

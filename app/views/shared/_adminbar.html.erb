@@ -1,6 +1,6 @@
   <%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
 <% unless user.nil? %>
-  <%ustatistic=user.ustatistic%>
+  <%ustatistic=Ustatistic.find(user.ustatistic_id)%>
 <%end%>
 <hr id="head_line">
      <table class="navi">
@@ -20,9 +20,14 @@
          <td class="navi_user">
                <a class="navi_scan_link" href="/users/">用户管理</a>
                <a class="navi_scan_link" href="/companies/admin">公司管理</a>
-        </td>
+         </td>
 
         <td><a href="/mail_accounts">邮箱信息</a></td>
 
+         </tr>
+         <tr>
+           <td>
+             <a href="http://dev-wl090.heroku.com/projects/g0/issues"> 问题列表</a>
+           </td>
          </tr>
   </table>

@@ -102,7 +102,7 @@ class CompaniesController < ApplicationController
   def new
 
     @company = Company.new
-    @user=User.find_by_id(session[:user_id])
+    @user=User.find(session[:user_id])
     @contact=UserContact.where(:user_id=>@user.id).first
      if params[:who]=="personal"
        @company.ispersonal=1
@@ -154,8 +154,8 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       if @company.save
         #update user'company_id
-        #@user=User.find_by_id(params[:company][:user_id])
-        @user=User.find_by_id(session[:user_id])
+        #@user=User.find(params[:company][:user_id])
+        @user=User.find(session[:user_id])
         raise if @user.blank?
        # @user.update_attributes!({:company_id=>@company.id})
         User.collection.update({:_id=>@user.id},{'$set'=>{:company_id=>@company.id}})        
