@@ -1,5 +1,5 @@
 
-if true
+#if true
 @admin=User.where(:name=>"admin").first
 
 if @admin.blank?
@@ -29,4 +29,4 @@ if @admin.blank?
 else
  Rails.logger.info  "admin alread created"
 end
-end
+#end
