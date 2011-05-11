@@ -76,7 +76,9 @@ class CargosController < ApplicationController
   end
   
   def index
-    unless params[:stock_cargo_id].nil?
+
+
+    unless params[:stock_cargo_id].blank?
        @cargos=Cargo.where({:user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
     else
     if params[:status]=="peiche"
@@ -228,6 +230,7 @@ class CargosController < ApplicationController
      @cargo=Cargo.new(params[:cargo])
     @cargo.user_contact_id=UserContact.find(@user.user_contact_id) unless @user.user_contact_id .nil?
     @cargo.company_id=Company.find(@user.company_id) unless @user.company_id .nil?
+     @cargo.user_id=@user.id
     @cargo.line=@cargo.fcity_code+"#"+@cargo.tcity_code
 
     respond_to do |format|

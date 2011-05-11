@@ -46,18 +46,16 @@ class  Cargo
       field :total_match, :type=>Integer
       field :total_click, :type=>Integer
       
-      field :cj_truck_id,:type=>String
-      field :cj_quote_id,:type=>String
-      field :cj_user_id,:type=>String
-      field :cj_company_id,:type=>String 
+      field :cj_truck_id
+      field :cj_quote_id
+      field :cj_user_id
+      field :cj_company_id
       
     #future usage
    has_many :pingjias
- field :user_id
+    field :user_id
    field :company_id
- #  has_one :user_contact
- #  has_one :cstatistic
- field :stock_cargo_id
+   field :stock_cargo_id
 
       
      index ([[:updated_at,Mongo::ASCENDING],[:status,Mongo::ASCENDING],[:fcity_code,Mongo::ASCENDING],[:tcity_code,Mongo::ASCENDING]])

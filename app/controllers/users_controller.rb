@@ -232,7 +232,7 @@ class UsersController < ApplicationController
         if @user.status !="actived"
           flash[:notice] = "请到你的邮箱去确认邮箱" if (@user.status == "new_register" )
         end
-        session[:user_id]=@user.id.to_s  #BSon to string
+        session[:user_id]=@user.id  #BSon to string??,no
         session[:user_name]=@user.name
         session[:user_email]=@user.email
         session[:original_uri]=nil

@@ -14,7 +14,8 @@ class StockCargosController < ApplicationController
     #this if for logined user only
    # @stock_cargos = StockCargo.where("user_id = ?",session[:user_id]).order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>5)
   # @stock_cargos = StockCargo.all(:user_id =>session[:user_id]).sort(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>5)
-    @stock_cargos = StockCargo.where(:user_id =>session[:user_id].to_s).paginate(:page=>params[:page]||1,:per_page=>20)
+   logger.info "session[:user_id]=#{session[:user_id]}"
+    @stock_cargos = StockCargo.where(:user_id =>session[:user_id]).paginate(:page=>params[:page]||1,:per_page=>20)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -64,7 +65,8 @@ class StockCargosController < ApplicationController
     params[:stockcargo][:expired_cargo]=0
     params[:stockcargo][:sent_weight]=0
     params[:stockcargo][:sent_bulk]=0
-    @stock_cargo = StockCargo.new(params[:stockcargo])    
+     params[:stockcargo][:user_id]=session[:user_id]  
+    @stock_cargo = StockCargo.new(params[:stockcargo])  
     respond_to do |format|
       if @stock_cargo.save
         flash[:notice] = '货物创建成功！'

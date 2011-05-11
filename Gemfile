@@ -3,7 +3,7 @@ require 'rubygems'
 
 source 'http://rubygems.org'
 source 'http://gemcutter.org'
-gem 'rails', '3.0.5'
+gem 'rails', '3.0.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -15,7 +15,7 @@ gem 'will_paginate',:git => 'http://github.com/mislav/will_paginate.git',:branch
 #gem 'thin'
 gem 'unicorn'
 #gem "mongo_mapper"
-gem "mongoid", "2.0.0.rc.8"
+gem "mongoid", "2.0.1"
 gem "bson_ext", "~> 1.2"
 
 gem 'memcache-client'

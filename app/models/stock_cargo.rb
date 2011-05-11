@@ -35,10 +35,9 @@ class StockCargo
       
       #define for search
      field :cangkus
-     field :user_id
+     field :user_id 
      field :company_id
      field :scstatistic_id
     #  referenced_in :cargo
 
-      #timestamps!
 end

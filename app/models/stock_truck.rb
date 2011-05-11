@@ -33,8 +33,8 @@ class StockTruck
       # contact inforamtion
 
       field :car_phone,:type=>String
-      field :company_id,:type=>String
-      field :user_id,:type=>String
+      field :company_id
+      field :user_id
       
       #Statistic
       field :valid_truck,:type=>Integer
@@ -45,8 +45,8 @@ class StockTruck
       field :status,:type=>String
 
       # for feature usage
-      field :truck_license_id,:type=>String
-      field :truck_owner_id,:type=>String
+      field :truck_license_id
+      field :truck_owner_id
       
       validates_uniqueness_of :paizhao ,:message=>"该牌照车子已经存在."
 

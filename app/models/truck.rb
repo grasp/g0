@@ -53,16 +53,16 @@ class Truck
      field :total_click,:type=>Integer
    
       #chenjiao record   
-      field :cj_cargo_id,:type=>String
-      field :cj_quote_id,:type=>String
-      field :cj_user_id,:type=>String
-      field :cj_company_id,:type=>String 
+      field :cj_cargo_id
+      field :cj_quote_id
+      field :cj_user_id
+      field :cj_company_id
       
       # external search
-      field  :company_id,:type=>String
-      field  :user_id,:type=>String
-      field  :stock_truck_id,:type=>String
-      field  :user_contact_id,:type=>String
+      field  :company_id
+      field  :user_id
+      field  :stock_truck_id
+      field  :user_contact_id
       index ([[:updated_at,Mongo::ASCENDING],[:status,Mongo::ASCENDING],[:fcity_code,Mongo::ASCENDING],[:tcity_code,Mongo::ASCENDING]])
   
      validate :check_unique,:on=>:create
