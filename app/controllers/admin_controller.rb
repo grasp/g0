@@ -143,6 +143,41 @@ class AdminController < ApplicationController
    def moveinfo
      @moves=Move.where.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
    end
-   
+
+   def cargo_manage
+     @cargos = Cargo.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+   end
+
+  def stockcargo_manage
+    @stock_cargos = StockCargo.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+  end
+
+   def truck_manage
+     @trucks = Truck.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+   end
+
+   def stocktruck_manage
+      @stock_trucks = StockTruck.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+   end
+
+   def inquery_manage
+      @inqueries = Inquery.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+   end
+   def quote_manage
+     @quotes = Quote.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+   end
+
+   def usercontact_manage
+       @user_contacts = UserContact.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+   end
+
+   def user_manage
+      @users = User.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+   end
+
+   def company_manage
+       @companies = Company.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+   end
+
    
 end

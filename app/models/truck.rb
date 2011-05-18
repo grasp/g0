@@ -37,9 +37,9 @@ class Truck
 
        
       #for future usage
-      field  :truck_pingjia_id,:type=>String
-      field  :truck_status_id,:type=>String
-      field  :tstatistic_id ,:type=>String      
+      field  :truck_pingjia_id
+      field  :truck_status_id
+      field  :tstatistic_id 
       
       field :price,:type=>String
       field :price_unit,:type=>String

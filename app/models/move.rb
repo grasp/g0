@@ -9,6 +9,6 @@ class Move
       field :expired_quote,:type=>Integer
       field :expired_inquery,:type=>Integer
       field :cost_time,:type=>String
-      embeds_one :users
+     field :user_id
       #timestamps!
 end

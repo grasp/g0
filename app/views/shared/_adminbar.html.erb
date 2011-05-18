@@ -1,33 +1,46 @@
-  <%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
+<%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
 <% unless user.nil? %>
   <%ustatistic=Ustatistic.find(user.ustatistic_id)%>
 <%end%>
 <hr id="head_line">
-     <table class="navi">
-         <tr>
-         <td> <a  href="/admin/">总体情况</a></td>
-         <td class="navi_scan">
-               <a class="navi_scan_link" href="/scans/scaninfo">扫描信息(<%=h Scan.count%>)</a>
-               <a class="navi_scan_link" href="/admin/moveinfo">迁移信息(<%=h Move.count%>)</a>
-              <!--  <a class="navi_scan_link" href="/scans/uinfoscan">用户有效货/车扫描</a>-->
-                 <a class="navi_scan_link" href="/admin/hourscaninfo">小时信息</a>
-         </td>
-         <td class="navi_grasp">
-              <a class="navi_scan_link" href="/admin/tf56grasp">tf56采集信息(<%=h GraspRecord.count%>)</a>
-              <a class="navi_scan_link" href="/admin/quzhougrasp">quzhou采集信息</a>    
-               <a  href="/lib_companies">公司采集信息(<%=LibCompany.count%>)</a> 
-         </td>  
-         <td class="navi_user">
-               <a class="navi_scan_link" href="/users/">用户管理</a>
-               <a class="navi_scan_link" href="/companies/admin">公司管理</a>
-         </td>
+<table class="navi">
+  <tr>
+    <td> <a  href="/admin/">总体情况</a></td>
+    <td>
+      <a class="navi_scan_link" href="/scans/scaninfo">扫描信息(<%=h Scan.count%>)</a></td>
+    <td>   <a class="navi_scan_link" href="/admin/moveinfo">迁移信息(<%=h Move.count%>)</a></td>
+    <td>  <a class="navi_scan_link" href="/admin/hourscaninfo">小时信息</a>
+    </td>
+    <td >
+      <a class="navi_scan_link" href="/admin/tf56grasp">tf56采集信息(<%=h GraspRecord.count%>)</a></td>
+    <td >
+      <a class="navi_scan_link" href="/admin/quzhougrasp">quzhou采集信息</a> </td>
+    <td >
+      <a  href="/lib_companies">公司采集信息(<%=LibCompany.count%>)</a>
+    </td>
 
-        <td><a href="/mail_accounts">邮箱信息</a></td>
 
-         </tr>
-         <tr>
-           <td>
-             <a href="http://dev-wl090.heroku.com/projects/g0/issues"> 问题列表</a>
-           </td>
-         </tr>
-  </table>
+    <td><a href="/mail_accounts">邮箱信息</a></td>
+
+  </tr>
+
+  <tr>
+
+    <td class="navi_user">
+      <a class="navi_scan_link" href="/admin/user_manage/">用户管理</a>   </td>
+    <td>  <a class="navi_scan_link" href="/admin/usercontact_manage/">联系方式管理</a>   </td>
+    <td> <a class="navi_scan_link" href="/admin/company_manage">公司管理</a></td>
+    <td> <a class="navi_scan_link" href="/admin/cargo_manage">货源管理</a></td>
+    <td> <a class="navi_scan_link" href="/admin/stockcargo_manage">货物管理</a></td>
+    <td> <a class="navi_scan_link" href="/admin/truck_manage">车源管理</a></td>
+    <td> <a class="navi_scan_link" href="/admin/stocktruck_manage">车辆管理</a></td>
+    <td> <a class="navi_scan_link" href="/admin/quote_manage">报价管理</a></td>
+    <td> <a class="navi_scan_link" href="/admin/inquery_manage">询价管理</a></td>
+
+  </tr>
+  <tr>
+    <td>
+      <a href="http://dev-wl090.heroku.com/projects/g0/issues"> 问题列表</a>
+    </td>
+  </tr>
+</table>

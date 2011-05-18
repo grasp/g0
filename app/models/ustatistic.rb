@@ -11,7 +11,6 @@ class Ustatistic
       field :total_driver,:type=>Integer
       field :total_custermer,:type=>Integer
       field :status,:type=>String
-      referenced_in :user
-     # timestamps!
+      field :user_id
 
 end

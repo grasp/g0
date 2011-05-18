@@ -21,11 +21,11 @@ class User
   field  :ustatistic_id
   field  :company_id
   #field  :stock_cargo_ids
- # field  :cargo_ids
- # field  :stock_truck_ids
-#  field  :truck_ids
+  # field  :cargo_ids
+  # field  :stock_truck_ids
+  #  field  :truck_ids
  #field :inquery_ids
-# field :quote_ids
+ # field :quote_ids
   
   validates_presence_of :email,:name,:message=>"用户名和email必须填写."
   validates_presence_of :mobilephone,:message=>"手机必须填写."

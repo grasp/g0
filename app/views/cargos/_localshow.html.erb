@@ -17,15 +17,19 @@
  
 <td> 
 <%=@stock_cargo.package_name%></td>
-
+<%@user=User.find(@cargo.user_id)%>
 <td>
-  <%= User.find(@cargo.user_id).name %>
+  <%= @user.name %>
 </td>
 
 <td>
-  <%usercontact=UserContact.first(:conditions=>{:user_id=>@cargo.user_id})%>
-  <%= usercontact.mphone %>
+  <%if @user.user_contact_id%>
+  <%usercontact=UserContact.find(@user.user_contact_id)%>
+  <%= usercontact.mobilephone %>
   <%= usercontact.quhao+"-"+usercontact.fixphone %>
+  <%else%>
+  <%=@user.mobilephone%>
+  <%end%>
 </td>
 </tr>
 </table>

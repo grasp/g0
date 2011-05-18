@@ -19,6 +19,6 @@ class Scan
       field :total_line,:type=>Integer
       field :total_company,:type=>Integer
       field :cost_time,:type=>String
-     embeds_one :users
+      field :user_id
       # timestamps!
 end

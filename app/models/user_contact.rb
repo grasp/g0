@@ -13,8 +13,7 @@ include Mongoid::Timestamps
       field :city_name,:type=>String
       field :city_code,:type=>String
       field :address,:type=>String
-      embeds_one :companies
-      embeds_one :users
-     # timestamps!
+      field :company_id
+      field :user_id
  
 end

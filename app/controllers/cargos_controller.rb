@@ -148,9 +148,10 @@ class CargosController < ApplicationController
   # GET /cargos/1
   # GET /cargos/1.xml
   def show
+
    # @cargo = Cargo.find(params[:id].to_s) #why not work ????
    @cargo = Cargo.first(:conditions=>{:_id=>params[:id].to_s})
-    @stock_cargo=StockCargo.find(@cargo.stock_cargo_id) if @cargo.from_site=="local"
+   @stock_cargo=StockCargo.find(@cargo.stock_cargo_id) if @cargo.from_site=="local"  && !@cargo.stock_cargo_id.blank?
   #  @line_ad=LineAd.find({:line=>get_line(@cargo.fcity_code,@cargo.tcity_code)})
     
     if @line_ad.blank?
@@ -172,36 +173,21 @@ class CargosController < ApplicationController
   def new
     #check conact first
     @cargo = Cargo.new
-    @stock_cargo=StockCargo.find(params[:id])
+    @stock_cargo=StockCargo.find(BSON::ObjectId(params[:id]))
     @cargo .stock_cargo_id=@stock_cargo.id
-    #  @stock_cargo=StockCargo.find(BSON::ObjectID(params[:id].to_s))
-   # @stock_cargo=StockCargo.first(:conditions=>{:_id=>params[:id]}) #mongo insert is _id,and what is mongoid
-   # puts "@stock_cargo=nil" if @stock_cargo.blank?
-   # puts "@stock_cargo.cate_name=#{@stock_cargo.cate_name}"
-    #@cargo.stock_cargo=@stock_cargo
-   # @user=User.find(session[:user_id])
     @user=User.find(session[:user_id])
- #   @user=User.first(:conditions=>{:_id=>session[:user_id]})
+
     @cargo.user_id=@user.id
     @cargo.status="正在配车"
+   @cargo.stock_cargo_id=@stock_cargo.id
 
-    #@user_contact=UserContact.find_by_user_id(session[:user_id])
-  # @user_contact=UserContact.find(@user.user_contact_id)
-   # @cargo.user_contact_id=@user_contact.id unless @user_contact.nil?
-  
     if @user.user_contact_id.blank?
       flash[:notice]="填写更多的联系信息，可以增加成交机会"
-    #  render(:template=>"shared/new_contact")
-   #   return;
+
     end
-  #  @company=Company.find_by_user_id(@user.id)
-  #  @company=@user.company
-   # @cargo.company=@user.company unless @user.company.blank?
 
     if @user.company_id.blank?
       flash[:notice]<<";填写公司信息能够增加成交机会"
-     # render(:template=>"shared/new_company")
-    #  return;
     end
 
     respond_to do |format|
@@ -226,12 +212,15 @@ class CargosController < ApplicationController
   # POST /cargos.xml
   def create
      params[:cargo][:from_site]="local"
+    # @stock_cargo=StockCargo.find(BSON::ObjectId(params[:cargo][:stock_cargo_id]))
+    # @cargo.stock_cargo_id=
+     params[:cargo][:stock_cargo_id]=BSON::ObjectId(params[:cargo][:stock_cargo_id])
      @user=User.find(session[:user_id])
      @cargo=Cargo.new(params[:cargo])
-    @cargo.user_contact_id=UserContact.find(@user.user_contact_id) unless @user.user_contact_id .nil?
-    @cargo.company_id=Company.find(@user.company_id) unless @user.company_id .nil?
+     @cargo.user_contact_id=UserContact.find(@user.user_contact_id) unless @user.user_contact_id .nil?
+     @cargo.company_id=Company.find(@user.company_id) unless @user.company_id .nil?
      @cargo.user_id=@user.id
-    @cargo.line=@cargo.fcity_code+"#"+@cargo.tcity_code
+     @cargo.line=@cargo.fcity_code+"#"+@cargo.tcity_code
 
     respond_to do |format|
       if @cargo.save
@@ -320,11 +309,18 @@ class CargosController < ApplicationController
   # DELETE /cargos/1
   # DELETE /cargos/1.xml
   def destroy
-    @cargo = Cargo.find(params[:id])
-    @cargo.destroy
+    cargo = Cargo.find(BSON::ObjectId(params[:id]))
+    cargo.destroy if cargo
 
+    #do we need update the statisitc?
+   # url=request.url
+   @user=User.find(session[:user_id])
     respond_to do |format|
-      format.html { redirect_to(cargos_url) }
+      if @user.name=="admin"
+      format.html { redirect_to(admincargo_manage_path) }
+      else
+       format.html { redirect_to(root_path) }
+      end
       format.xml  { head :ok }
     end
   end

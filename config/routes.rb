@@ -5,13 +5,18 @@ G0::Application.routes.draw do
 
   resources :feedbacks
   match '/admin/hourscan'  =>'admin#hourscan',:as=>:adminhourscan
-  match '/admin/hourscaninfo'  =>'admin#hourscaninfo',:as=>:adminhourscaninfo
-  
+  match '/admin/hourscaninfo'  =>'admin#hourscaninfo',:as=>:adminhourscaninfo  
   match '/admin/move'  =>'admin#move',:as=>:adminmove
-  match '/admin/moveinfo'  =>'admin#moveinfo',:as=>:adminmoveinfo
-  
+  match '/admin/moveinfo'  =>'admin#moveinfo',:as=>:adminmoveinfo  
   match '/admin/quzhougrasp'  =>'admin#quzhougrasp',:as=>:adminquzhougrasp
   match '/admin/tf56grasp'  =>'admin#tf56grasp',:as=>:admintf56grasp
+  match '/admin/cargo_manage'  =>'admin#cargo_manage',:as=>:admincargo_manage
+  match '/admin/stockcargo_manage'  =>'admin#stockcargo_manage' ,:as=>:adminstockcargo_manage
+  match '/admin/truck_manage'  =>'admin#truck_manage',:as=>:admintruck_manage
+  match '/admin/stocktruck_manage'  =>'admin#stocktruck_manage',:as=>:adminstocktruck_manage
+  match '/admin/quote_manage'  =>'admin#quote_manage',:as=>:adminquote_manage
+  match '/admin/usercontact_manage'  =>'admin#usercontact_manage',:as=>:adminusercontact_manage
+  match '/admin/company_manage  '  =>'admin#company_manage' ,:as=>:admincompany_manage
   get "admin/index"
 
 
@@ -115,7 +120,8 @@ G0::Application.routes.draw do
   match '/cargos/show' =>'cargos#show', :as=>:cargosshow
   match '/cargos/list/:id' =>'cargos#index', :as=>:cargosindex
   match '/cargos/:cargo_id/match' =>'cargos#match', :as=>:cargosmatch
-
+  match '/cargos/destroy/:id' =>'cargos#destroy', :as=>:cargosdestroy
+  
   resources :cargos do
       resources :quotes
       resources :inqueries

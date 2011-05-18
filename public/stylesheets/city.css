@@ -100,6 +100,7 @@ div.region ul{
      width: 100%;
 }
 div.region ul li {
+     float: left;
     margin-top: 10px;
     width: 100%;
     margin-left: 0px;
@@ -112,11 +113,11 @@ div.region ul li {
  /* display: inline-block;
   margin-left: 1px;*/
 }
+/* must comments, otherwise ie 8 will fail*/
 .city {
      /* float:left;
-      margin-left: 1px;*/
-      display: inline-block;
-     
+      margin-left: 1px;
+      display: inline-block;*/     
 }
 
 .line{

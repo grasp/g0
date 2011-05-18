@@ -5,20 +5,12 @@
             <url>app/controllers/users_controller.rb</url>
             <line>281</line>
         </file>
+        <file>
+            <url>app/controllers/admin_controller.rb</url>
+            <line>150</line>
+        </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/Z:/vob/g0/Gemfile</file>
-        <file>file:/Z:/vob/g0/app/controllers/stock_cargos_controller.rb</file>
-        <file>file:/Z:/vob/g0/app/models/stock_cargo.rb</file>
-        <file>file:/Z:/vob/g0/app/controllers/cargos_controller.rb</file>
-        <file>file:/Z:/vob/g0/app/views/cargos/_cargolist.html.erb</file>
         <file>file:/Z:/vob/g0/app/views/shared/_navibar.html.erb</file>
-        <file>file:/Z:/vob/g0/app/controllers/public_controller.rb</file>
-        <file>file:/Z:/vob/g0/app/controllers/users_controller.rb</file>
-        <file>file:/Z:/vob/g0/app/models/stock_truck.rb</file>
-        <file>file:/Z:/vob/g0/app/models/truck.rb</file>
-        <file>file:/Z:/vob/g0/app/models/cargo.rb</file>
-        <file>file:/Z:/vob/g0/app/helpers/users_helper.rb</file>
-        <file>file:/Z:/vob/g0/app/models/user.rb</file>
     </open-files>
 </project-private>

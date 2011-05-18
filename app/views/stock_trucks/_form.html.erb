@@ -78,8 +78,8 @@
     <%= f.select(:truck_year, options_for_select($year_hash_reverse.to_a,@stock_truck.truck_year)) %>
   </div>
 
-  <%= f.hidden_field :user_id %>
-  <%= f.hidden_field :company_id %>
+  <%#= f.hidden_field :user_id %>
+  <%#= f.hidden_field :company_id %>
   <%= f.hidden_field :status%>
 
   <div class="actions">

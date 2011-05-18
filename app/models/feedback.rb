@@ -8,11 +8,9 @@ include Mongoid::Timestamps
      field :satisfy,:type=>String
      field :hate,:type=>String
      field :improve,:type=>String
-      #for statistic
 
      field :user_name,:type=>String
      field :ip,:type=>String
-     embeds_one :users      
-     #timestamps!
+     field:user_id
  
 end

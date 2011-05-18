@@ -8,6 +8,6 @@ class Search
     field :tcity_code,:type=>String
     field :tcity_name,:type=>String
     field :stype,:type=>String
-    # timestamps!
+    field :user_id
     
 end

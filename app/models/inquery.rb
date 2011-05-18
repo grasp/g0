@@ -12,13 +12,13 @@ class Inquery
     field :status,:type=>String
 
    # foreign data
-      field :cargo_id,:type=>String
-      field :truck_id,:type=>String
-      field :truck_company_id,:type=>String
-      field :truck_user_id,:type=>String
-      field :cargo_company_id,:type=>String
-      field :cargo_user_id,:type=>String
-      field :user_id,:type=>String
+      field :cargo_id
+      field :truck_id
+      field :truck_company_id
+      field :truck_user_id
+      field :cargo_company_id
+      field :cargo_user_id
+      field :user_id
       
    #feature usage
       field :ismailed,:type=>Boolean

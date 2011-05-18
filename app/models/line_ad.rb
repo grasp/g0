@@ -8,8 +8,8 @@ class LineAd
       field :url,:type=>String
       field :one_word,:type=>String
       field :contact_phone,:type=>String
-      embeds_one :users
-      embeds_one:companies
-      embeds_one :lstatistics
-     # timestamps!
+      field :user_id
+      field :company_id
+      field :lstatistic_id
+
 end

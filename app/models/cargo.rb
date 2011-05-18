@@ -3,12 +3,7 @@ class  Cargo
    include Mongoid::Document
    include Mongoid::Timestamps
     # cattr_reader :per_page
-    # @@per_page = 20
-    # belongs_to :users
-   #  has_many :quotes
-    # has_many :inqueries
-   #  has_one :cstatistic 
-      
+    # @@per_page = 20      
    # cargo self info
       field :cargo_weight, :type=>String
       field :cargo_zuhuo, :type=>String
@@ -52,10 +47,10 @@ class  Cargo
       field :cj_company_id
       
     #future usage
-   has_many :pingjias
+    has_many :pingjias
     field :user_id
-   field :company_id
-   field :stock_cargo_id
+    field :company_id
+    field :stock_cargo_id
 
       
      index ([[:updated_at,Mongo::ASCENDING],[:status,Mongo::ASCENDING],[:fcity_code,Mongo::ASCENDING],[:tcity_code,Mongo::ASCENDING]])

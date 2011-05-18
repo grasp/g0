@@ -50,5 +50,4 @@ class StockTruck
       
       validates_uniqueness_of :paizhao ,:message=>"该牌照车子已经存在."
 
-     # timestamps!
 end

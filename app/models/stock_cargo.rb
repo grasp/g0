@@ -38,6 +38,5 @@ class StockCargo
      field :user_id 
      field :company_id
      field :scstatistic_id
-    #  referenced_in :cargo
 
 end

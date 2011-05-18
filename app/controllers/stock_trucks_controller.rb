@@ -8,11 +8,7 @@ class StockTrucksController < ApplicationController
   #layout "public", :except => [:oper]
   layout nil
   def index
-  #add for admin
-
-   # @stock_trucks = StockTruck.all
-  #  @stock_trucks = StockTruck.where("user_id = ?",session[:user_id]).order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>5)
-    @stock_trucks = StockTruck.where(:user_id =>session[:user_id]).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>5)
+   @stock_trucks = StockTruck.where(:user_id =>session[:user_id]).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>5)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @stock_trucks }
@@ -60,15 +56,16 @@ class StockTrucksController < ApplicationController
   # POST /stock_trucks
   # POST /stock_trucks.xml
   def create
-    params[:stocktruck][:truckcount]=0 #clear the counter
-    params[:stocktruck][:status]="车辆闲置" #clear the counter
+    @user=User.find(session[:user_id])
+    stocktruck=params[:stocktruck]
+    stocktruck[:truckcount]=0 #clear the counter
+    stocktruck[:status]="车辆闲置" #clear the counter
     
     #initialize statistic 
-     params[:stocktruck][:valid_truck]=0
-     params[:stocktruck][:total_truck]=0
-     params[:stocktruck][:expired_truck]=0
-
-    @stock_truck = StockTruck.new(params[:stocktruck])
+     stocktruck[:valid_truck]=0;     stocktruck[:total_truck]=0;     stocktruck[:expired_truck]=0
+     
+     stocktruck[:user_id]=@user.id
+     @stock_truck = StockTruck.new(stocktruck)
 
     respond_to do |format|
       if @stock_truck.save

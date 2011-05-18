@@ -27,19 +27,15 @@ class  ExpiredCargo
       field :fcity_name, :type=>String
       field :tcity_name, :type=>String
       field :fcity_code, :type=>String
-      field :tcity_code, :type=>String
+      field :tcity_code, :type=>String 
       
-
-
-      
-      field :stock_cargo_id,:type=>String
-      field :user_contact_id,:type=>String
+      field :stock_cargo_id
+      field :user_contact_id
 
       #important information
       field :zhuang_addr, :type=>String
       field :zhuang_time, :type=>String
       field :xie_addr, :type=>String
-
 
       
       field :price, :type=>String
@@ -54,19 +50,19 @@ class  ExpiredCargo
       field :total_match, :type=>Integer
       field :total_click, :type=>Integer
       
-      field :cj_truck_id,:type=>String
-      field :cj_quote_id,:type=>String
-      field :cj_user_id,:type=>String
-      field :cj_company_id,:type=>String 
+      field :cj_truck_id
+      field :cj_quote_id
+      field :cj_user_id
+      field :cj_company_id
       
-        # for contact
-      embeds_one :users     
-      embeds_one :companies
+      # for contact
+       field :user_id
+      field :company_id
       
         #future usage
       embeds_many :pingjias
-      embeds_one :cstatistics  
+      field :cstatistic_id
       
-     #timestamps!
+
      
 end

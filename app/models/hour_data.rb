@@ -19,7 +19,7 @@ class HourData
       field :total_truck,:type=>Integer
       field :total_quote,:type=>Integer
       field :total_inquery,:type=>Integer
-      referenced_in :user   
+      field :user_id
      # timestamps!
 end
 

@@ -21,10 +21,10 @@ class Company
      field :email, :type=>String    
      field :user_name, :type=>String
      field :ispersonal, :type=>Integer
-     embeds_one :company_licenses
-     referenced_in :user
+    # embeds_one :company_licenses
+    # referenced_in :user
+    field :user_id
       
-   # validates_uniqueness_of :name ,:message=>"该公司已经被注册."
-   # validates_uniqueness_of :email ,:message=>"该公司已经被注册."
-   # timestamps!
+    validates_uniqueness_of :name ,:message=>"该公司名字已经被注册."
+    validates_uniqueness_of :email ,:message=>"该Email所属公司已经被注册."
 end
