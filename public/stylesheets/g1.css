@@ -169,7 +169,7 @@ div.public_view {
 }
 
 /* for float div css*/
-a.float_close2{text-align: right;}
+a.float_close2,a.float_close{text-align: right;}
 div.city_title {text-align: left;}
 
 /*for user login*/
