@@ -13,33 +13,27 @@
 
 root { 
     display: block;
- border-right-width:1px;
+    border-right-width:1px;
 }
-      
+
 body {
-font-size: 16px;
+    font-size: 16px;
+    margin:0px auto;
+    text-align: center;
 }
 
 #sheader {
-    padding: 5px;
-  /*  height:100px;*/
-    margin-bottom: 10px;
-    float:left;
+    padding: 5px;    
     width:100%;
-}
 
-#ghead {
+        text-align: left;
+}
+/*
+#guser {
+    margin-top:10px;
     padding: 5px;
-    float:left;
 }
-
-#main {
-    background-color:white;
-    /*border: 3px solid blue;*/
-    border:none;
-    width:100%;
-    float:left;
-}
+*/
 
 
 h1,h2,h3{
@@ -48,43 +42,19 @@ h1,h2,h3{
 }
 
 
-#content {
-    /*
-    padding: 5px;    
-    border-left: 3px solid;
-    border-bottom: 3px solid;
-    border-left-color: #6694E3;
-    border-bottom-color: #6694E3;
-   
-    background-color: #6694E3;   
-     */
-    margin:0px;
-    padding: 0px;
-    width: 100%;
-    float: left;
-   }
+div.content {
+    width:100%;
+  
+}
 
 #show {
-  /* padding: 10px;*/
-   /* padding-top:0px;*/
-    padding-left:0px;
-      margin:0px;
-    padding: 0px;
-    width:100%;
     background-color: #F2F2F2;
+    width:100%;
+      padding-top: 10px;
+ 
+ 
 }
 
-/*
-#city_data_list{
-    padding: 3px;
-    border: 2px solid;
-    border-color:blue;
-    background-color: white;
-    width:100%;
-    position: absolute;
-    z-index: 1000;
-}
-*/
 .data_list{
     padding: 3px;
     border: 2px solid;
@@ -95,7 +65,6 @@ h1,h2,h3{
 }
 
 
-
 .highlight_background {
     background-color:#ffcc00;
     font-size:120%;
@@ -103,14 +72,17 @@ h1,h2,h3{
 
 div.user_announce{
     float:left;
+    padding-left: 20px;
     width: 30%;
     height: 600px;
+    text-align: left;
+
 }
 
 
 #user_form{
     float:left;
-    width: 60%;
+    width: 50%;
     height: 600px;
 }
 
@@ -120,54 +92,35 @@ div.user_announce{
 }
 
 #notice{
-   color:red;
-  top:5px;
+    color:red;
+    top:5px;
 }
 
 td a {
     font-weight:normal;
 }
 
-
-
 a.menu
 {
     font-weight: normal;
-
 }
 
-.ads{
-    width:100%;
-    margin-top: 0px;
-    margin-left: 0px;
-    padding-left: 0px;
-    /*
-    padding-bottom: 10px;
-   border-color:blue;
-    background-color:#BFD7FF;
-    height: 10%;
-    */
-}
-.ads a{
-    margin:10px;
-    margin-left: 5px;
-    padding-left: 5px;
-    font-size:larger;
-}
+
 #footer {
-     display:inline;
-     margin-top:50px;
-     margin-bottom: 50px;
-     float:left;
-     text-align:center;
+    display:inline;
+    /*
+    margin-top:50px;
+    margin-bottom: 50px;
+    float:left;*/
+    text-align:center;
 }
 /*not work*/
 #footer a {
 
     margin-left:10px;
     margin-right:10px; 
-      
-   /* text-align:center;*/
+
+    /* text-align:center;*/
 }
 
 
@@ -175,8 +128,6 @@ a.menu
     margin:auto;
     display:inline;
 }
-
-
 
 .truck_bottom_link a,.cargo_bottom_link a {
     padding-right: 10px;
@@ -200,13 +151,13 @@ div.bottom_link a {
 }
 
 div.feedback_form{
-    
-     margin-left: 120px;
+
+    margin-left: 120px;
 }
 
 
 #stocktruck_edit {
-   
+
 }
 div.public_view {
     margin-top:30px;
@@ -216,3 +167,11 @@ div.public_view {
 .field2 select{
     height:25px;
 }
+
+/* for float div css*/
+a.float_close2{text-align: right;}
+div.city_title {text-align: left;}
+
+/*for user login*/
+#login label,#login .field,#login .actions{text-align: left;}
+

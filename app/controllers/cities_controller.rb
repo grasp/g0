@@ -3,7 +3,8 @@ class CitiesController < ApplicationController
   # GET /cities
   # GET /cities.xml
   layout :nil
-  caches_page :index
+
+  #caches_page :index
   
   def index
     #get the original value

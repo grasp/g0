@@ -6,11 +6,11 @@
   <%=render "shared/html_header"%>
   </head>
   <body>
-   <%user=User.find(session[:user_id]) unless session[:user_id].nil?%>
+   <%user=User.find(session[:user_id]) unless session[:user_id].nil? #TOBE ImProved%>
     <div id="sheader">
       <img src="/images/7491063.gif" alt="Icon" align="left" />
-      <div id="ghead">
-        <div id="guser" >
+
+        <span id="guser" >
           <a  href="/" >首页</a>
             <%if user.nil?%>
             | <a  href="/users/login" >登录</a>
@@ -21,46 +21,26 @@
            <%end%>
             <%time=Time.now%>
              <span>今天是<%=time.year%>年<%=time.month%>月<%=time.day%>日,星期<%=$week_day[time.wday.to_i]%></span>
-        </div>
-      </div>
+        </span>
+
     </div>
+
+      <div class="content">
       <div id="navi">
        <%=render "shared/navibar"%>
       </div>
 
-      <div id="content">
-        <!--
-        <div id="scontroll">
-          <div id="line">
-            <div style="display: inline">
-              <label>出发地</label>
-              <a  class="data_load"  href="/cities">杭州市</a>
-              <span class="data_list" style="display:none"></span>
-              <input name="city_from" type="hidden" value="330100000000"/>
-            </div>
-
-            <div style="display: inline">
-              <label >到达地</label>
-              <a class="data_load"  href="/cities" >上海市</a>
-              <span class="data_list" style="display:none"></span>
-              <input name="city_to" type="hidden" value="330100000000"/>
-            </div>
-          </div>
-           <span id="line_tree_list" style="display:none"></span>
-        </div>
-        -->
+    
         <div id="show">
           <%= yield %>
         </div>
+     
 
-      </div>
 
+   <%=render "shared/float_show"%>
+     </div>
 
-<%=render "shared/float_show"%>
-
-    <%#=flash[:notice]%>
-    
-    <div id="footer" style="display:inline-block;width:100%;margin-top: 50px;margin-bottom: 50px;float: left;text-align: center;">
+    <div id="footer" style="display:inline-block;width:100%;margin-top: 50px;margin-bottom: 50px;text-align: center;">
       <span>
       <a href="/public/about">关于物流零距离</a>|
       <a href="/public/mianze">免责声明</a>|
@@ -69,6 +49,8 @@
     </span>
       <p>@2010-2011 www.w090.com 杭州全聚通网络技术有限公司</p>
     </div>
+
+
   </body>
 </html>
 

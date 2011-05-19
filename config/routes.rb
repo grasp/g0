@@ -141,8 +141,7 @@ G0::Application.routes.draw do
   resources :cargo_categories
 
 
-  match '/cities/:dir/'=>'cities#index',:as=>:citiesindex
-  match '/cities/:dir/:code'=>'cities#index',:as=>:citiesdirindex
+  match '/cities/:dir(/:code)'=>'cities#index',:as=>:citiesindex
   resources :cities
 
   match 'users/login' =>'users#login',:as=>:userslogin

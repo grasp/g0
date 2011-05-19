@@ -14,7 +14,7 @@
 root { 
     display: block;
 }
-#cheyuan_sel  {
+#cheyuan_sel{
     color:blue;
 }
 #huoyuan_sel{
@@ -22,109 +22,39 @@ root {
 }
 
 .highlight {
-
     border: 1px solid #888;
     padding: 0.5em;
     background-color:silver;
 }
-#gbar {
-  display: inline;
-  aligh:left;
-  clear:both;
 
-}
+div.province {
+text-align: left;
 
-#guser {
-  display: inline;
-  clear:both;
-  aligh:right;
-}
-
-#navi_bar {
-   
-    width : 100px;
-    height : 200px;
-}
-
-
-div.float_show2{
-    background-color: red;
-    display:block; 
-    width:50%;
-}
-
-
-div.province{
-  /*float:left;*/
-    display:inline-block;
-    width:auto;
-    margin-left: 0px;
-}
-
-div.province ul {
-     width:100%;
-      float: left;
-     display: inline;
-     margin-left: 0px;
-
-}
-
-div.province ul li {
-     width:100%;
-     float: left;
-     display: inline;
-     list-style-type:none;
-     margin-left: 0px;
-     
 }
 
 /* for IE use float and display*/
 .city_province{
-   /* margin-left: 5px;*/
     font-size: larger;
-    float:left;
     display: inline;
-    margin-left: 3px;
 
  }
-div.region{
-     /*float:left;*/
-   /* display:block;   */
-    margin-left: 0px;
-}
 
-div.region ul{
-     float: left;
-     list-style-type:none;
-     margin-left: 0px;
-     width: 100%;
+div.region,a.city{
+text-align: left;
 }
-div.region ul li {
-     float: left;
-    margin-top: 10px;
-    width: 100%;
-    margin-left: 0px;
-    list-style-type:none;   
-}
+a.city_region{width:auto;}
+
+
+div.city_line {padding-top: 4px;}
 
 .city_region{
   font-weight: bold;
-  float:left;
- /* display: inline-block;
-  margin-left: 1px;*/
-}
-/* must comments, otherwise ie 8 will fail*/
-.city {
-     /* float:left;
-      margin-left: 1px;
-      display: inline-block;*/     
+text-align: left;
 }
 
 .line{
     background-color: rgb(213,214,255);
-/*    padding-top:15px;
-    padding-bottom:15px;*/
-   float:left;
+    float:left;
 
 }
 
@@ -139,9 +69,9 @@ div.region ul li {
 }
 .selected_province,.selected_region,.selected_city{
     background-color:#ffcc00;
+    /*
     font-weight: bold;
-    font-size: larger;
-
+    font-size: larger;*/
 }
 
 

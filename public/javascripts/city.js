@@ -6,7 +6,7 @@ function get_full_name(code){
     
     if (code.match(/\d\d0000000000$/) )
     {
-     selected=$("#float_load2 div ul li a[href$="+code+"]")
+     selected=$("#float_load2 div div div a[href$="+code+"]")
      selected.css("background-color","#ffcc00");
      return selected.text();
     }
@@ -14,21 +14,21 @@ function get_full_name(code){
     else  if (code.match(/\d\d\d\d00000000$/)  && ( ! code.match(/\d\d0000000000$/)))
     {       
        province_code=code.slice(0,2)+"0000000000"
-       $("#float_load2 div ul li a[href$="+province_code+"]").css("background-color","#ffcc00");
-       $("#float_load2 div ul li a[href$="+code+"]").css("background-color","#ffcc00");
-       return  $("#float_load2 div ul li a[href$="+province_code+"]").text()+ $("#float_load2 div ul li a[href$="+code+"]").text(); 
+       $("#float_load2 div div div a[href$="+province_code+"]").css("background-color","#ffcc00");
+       $("#float_load2 div div div a[href$="+code+"]").css("background-color","#ffcc00");
+       return  $("#float_load2 div div div a[href$="+province_code+"]").text()+ $("#float_load2 div div div a[href$="+code+"]").text();
     }
          
     else if ((! code.match(/\d\d\d\d00000000$/)) && (! code.match(/\d\d0000000000$/)))
     {
       province_code=code.slice(0,2)+"0000000000"
       region_code=code.slice(0,4)+"00000000"
-       $("#float_load2 div ul li a[href$="+province_code+"]").css("background-color","#ffcc00");
-       $("#float_load2 div ul li a[href$="+region_code+"]").css("background-color","#ffcc00");
-       $("#float_load2 div ul li a[href$="+code+"]").css("background-color","#ffcc00");
-      return  $("#float_load2 div ul li a[href$="+province_code+"]").text()+$("#float_load2 div ul li a[href$="+region_code+"]").text()+$("#float_load2 div ul li a[href$="+code+"]").text();
+       $("#float_load2 div div div a[href$="+province_code+"]").css("background-color","#ffcc00");
+       $("#float_load2 div div div a[href$="+region_code+"]").css("background-color","#ffcc00");
+       $("#float_load2 div div div a[href$="+code+"]").css("background-color","#ffcc00");
+      return  $("#float_load2 div div div a[href$="+province_code+"]").text()+$("#float_load2 div div div a[href$="+region_code+"]").text()+$("#float_load2 div div div a[href$="+code+"]").text();
     }
-    return $("#float_load2 div ul li a[href$="+code+"]").text();
+    return $("#float_load2 div div div a[href$="+code+"]").text();
 }
 
 function city_load(){
@@ -56,8 +56,7 @@ function city_load(){
                $("#from_data_load,#to_data_load" ).css("background-color","#D4E4FF");
                  $(this).css("background-color","#ffcc00");
                  selected.empty();
-                 selected.load(this.href,function(){
-                     
+                 selected.load(this.href,function(){                     
                  })
                 //locate the position
             }
@@ -65,7 +64,6 @@ function city_load(){
             {
                 $("#float_show2").css("display","none");
             }
-
             if($.browser.msie){
                 event.returnValue = false;
                 event.preventDefault();
@@ -74,9 +72,8 @@ function city_load(){
             else   return false;
         });
 
-    $("#float_load2 div ul li a" ).live("click",function()
-    {
-        
+    $("#float_load2 a.city_province,#float_load2 a.city_region,#float_load2 a.city" ).live("click",function()
+    {        
         var last_index=this.href.toString().lastIndexOf('/')
         var code =this.href.toString().substring(last_index+1);
         thishref=this.href
@@ -85,7 +82,7 @@ function city_load(){
         region_code=code.slice(0,4)+"00000000"   
         
         // alert("clicked1");
-        $("#float_load2 div ul li a" ).css("background-color","white");
+        $("#float_load2 div div div a" ).css("background-color","white");
        //  alert("clicked2");
          
         slected=$(this);   
@@ -107,7 +104,7 @@ function city_load(){
           if ($("#search").length >0)
           {
             var action=$("#search").attr("href")
-           new_action=action.replace(/search\/\d+/,"search/"+code)
+             new_action=action.replace(/search\/\d+/,"search/"+code)
             $("#search").attr("href",new_action)
           }
           else
@@ -150,8 +147,6 @@ function city_load(){
     {
         $(this).parent().parent().css("display","none");
         
-        //updated the selected
-
         if($.browser.msie) {
             event.returnValue = false;
             event.preventDefault();

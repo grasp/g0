@@ -3,8 +3,7 @@
  
 <%get_city_array(@code)%>
 <div class="city_selector" style="width:800px;margin:0px;">
-<div>
-<!-- <a class="list_close" style="margin-top: 5px;margin-left: 2px; display: inline;" href="">关闭</a>-->
+<div class="city_title">
 
 <%if params[:dir]=="from"%>
 <p style="display: inline"> 出发城市:<b id="selected_city" > <%=@selected_city_name%></b></p>
@@ -19,9 +18,9 @@
 </div>
 
 <div class="province" style="margin-left: 0px;" >
-<ul style="margin-top: 10px">
+<div>
   <%$raw_province_array.each do |one_row|%>
- <li>
+ <div>
     <%one_row.each do |city_key|%>
  
     <%if city_key.to_s==@province_code%>
@@ -31,16 +30,16 @@
      <%end%>
  
     <%end%>
-  </li>
+  </div>
   <%end%>
- </ul>
+ </div>
 
 </div>
   <hr>
 <div class="region" style="margin-left: 0px;">
-<ul style="margin-top: 10px">
+<div style="margin-top: 10px">
     <%@region.each do |region_code,region|%>
-      <li>
+      <div class="city_line">
          <%if region_code==@region_code%>
          <a class ="selected_region city_region" href=<%="/cities/#{params[:dir]}/#{region_code}"%>><%=$province_region[region_code]%></a> 
         <%else%>
@@ -53,14 +52,14 @@
           <a class="city" href=<%="/cities/#{params[:dir]}/#{city_code}"%>><%=city_name%></a>
           <%end%>
        <%end%>
-      </li>
+      </div>
     <%end%>
 
-</ul>
+</div>
 
 </div>
 
 
 </div>
-<%#=end%>
+
 
