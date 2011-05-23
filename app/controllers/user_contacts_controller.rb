@@ -114,7 +114,7 @@ class UserContactsController < ApplicationController
     
     
     #if already exsit , do nothing
-   if UserContact.first(:conditions=>{:user_id=>session[:user_id]}).blank?
+   if UserContact.where(:user_id=>session[:user_id]).first.blank?
     @user=User.find(session[:user_id])
     @user_contact = UserContact.new
     @user_contact.email=@user.email
@@ -124,8 +124,10 @@ class UserContactsController < ApplicationController
       format.xml  { render :xml => @user_contact }
     end
    else
-     flash[:notice]="用户联系方式已经创建"
-     redirect_to root_path
+      respond_to do |format|
+        flash[:notice]="用户联系方式已经创建"
+        format.html { render :layout=>'public',:action => "show"}
+      end
    end
   end
 
@@ -146,16 +148,15 @@ class UserContactsController < ApplicationController
   def create
      params[:usercontact][:user_id]=session[:user_id]
      @user_contact = UserContact.new(params[:usercontact])
-     
+     @user=User.find(session[:user_id])
     respond_to do |format|
       if @user_contact.save
         flash[:notice] = '联系信息创建成功'
-        User.collection.update({:_id=>"session[:user_id]"},{'$set'=>{:user_contact_id=>@user_contact.id}})
-       #  format.html { redirect_to(:controller=>"companies",:action=>"new")}
-        format.html {  redirect_to root_path}
+         @user.update_attributes(:user_contact_id=>@user_contact.id)
+         format.html {  render :layout=>'public',:action => "show" }
       else
         flash[:notice] = '创建联系人失败'
-        format.html { render :action => "new" }
+        format.html { render :action => "new",:layout=>"public" }
         format.xml  { render :xml => @user_contact.errors, :status => :unprocessable_entity }
       end
     end
@@ -165,13 +166,6 @@ class UserContactsController < ApplicationController
   # PUT /contact_people/1.xml
   def update
     @user_contact=UserContact.find(params[:id])
-  #  @user_contact = update_contact_from_param(params)
-    #update for myself
-   # if @user_contact.user_id==session[:user_id]
-    #  @user=User.find_by_id(@user_contact.user_id)
-    #  @user.update_attribute(:name,@user_contact.name)
-   #   @user.update_attribute(:contact_id,@user_contact.id)
-  #  end
 
     respond_to do |format|
       if @user_contact.update_attributes(params[:usercontact])

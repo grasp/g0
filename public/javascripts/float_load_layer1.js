@@ -79,7 +79,7 @@ function float_load_layer1(){
          {
            select_parent.css("background-color","#ffcc00");
          }
- // ajust the location for each float
+           // ajust the location for each float
  
           if(cord_top>($("#show").offset().top+$("#show").height()/2)+100)
           {
@@ -90,8 +90,11 @@ function float_load_layer1(){
              selected.css("top",corordiate.top+30);
           }
           
-          selected.css("left",$("#show").offset().left);
-            if ((this.href.match(/cargos\/show/))||(this.href.match(/trucks\/show/)))
+       //   selected.css("left",$("#show").offset().left);
+       
+       selected.css("left",corordiate.left);
+
+         if ((this.href.match(/cargos\/show/))||(this.href.match(/trucks\/show/)))
           {
               selected.css("top",corordiate.top+$(this).height()+10);
               selected.css("left",corordiate.left);

@@ -41,6 +41,7 @@ text-align: left;
 
 div.region,a.city{
 text-align: left;
+text-decoration: none;
 }
 a.city_region{width:auto;}
 
@@ -49,18 +50,17 @@ div.city_line {padding-top: 4px;}
 
 .city_region{
   font-weight: bold;
-text-align: left;
+  text-align: left;
 }
 
-.line{
+div.line{
     background-color: rgb(213,214,255);
-    float:left;
-
+    /*float:left;*/
 }
 
 #from_data_load ,#to_data_load,.line_from_label,.line_to_label{
     padding-left: 15px;
-    float:left;
+   /* float:left;*/
     display: inline;
 }
 .truck_area2

@@ -1,0 +1,320 @@
+# Logfile created on 2011-05-20 09:23:27 +0800 by logger.rb/25413
+
+
+Started GET "/" for 10.192.204.147 at 2011-05-20 09:23:27 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dd5c29065a3cc0a4d000068'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-20 01:23:28 UTC, "created_at"=>2011-05-20 01:23:28 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB cursor.close 5029073811815794217
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (8.3ms)
+Rendered shared/_html_header.erb (2.0ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (2.3ms)
+Rendered shared/_float_show.html.erb (0.2ms)
+Rendered cargos/search.html.erb within layouts/public (15.8ms)
+Completed 200 OK in 18ms (Views: 17.3ms)
+
+
+Started GET "/cities/from/100000000000" for 10.192.204.147 at 2011-05-20 09:23:31 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"100000000000"}
+Rendered cities/index.html.erb (2.2ms)
+Completed 200 OK in 4ms (Views: 3.2ms)
+
+
+Started GET "/cities/to/100000000000" for 10.192.204.147 at 2011-05-20 09:23:35 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"to", "code"=>"100000000000"}
+Rendered cities/index.html.erb (2.2ms)
+Completed 200 OK in 3ms (Views: 3.2ms)
+
+
+Started GET "/" for 10.192.204.147 at 2011-05-20 09:23:52 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dd5c2a965a3cc0a4d000069'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-20 01:23:53 UTC, "created_at"=>2011-05-20 01:23:53 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB cursor.close 6584548895836104242
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (8.3ms)
+Rendered shared/_html_header.erb (2.1ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (2.3ms)
+Rendered shared/_float_show.html.erb (0.2ms)
+Rendered cargos/search.html.erb within layouts/public (15.9ms)
+Completed 200 OK in 18ms (Views: 17.3ms)
+
+
+Started GET "/users/login" for 10.192.204.147 at 2011-05-20 09:23:56 +0800
+  Processing by UsersController#login as HTML
+Rendered shared/_html_header.erb (2.1ms)
+Rendered users/_user_annoucement.html.erb (0.2ms)
+Rendered shared/_float_show.html.erb (0.2ms)
+Rendered users/login.html.erb within layouts/users (5.3ms)
+Completed 200 OK in 59ms (Views: 58.0ms)
+
+
+Started GET "/users/authenticate?email=admin&password=[FILTERED]" for 10.192.204.147 at 2011-05-20 09:24:06 +0800
+  Processing by UsersController#authenticate as HTML
+  Parameters: {"email"=>"admin", "password"=>"[FILTERED]"}
+MONGODB g0_development['users'].find({:name=>"admin"})
+Redirected to http://10.192.185.193:3456/
+Completed 302 Found in 2ms
+
+
+Started GET "/" for 10.192.204.147 at 2011-05-20 09:24:07 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dd5c2b865a3cc0a4d00006b'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-20 01:24:08 UTC, "created_at"=>2011-05-20 01:24:08 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB cursor.close 4422295765838242348
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (8.4ms)
+Rendered shared/_html_header.erb (2.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc9d06565a3cc1831000001')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc9d06565a3cc1831000001')})
+MONGODB g0_development['ustatistics'].find({:_id=>BSON::ObjectId('4dc9d06565a3cc1831000002')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (8.5ms)
+Rendered shared/_float_show.html.erb (0.2ms)
+Rendered cargos/search.html.erb within layouts/public (22.8ms)
+Completed 200 OK in 25ms (Views: 24.2ms)
+
+
+Started GET "/cities/from/100000000000" for 10.192.204.147 at 2011-05-20 09:25:34 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"100000000000"}
+Rendered cities/index.html.erb (2.2ms)
+Completed 200 OK in 4ms (Views: 3.2ms)
+
+
+Started GET "/cities/from/100000000000" for 10.192.204.147 at 2011-05-20 09:35:32 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"100000000000"}
+Rendered cities/index.html.erb (2.2ms)
+Completed 200 OK in 4ms (Views: 3.3ms)
+
+
+Started GET "/" for 10.192.204.147 at 2011-05-20 09:38:09 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dd5c60265a3cc0a4d00006c'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-20 01:38:10 UTC, "created_at"=>2011-05-20 01:38:10 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB cursor.close 4386393112009603633
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (8.8ms)
+Rendered shared/_html_header.erb (2.0ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (2.4ms)
+Rendered shared/_float_show.html.erb (0.2ms)
+Rendered cargos/search.html.erb within layouts/public (16.5ms)
+Completed 200 OK in 19ms (Views: 17.9ms)
+
+
+Started GET "/cities/from/100000000000" for 10.192.204.147 at 2011-05-20 09:38:13 +0800
+  Processing by CitiesController#index as HTML
+  Parameters: {"dir"=>"from", "code"=>"100000000000"}
+Rendered cities/index.html.erb (2.2ms)
+Completed 200 OK in 4ms (Views: 3.2ms)
+
+
+Started GET "/" for 10.192.204.147 at 2011-05-20 11:18:54 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dd5dd9f65a3cc0a4d00006d'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-20 03:18:55 UTC, "created_at"=>2011-05-20 03:18:55 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB cursor.close 5219528514451650624
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (8.2ms)
+Rendered shared/_html_header.erb (2.0ms)
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (2.3ms)
+Rendered shared/_float_show.html.erb (0.2ms)
+Rendered cargos/search.html.erb within layouts/public (15.8ms)
+Completed 200 OK in 18ms (Views: 17.2ms)
+
+
+Started GET "/cargos/show/4dd1ec0065a3cc18ec000012" for 10.192.204.147 at 2011-05-20 11:19:01 +0800
+  Processing by CargosController#show as HTML
+  Parameters: {"id"=>"4dd1ec0065a3cc18ec000012"}
+MONGODB g0_development['cargos'].find({:_id=>BSON::ObjectId('4dd1ec0065a3cc18ec000012')})
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc9eb9465a3cc19a600001f')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')})
+Rendered cargos/_localshow.html.erb (1.1ms)
+Rendered cargos/show.html.erb (2.2ms)
+Completed 200 OK in 5ms (Views: 3.2ms)
+
+
+Started GET "/cargos/show/4dd1ea8765a3cc18ec00000d" for 10.192.204.147 at 2011-05-20 11:19:05 +0800
+  Processing by CargosController#show as HTML
+  Parameters: {"id"=>"4dd1ea8765a3cc18ec00000d"}
+MONGODB g0_development['cargos'].find({:_id=>BSON::ObjectId('4dd1ea8765a3cc18ec00000d')})
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc9eb9465a3cc19a600001f')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')})
+Rendered cargos/_localshow.html.erb (1.2ms)
+Rendered cargos/show.html.erb (2.3ms)
+Completed 200 OK in 5ms (Views: 3.3ms)
+
+
+Started GET "/cargos/show/4dc9e38365a3cc19a6000008" for 10.192.204.147 at 2011-05-20 11:19:08 +0800
+  Processing by CargosController#show as HTML
+  Parameters: {"id"=>"4dc9e38365a3cc19a6000008"}
+MONGODB g0_development['cargos'].find({:_id=>BSON::ObjectId('4dc9e38365a3cc19a6000008')})
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc9d96e65a3cc1831000019')})
+Completed   in 1ms
+
+Mongoid::Errors::DocumentNotFound (Document not found for class StockCargo with id(s) 4dc9d96e65a3cc1831000019.):
+  app/controllers/cargos_controller.rb:154:in `show'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.1ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.7ms)
+
+
+Started GET "/cargos/show/4dc1efbe0b3b97049500002a" for 10.192.204.147 at 2011-05-20 11:19:14 +0800
+  Processing by CargosController#show as HTML
+  Parameters: {"id"=>"4dc1efbe0b3b97049500002a"}
+MONGODB g0_development['cargos'].find({:_id=>BSON::ObjectId('4dc1efbe0b3b97049500002a')})
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc1ef8e0b3b970495000028')})
+Completed   in 1ms
+
+Mongoid::Errors::DocumentNotFound (Document not found for class StockCargo with id(s) 4dc1ef8e0b3b970495000028.):
+  app/controllers/cargos_controller.rb:154:in `show'
+
+
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.1ms)
+Rendered /usr/local/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (5.7ms)
+
+
+Started GET "/cargos/show/4d97c38c0b3b972a9b000008" for 10.192.204.147 at 2011-05-20 11:19:20 +0800
+  Processing by CargosController#show as HTML
+  Parameters: {"id"=>"4d97c38c0b3b972a9b000008"}
+MONGODB g0_development['cargos'].find({:_id=>BSON::ObjectId('4d97c38c0b3b972a9b000008')})
+Rendered cargos/_qzshow.html.erb (0.3ms)
+Rendered cargos/show.html.erb (1.4ms)
+Completed 200 OK in 3ms (Views: 2.4ms)
+
+
+Started GET "/users/login" for 10.192.204.147 at 2011-05-20 11:19:27 +0800
+  Processing by UsersController#login as HTML
+Rendered shared/_html_header.erb (2.0ms)
+Rendered users/_user_annoucement.html.erb (0.2ms)
+Rendered shared/_float_show.html.erb (0.2ms)
+Rendered users/login.html.erb within layouts/users (4.8ms)
+Completed 200 OK in 7ms (Views: 6.2ms)
+
+
+Started GET "/users/authenticate?email=hunter.wxhu%40gmail.com&password=[FILTERED]" for 10.192.204.147 at 2011-05-20 11:19:34 +0800
+  Processing by UsersController#authenticate as HTML
+  Parameters: {"email"=>"hunter.wxhu@gmail.com", "password"=>"[FILTERED]"}
+MONGODB g0_development['users'].find({:email=>"hunter.wxhu@gmail.com"})
+Redirected to http://10.192.185.193:3456/
+Completed 302 Found in 1ms
+
+
+Started GET "/" for 10.192.204.147 at 2011-05-20 11:19:35 +0800
+  Processing by CargosController#search as HTML
+MONGODB g0_development['searches'].insert([{"_id"=>BSON::ObjectId('4dd5ddc865a3cc0a4d00006f'), "fcity_code"=>"100000000000", "fcity_name"=>"出发地选择", "tcity_name"=>"到达地选择", "tcity_code"=>"100000000000", "updated_at"=>2011-05-20 03:19:36 UTC, "created_at"=>2011-05-20 03:19:36 UTC}])
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB cursor.close 2943780169282377684
+MONGODB g0_development['cargos'].find({:status=>"正在配车"}).limit(20).sort([[:updated_at, :desc]])
+Rendered cargos/_cargolist.html.erb (8.4ms)
+Rendered shared/_html_header.erb (2.0ms)
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')})
+MONGODB g0_development['ustatistics'].find({:_id=>BSON::ObjectId('4dc9d15265a3cc1831000009')})
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:status=>"正在配车"}, "fields"=>nil})
+MONGODB g0_development['$cmd'].find({"count"=>"trucks", "query"=>{:status=>"正在配货"}, "fields"=>nil})
+Rendered shared/_navibar.html.erb (2.9ms)
+Rendered shared/_float_show.html.erb (0.2ms)
+Rendered cargos/search.html.erb within layouts/public (17.2ms)
+Completed 200 OK in 20ms (Views: 18.6ms)
+
+
+Started GET "/users/4dc9d15265a3cc1831000008/stock_cargos" for 10.192.204.147 at 2011-05-20 11:19:44 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc9d15265a3cc1831000008"}
+session[:user_id]=4dc9d15265a3cc1831000008
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}).limit(20)
+Rendered stock_cargos/index.html.erb (0.9ms)
+Completed 200 OK in 17ms (Views: 15.3ms)
+
+
+Started GET "/users/4dc9d15265a3cc1831000008/cargos/" for 10.192.204.147 at 2011-05-20 11:19:49 +0800
+  Processing by CargosController#index as HTML
+  Parameters: {"user_id"=>"4dc9d15265a3cc1831000008"}
+MONGODB g0_development['$cmd'].find({"count"=>"cargos", "query"=>{:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}, "fields"=>nil})
+MONGODB g0_development['cargos'].find({:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}).limit(20).sort([[:updated_at, :desc]])
+MONGODB g0_development['lstatistics'].find({:line=>"340207000000#500101000000"})
+MONGODB g0_development['lstatistics'].find({:line=>"430000000000#430000000000"})
+MONGODB g0_development['lstatistics'].find({:line=>"320000000000#350000000000"})
+MONGODB g0_development['lstatistics'].find({:line=>"330104000000#500000000000"})
+Rendered cargos/_list.html.erb (15.5ms)
+Rendered cargos/_cargonavi.html.erb (0.9ms)
+Rendered cargos/index.html.erb (24.7ms)
+Completed 200 OK in 57ms (Views: 35.3ms)
+
+
+Started GET "/users/4dc9d15265a3cc1831000008/stock_cargos" for 10.192.204.147 at 2011-05-20 11:19:52 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc9d15265a3cc1831000008"}
+session[:user_id]=4dc9d15265a3cc1831000008
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}).limit(20)
+Rendered stock_cargos/index.html.erb (0.9ms)
+Completed 200 OK in 3ms (Views: 2.0ms)
+
+
+Started GET "/cargos/new/4dc9eb9465a3cc19a600001f" for 10.192.204.147 at 2011-05-20 11:20:38 +0800
+  Processing by CargosController#new as HTML
+  Parameters: {"id"=>"4dc9eb9465a3cc19a600001f"}
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc9eb9465a3cc19a600001f')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')})
+Rendered cargos/_form.html.erb (3.0ms)
+Rendered cargos/new.html.erb (35.8ms)
+Completed 200 OK in 57ms (Views: 54.7ms)
+
+
+Started GET "/users/4dc9d15265a3cc1831000008/stock_cargos" for 10.192.204.147 at 2011-05-20 11:21:12 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc9d15265a3cc1831000008"}
+session[:user_id]=4dc9d15265a3cc1831000008
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}).limit(20)
+Rendered stock_cargos/index.html.erb (0.9ms)
+Completed 200 OK in 3ms (Views: 2.0ms)
+
+
+Started GET "/cargos/new/4dc9eb9465a3cc19a600001f" for 10.192.204.147 at 2011-05-20 11:21:28 +0800
+  Processing by CargosController#new as HTML
+  Parameters: {"id"=>"4dc9eb9465a3cc19a600001f"}
+MONGODB g0_development['stock_cargos'].find({:_id=>BSON::ObjectId('4dc9eb9465a3cc19a600001f')})
+MONGODB g0_development['users'].find({:_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')})
+Rendered cargos/_form.html.erb (2.6ms)
+Rendered cargos/new.html.erb (3.5ms)
+Completed 200 OK in 6ms (Views: 4.5ms)
+
+
+Started GET "/users/4dc9d15265a3cc1831000008/stock_cargos" for 10.192.204.147 at 2011-05-20 11:21:45 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc9d15265a3cc1831000008"}
+session[:user_id]=4dc9d15265a3cc1831000008
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}).limit(20)
+Rendered stock_cargos/index.html.erb (1.0ms)
+Completed 200 OK in 495ms (Views: 23.7ms)
+
+
+Started GET "/users/4dc9d15265a3cc1831000008/stock_cargos" for 10.192.204.147 at 2011-05-20 11:22:28 +0800
+  Processing by StockCargosController#index as HTML
+  Parameters: {"user_id"=>"4dc9d15265a3cc1831000008"}
+session[:user_id]=4dc9d15265a3cc1831000008
+MONGODB g0_development['$cmd'].find({"count"=>"stock_cargos", "query"=>{:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}, "fields"=>nil})
+MONGODB g0_development['stock_cargos'].find({:user_id=>BSON::ObjectId('4dc9d15265a3cc1831000008')}).limit(20)
+Rendered stock_cargos/index.html.erb (0.9ms)
+Completed 200 OK in 47ms (Views: 15.3ms)

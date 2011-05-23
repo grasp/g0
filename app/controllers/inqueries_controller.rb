@@ -73,6 +73,7 @@ class InqueriesController < ApplicationController
     @inquery.user_id=session[:user_id]
 
     @truck=Truck.find(@inquery.truck_id)
+
     @inquery.truck_user_id=@truck.user_id
     @inquery.truck_company_id=@truck.company_id
 
@@ -110,18 +111,21 @@ class InqueriesController < ApplicationController
   # POST /inqueries
   # POST /inqueries.xml
   def create
-    
+     params[:inquery][:user_id]=session[:user_id]
+     params[:inquery][:truck_id]=BSON::ObjectId(params[:inquery][:truck_id])
+     params[:inquery][:cargo_id]=BSON::ObjectId(params[:inquery][:cargo_id])
+
     @inquery = Inquery.new(params[:inquery])
     if params[:mianyi]=="on"
       @inquery.price=nil
     end
       @cargo=Cargo.find(@inquery.cargo_id)
-    # @truck=Truck.find(@inquery.truck_id)
+      @truck=Truck.find(@inquery.truck_id)
 
     @inquery.cargo_company_id=@cargo.company_id
     @inquery.cargo_user_id=@cargo.user_id
-   # @inquery.truck_company_id=@truck.company_id
-   # @inquery.truck_user_id=@truck.user_id
+    @inquery.truck_company_id=@truck.company_id
+    @inquery.truck_user_id=@truck.user_id
 
     respond_to do |format|
       #update statistic

@@ -2,8 +2,6 @@
 class Inquery 
     include Mongoid::Document
     include Mongoid::Timestamps
-  #belongs_to :trucks
-  #belongs_to :cargos
 
     field :price,:type=>Integer
     field :comments,:type=>String
@@ -25,7 +23,7 @@ class Inquery
       field :isaccepted,:type=>Boolean
       index [[:cargo_id,Mongo::ASCENDING],[:truck_id,Mongo::ASCENDING]]
 
-     validate :check_unique,:on=>:create
+      validate :check_unique,:on=>:create
      
   def check_unique
     repeated=Inquery.where(:cargo_id=>self.cargo_id,:truck_id=>self.truck_id)

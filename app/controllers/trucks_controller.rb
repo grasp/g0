@@ -46,10 +46,10 @@ class TrucksController < ApplicationController
   def quoteinquery
    # @truck=Truck.find(params[:truck_id])
     @truck=Truck.find(params[:truck_id])
-    @baojia=Quote.where(:truck_id => params[:truck_id], :user_id =>session[:user_id])
-    @xunjia=Inquery.where(:truck_id => params[:truck_id]) 
+    @baojia=Quote.where(:truck_id =>BSON::ObjectId(params[:truck_id]), :user_id =>session[:user_id])
+    @xunjia=Inquery.where(:truck_id => BSON::ObjectId(params[:truck_id]))
 
-    
+    logger.info "@xunjia.size=#{@xunjia.size}"
   end
   
   def search
@@ -214,11 +214,17 @@ class TrucksController < ApplicationController
   # POST /trucks.xml
   def create
 
-    # @truck= get_truck_info_from_params(params)
+
+      @user=User.find(session[:user_id])
+      params[:truck][:stock_truck_id]=BSON::ObjectId( params[:truck][:stock_truck_id])
+      params[:truck][:user_id]=@user.id
+      params[:truck][:company_id]=@user.company_id
+      params[:truck][:user_contact_id]=@user.user_contact_id
+
     params[:truck][:from_site]="local"
     @truck=Truck.new(params[:truck])  
     @truck.line=@truck.fcity_code+"#"+@truck.tcity_code     
-  @user=User.find(session[:user_id])
+ 
     respond_to do |format|
       if @truck.save
         flash[:notice] = '车源创建成功'

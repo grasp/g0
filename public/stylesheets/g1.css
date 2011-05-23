@@ -175,3 +175,4 @@ div.city_title {text-align: left;}
 /*for user login*/
 #login label,#login .field,#login .actions{text-align: left;}
 
+div.stock_cargolist,div.stock_trucklist{margin-right: 20%;}

@@ -47,10 +47,10 @@ class  Cargo
       field :cj_company_id
       
     #future usage
-    has_many :pingjias
-    field :user_id
-    field :company_id
-    field :stock_cargo_id
+      field :user_id
+      field :user_contact_id
+      field :company_id
+     field :stock_cargo_id
 
       
      index ([[:updated_at,Mongo::ASCENDING],[:status,Mongo::ASCENDING],[:fcity_code,Mongo::ASCENDING],[:tcity_code,Mongo::ASCENDING]])

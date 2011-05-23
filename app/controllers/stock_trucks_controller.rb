@@ -93,6 +93,7 @@ class StockTrucksController < ApplicationController
         format.html { redirect_to(@stock_truck) }
         format.xml  { head :ok }
       else
+         flash[:notice] = '更新车子基本信息失败.'
         format.html { render :action => "edit" }
         format.xml  { render :xml => @stock_truck.errors, :status => :unprocessable_entity }
       end

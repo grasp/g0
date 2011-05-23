@@ -121,26 +121,27 @@ class QuotesController < ApplicationController
   #when multi-truck for one cargo
 
   def create
-    @quote = Quote.new(params[:quote])
+     params[:quote][:user_id]=session[:user_id]
+     params[:quote][:truck_id]=BSON::ObjectId(params[:quote][:truck_id])
+     params[:quote][:cargo_id]=BSON::ObjectId(params[:quote][:cargo_id])
+     @quote = Quote.new(params[:quote])
+
     if params[:mianyi]=="on"
       @quote.price=nil
     end
 
     @cargo=Cargo.find(@quote.cargo_id)
     @truck=Truck.find(@quote.truck_id)
-
-  #  @quote.cargo_company_id=@cargo.company_id
-  #  @quote.cargo_user_id=@cargo.user_id
+    @quote.cargo_company_id=@cargo.company_id
+    @quote.cargo_user_id=@cargo.user_id
     @quote.truck_company_id=@truck.company_id
     @quote.truck_user_id=@truck.user_id
 
     respond_to do |format|
       if @quote.save
         #update statistic
-       # Cargo.collection.update({'_id' => @quote.cargo_id},{'$inc' => {"total_baojia" => 1}}) 
         @cargo.inc(:total_baojia,1)        
         #update  tstatistic
-       # Truck.collection.update({'_id' => @quote.truck_id},{'$inc' => {"total_baojia" => 1}})  
         @truck.inc(:total_baojia,1)  
         flash[:notice]= "创建报价成功！"
         format.html { redirect_to(@quote, :notice => '创建报价成功.') }

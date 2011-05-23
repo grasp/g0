@@ -134,19 +134,19 @@ class CompaniesController < ApplicationController
   def edit
     @company = Company.find(params[:id])
     
-    if @company.fix_phone.match(/-/)
-      @company.quhao=@company.fix_phone.split(/-/)[0]
-      @company.fix_phone=@company.fix_phone.split(/-/)[1]
-    else
-      @company.quhao=""
-      @company.fix_phone=@company.fix_phone
-    end
+  #  if @company.fix_phone.match(/-/)
+     # @company.quhao=@company.fix_phone.split(/-/)[0]
+     # @company.fix_phone=@company.fix_phone.split(/-/)[1]
+   # else
+   #   @company.quhao=""
+   #   @company.fix_phone=@company.fix_phone
+  #  end
   end
 
   # POST /companies
   # POST /companies.xml
   def create
-    params[:company][:fix_phone]=params[:quhao]+"-"+ params[:company][:fix_phone]
+   # params[:company][:fix_phone]=params[:quhao]+"-"+ params[:company][:fix_phone]
     @company = Company.new(params[:company])    
      
     #ret_val_company=get_company_from_params(params)
@@ -157,15 +157,16 @@ class CompaniesController < ApplicationController
         #@user=User.find(params[:company][:user_id])
         @user=User.find(session[:user_id])
         raise if @user.blank?
-       # @user.update_attributes!({:company_id=>@company.id})
-        User.collection.update({:_id=>@user.id},{'$set'=>{:company_id=>@company.id}})        
+        @user.update_attributes({:company_id=>@company.id})
+
+
         flash[:notice] = '公司创建成功，恭喜你注册完成了'
        # session[:user_id]=@user.id
         format.html {  redirect_to root_path}
         format.xml  { render :xml => @company, :status => :created, :location => @company }
       else
         flash[:notice] = '公司创建失败了'
-        format.html { render :action => "new" }
+        format.html { render :action => "new",:layout=>"public" }
         format.xml  { render :xml => @company.errors, :status => :unprocessable_entity }
       end
     end
@@ -174,7 +175,7 @@ class CompaniesController < ApplicationController
   # PUT /companies/1
   # PUT /companies/1.xml
   def update
-    params[:company][:fix_phone]=params[:quhao]+"-"+ params[:company][:fix_phone]
+    #params[:company][:fix_phone]=params[:quhao]+"-"+ params[:company][:fix_phone]
     @company= Company.find(params[:id])
     #company = update_company(params)
 
