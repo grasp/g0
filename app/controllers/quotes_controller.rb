@@ -172,11 +172,13 @@ class QuotesController < ApplicationController
 
   #only for owner of cargo
   def request_chenjiao
+    begin
     @quote = Quote.find(params[:id])
     if @quote.blank?
     @quote=Inquery.find(params[:id])
     end
-    
+    rescue
+    end
     @cargo=Cargo.find(@quote.cargo_id)
     @truck=Truck.find(@quote.truck_id)
     

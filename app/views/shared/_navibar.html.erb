@@ -6,9 +6,9 @@
      <table class="navi" style="display:inline-block;">
               
          <% unless user.nil? %>
-         <tr class="navi_huo">
+         <tr class="navi_admin">
            <%if user.name=="admin"%>
-            <td> <a href="/admin">网站管理</a></td>
+            <td class="navi_huo"> <a href="/admin">网站管理</a></td>
            <%end%>
    
            <td class="navi_huo"> <a class="navi_link" href="/cargos/search/100000000000/100000000000/1">货源信息(<%=h Cargo.where(:status=>"正在配车").count%>)</a></td>
