@@ -27,9 +27,6 @@ class StockCargo
       
       #Statistic
       field :valid_cargo,:type=>Integer
-      field :total_cargo,:type=>Integer
-      field :expired_cargo,:type=>Integer
-
       #status
       field :status,:type=>String
       

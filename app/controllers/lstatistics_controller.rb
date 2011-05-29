@@ -3,7 +3,6 @@ class LstatisticsController < ApplicationController
   # GET /lstatistics.xml
   def index
     @lstatistics = Lstatistic.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @lstatistics }

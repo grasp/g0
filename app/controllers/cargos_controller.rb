@@ -143,17 +143,14 @@ class CargosController < ApplicationController
       format.html # part.html.erb
       format.xml  { render :xml => @cargos }
     end
-
   end
   # GET /cargos/1
   # GET /cargos/1.xml
   def show
-
    # @cargo = Cargo.find(params[:id].to_s) #why not work ????
    @cargo = Cargo.first(:conditions=>{:_id=>params[:id].to_s})
    @stock_cargo=StockCargo.find(@cargo.stock_cargo_id) if @cargo.from_site=="local"  && !@cargo.stock_cargo_id.blank?
-  #  @line_ad=LineAd.find({:line=>get_line(@cargo.fcity_code,@cargo.tcity_code)})
-    
+  #  @line_ad=LineAd.find({:line=>get_line(@cargo.fcity_code,@cargo.tcity_code)})    
     if @line_ad.blank?
       #@line_ad=LineAd.find_by_line("0")
       #@line_ad.fcity_name=@cargo.fcity_name

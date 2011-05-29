@@ -1,6 +1,9 @@
 # coding: utf-8
 class AdminController < ApplicationController
   layout "admin"
+  include Tf56graspHelper
+  include QuzhougraspHelper
+  include ScansHelper
  #   before_filter:admin_authorize,:except=>[:index] #for debug purpose
   before_filter:admin_authorize, :except=>[:hourscan,:move] #for debug purpose
   def index
@@ -76,61 +79,35 @@ class AdminController < ApplicationController
     @all_hourdata=HourData.all.desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
 
   end
-  
+  def scan
+    scan_helper
+  end
+    def scan_info
+   @scans=Scan.all.desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
+  end
   def move
-    @move=Move.new
-      @move.expired_cargo=0
-      @move.expired_truck=0
-      @move.expired_quote=0
-      @move.expired_inquery=0
-    start_time=Time.now
-    Truck.where(:status=>"超时过期").each do |truck|
-      expiredtruck=ExpiredTruck.new
-      truck.raw_attributes.keys.each do |key| 
-      expiredtruck[key[0]]=truck[key[0]]
+   start_time=Time.now; @move=Move.new;@move.expired_cargo=0;@move.expired_truck=0;@move.expired_quote=0;@move.expired_inquery=0
+     a=Hash.new
+    a[Truck]=ExpiredTruck;a[Cargo]=ExpiredCargo;a[Quote]=ExpiredQuote;a[Inquery]=ExpiredInquery
+    a.each do |a,b|
+      a.where(:status=>"超时过期").each do |record|
+    #only move those expired 3 months
+      if compare_time_expired(record.updated_at,90)==true
+      expiredb=b.new
+      record.raw_attributes.keys.each do |key|
+       expiredb[key[0]]=record[key[0]]
       end
-      expiredtruck.save      
-      truck.destroy
+      expiredb.save
+      record.destroy
       @move.expired_truck+=1
     end
-    Rails.logger.debug "expiredtruck.count=#{ExpiredTruck.count}"
-    Cargo.where(:status=>"超时过期").each do |cargo|
-      expiredcargo=ExpiredCargo.new(:id=>cargo.id)
-      cargo.raw_attributes.keys.each do |key| 
-        expiredcargo[key[0]]=cargo[key[0]]
-      end
-      expiredcargo.save
-      cargo.destroy
-      @move.expired_cargo+=1
     end
-    Rails.logger.debug "expiredcargo.count=#{ExpiredCargo.count}"
-    
-    Quote.where(:status=>"超时过期").each do |quote|
-      expiredquote=ExpiredQuote.new
-      quote.raw_attributes.keys.each do |key| 
-      expiredquote[key[0]]=quote[key[0]]
-      end
-      expiredquote.save
-      quote.destroy
-      @move.expired_quote+=1
-   end
-   Rails.logger.debug "expiredquote.count=#{ExpiredQuote.count}"
-   Inquery.where(:status=>"超时过期").each do |inquery|
-      expiredinquery=ExpiredInquery.new
-      inquery.raw_attributes.keys.each do |key| 
-        expiredinquery[key[0]]=inquery[key[0]]
-      end
-      expiredinquery.save
-      inquery.destroy
-      @move.expired_inquery+=1
-   end
-   Rails.logger.debug "expiredinquery.count=#{ExpiredInquery.count}"
+    end
+
     end_time=Time.now
     @move.cost_time=end_time-start_time
     
-    @move.save
-    
-    
+    @move.save    
     
      respond_to do |format|
       format.html # index.html.erb
@@ -179,5 +156,34 @@ class AdminController < ApplicationController
        @companies = Company.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
    end
 
-   
+   def get_room_contact
+a=[Cargo,Truck,ExpiredCargo,ExpiredTruck]
+a.each do |records|
+  records.where("from_site"=>"tf56").each do |record|
+    unless record.comments.blank?
+    room=record.comments.to_s.split(/\s/)[0].strip.slice(0,6)
+    contact=record.comments.gsub(room,"").strip
+    check=RoomContact.where("room"=>room).first
+    RoomContact.create("room"=>room,"contact"=>contact,"from"=>room.gsub(/\w||\d/,"").split[0].strip) if  (!room.blank? && contact.size>4 && check.blank?)
+   end
+  end
+end
+
+     @rooms=RoomContact.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+   end
+
+      def show_room_contact
+         @rooms=RoomContact.all.order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)
+        respond_to do |format|
+      format.html { render :action => '/admin/get_room_contact' }
+      end
+      end
+      def grasp_tf56
+      get_tf56_grasps
+      end
+
+      def grasp_quzhou
+       get_quzhou_grasps
+      end
+
 end
