@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   include QuzhougraspHelper
   include ScansHelper
  #   before_filter:admin_authorize,:except=>[:index] #for debug purpose
-  before_filter:admin_authorize, :except=>[:hourscan,:move] #for debug purpose
+  before_filter:admin_authorize, :except=>[:grasp_tf56,:grasp_quzhou,:scan,:move] #for debug purpose
   def index
     @today=Hash.new
     @today["huo"]=Cargo.where(:created_at.lte=>Time.now,:created_at.gte=>Time.now-86400).count

@@ -7,7 +7,7 @@ gem 'rails', '3.0.7'
 gem "mechanize"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'eventmachine', "0.12.6"
+gem 'eventmachine', "0.12.10"
 #gem 'will_paginate',:git => 'http://github.com/mislav/will_paginate.git',:branch=>'rails3'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'thin'
