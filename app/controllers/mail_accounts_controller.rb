@@ -2,9 +2,10 @@ class MailAccountsController < ApplicationController
   # GET /mail_accounts
   # GET /mail_accounts.xml
     layout "admin"
+    include MailAccountsHelper
   def index
+    batch_insert_gmail_account
     @mail_accounts = MailAccount.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @mail_accounts }

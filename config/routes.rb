@@ -1,4 +1,6 @@
 G0::Application.routes.draw do
+
+   match '/mail_accounts/index(/:test_mail)'  =>'mail_accounts#index',:as=>:mail_account_index
   resources :mail_accounts
 
   resources :lib_companies
