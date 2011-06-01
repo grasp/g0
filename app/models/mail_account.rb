@@ -1,14 +1,15 @@
 class MailAccount
   include Mongoid::Document
-  field :address, :type => String
+  field :address
   field :port, :type => String
+   field :fullname, :type => String
   field :username, :type => String
   field :password, :type => String
   field :authentication, :type => String
   field :enable_startttls, :type => Boolean
   field :today_sent, :type => Integer
   field :total_sent, :type => Integer
-  field :last_use, :type => String
+  field :last_use
   field :rejected, :type => String
   field :status, :type => String
 

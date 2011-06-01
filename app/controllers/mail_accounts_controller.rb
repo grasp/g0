@@ -12,6 +12,10 @@ class MailAccountsController < ApplicationController
     end
   end
 
+  def tuiguang
+    sent_tuiguang_email
+  end
+
   # GET /mail_accounts/1
   # GET /mail_accounts/1.xml
   def show
