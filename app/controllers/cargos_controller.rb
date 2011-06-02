@@ -79,17 +79,17 @@ class CargosController < ApplicationController
 
 
     unless params[:stock_cargo_id].blank?
-       @cargos=Cargo.where({:user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos=Cargo.where({:user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
     else
     if params[:status]=="peiche"
-        @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"正在配车").desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
+        @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"正在配车").desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
     elsif params[:status]=="ischenjiao"
-       @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"正在成交").desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"正在成交").desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
     elsif params[:status]=="chenjiao"
-       @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"已成交").desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos = Cargo.where(:user_id =>session[:user_id],:status =>"已成交").desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
      else
        #@cargos = Cargo.where("user_id = ?",session[:user_id]).order("updated_at desc").paginate(:page=>params[:page]||1,:per_page=>20)
-       @cargos = Cargo.where(:user_id =>session[:user_id]).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
+       @cargos = Cargo.where(:user_id =>session[:user_id]).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
     end
    end    
     
@@ -109,23 +109,23 @@ class CargosController < ApplicationController
       @search.fcity_code=@cargo.fcity_code
       @search.tcity_code=@cargo.tcity_code
       
-     # @trucks=Truck.where(:fcity_code =>@cargo.fcity_code,:tcity_code =>@cargo.tcity_code).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
+     # @trucks=Truck.where(:fcity_code =>@cargo.fcity_code,:tcity_code =>@cargo.tcity_code).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
     if @search.fcity_code=="100000000000" && @search.tcity_code=="100000000000" then   
-     @trucks=Truck.where.desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
+     @trucks=Truck.where.desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
    elsif @search.fcity_code=="100000000000" && @search.tcity_code!="100000000000"
      min=get_max_min_code(@search.tcity_code)[0]
      max=get_max_min_code(@search.tcity_code)[1]
-      @trucks=Truck.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"配货"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
+      @trucks=Truck.where({:tcity_code.gte=>min,:tcity_code.lt=>max,:status=>"配货"}).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
     elsif @search.tcity_code=="100000000000" && @search.fcity_code!="100000000000"
      min=get_max_min_code(@search.fcity_code)[0]
      max=get_max_min_code(@search.fcity_code)[1]     
-     @trucks=Truck.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"配货"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
+     @trucks=Truck.where({:fcity_code.gte =>min,:fcity_code.lt =>max,:status=>"配货"}).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
     else
       mint=get_max_min_code(@search.tcity_code)[0]
       maxt=get_max_min_code(@search.tcity_code)[1]
       minf=get_max_min_code(@search.fcity_code)[0]
       maxf=get_max_min_code(@search.fcity_code)[1]
-     @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"配货"}).desc(:updated_at).paginate(:page=>params[:page]||1,:per_page=>20)
+     @trucks=Truck.where({:fcity_code.gte =>minf,:fcity_code.lt =>maxf,:tcity_code.gte=>mint,:tcity_code.lt=>maxt,:status=>"配货"}).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
     end
     @search.save
     respond_to do |format|
