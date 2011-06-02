@@ -80,9 +80,13 @@ ActionMailer::Base.delivery_method = :smtp
       company.update_attributes(:sent_counter=>1,:last_sent_time=>Time.now,:status=>"enabled")
       mail_account.inc(:today_sent,1)
       mail_account.inc(:total_sent,1)
+
+      sleep(10)  #for gmail sleep 10 second 
     rescue
        Rails.logger.info " sent to #{company.email} failed"
-         mail_account.inc(:fail_counter,1)
+             @exception=$@
+                      mail_account.inc(:fail_counter,1)
+         raise
     end
 
     end

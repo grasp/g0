@@ -33,8 +33,9 @@
           <td><%= cargo.package_name %></td>        
           <td><%=h $cargo_big_category[cargo.big_category]%></td>
           <td><%= h $cargo_option[cargo.cargo_zuhuo] %></td>
-           -->
-          <td><%=cargo.updated_at.localtime.to_s.slice(0,19) unless cargo.updated_at.nil? %></td>         
+        
+          <td><%=cargo.updated_at.localtime.to_s.slice(0,19) unless cargo.updated_at.nil? %></td>       -->
+          <td><%=cargo.updated_at.localtime.to_s.slice(0,19) unless cargo.updated_at.nil? %></td>
           <td><%=cargo.status %></td>
           <td>
             <%if cargo[:from_site]=="local"%>

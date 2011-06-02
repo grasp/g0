@@ -39,7 +39,8 @@ def scan_helper
   a=[Truck,Cargo]
   a.each do |records|
      records.where(:status.in=>["正在配货","正在配车"],:from_site.in=>["tf56","quzhou"]).each do |record|
-       record.update_attributes!(:status=>"超时过期")     if compare_time_expired(record.updated_at,record.send_date || "1")==true
+     #  record.update_attributes!(:status=>"超时过期")     if compare_time_expired(record.updated_at,record.send_date || "1")==true
+      record.update_attributes!(:status=>"超时过期")     if compare_time_expired(record.created_at,record.send_date || "1")==true
       # puts record.status
      end
   end
