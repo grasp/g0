@@ -187,6 +187,7 @@ end
       end
    def show_cron_mail
      @log=`cat /var/mail/hunter`
+     @logs=@log.split("\n")
    end
 
 end
