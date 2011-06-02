@@ -13,6 +13,7 @@
     <th>货源状态</th>
     <th>车主报价/货主询价</th>
     <th>车源速配</th>
+    <th>created_at</th>
 
   </tr>
 
@@ -35,7 +36,7 @@
           <a class="quick_match" href="/trucks/search/<%=cargo.fcity_code%>/<%=cargo.tcity_code%>/1">车源速配</a>
           <a  href="/cargos/destroy/<%=cargo.id%>">删除</a>
         </td>
-
+        <td><%=cargo.updated_at.localtime.to_s%></td>
       </tr>
     <% end %>
       </table>

@@ -44,7 +44,8 @@ module QuzhougraspHelper
                 item_info[11]="0570-"+item_info[11]
                 #   puts "item_info[11]=#{item_info[11]}"
               end
-               one_item[:created_at]=item_info[12]
+             #  one_item[:created_at]=item_info[12]
+             one_item[:created_at]=Time.now
                one_item[:send_date]=2
               # one_item[:updated_at]=Time.now
                 one_item[:status]="正在配车"  # for match local
@@ -72,7 +73,8 @@ module QuzhougraspHelper
                 item_info[11]="0570-"+item_info[11].to_s
               end
               one_item[:contact_phone]=item_info[11]
-              one_item[:created_at]=item_info[12]
+          #    one_item[:created_at]=item_info[12]
+           one_item[:created_at]=Time.now
               one_item[:paizhao]= "牌照未知"
               one_item[:status]="正在配货"  # for match local
               one_item[:from_site]="quzhou"

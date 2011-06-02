@@ -54,7 +54,7 @@ class  Cargo
 
       
      index ([[:updated_at,Mongo::ASCENDING],[:status,Mongo::ASCENDING],[:fcity_code,Mongo::ASCENDING],[:tcity_code,Mongo::ASCENDING]])
-    validates_presence_of :cate_name,:fcity_code,:tcity_code     
+    validates_presence_of :fcity_code,:tcity_code   #remove cate_name, could be empty from grasp
     validate :check_unique,:on=>:create
   def check_unique
     repeated=Cargo.where(:cate_name=>self.cate_name,:line=>self.line,:user_id=>self.user_id,:status=>"正在配车",:comments=>self.comments,:contact_phone=>self.contact_phone)

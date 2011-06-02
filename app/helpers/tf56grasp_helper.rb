@@ -35,7 +35,8 @@ module Tf56graspHelper
             one_item_huo[:tcity_code]=city_code
             one_item_huo[:tcity_name]=cal_city
 
-            one_item_huo[:created_at]=td_info[5].strip!
+         #   one_item_huo[:created_at]=td_info[5].strip!
+         one_item_huo[:created_at]=Time.now
             one_item_huo[:send_date]=2
             # one_item_huo[:updated_at]=Time.now
             one_item_huo[:url]=url.to_s  #keep this url at first , remove after get contact
@@ -82,7 +83,8 @@ module Tf56graspHelper
             td_info<<p.content
           end
           if td_info.size==4
-            one_item_che[:created_at]=td_info[3].strip!  #record created time,seemd not work
+          #  one_item_che[:created_at]=td_info[3].strip!  #record created time,seemd not work
+          one_item_che[:created_at]=Time.now  #record created time,seemd not work
           end
         end
       end
