@@ -26,6 +26,7 @@ G0::Application.routes.draw do
     match '/admin/grasp_quzhou' =>'admin#grasp_quzhou' ,:as=>:admin_grasp_quzhou
     match '/admin/scan' =>'admin#scan' ,:as=>:admin_scan
      match '/admin/scaninfo' =>'admin#scan_info' ,:as=>:admin_scan_info
+       match '/admin/show_cron_mail' =>'admin#show_cron_mail' ,:as=>:admin_show_cron_mail
   get "admin/index"
 
 

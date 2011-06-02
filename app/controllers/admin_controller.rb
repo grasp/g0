@@ -185,5 +185,8 @@ end
       def grasp_quzhou
        get_quzhou_grasps
       end
+   def show_cron_mail
+     @log=`cat /var/mail/hunter`
+   end
 
 end
