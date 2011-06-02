@@ -57,7 +57,7 @@ class  Cargo
     validates_presence_of :cate_name,:fcity_code,:tcity_code     
     validate :check_unique,:on=>:create
   def check_unique
-    repeated=Cargo.where(:cate_name=>self.cate_name,:line=>self.line,:user_id=>self.user_id,:status=>"正在配车",:comments=>self.comments)
+    repeated=Cargo.where(:cate_name=>self.cate_name,:line=>self.line,:user_id=>self.user_id,:status=>"正在配车",:comments=>self.comments,:contact_phone=>self.contact_phone)
        unless repeated.size==0
       errors.add(:base,"不能重复发布货源信息")
      return false
