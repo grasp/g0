@@ -68,7 +68,14 @@ class Truck
      validate :check_unique,:on=>:create
       
     def check_unique
-    repeated=Truck.where(:paizhao=>self.paizhao,:line=>self.line,:user_id=>self.user_id,:status=>"正在配货",:comments=>self.comments,:contact_phone=>self.contact_phone)
+
+   if self.from_site!="quzhou"
+    repeated=Truck.where(:paizhao=>self.paizhao,:line=>self.line,:user_id=>self.user_id,:status=>"正在配货",
+            :comments=>self.comments,:from_site=>self.from_site)
+   else
+        repeated=Truck.where(:line=>self.line,:user_id=>self.user_id,:status=>"正在配货",
+            :comments=>self.comments,:from_site=>self.from_site)
+   end
    # puts "repeated.size=#{repeated.size}"
     unless repeated.size==0
       errors.add_to_base("不能重复发布车源信息")

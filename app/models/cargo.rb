@@ -57,7 +57,11 @@ class  Cargo
     validates_presence_of :fcity_code,:tcity_code   #remove cate_name, could be empty from grasp
     validate :check_unique,:on=>:create
   def check_unique
-    repeated=Cargo.where(:cate_name=>self.cate_name,:line=>self.line,:user_id=>self.user_id,:status=>"正在配车",:comments=>self.comments,:contact_phone=>self.contact_phone)
+  #  repeated=Cargo.where(:cate_name=>self.cate_name,:line=>self.line,:user_id=>self.user_id,:status=>"正在配车",
+   #               :comments=>self.comments,:contact_phone=>self.contact_phone,:from_site=>self.from_site )
+
+       repeated=Cargo.where(:cate_name=>self.cate_name,:line=>self.line,:user_id=>self.user_id,:status=>"正在配车",
+                  :comments=>self.comments,:from_site=>self.from_site )
        unless repeated.size==0
       errors.add(:base,"不能重复发布货源信息")
      return false
