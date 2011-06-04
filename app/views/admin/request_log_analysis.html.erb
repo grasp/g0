@@ -1,0 +1,19 @@
+
+
+<h2><%=@command%></h2>
+<table>
+  <tr>
+    <%@all_log_file.each do |logfile|%>
+    <%u_r_i="/admin/request_log_analysis/logfile/"+logfile%>
+    <td><a href=<%=URI.escape(u_r_i)%>><%=logfile%></a>
+    </td>
+    <%end%>
+  </tr>
+  <tr>
+    <td> <a href="/admin/request_log_analysis/all/all"> All Log Analysis</a></td>
+  </tr>
+</table>
+<h1><%=@log%> Analysis</h1>
+
+<%=raw(@analysis)%>
+

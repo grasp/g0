@@ -4,6 +4,7 @@ class AdminController < ApplicationController
   include Tf56graspHelper
   include QuzhougraspHelper
   include ScansHelper
+  include AdminHelper
  #   before_filter:admin_authorize,:except=>[:index] #for debug purpose
   before_filter:admin_authorize, :except=>[:grasp_tf56,:grasp_quzhou,:scan,:move] #for debug purpose
   def index
@@ -38,47 +39,8 @@ class AdminController < ApplicationController
       format.html{render :template=>"/admin/grasp"} # index.html.erb
       format.xml  { render :xml => @scans }
     end
-  end
-  
-  def hourscan
-   
-      @lastdata=HourData.last
-      @hourdata=HourData.new
-      @hourdata.total_user=User.count
-      @hourdata.total_contact=UserContact.count
-      @hourdata.total_company=Company.count
-      @hourdata.total_cargo=Cargo.count
-      @hourdata.total_truck=Truck.count
-      @hourdata.total_quote=Quote.count
-      @hourdata.total_inquery=Inquery.count
-      unless @lastdata.blank?  
-      @hourdata.user_new=@hourdata.total_user-@lastdata.total_user 
-      @hourdata.contact_new=@hourdata.total_contact-@lastdata.total_contact
-      @hourdata.company_new=@hourdata.total_company-@lastdata.total_company
-      @hourdata.cargo_new=@hourdata.total_cargo-@lastdata.total_cargo
-      @hourdata.truck_new=@hourdata.total_truck-@lastdata.total_truck
-      @hourdata.quote_new=@hourdata.total_quote-@lastdata.total_quote
-      @hourdata.inquery_new=@hourdata.total_inquery-@lastdata.total_inquery      
-      @hourdata.save
-      else          
-      @hourdata.user_new=0
-      @hourdata.contact_new=0
-      @hourdata.company_new=0
-      @hourdata.cargo_new=0
-      @hourdata.truck_new=0
-      @hourdata.quote_new=0
-      @hourdata.inquery_new=0
-      @hourdata.save
-      end
- 
-  end
-  
-  def hourscaninfo
+  end  
 
-    
-    @all_hourdata=HourData.all.desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
-
-  end
   def scan
     scan_helper
   end
@@ -189,5 +151,12 @@ end
      @log=`cat /var/mail/hunter`
      @logs=@log.split("\n")
    end
+def daily_trends
+  show_cargo_trends
+end
 
+def request_log_analysis
+
+helper_request_log_analysis
+end
 end

@@ -1,7 +1,7 @@
 G0::Application.routes.draw do
 
-   match '/mail_accounts/index(/:test_mail)'  =>'mail_accounts#index',:as=>:mail_account_index
-   match '/mail_accounts/tuiguang(/:test_mail)'  =>'mail_accounts#tuiguang',:as=>:mail_account_tuiguang
+  match '/mail_accounts/index(/:test_mail)'  =>'mail_accounts#index',:as=>:mail_account_index
+  match '/mail_accounts/tuiguang(/:test_mail)'  =>'mail_accounts#tuiguang',:as=>:mail_account_tuiguang
   resources :mail_accounts
 
   resources :lib_companies
@@ -22,13 +22,14 @@ G0::Application.routes.draw do
   match '/admin/company_manage  '  =>'admin#company_manage' ,:as=>:admincompany_manage
   match '/admin/get_room_contact' =>'admin#get_room_contact' ,:as=>:admin_get_room_contact
   match '/admin/show_room_contact' =>'admin#show_room_contact' ,:as=>:admin_show_room_contact
-   match '/admin/grasp_tf56' =>'admin#grasp_tf56' ,:as=>:admin_grasp_tf56
-    match '/admin/grasp_quzhou' =>'admin#grasp_quzhou' ,:as=>:admin_grasp_quzhou
-    match '/admin/scan' =>'admin#scan' ,:as=>:admin_scan
-     match '/admin/scaninfo' =>'admin#scan_info' ,:as=>:admin_scan_info
-       match '/admin/show_cron_mail' =>'admin#show_cron_mail' ,:as=>:admin_show_cron_mail
+  match '/admin/grasp_tf56' =>'admin#grasp_tf56' ,:as=>:admin_grasp_tf56
+  match '/admin/grasp_quzhou' =>'admin#grasp_quzhou' ,:as=>:admin_grasp_quzhou
+  match '/admin/scan' =>'admin#scan' ,:as=>:admin_scan
+  match '/admin/scaninfo' =>'admin#scan_info' ,:as=>:admin_scan_info
+  match '/admin/show_cron_mail' =>'admin#show_cron_mail' ,:as=>:admin_show_cron_mail
+  match 'admin/daily_trends/day/:day/table/:table(/field/:field/condition/:condition/value/:value)' =>'admin#daily_trends' ,:as=>:admin_daily_trends
+  match '/admin/request_log_analysis((/all/:all)(/logfile/:logfile))' =>'admin#request_log_analysis' ,:as=>:admin_request_log_analysis
   get "admin/index"
-
 
   resources :citystatistics
 
@@ -40,7 +41,7 @@ G0::Application.routes.draw do
   match '/scans/truckexpire'  =>'scans#truckexpire',:as=>:scantruckexpire
   match '/scans/cargoexpire'  =>'scans#cargoexpire',:as=>:scancargoexpire
   match '/scans/scan'  =>'scans#scan',:as=>:scanscan
-    match '/scans/scaninfo'  =>'scans#scaninfo',:as=>:scaninfo
+  match '/scans/scaninfo'  =>'scans#scaninfo',:as=>:scaninfo
   resources :scans
 
   resources :lstatistics
@@ -85,18 +86,18 @@ G0::Application.routes.draw do
   match 'cargos/public' =>'cargos#public',:as=>:cargospublic
   match 'trucks/public' =>'trucks#public',:as=>:truckspublic
 
-   match '/trucks/search/:from/:to/:page'  =>'trucks#search',:as=>:truckssearchline  
-   match '/trucks/request_chenjiao/:id' =>"trucks#request_chenjiao" ,:as=>:trucksrequest_chenjiao
-   match '/trucks/index/:status' =>"trucks#index" ,:as=>:truckindexstatus
- #  match  '/trucks/search'=>'trucks#search',:as=>:trucksearch
+  match '/trucks/search/:from/:to/:page'  =>'trucks#search',:as=>:truckssearchline
+  match '/trucks/request_chenjiao/:id' =>"trucks#request_chenjiao" ,:as=>:trucksrequest_chenjiao
+  match '/trucks/index/:status' =>"trucks#index" ,:as=>:truckindexstatus
+  #  match  '/trucks/search'=>'trucks#search',:as=>:trucksearch
   match  '/trucks/new'=>'trucks#new',:as=>:trucksnew
   match  '/trucks/create'=>'trucks#create',:as=>:truckscreate
   match '/trucks/show' =>'trucks#show',:as=>:trucksshow
   match '/trucks/list/:id'=>'trucks#index',:as=>:trucksindex
   match '/trucks/:truck_id/match' =>'trucks#match', :as=>:trucksmatch
   resources :trucks do
-      resources :inqueries
-      resources :quotes
+    resources :inqueries
+    resources :quotes
   end
   match '/companies/new/(:who)' =>'companies#new',:as=>:companiesnewwho
   match '/companies/index/:id(/:who)' =>'companies#index',:as=>:companiesindex
@@ -121,7 +122,7 @@ G0::Application.routes.draw do
     resources :cargos
   end
 
- # match '/cargos/:cargo_id/inqueries/part' =>'inqueries#part', :as=>:inqueries#part
+  # match '/cargos/:cargo_id/inqueries/part' =>'inqueries#part', :as=>:inqueries#part
   match 'cargos/request_chenjiao/:id'=>"cargos#request_chenjiao" ,:as=>:cargorequest_chenjiao
   match '/cargos/index/:status' =>"cargos#index" ,:as=>:cargoindexstatus
   match '/cargos/search' =>'cargos#search', :as=>:cargosrootsearch
@@ -133,14 +134,14 @@ G0::Application.routes.draw do
   match '/cargos/destroy/:id' =>'cargos#destroy', :as=>:cargosdestroy
   
   resources :cargos do
-      resources :quotes
-      resources :inqueries
+    resources :quotes
+    resources :inqueries
   end
 
 
   match  '/package_categories/show/:code' =>'package_categories#show',:as=>:package_categoriesshow
   resources :package_categories
-   match '/user_contacts/showf/:id'=>'user_contacts#showf' , :as=>:usercontactsshowf
+  match '/user_contacts/showf/:id'=>'user_contacts#showf' , :as=>:usercontactsshowf
   match '/user_contacts/index/:id/(:who)'=>'user_contacts#index' , :as=>:usercontactsindex
   match '/user_contacts/user/:user_id'=>'user_contacts#show' , :as=>:usercontactsshow
   match '/user_contacts/edit'=>'user_contacts#edit' , :as=>:usercontactsedit
