@@ -5,6 +5,7 @@ class MailAccountsController < ApplicationController
     include MailAccountsHelper
   def index
     batch_insert_gmail_account
+    batch_insert_netease_account
     @mail_accounts = MailAccount.all
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,10 @@ class MailAccountsController < ApplicationController
   end
 
   def tuiguang
-    sent_tuiguang_email
+    Rails.logger.info "domain=#{params[:domain]}"
+    mode=params[:mode] ||"test"
+    domain=params[:domain].gsub!(/#/,".").to_s ||"smtp.gmail.com"
+    sent_tuiguang_email(mode,domain)
   end
 
   # GET /mail_accounts/1

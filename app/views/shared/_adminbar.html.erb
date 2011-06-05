@@ -17,7 +17,8 @@
   </tr>
   <tr>
     <td><a href="/mail_accounts">邮箱信息</a></td>
-    <td><a href="/mail_accounts/tuiguang/test">测试推广</a></td>
+    <td><a href="/mail_accounts/tuiguang/mode/test/domain/<%=CGI.escape("smtp#gmail#com")%>">Gmail测试</a></td>
+      <td><a href="/mail_accounts/tuiguang/mode/test/domain/<%=CGI.escape("smtp#163#com")%>">163测试</a></td>
     <td >
       <a  href="/lib_companies">公司采集(<%=LibCompany.count%>)</a>
     </td>
@@ -52,7 +53,7 @@
     <td><a class="navi_scan_link" href="/admin/hourly_trends/day/<%=Time.now.to_s.slice(0,10)%>/table/cargo">小时趋势</a></td>
     <td>  <a class="navi_scan_link" href="/admin/request_log_analysis">访问分析</a> </td>
     <td><a href="/admin/show_cron_mail">后台邮件 </a></td>
-
+    <td><a href="/admin/show_log">日志分析 </a></td>
     <td>
       <a  href="http://dev-wl090.heroku.com/projects/g0/issues"> 问题列表</a>
     </td>

@@ -142,4 +142,8 @@ def request_log_analysis
 
 helper_request_log_analysis
 end
+
+def show_log
+  show_log_helper
+end
 end

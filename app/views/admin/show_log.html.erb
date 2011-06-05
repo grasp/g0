@@ -1,0 +1,34 @@
+<table>
+
+  <tbody>
+    <tr>
+      <td><a href="/admin/show_log/logfile/<%=CGI::escape("/var/log/syslog")%>"> syslog</a>
+      </td>
+      <td><a href="/admin/show_log/logfile/<%=CGI::escape("/var/log/messages")%>"> messages</a>
+      </td>
+
+      <td><a href="/admin/show_log/logfile/<%=CGI::escape("/var/log/mail#log")%>"> mail.log</a>
+      </td>
+
+      <td><a href="/admin/show_log/logfile/<%=CGI::escape("/var/log/mongodb/mongodb#log")%>"> mongodb.log</a>
+      </td>
+
+      <td><a href="/admin/show_log/logfile/<%=CGI::escape("/var/log/kern#log")%>"> kern.log</a>
+      </td>
+
+      <td><a href="/admin/show_log/logfile/<%=CGI::escape("/opt/vob/g0/log/development#{Time.now.to_s.slice(0,10)}#log")%>"> development.log</a>
+      </td>
+      <td><a href="/admin/show_log/logfile/<%=CGI::escape("/opt/vob/g0/log/production#{Time.now.to_s.slice(0,10)}#log")%>"> production.log</a>
+      </td>
+
+     
+    </tr>
+  </tbody>
+</table>
+<h1><%=@logfile%></h1
+
+<div>
+  <%@logs.each do |log|%>
+    <p style="text-align:  left; "><%=log%></p>
+  <%end%>
+</div>

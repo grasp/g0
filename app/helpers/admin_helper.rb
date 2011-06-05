@@ -93,4 +93,16 @@ module AdminHelper
 
 
   end
+
+  def show_log_helper
+    if params[:logfile]
+   @logfile=params[:logfile]
+   @logfile.gsub!(/#/,".")
+    else
+      @logfile='/var/log/cron.log'
+    end
+   logs=`cat #{@logfile}`
+   @logs=Array.new
+   @logs=logs.split("\n")
+  end
 end
