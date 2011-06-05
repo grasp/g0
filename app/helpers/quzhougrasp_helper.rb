@@ -92,12 +92,16 @@ module QuzhougraspHelper
   end
 def  get_quzhou_grasps
   start_time=Time.now
+  @admin=User.where("name"=>"admin").first
+
  grasp= get_first_page_quzhou
   start_time=Time.now;@huo_succ_counter=0;@huo_fail_counter=0;@che_succ_counter=0;@che_fail_counter=0
  @page_huos=grasp[0]
  @page_ches=grasp[1]
     #insert each huo
     @page_huos.each do |huo|
+    huo[:user_id]=@admin.id
+   # puts huo
     begin
     a=Cargo.new(huo)
     @huo_succ_counter+=1 if a.save
@@ -107,6 +111,8 @@ def  get_quzhou_grasps
     end
      @huo_time=Time.now-start_time
      @page_ches.each do |che|
+       che[:user_id]=@admin.id
+      # puts che
     begin
     a=Truck.new(che)
     @che_succ_counter+=1 if a.save

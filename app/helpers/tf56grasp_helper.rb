@@ -131,11 +131,14 @@ module Tf56graspHelper
 
   def get_tf56_grasps
     start_time=Time.now;@huo_succ_counter=0;@huo_fail_counter=0
+    @admin=User.where("name"=>"admin").first
+
     @page_huos=get_first_page_huo
   
     #insert each huo
     @page_huos.each do |huo|
-
+    huo[:user_id]=@admin.id
+   # puts huo
    #add huo comments if huo has no comments
   # puts "huo[:comments].size=#{huo[:comments].size}"
    if huo[:comments].size<15
@@ -155,6 +158,9 @@ module Tf56graspHelper
    start_time=Time.now;@che_succ_counter=0;@che_fail_counter=0
     @page_ches=get_first_page_che
         @page_ches.each do |che|
+
+        che[:user_id]=@admin.id
+       # puts che
     begin
     a=Truck.new(che)
     @che_succ_counter+=1 if a.save

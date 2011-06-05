@@ -41,7 +41,7 @@ def scan_helper
      records.where(:status.in=>["正在配货","正在配车"],:from_site.in=>["tf56","quzhou"]).each do |record|
      #  record.update_attributes!(:status=>"超时过期")     if compare_time_expired(record.updated_at,record.send_date || "1")==true
       record.update_attributes!(:status=>"超时过期")     if compare_time_expired(record.created_at,record.send_date || "1")==true
-      # puts record.status
+     # puts record.status
      end
   end
 a.each do |records|
@@ -72,5 +72,29 @@ end
     @scan.save
     # we will do scan work in this action
 end
+def move_helper
+     start_time=Time.now; @move=Move.new;@move.expired_cargo=0;@move.expired_truck=0;@move.expired_quote=0;@move.expired_inquery=0
+     a=Hash.new
+    a[Truck]=ExpiredTruck;a[Cargo]=ExpiredCargo;a[Quote]=ExpiredQuote;a[Inquery]=ExpiredInquery
+    a.each do |a,b|
+      a.where(:status=>"超时过期").each do |record|
+    #only move those expired 3 months
+      if compare_time_expired(record.updated_at,90)==true
+      expiredb=b.new
+      record.raw_attributes.keys.each do |key|
+       expiredb[key[0]]=record[key[0]]
+      end
+      expiredb.save
+      record.destroy
+     # puts "record moved!"
+      @move.expired_truck+=1
+    end
+    end
+    end
 
+    end_time=Time.now
+    @move.cost_time=end_time-start_time
+
+    @move.save
+end
 end

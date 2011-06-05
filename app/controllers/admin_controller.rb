@@ -48,28 +48,7 @@ class AdminController < ApplicationController
    @scans=Scan.all.desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
   end
   def move
-   start_time=Time.now; @move=Move.new;@move.expired_cargo=0;@move.expired_truck=0;@move.expired_quote=0;@move.expired_inquery=0
-     a=Hash.new
-    a[Truck]=ExpiredTruck;a[Cargo]=ExpiredCargo;a[Quote]=ExpiredQuote;a[Inquery]=ExpiredInquery
-    a.each do |a,b|
-      a.where(:status=>"超时过期").each do |record|
-    #only move those expired 3 months
-      if compare_time_expired(record.updated_at,90)==true
-      expiredb=b.new
-      record.raw_attributes.keys.each do |key|
-       expiredb[key[0]]=record[key[0]]
-      end
-      expiredb.save
-      record.destroy
-      @move.expired_truck+=1
-    end
-    end
-    end
-
-    end_time=Time.now
-    @move.cost_time=end_time-start_time
-    
-    @move.save    
+move_helper
     
      respond_to do |format|
       format.html # index.html.erb

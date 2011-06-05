@@ -78,7 +78,7 @@ class Truck
    end
    # puts "repeated.size=#{repeated.size}"
     unless repeated.size==0
-      errors.add_to_base("不能重复发布车源信息")
+       errors.add(:base,"不能重复发布车源信息")
       return false
     end
     return true
