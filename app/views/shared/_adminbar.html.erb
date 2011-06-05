@@ -6,51 +6,54 @@
 <table class="navi">
   <tr>
     <td > <a  href="/admin/">总体情况</a></td>
-    <td><a class="navi_scan_link" href="/admin/scan">开始扫描</a></td></td>
+    <td><a class="navi_scan_link" href="/admin/scan">过期扫描</a></td></td>
     <td>
-      <a class="navi_scan_link" href="/admin/scaninfo">扫描信息(<%=h Scan.count%>)</a></td>
-     <td>   <a class="navi_scan_link" href="/admin/move">开始迁移</a></td>
-    <td>   <a class="navi_scan_link" href="/admin/moveinfo">迁移信息(<%=h Move.count%>)</a></td>
+      <a class="navi_scan_link" href="/admin/scaninfo">扫描历史(<%=h Scan.count%>)</a></td>
+    <td>   <a class="navi_scan_link" href="/admin/move">迁移过期</a></td>
+    <td>   <a class="navi_scan_link" href="/admin/moveinfo">迁移历史(<%=h Move.count%>)</a></td>
 
+
+
+  </tr>
+  <tr>
     <td><a href="/mail_accounts">邮箱信息</a></td>
-     <td><a href="/mail_accounts/tuiguang/test">测试推广</a></td>
-
+    <td><a href="/mail_accounts/tuiguang/test">测试推广</a></td>
+    <td >
+      <a  href="/lib_companies">公司采集(<%=LibCompany.count%>)</a>
+    </td>
   </tr>
 
   <tr>
 
     <td class="navi_user">
-     <a class="navi_scan_link" href="/admin/user_manage/">用户管理</a>   </td>
-    <td>  <a class="navi_scan_link" href="/admin/usercontact_manage/">联系方式管理</a>   </td>
-    <td> <a class="navi_scan_link" href="/admin/company_manage">公司管理</a></td>
-    <td> <a class="navi_scan_link" href="/admin/cargo_manage">货源管理</a></td>
-    <td> <a class="navi_scan_link" href="/admin/stockcargo_manage">货物管理</a></td>
-    <td> <a class="navi_scan_link" href="/admin/truck_manage">车源管理</a></td>
-    <td> <a class="navi_scan_link" href="/admin/stocktruck_manage">车辆管理</a></td>
-    <td> <a class="navi_scan_link" href="/admin/quote_manage">报价管理</a></td>
-    <td> <a class="navi_scan_link" href="/admin/inquery_manage">询价管理</a></td>
-
+    <a class="navi_scan_link" href="/admin/user_manage/">用户管理</a>   </td>
+    <td>  <a class="navi_scan_link" href="/admin/usercontact_manage/">联系方式</a>   </td>
+    <td> <a class="navi_scan_link" href="/admin/company_manage">公司</a></td>
+    <td> <a class="navi_scan_link" href="/admin/cargo_manage">货源</a></td>
+    <td> <a class="navi_scan_link" href="/admin/stockcargo_manage">货物</a></td>
+    <td> <a class="navi_scan_link" href="/admin/truck_manage">车源</a></td>
+    <td> <a class="navi_scan_link" href="/admin/stocktruck_manage">车辆</a></td>
+    <td> <a class="navi_scan_link" href="/admin/quote_manage">报价</a></td>
+    <td> <a class="navi_scan_link" href="/admin/inquery_manage">询价</a></td>
   </tr>
   <tr>
-      <td> <a class="navi_scan_link" href="/admin/grasp_quzhou">采集QuZhou</a></td>
-      <td> <a class="navi_scan_link" href="/admin/grasp_tf56">采集Tf56</a></td>
-      <td> <a class="navi_scan_link" href="/admin/get_room_contact">采集房间联系</a></td>
-      <td> <a class="navi_scan_link"  href="/admin/show_room_contact"> 显示房间联系</a></td>
-          <td >
-      <a class="navi_scan_link" href="/admin/tf56grasp">tf56采集信息(<%=h GraspRecord.count%>)</a></td>
+    <td> <a class="navi_scan_link" href="/admin/grasp_quzhou">采集QuZhou</a></td>
+    <td> <a class="navi_scan_link" href="/admin/grasp_tf56">采集Tf56</a></td>
+    <td> <a class="navi_scan_link" href="/admin/get_room_contact">整理房间</a></td>
     <td >
-      <a class="navi_scan_link" href="/admin/quzhougrasp">quzhou采集信息</a> </td>
+      <a class="navi_scan_link" href="/admin/tf56grasp">tf56历史(<%=h GraspRecord.count%>)</a></td>
     <td >
-      <a  href="/lib_companies">公司采集信息(<%=LibCompany.count%>)</a>
-    </td>
-    <td><a href="/admin/show_cron_mail">后台邮件
-    </a></td>
+      <a class="navi_scan_link" href="/admin/quzhougrasp">quzhou历史</a> </td>
+
   </tr>
 
-    <tr>  
-     <td>  <a class="navi_scan_link" href="/admin/daily_trends/day/30/table/cargo">趋势分析</a> </td>
-     <td>  <a class="navi_scan_link" href="/admin/request_log_analysis">访问分析</a> </td>
-     <td>
+  <tr>
+    <td>  <a class="navi_scan_link" href="/admin/daily_trends/day/30/table/cargo">每日趋势</a> </td>
+    <td><a class="navi_scan_link" href="/admin/hourly_trends/day/<%=Time.now.to_s.slice(0,10)%>/table/cargo">小时趋势</a></td>
+    <td>  <a class="navi_scan_link" href="/admin/request_log_analysis">访问分析</a> </td>
+    <td><a href="/admin/show_cron_mail">后台邮件 </a></td>
+
+    <td>
       <a  href="http://dev-wl090.heroku.com/projects/g0/issues"> 问题列表</a>
     </td>
   </tr>

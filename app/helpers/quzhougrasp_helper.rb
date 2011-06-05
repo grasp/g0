@@ -22,6 +22,7 @@ module QuzhougraspHelper
             #  puts "#{item_info[0]},size=#{item_info[0].size}"
             if item_info[0].to_s=="货物"
               one_item[:cate_name]=item_info[1] ||"面谈"
+              one_item[:cate_name]="面谈" if one_item[:cate_name].to_s.size<2
               one_item[:fcity_name]=item_info[2]
               one_item[:tcity_name]=item_info[3]
               city_code= cal_city=nil
@@ -75,7 +76,7 @@ module QuzhougraspHelper
               one_item[:contact_phone]=item_info[11]
           #    one_item[:created_at]=item_info[12]
            one_item[:created_at]=Time.now
-              one_item[:paizhao]= "牌照未知"
+              one_item[:paizhao]= "未知牌照"
               one_item[:status]="正在配货"  # for match local
               one_item[:from_site]="quzhou"
               one_item[:send_date]=2

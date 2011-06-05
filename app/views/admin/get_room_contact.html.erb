@@ -3,6 +3,8 @@
 <p><%#=cargo.comments %></p>
 <%#end%>
 <p>总共有<%= RoomContact.count %>房间联系方式</p>
+
+<h3><a class="navi_scan_link"  href="/admin/show_room_contact"> 显示房间</a></h3>
  <%  unless @rooms.blank? %>
 <table  >
     <tr>

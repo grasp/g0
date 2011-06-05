@@ -28,6 +28,7 @@ G0::Application.routes.draw do
   match '/admin/scaninfo' =>'admin#scan_info' ,:as=>:admin_scan_info
   match '/admin/show_cron_mail' =>'admin#show_cron_mail' ,:as=>:admin_show_cron_mail
   match 'admin/daily_trends/day/:day/table/:table(/field/:field/condition/:condition/value/:value)' =>'admin#daily_trends' ,:as=>:admin_daily_trends
+   match 'admin/hourly_trends/day/:day/table/:table(/field/:field/condition/:condition/value/:value)' =>'admin#hourly_trends' ,:as=>:admin_daily_trends
   match '/admin/request_log_analysis((/all/:all)(/logfile/:logfile))' =>'admin#request_log_analysis' ,:as=>:admin_request_log_analysis
   get "admin/index"
 

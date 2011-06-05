@@ -152,7 +152,11 @@ end
      @logs=@log.split("\n")
    end
 def daily_trends
-  show_cargo_trends
+  show_daily_trends
+end
+
+def hourly_trends
+  show_hourly_trends
 end
 
 def request_log_analysis
