@@ -6,6 +6,7 @@ class MailAccountsController < ApplicationController
   def index
     batch_insert_gmail_account
     batch_insert_netease_account
+    batch_insert_hotmail_account
     @mail_accounts = MailAccount.all
     respond_to do |format|
       format.html # index.html.erb

@@ -64,6 +64,30 @@ module MailAccountsHelper
       end
     end
   end
+ def batch_insert_hotmail_account
+    hotmail_account=[]
+    8.downto(1).each {|i|  hotmail_account<<"w090_"+ "%03d" % i}
+    #have a mistake for w011
+  #  hotmail_account.delete("w090_011")
+   #   hotmail_account<<"w90_011"
+    first_account=MailAccount.where(:fullname=>"w090_001@hotmail.com").first
+    if first_account.blank? #insert mail account for first time
+      hotmail_account.each do |account|
+        new_account=Hash.new
+        new_account[:address]="smtp.live.com"
+        new_account[:username]=account
+        new_account[:fullname]=account+"@hotmail.com"
+        new_account[:password]="followme123#"
+        new_account[:port]="25"
+        new_account[:day_max]="49"
+        new_account[:send_interval]="15"
+        new_account[:authentication]=":login"
+        new_account[:enable_startttls]="true"
+        a=MailAccount.new(new_account)
+        raise unless a.save
+      end
+    end
+  end
 
   def sent_tuiguang_email(mode,domain)
     #for each mail account , sent out limited mail
@@ -90,13 +114,24 @@ module MailAccountsHelper
         :password => mail_account.password
       }
       end
+       if domain=="smtp.live.com"
+      ActionMailer::Base.smtp_settings = {
+         :address => mail_account.address,
+        :port => mail_account.port,
+    #    :domain   => "hotmail.com",
+        :authentication => :login ,
+        :user_name => mail_account.fullname,
+        :password => mail_account.password
+      }
+      end
       #find #{mail_account[:day_max]} lib_company and send out email for each company
       mail_account[:day_max]=1  if mode=="test"
 
       LibCompany.where(:sent_counter=>nil).limit(mail_account[:day_max]).each do |company|
         #for debug purpose
         company.email="mark.xiansheng@gmail.com"   if mode=="test"  && domain=="smtp.gmail.com"
-      company.email="w090_001@163.com"   if mode=="test" && domain=="smtp.163.com"
+        company.email="w090_001@163.com"   if mode=="test" && domain=="smtp.163.com"
+        company.email="w090_001@hotmail.com"   if mode=="test" && domain=="smtp.live.com"
        Rails.logger.info " to #{company.email} from #{mail_account.fullname}"
         begin
           UserMailer.tuiguang_email(mail_account.fullname,company.email,company.name).deliver!
