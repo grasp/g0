@@ -21,6 +21,12 @@ class MailAccountsController < ApplicationController
     sent_tuiguang_email(mode,domain)
   end
 
+  def receive
+     mode=params[:mode] ||"test"
+    domain=params[:domain].gsub!(/#/,".").to_s ||"smtp.gmail.com"
+    receive_helper(mode,domain)
+  end
+
   # GET /mail_accounts/1
   # GET /mail_accounts/1.xml
   def show

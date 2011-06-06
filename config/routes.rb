@@ -1,7 +1,8 @@
 G0::Application.routes.draw do
 
   match '/mail_accounts/index(/:test_mail)'  =>'mail_accounts#index',:as=>:mail_account_index
-  match '/mail_accounts/tuiguang((/mode/:mode)(/domain/:domain))'  =>'mail_accounts#tuiguang',:as=>:mail_account_tuiguang
+  match '/mail_accounts/tuiguang((/mode/:mode/way/sent)(/domain/:domain))'  =>'mail_accounts#tuiguang',:as=>:mail_account_tuiguang
+  match '/mail_accounts/tuiguang/((/mode/:mode/way/receive)(/domain/:domain))'  =>'mail_accounts#receive',:as=>:mail_account_receive
   resources :mail_accounts
 
   resources :lib_companies
@@ -31,6 +32,7 @@ G0::Application.routes.draw do
   match 'admin/hourly_trends/day/:day/table/:table(/field/:field/condition/:condition/value/:value)' =>'admin#hourly_trends' ,:as=>:admin_daily_trends
   match '/admin/request_log_analysis((/all/:all)(/logfile/:logfile))' =>'admin#request_log_analysis' ,:as=>:admin_request_log_analysis
   match '/admin/show_log(/logfile/:logfile)' =>'admin#show_log' ,:as=>:admin_show_log
+ match '/admin/backup_db' =>'admin#backup_db' ,:as=>:admin_backup_db
   get "admin/index"
 
   resources :citystatistics

@@ -177,11 +177,11 @@ module Tf56graspHelper
      @che_time=Time.now-start_time
      a=GraspRecord.new({:diff_che=> @che_succ_counter,:diff_huo=> @huo_succ_counter,
         :cycle_che=>0,:cycle_huo=>0,
-       :cost_time=>@huo_time+@che_time,
+        :cost_time=>@huo_time+@che_time,
         :fail_counter=>@huo_fail_counter+@che_fail_counter,
         :miss_field_huo=>0,:miss_field_che=>0,
         :repeat_huo=>@huo_fail_counter,:repeat_che=>@che_fail_counter,
-       :cargostatus=>"notexpired",  :truckstatus=>"notexpired",:from_site=>"tf56"})
+        :cargostatus=>"notexpired",  :truckstatus=>"notexpired",:from_site=>"tf56"})
 
      @grasp=GraspRecord.all.order(:created_at.desc).first
   end

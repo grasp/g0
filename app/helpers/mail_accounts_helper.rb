@@ -150,5 +150,50 @@ module MailAccountsHelper
       end
     end
 
+
+  end
+
+  def   receive_helper(mode,domain)
+
+    Rails.logger.info "start to receive mode=#{mode},domain=#{domain}"
+
+    MailAccount.where(:address=>domain).each do |mail_account|
+      if domain=="smtp.gmail.com"
+      ActionMailer::Base.smtp_settings = {
+        :enable_starttls_auto => mail_account.enable_startttls,
+        :address => mail_account.address,
+        :port => mail_account.port,
+        :authentication => mail_account.authentication ,
+        :user_name => mail_account.username,
+        :password => mail_account.password
+      }
+      end
+     if domain=="smtp.163.com"
+      ActionMailer::Base.smtp_settings = {
+         :address => mail_account.address,
+        :port => mail_account.port,
+        :domain   => "163.com",
+        :authentication => :login ,
+        :user_name => mail_account.fullname,
+        :password => mail_account.password
+      }
+      end
+       if domain=="smtp.live.com"
+      ActionMailer::Base.smtp_settings = {
+         :address => mail_account.address,
+        :port => mail_account.port,
+    #    :domain   => "hotmail.com",
+        :authentication => :login ,
+        :user_name => mail_account.fullname,
+        :password => mail_account.password
+      }
+      end
+     #receive mail here
+     
+    
+
+
+    end
+
   end
 end

@@ -146,4 +146,11 @@ end
 def show_log
   show_log_helper
 end
+
+def backup_db
+  `cd`
+  `mongodump -o /home/hunter/dump`
+  `tar -zcf /home/hunter/dump_#{Time.now.to_s.slice(0,10)}.tgz /home/hunter/dump`
+   send_file "/home/hunter/dump_#{Time.now.to_s.slice(0,10)}.tgz", :type=>"application/tgz"
+end
 end
