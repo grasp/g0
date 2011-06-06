@@ -76,7 +76,9 @@ module Tf56graspHelper
         td_info=Array.new
         url=tr.css("td.hydash a").map { |link| link['href'] }
         unless url[0].nil?
-          url="http://www.tf56.com/"+"TradeCenter/AspData/tCarDetail.asp?iWebBizCar="+url[0].to_s[-7..-1]
+        #  puts "#{url[0].to_s[-5..-1]}"
+          url="http://www.tf56.com/"+"TradeCenter/AspData/tCarDetail.asp?iWebBizCarID="+url[0].to_s[-5..-1]
+         # puts url
           one_item_che[:url]=url
           one_page_che<<one_item_che
           tr.css("td.hydash").each do |p|
@@ -89,6 +91,7 @@ module Tf56graspHelper
         end
       end
     end
+
     one_page_che.each do |one_item_che|
       # puts "start parse che url=#{one_item_che[:url]},one_page_size=#{one_page_che.size}"
       a.get(one_item_che[:url]) do |page|
@@ -100,6 +103,7 @@ module Tf56graspHelper
           end
           if td_info.size>40 #full size is 54
             one_item_che[:paizhao]=td_info[6] ||"牌照未知"
+           # puts " #{one_item_che[:paizhao]}"
             one_item_che[:tcity_name]=td_info[38]
             one_item_che[:fcity_name]=td_info[32]
             city_code=CityTree.get_code_from_name(one_item_che[:fcity_name]) unless  one_item_che[:fcity_name].nil?
@@ -122,74 +126,15 @@ module Tf56graspHelper
             one_item_che[:send_date]=2
             one_item_che[:huicheng]="003"
           end
+         # puts  one_item_che
            one_item_che.delete(:url)
         end
-      end
+
     end
+     end
     return  one_page_che
   end
- def get_page_che_by_history
-    a = Mechanize.new
-    a.set_proxy( @proxy_server, '1080') if @office
-    one_page_che=Array.new
-    a.get('http://www.tf56.com/wscy.asp') do |page|
-      page.parser().css("html body table table table table table  table table tr").each do |tr|
-        one_item_che=Hash.new
-        td_info=Array.new
-        url=tr.css("td.hydash a").map { |link| link['href'] }
-        unless url[0].nil?
-          url="http://www.tf56.com/"+"ShowCarInfo.asp?iWebBizCarID="+url[0].to_s[-7..-1]
-          one_item_che[:url]=url
-          one_page_che<<one_item_che
-          tr.css("td.hydash").each do |p|
-            td_info<<p.content
-          end
-          if td_info.size==4
-          #  one_item_che[:created_at]=td_info[3].strip!  #record created time,seemd not work
-          one_item_che[:created_at]=Time.now  #record created time,seemd not work
-          end
-        end
-      end
-    end
-    one_page_che.each do |one_item_che|
-      # puts "start parse che url=#{one_item_che[:url]},one_page_size=#{one_page_che.size}"
-      a.get(one_item_che[:url]) do |page|
-        raise if page.nil?
-        page.parser().css("table").each do |tr|
-          td_info=Array.new
-          tr.css("td").each do |p|
-            td_info<<p.content
-          end
-          if td_info.size>40 #full size is 54
-            one_item_che[:paizhao]=td_info[6] ||"牌照未知"
-            one_item_che[:tcity_name]=td_info[38]
-            one_item_che[:fcity_name]=td_info[32]
-            city_code=CityTree.get_code_from_name(one_item_che[:fcity_name]) unless  one_item_che[:fcity_name].nil?
-            cal_city=CityTree.get_city_full_path(city_code) unless  city_code.nil?
-            one_item_che[:fcity_code]=city_code
-            one_item_che[:fcity_name]=cal_city
-            city_code=CityTree.get_code_from_name(one_item_che[:tcity_name]) unless  one_item_che[:tcity_name].nil?
-            cal_city=CityTree.get_city_full_path(city_code) unless  city_code.nil?
-            one_item_che[:tcity_code]=city_code
-            one_item_che[:tcity_name]=cal_city
 
-            one_item_che[:length]=td_info[24].to_s.delete("米")
-            one_item_che[:dunwei]=td_info[18].to_s.delete("吨")
-
-          elsif td_info.size>6 # full size is 16 , only driver phone , is 10
-            one_item_che[:driver_phone]=td_info[6]
-            one_item_che[:car_phone]=td_info[12] #actully is car owner phone!!
-            one_item_che[:status]="正在配货"  # for match local
-            one_item_che[:from_site]="tf56"
-            one_item_che[:send_date]=2
-            one_item_che[:huicheng]="003"
-          end
-           one_item_che.delete(:url)
-        end
-      end
-    end
-    return  one_page_che
-  end
   def get_tf56_grasps
     start_time=Time.now;@huo_succ_counter=0;@huo_fail_counter=0
     @admin=User.where("name"=>"admin").first
