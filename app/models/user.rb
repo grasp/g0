@@ -34,8 +34,13 @@ class User
   validates_uniqueness_of :mobilephone ,:message=>"该手机已经存在."
   
    def self.authenticated_with_token(user_id, stored_salt)
-     u = self.criteria.id(user_id)
+    # u = self.criteria.id(user_id)
+    begin
+     u = self.find(user_id)
      u && u.salt == stored_salt ? u : nil
+    rescue
+      Rails.logger.info("authentication failure!!")
+    end
    end
   
   def self.authenticate(email_or_name,password)

@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/thedarkone/rails-dev-boost.git
+  revision: 6e093e559003d1986ab95b09a9e21197bb5d8edb
+  specs:
+    rails-dev-boost (0.1.1)
+
 GEM
   remote: http://rubygems.org/
   remote: http://gemcutter.org/
@@ -74,7 +80,7 @@ GEM
       activesupport (= 3.0.7)
       rake (>= 0.8.7)
       thor (~> 0.14.4)
-    rake (0.9.1)
+    rake (0.9.2)
     request-log-analyzer (1.11.0)
     thin (1.2.11)
       daemons (>= 1.0.9)
@@ -96,6 +102,7 @@ DEPENDENCIES
   memcache-client
   mongoid (= 2.0.1)
   rails (= 3.0.7)
+  rails-dev-boost!
   request-log-analyzer
   thin
   will_paginate (~> 3.0.pre2)
