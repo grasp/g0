@@ -16,6 +16,8 @@ gem "mongoid", "2.0.1"
 gem "bson_ext", "~> 1.2"
 gem 'memcache-client'
 
+gem 'firewatir'
+
 gem 'request-log-analyzer'
 #gem 'dalli'
 # Use unicorn as the web server
