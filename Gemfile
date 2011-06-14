@@ -16,6 +16,7 @@ gem "mongoid", "2.0.1"
 gem "bson_ext", "~> 1.2"
 gem 'memcache-client'
 
+#gem 'watir'
 gem 'firewatir'
 
 gem 'request-log-analyzer'
