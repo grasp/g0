@@ -7,3 +7,4 @@ thin
 public/*.html
 *.html
 vendor
+/nbproject/private/

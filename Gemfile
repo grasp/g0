@@ -7,17 +7,23 @@ gem 'rails', '3.0.7'
 gem "mechanize"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'eventmachine', "0.12.10"
+
 #gem 'will_paginate',:git => 'http://github.com/mislav/will_paginate.git',:branch=>'rails3'
 gem "will_paginate", "~> 3.0.pre2"
-gem 'thin'
+
 #gem 'unicorn'
 gem "mongoid", "2.0.1"
-gem "bson_ext", "~> 1.2"
+
 gem 'memcache-client'
 
-#gem 'watir'
+gem 'watir'
+
+if false #for linux 
+gem 'thin'
 gem 'firewatir'
+gem "bson_ext", "~> 1.2"
+gem 'eventmachine', "0.12.6"
+end
 
 gem 'request-log-analyzer'
 #gem 'dalli'
@@ -38,5 +44,6 @@ gem 'request-log-analyzer'
 #   gem 'webrat'
 # end
 group :development do
-  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
+  gem 'rails-dev-boost', :git => 'http://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
+ #gem 'rails-dev-boost', :require => 'rails_development_boost'
 end

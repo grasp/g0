@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/thedarkone/rails-dev-boost.git
-  revision: 6e093e559003d1986ab95b09a9e21197bb5d8edb
+  remote: http://github.com/thedarkone/rails-dev-boost.git
+  revision: 8ea07ebee74d9f2879f074c307890997b1f34f03
   specs:
     rails-dev-boost (0.1.1)
 
@@ -37,14 +37,11 @@ GEM
     activesupport (3.0.7)
     arel (2.0.10)
     bson (1.3.1)
-    bson_ext (1.3.1)
     builder (2.1.2)
     commonwatir (1.8.1)
       user-choices
-    daemons (1.1.3)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    eventmachine (0.12.10)
     firewatir (1.8.1)
       commonwatir (= 1.8.1)
     hoe (2.9.4)
@@ -66,7 +63,7 @@ GEM
       mongo (~> 1.3)
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
-    nokogiri (1.4.4)
+    nokogiri (1.4.4.1-x86-mingw32)
     polyglot (0.3.1)
     rack (1.2.3)
     rack-mount (0.6.14)
@@ -90,10 +87,6 @@ GEM
     request-log-analyzer (1.11.0)
     s4t-utils (1.0.4)
       hoe (>= 1.3.0)
-    thin (1.2.11)
-      daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
-      rack (>= 1.0.0)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -102,21 +95,32 @@ GEM
       builder (>= 2.1.2)
       s4t-utils (>= 1.0.3)
       xml-simple (>= 1.0.11)
+    watir (1.8.1)
+      commonwatir (= 1.8.1)
+      firewatir (= 1.8.1)
+      nokogiri
+      win32-process (>= 0.5.5)
+      windows-pr (>= 0.6.6)
     will_paginate (3.0.pre2)
+    win32-api (1.4.8-x86-mingw32)
+    win32-process (0.6.5)
+      windows-pr (>= 1.1.2)
+    windows-api (0.4.0)
+      win32-api (>= 1.4.5)
+    windows-pr (1.2.0)
+      win32-api (>= 1.4.5)
+      windows-api (>= 0.3.0)
     xml-simple (1.0.16)
 
 PLATFORMS
-  ruby
+  x86-mingw32
 
 DEPENDENCIES
-  bson_ext (~> 1.2)
-  eventmachine (= 0.12.10)
-  firewatir
   mechanize
   memcache-client
   mongoid (= 2.0.1)
   rails (= 3.0.7)
   rails-dev-boost!
   request-log-analyzer
-  thin
+  watir
   will_paginate (~> 3.0.pre2)
