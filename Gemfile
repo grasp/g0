@@ -44,6 +44,10 @@ gem 'request-log-analyzer'
 #   gem 'webrat'
 # end
 group :development do
-  gem 'rails-dev-boost', :git => 'http://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
+  gem "rails-dev-boost", :git => "http://github.com/thedarkone/rails-dev-boost.git", :require => "rails_development_boost"
  #gem 'rails-dev-boost', :require => 'rails_development_boost'
+end
+
+group :test do
+  gem "rails-dev-boost", :git => "http://github.com/thedarkone/rails-dev-boost.git", :require => "rails_development_boost"
 end
