@@ -6,7 +6,7 @@ require 'iconv'
 $KCODE="U"
    
   $cargo_category_one=Hash.new
-#  $cargo_category_two=Hash.new
+  $cargo_category_two=Hash.new
 #  $cargo_category_three=Hash.new
   $catename=Hash.new
   $catetree=Hash.new
@@ -38,7 +38,7 @@ def load_cargo_category_to_hash
      ancient_code=code[0,2]+"0000"
      $catetree[ancient_code][parent_code][code]=name
  end
-   
+   $cargo_category_two[code]=name
   
   end
   

@@ -5,6 +5,7 @@ require 'iconv'
 
 $KCODE="U"
 $package_category_one=Hash.new
+$package_category_two=Hash.new
 $packagetree=Hash.new
 
 def load_package_category_to_hash
@@ -31,7 +32,9 @@ def load_package_category_to_hash
      else
        parent_code=code[0]+"000"
        $packagetree[parent_code][code]=name
-     end               
+     end  
+     
+        $package_category_two[code]=name
       end
     end
   end

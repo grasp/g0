@@ -18,8 +18,8 @@ test "user_register_login_logout" do
   #"0-any_user_should_see_first_page"
     puts "0any user should see first page"
     #open index
-    b=$browser.goto "#{$site_root}"
-    assert (b)
+
+
     #check navi text and bottom text
     result=$browser.text.force_encoding('utf-8')
     ma=["关于物流零距离","货源信息","车源信息","联系我们"]
@@ -69,23 +69,8 @@ test "user_register_login_logout" do
     end
 
 #user register and login" 
-         puts "00000-user register and login"
-     $browser.goto("#{$site_root}")
- 
-    $browser.link(:href, "#{$site_root}/users/new").click
-    $browser.text_field(:id, "user_name").set($user_name)
-    $browser.text_field(:id, "user_email").set($user_email)
-    $browser.text_field(:id, "user_password").set("1234567")
-    $browser.text_field(:id, "user_password_confirmation").set("1234567")
-    $browser.text_field(:id, "user_mobilephone").set($mobile_phone)
-    $browser.button(:id, "user_submit").click
-    result=$browser.text.force_encoding('utf-8')
-    ["登出","我的货源","我的车源","关于物流零距离","完善公司信息","完善联系方式"].each { |text| assert result.include?(text),"#{text} 不存在 !!"}
-   
-    #log out test
-    sleep(2)  #need wait 1 sec after register
-
-    $browser.link(:href, "#{$site_root}/users/logout").click
+    puts "user login and logout"
+    assert $browser.goto "#{$site_root}"
     result=$browser.text.force_encoding('utf-8')
     ["登录","货源信息","快速注册,永久免费","车源信息","关于物流零距离"].each { |text| assert result.include?(text),"#{text} 不存在 !!"}
     #login test

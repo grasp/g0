@@ -1,49 +1,50 @@
 <div class="stock_cargolist">
-<p style="margin-top:20px;">请点击每个货物的<b style="color:blue;">发布货源</b>来发布该货物的货源</p>
 
-<!--<h2>我的全部货物</h2>-->
+
+  <!--<h2>我的全部货物</h2>-->
   <%unless @stock_cargos.blank?%>
-<table>
+    <table>
 
-  <tr>
-     
-    <th>货物</th>
-      <th>包装</th>     
-    <th>货物大类</th>
-     <th>总计发布</th>
-     <th>状态</th>
-     <th>发布货源</th>
-  </tr>
+      <tr>
 
-  <% @stock_cargos.each do |stock_cargo| %>
-    <tr>     
-      <td>       
-        <a class ="show_float" href="/stock_cargos/show/<%=stock_cargo.id.to_s%>"><%=h stock_cargo.cate_name %></a></td> 
-      <td><%=h stock_cargo.package_name %></td>     
-    
-      <td><%=h $cargo_big_category[stock_cargo.big_category] %></td>   
-      <td><%=h stock_cargo.sent_weight %>吨/<%=h stock_cargo.sent_bulk %>方</td>
-      <%if stock_cargo.status!="正在配车" %>
-       <td style="color:red;"><%=h stock_cargo.status%></td>  
-      <%else%>
-       <td><%=h stock_cargo.status%></td>     
-      <%end%>
-      <td>
-        <a class="link_show" href="/cargos/new/<%=stock_cargo.id.to_s%>">发布货源</a>      
-      </td>
-    </tr>
-  <% end %>
+        <th>货物</th>
+        <th>包装</th>     
+        <th>货物大类</th>
+        <th>总计发布</th>
+        <th>状态</th>
+        <th>发布货源</th>
+      </tr>
+
+      <% @stock_cargos.each do |stock_cargo| %>
+        <tr>     
+          <td>       
+            <a class ="show_float" href="/stock_cargos/show/<%=stock_cargo.id.to_s%>"><%=h stock_cargo.cate_name %></a></td> 
+          <td><%=h stock_cargo.package_name %></td>     
+
+          <td><%=h $cargo_big_category[stock_cargo.big_category] %></td>   
+          <td><%=h stock_cargo.sent_weight %>吨/<%=h stock_cargo.sent_bulk %>方</td>
+          <%if stock_cargo.status!="正在配车" %>
+            <td style="color:red;"><%=h stock_cargo.status%></td>  
+          <%else%>
+            <td><%=h stock_cargo.status%></td>     
+          <%end%>
+          <td>
+            <a class="link_show" href="/cargos/new/<%=stock_cargo.id.to_s%>">发布货源</a>      
+          </td>
+        </tr>
+      <% end %>
     </table>
-    <%else%>
+  <%else%>
     <p>请先添加货物， 然后发布货源</p>
-    <% end %>
+  <% end %>
 
-<%= will_paginate @trucks ,:class=>"page_navi_link"%>
-<div class="caozuo_area" ></div>
+  <%= will_paginate @trucks ,:class=>"page_navi_link"%>
+  <p style="margin-top:20px;">请点击每个货物的<b style="color:blue;">发布货源</b>来发布该货物的货源</p>
+  <div class="caozuo_area" ></div>
 
-<div class="bottom_link">
-  <a class="show_float"  href="/stock_cargos/new">添加新的货物</a>
-</div>
+  <div class="bottom_link">
+    <a class="show_float"  href="/stock_cargos/new">添加新的货物</a>
+  </div>
 
 </div>
 

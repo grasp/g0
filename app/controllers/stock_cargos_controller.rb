@@ -12,9 +12,9 @@ class StockCargosController < ApplicationController
     #@stock_cargos = StockCargo.all
     #
     #this if for logined user only
-   # @stock_cargos = StockCargo.where("user_id = ?",session[:user_id]).order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>5)
-  # @stock_cargos = StockCargo.all(:user_id =>session[:user_id]).sort(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>5)
-   logger.info "session[:user_id]=#{session[:user_id]}"
+    # @stock_cargos = StockCargo.where("user_id = ?",session[:user_id]).order("created_at desc").paginate(:page=>params[:page]||1,:per_page=>5)
+    # @stock_cargos = StockCargo.all(:user_id =>session[:user_id]).sort(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>5)
+    logger.info "session[:user_id]=#{session[:user_id]}"
     @stock_cargos = StockCargo.where(:user_id =>session[:user_id]).paginate(:page=>params[:page]||1,:per_page=>20)
 
     respond_to do |format|
@@ -57,6 +57,15 @@ class StockCargosController < ApplicationController
   def create
     # result= get_stock_cargo_from_params(params)
     #  @stock_cargo = StockCargo.new(params)
+    
+   # params[:stockcargo][:package_name]= #init value
+    params[:stockcargo][:package_name]=$package_category_two[params[:stockcargo][:package_code]] #init value
+    
+   # unless params[:stockcargo][:cate_code].nil?
+    params[:stockcargo][:cate_name]=$cargo_category_two[params[:stockcargo][:cate_code]] #init value
+  #  else
+      
+ #   end
     params[:stockcargo][:cargocount]=0 #init value
     params[:stockcargo][:status]="货物闲置" #init value
     #must initialilize ,otherwise $inc  in update will not work
@@ -65,14 +74,12 @@ class StockCargosController < ApplicationController
     params[:stockcargo][:expired_cargo]=0
     params[:stockcargo][:sent_weight]=0
     params[:stockcargo][:sent_bulk]=0
-     params[:stockcargo][:user_id]=session[:user_id]  
+    params[:stockcargo][:user_id]=session[:user_id]  
     @stock_cargo = StockCargo.new(params[:stockcargo])  
     respond_to do |format|
       if @stock_cargo.save
         flash[:notice] = '货物创建成功！'
-
-        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_stock_cargo" => 1}})
-        
+        Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_stock_cargo" => 1}})        
         format.html { redirect_to(@stock_cargo) }
         format.xml  { render :xml => @stock_cargo, :status => :created, :location => @stock_cargo }
       else
