@@ -3,52 +3,63 @@
 # and open the template in the editor.
 
 class W090NewStockCargoTest < ActiveSupport::TestCase
-
   
   def create_stock_cargo(big_cate,huo_dalei,huo_xiaolei,pack_dalei,pack_xiaolei)
     
-   
     #click new stock cargo
-   assert $browser.link(:text, "添加新的货物").click;sleep 0.2
+   assert $browser.link(:text, "添加新的货物").click;sleep 0.5
    ["创建货物","货物大类","货物类别","货物包装"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
        
    $browser.select_list(:id, "stockcargo_big_category").set("#{big_cate}")
    #选择货物
-   assert $browser.link(:text, "类别选择").click; sleep 0.2
+   assert $browser.link(:text, "类别选择").click; sleep 0.5
    ["面谈","煤炭及制品","石油天然气及制品","货物大类"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
    
-    assert $browser.link(:text, "#{huo_dalei}").click;sleep 0.2
+    assert $browser.link(:text, "#{huo_dalei}").click;sleep 0.5
     ["#{huo_xiaolei}"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
     
-    assert $browser.link(:text, "#{huo_xiaolei}").click;sleep 0.2
+    assert $browser.link(:text, "#{huo_xiaolei}").click;sleep 0.5
     ["#{huo_xiaolei}"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
     
-    assert $browser.link(:id, "list_closec").click;sleep 0.2
+    assert $browser.link(:id, "list_closec").click;sleep 0.5
     ["#{huo_xiaolei}"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
     
     #选择包装
-   assert $browser.link(:text, "包装选择").click;sleep 0.2
+   assert $browser.link(:text, "包装选择").click;sleep 0.5
    ["包装大类","桶装","罐装","箱","袋装","特殊包装"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
    
-    assert $browser.link(:text, "#{pack_dalei}").click;sleep 0.2
+    assert $browser.link(:text, "#{pack_dalei}").click;sleep 0.5
     ["#{pack_xiaolei}"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
     
-     assert $browser.link(:text, "#{pack_xiaolei}").click;sleep 0.2
+     assert $browser.link(:text, "#{pack_xiaolei}").click;sleep 0.5
     ["#{pack_xiaolei}"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
    
-   assert $browser.link(:id, "list_closep").click;sleep 0.2
+   assert $browser.link(:id, "list_closep").click;sleep 0.5
     ["#{pack_xiaolei}"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
 
     assert $browser.button(:id, "stockcargo_submit").click;sleep 0.5
     ["货物创建成功","货物闲置",].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
     
-    $browser.link(:text, "关闭").click;sleep 0.2
+    $browser.link(:text, "关闭").click;sleep 0.5
     
   end
+  
+
+  
+   def create_cargo(from_province,from_city,to_province,to_city,weight,bulk,day,zuhuo)
+     line_select(from_province,from_city,to_province,to_city)
+     $browser.text_field(:id,"cargo_cargo_weight").set(weight)
+     $browser.text_field(:id,"cargo_cargo_bulk").set(bulk)
+     $browser.select_list(:id,"cargo_send_date").set(day)
+     $browser.select_list(:id,"cargo_cargo_zuhuo").set(zuhuo)
+     $browser.button(:id,"cargo_submit").click;sleep 0.5
+      ["货物","出发","到达","继续发布货源",].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+   end
+
   test "user create a stock cargo" do
     puts "user create a stock cargo"
     logout_and_login
-    assert $browser.link(:id, "fabu_huo").click; sleep 0.2
+    assert $browser.link(:id, "fabu_huo").click; sleep 0.5
     ["请先添加货物","添加新的货物","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
 
     create_stock_cargo("普通货物","石油天然气及制品","煤 油","特殊包装","其他包装")
@@ -69,12 +80,16 @@ class W090NewStockCargoTest < ActiveSupport::TestCase
     assert $browser.link(:id, "fabu_huo").click; sleep 0.5   #first click 发布货源 
     ["添加新的货物","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
     
-     assert  $browser.link(:href, "#{old_link}").click;;sleep 0.4 #click each links we remembered
+     assert  $browser.link(:href, "#{old_link}").click;;sleep 0.5 #click each links we remembered
     ["请选择出发地","请选择到达地","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
-  #line select
-  #fill value
-  #click
-  
+      create_cargo("浙江","杭州市","浙江","绍兴市","12","12","一天","零整不限")
+      
+       #second line for same cargo
+       assert $browser.link(:id, "fabu_huo").click; sleep 0.5   #first click 发布货源
+       ["正在配车"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+      assert  $browser.link(:href, "#{old_link}").click;;sleep 0.4 #click each links we remembered
+     ["请选择出发地","请选择到达地","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+     create_cargo( "河南","宝丰县","湖北","广水市","12","12","二天","整车")
     end
   end
 end

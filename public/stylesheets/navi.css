@@ -12,11 +12,13 @@
 */
 
 #navi {
-    text-align: left;
+    text-align:center;
     border-color: #cb8ef7;
-    border-top-style: solid;
-    border-top-width: 1px;
+   border-bottom-width: 1px;
+   border-bottom-style: solid;
+ 
     padding-top: 10px;
+
  }
 
 

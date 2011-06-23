@@ -25,7 +25,7 @@ body {
 #sheader {
     padding: 5px;    
     width:100%;
-
+float:left;
         text-align: left;
 }
 /*
@@ -50,8 +50,7 @@ div.content {
 #show {
     background-color: #F2F2F2;
     width:100%;
-      padding-top: 10px;
- 
+    padding-top: 10px;
  
 }
 

@@ -497,9 +497,11 @@ function company_new_validation()
 
 function usercontacts_new_validation()
 {
+    
+
     $("#usercontact_new").validate(
     {
-
+ 
         rules: {
             "usercontact[name]":{
                 required:true,
@@ -733,7 +735,7 @@ function cargo_new_validation(){
     $("#cargo_new").validate(
     {
         submitHandler: function(form) {
-                  $('#cargo_new').ajaxSubmit({
+       $('#cargo_new').ajaxSubmit({
       // target: '#show',
        success: function() {
        $("#show").load($("a.navi_cargo").attr("href"));

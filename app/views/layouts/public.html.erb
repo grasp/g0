@@ -7,10 +7,11 @@
   </head>
   <body>
    <%user=User.find(session[:user_id]) unless session[:user_id].nil? #TOBE ImProved%>
-    <div id="sheader">
+    <div  style=" text-align: center;" id="sheader">
+      
       <img src="/images/7491063.gif" alt="Icon" align="left" />
 
-        <span id="guser" >
+        <span style ="margin-top: 20px;" id="guser" >
           <a  href="/" >首页</a>
             <%if user.nil?%>
             | <a  href="/users/login" >登录</a>
@@ -24,12 +25,10 @@
         </span>
 
     </div>
-
+         <span id="navi">
+         <%=render "shared/navibar"%>
+         </span>
       <div class="content">
-      <div id="navi">
-       <%=render "shared/navibar"%>
-      </div>
-
     
         <div id="show">
           <%= yield %>

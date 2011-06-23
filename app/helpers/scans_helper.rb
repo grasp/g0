@@ -39,25 +39,25 @@ def scan_helper
   a=[Truck,Cargo]
   a.each do |records|
      records.where(:status.in=>["正在配货","正在配车"],:from_site.in=>["tf56","quzhou"]).each do |record|
-     #  record.update_attributes!(:status=>"超时过期")     if compare_time_expired(record.updated_at,record.send_date || "1")==true
-      record.update_attributes!(:status=>"超时过期")     if compare_time_expired(record.created_at,record.send_date || "1")==true
-     # puts record.status
+       record.update_attribute("status","超时过期")     if compare_time_expired(record.created_at,record.send_date || "1")==true
      end
   end
 a.each do |records|
    records.where(:status.in=>["正在配货","正在配车"],:from_site=>"local").each do |record|
       if compare_time_expired(record.created_at,record.send_date || "1")==true
-      record.update_attributes(:status=>"超时过期")
-        if record.paizhao.blank? #is huo record
+      record.update_attribute("status","超时过期")
+      
+        begin
+          record.paizhao.blank? #is huo record  ,mongoid will raise exception if no method
           StockCargo.where("cargo_id"=>record.id).each { |stockcargo| stockcargo.inc(:valid_cargo,-1)}
-          Quote.where("cargo_id"=>record.id).each { |quote| quote.update_attributes(:status=>"超时过期")}
-          Inquery.where("cargo_id"=>record.id).each { |inquery| inquery.update_attributes(:status=>"超时过期")}
-           Ustatistic.where(:user_id=>record.user_id).inc(:valid_cargo,-1)
-        else  #is che record
-          StockTruck.where("truck_id"=>record.id).each { |stocktruck| stocktruck.inc(:valid_truck,-1)}
-           Quote.where("truck_id"=>record.id).each { |quote| quote.update_attributes(:status=>"超时过期")}
-           Inquery.where("truck_id"=>record.id).each { |inquery| inquery.update_attributes(:status=>"超时过期")}
-           Ustatistic.where(:user_id=>record.user_id).inc(:valid_truck,-1)
+          Quote.where("cargo_id"=>record.id).each { |quote| quote.update_attribute("status","超时过期")}
+          Inquery.where("cargo_id"=>record.id).each { |inquery| inquery.update_attribute("status","超时过期")}
+          Ustatistic.where(:user_id=>record.user_id).first.inc(:valid_cargo,-1)
+        rescue  #is che record
+           StockTruck.where("truck_id"=>record.id).each { |stocktruck| stocktruck.inc(:valid_truck,-1)}
+           Quote.where("truck_id"=>record.id).each { |quote| quote.update_attribute("status","超时过期")}
+           Inquery.where("truck_id"=>record.id).each { |inquery| inquery.update_attribute("status","超时过期")}
+           Ustatistic.where(:user_id=>record.user_id).first.inc(:valid_truck,-1)
         end
       end
    end

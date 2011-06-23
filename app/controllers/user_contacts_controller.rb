@@ -118,6 +118,7 @@ class UserContactsController < ApplicationController
     @user=User.find(session[:user_id])
     @user_contact = UserContact.new
     @user_contact.email=@user.email
+    @user_contact.mobilephone=@user.mobilephone
 
     respond_to do |format|
       format.html # new.html.erb
@@ -148,11 +149,22 @@ class UserContactsController < ApplicationController
   def create
      params[:usercontact][:user_id]=session[:user_id]
      @user_contact = UserContact.new(params[:usercontact])
+     
      @user=User.find(session[:user_id])
+     
+    if @user.mobilephone!= @user_contact.mobilephone
+      @user.update_attribute("mobilephone",@user_contact.mobilephone)
+    end
+    
+    if @user.email!= @user_contact.email && !(@user_contact.email.blank?)
+         @user.update_attribute("email",@user_contact.email)
+    end
+
+    @user.update_attribute("user_contact_id",@user_contact.id)
+ 
     respond_to do |format|
       if @user_contact.save
-        flash[:notice] = '联系信息创建成功'
-         @user.update_attributes(:user_contact_id=>@user_contact.id)
+         flash[:notice] = '联系信息创建成功'      
          format.html {  render :layout=>'public',:action => "show" }
       else
         flash[:notice] = '创建联系人失败'

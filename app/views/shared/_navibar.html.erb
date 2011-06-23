@@ -25,9 +25,9 @@
               <td class="navi_user">  <a style="color:red;" href="/users/<%=user.id%>/companies/new"> 完善公司信息</a> </td>
               <%end%>   
                <%unless user.user_contact_id.blank?%>
-                <td class="navi_user"> <a class="navi_link" href="/user_contacts/show/<%=user.user_contact_id%>">我的联系人</a></td>
+                <td class="navi_user"> <a  id ="my_contact" class="navi_link" href="/user_contacts/show/<%=user.user_contact_id%>">我的联系信息</a></td>
                <%else%>
-                 <td class="navi_user"> <a style="color:red;" href="/user_contacts/new/<%=user.id%>">完善联系方式</a></td>
+                 <td class="navi_user"> <a id ="my_contact" style="color:red;" href="/user_contacts/new/<%=user.id%>">完善联系方式</a></td>
                <%end%> 
 
           <%else%>

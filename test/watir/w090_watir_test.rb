@@ -8,13 +8,10 @@ start_time=Time.now
 require 'watir'
 require  'rubygems'
 require 'active_support/all'
-
+require 'test/unit/notify'
 require "test/unit"
 puts "load test env cost #{Time.now-start_time} sec"
 #end
-
-
-
 
 
 class ActiveSupport::TestCase
@@ -26,13 +23,16 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   #$browser = Watir::Browser.new()
   $browser =Watir::IE.new
- # $browser.minimize
- $browser.maximize
+  $browser.speed = :fast
+  $browser.minimize
+ #$browser.maximize
  
   $site_root= "http://localhost:5678"
   $user_name=Time.now.to_s.gsub(/\s|:|\+/,"").to_s
+ 
   $user_email="#{$user_name}@gmail.com"
   $mobile_phone=$user_name.slice(9,18)
+   $paizhao=$mobile_phone.slice(0,6)
   $browser.goto("#{$site_root}")
   #each time run test, new a user
   
@@ -75,12 +75,40 @@ class ActiveSupport::TestCase
     $browser.button(:value, "登录").click
   end
 
-   def tear_down
-       $browser.close
-   end
- 
+  def line_select(from_province,from_city,to_province,to_city)
+     assert $browser.link(:id, "from_data_load").click;sleep 0.5
+    ["浙江","上海","北京","西藏"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    
+     assert $browser.link(:text, "#{from_province}").click;sleep 0.5
+     ["浙江","上海","北京","西藏"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+     
+      assert $browser.link(:text, "#{from_city}").click;sleep 0.5
+     ["#{from_province}","#{from_city}"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    
+    assert $browser.link(:id, "from_data_load").click;sleep 0.5
+     ["#{from_province}","#{from_city}"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    
+    
+    assert $browser.link(:id, "to_data_load").click;sleep 0.5
+    ["浙江","上海","北京","西藏"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    
+     assert $browser.link(:text, "#{to_province}").click;sleep 0.5
+     ["浙江","上海","北京","西藏"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+     
+      assert $browser.link(:text, "#{to_city}").click;sleep 0.5
+     ["#{to_province}","#{to_city}"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    
+    assert $browser.link(:id, "to_data_load").click;sleep 0.5
+     ["#{to_province}","#{to_city}"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    
+  end
+  
 end
 require  File.dirname(__FILE__) + "/cargos/cargo_public_page_test"
 require  File.dirname(__FILE__) + "/trucks/truck_page_test"
+require  File.dirname(__FILE__) + "/trucks/new_stock_truck_and_truck"
 require  File.dirname(__FILE__) + "/users/user_page_test"
 require  File.dirname(__FILE__) + "/cargos/new_stock_cargo"
+require  File.dirname(__FILE__) + "/companies/new_company"
+require  File.dirname(__FILE__) + "/contacts/new_contact"
+

@@ -29,14 +29,19 @@ test "user_register_login_logout" do
 
 
   #"1-user open register form" 
+  
     puts "1-user open register form"
-    b=$browser.link(:href, "#{$site_root}/users/new").click
-    assert b
     result=$browser.text.force_encoding('utf-8')
-    ma=["欢迎来到物流零距离","用户名","Email","密码"]
-    ma.each do |text|
-      assert result.include?(text),"#{text} 不存在 !!"
+    if result.include?("登出")
+      $browser.link(:href, "#{$site_root}/users/logout").click;sleep 0.5
+    else
+      $browser.goto("#{$site_root}")
     end
+    sleep 1
+    
+    assert $browser.link(:href, "#{$site_root}/users/new").click
+    result=$browser.text.force_encoding('utf-8')
+    ["欢迎来到物流零距离","用户名","Email","密码"].each {|text|   assert result.include?(text),"#{text} 不存在 !!"}
 
   #"2-user click button without any fill"
     puts "2user click button without any fill"
