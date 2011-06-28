@@ -5,8 +5,8 @@ class StockCargosController < ApplicationController
   include StockCargosHelper
   before_filter:authorize
   protect_from_forgery :except => [:tip,:login]
-  # layout "public"
-  layout :nil
+  layout 'public' ,:except => [:show]
+ # layout :nil
   def index
     #for admin purpose
     #@stock_cargos = StockCargo.all
@@ -78,9 +78,10 @@ class StockCargosController < ApplicationController
     @stock_cargo = StockCargo.new(params[:stockcargo])  
     respond_to do |format|
       if @stock_cargo.save
-        flash[:notice] = '货物创建成功！'
+       flash[:notice]="货物创建成功"
         Ustatistic.collection.update({'user_id' => session[:user_id]},{'$inc' => {"total_stock_cargo" => 1}})        
-        format.html { redirect_to(@stock_cargo) }
+       # format.html { redirect_to(@stock_cargo) }
+        format.html { redirect_to :action=>"index"}
         format.xml  { render :xml => @stock_cargo, :status => :created, :location => @stock_cargo }
       else
         flash[:notice] = '货物创建失败！.'

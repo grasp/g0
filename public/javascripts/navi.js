@@ -22,6 +22,7 @@ $("#navi").ready(function(){
 });
 */
 //Ajax for all navi link
+/*
 $('a.navi_link').live("click",function(){
     $('#show').load(this.href,function(){
  });
@@ -42,11 +43,13 @@ $(".page_navi_link,div.page_navi_link a,a.link_show").live("click",function(){
  });
      return false;
     });
-    
+    */
+ /*   
     $('#search').live("click",function(){
     
      $('#show').load(this.href);
      return false;
      
 })
+*/
 }

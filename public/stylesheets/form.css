@@ -33,8 +33,15 @@
      font-size:larger;
      margin-top: 20px;
 }
-
-
+/*
+div.sc_field label,div.sc_field span{
+     width:120px;
+     height: 50px;
+     font-weight: bold;
+     font-size:larger;
+     text-align: center;
+}
+*/
 .show_form  .field label{
       font-weight: bold;
       display:-moz-inline-stack;
@@ -52,11 +59,11 @@
       display:inline-block;
       margin-left:10px;
 }
-
+/*
 div.stockcargo_new .field label{
      width:30%;
 }
-
+*/
 /* for email reminder label*/
 #register_email
 {
@@ -99,11 +106,12 @@ div.stockcargo_new .field input{
 .show_form .login_button {
      margin-left: 30%;
 }
+/*
 div.stock_cargo_new .field select{
      width:50%;
     
 }
- 
+ */
 /*.threepxfix class below: 
 Targets IE6- ONLY. Adds 3 pixel indent for multi-line form contents. 
 to account for 3 pixel bug: http://www.positioniseverything.net/explorer/threepxtest.html 
@@ -266,3 +274,6 @@ text-align: left;
 
 #error_explanation{color:red;}
 
+#stockcargo_big_category{width: 150px;border: 1px;border-style: solid;}
+div.sc_field{margin-top:10px;}
+.data_list li {list-style-type:none;text-align: left;}

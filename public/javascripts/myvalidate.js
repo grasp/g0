@@ -574,10 +574,10 @@ function stock_cargo_new_validation(){
         submitHandler: function(form) {
             $('#stockcargo_new').ajaxSubmit({
                 // beforeSubmit:function(){ (stock_cargo_new_validation());},
-                target: '#float_load',
+              //  target: '#float_load',
                 success: function() {
-                    $("#show").load($("a.navi_stock_cargo").attr("href"));
-                    $('#navi').load("/public/navibar");
+                   // $("#show").load($("a.navi_stock_cargo").attr("href"));
+                  //  $('#navi').load("/public/navibar");
                 }
             });
             return false;
@@ -850,7 +850,7 @@ function quote_new_validation(){
     $("#quote_new").validate(
     {
         submitHandler: function(form) {
-                  $('#quote_new').ajaxSubmit({
+        $('#quote_new').ajaxSubmit({
        target: '#float_load',
        success: function() {
 

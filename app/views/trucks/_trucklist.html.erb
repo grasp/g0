@@ -27,7 +27,8 @@
     <th>状态</th>
     <th>货主操作</th>
   <th>
-     <a id ="search"  href=<%="/trucks/search/#{@search.fcity_code}/#{@search.tcity_code}/1"%>>搜索</a>
+   <input value="查询" class="truck_search" type="submit" name="asss">
+   <!--  <a id ="search"  href=<%="/trucks/search/#{@search.fcity_code}/#{@search.tcity_code}/1"%>>搜索</a>-->
   </th>
   </tr>
 
@@ -71,4 +72,4 @@
         <p>没有找到对应车源</p>
      <% end %>
 
-<%= will_paginate(@trucks ,:class=>"page_navi_link",:action=>"search",:params=>{:fcity_code=>@search.fcity_code, :tcity_code=>@search.tcity_code}) %>
+<%= will_paginate(@trucks ,:action=>"search",:params=>{:fcity_code=>@search.fcity_code, :tcity_code=>@search.tcity_code}) %>

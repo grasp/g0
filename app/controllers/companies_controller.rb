@@ -8,11 +8,13 @@ class CompaniesController < ApplicationController
   protect_from_forgery :except => [:tip,:login]
   include CompaniesHelper
 #  layout  "users",:except => [:show,:index,:search,:showf]
-  layout :choose_layout
+layout 'public'
+ # layout :choose_layout
   
     def choose_layout
       return 'admin'  if action_name =='admin'      
       return 'users' if action_name=="new" || action_name=="edit"
+      return 'public' if action_name=="show"
      end
      
    def admin

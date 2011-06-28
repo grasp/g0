@@ -4,8 +4,14 @@ class UserContactsController < ApplicationController
   # GET /contact_people.xml
   before_filter:authorize
   protect_from_forgery :except => [:tip,:login]
- #  layout "public"
-  layout  "users",:except => [:show,:index,:showf]
+   layout "public"
+ # layout :choose_layout
+  
+    def choose_layout
+ 
+      return 'users' if action_name=="new" || action_name=="edit"
+      return 'public' if action_name=="show"
+     end
   
   def index
 

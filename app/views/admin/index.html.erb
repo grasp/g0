@@ -1,39 +1,17 @@
-<h1>Admin#index</h1>
-<div>
- 
-<ul><li> 用户数量:<%=User.count%></li></ul> 
-<ul> <li>公司数量:<%=Company.count%></li></ul> 
-<ul>
-  <li> 货源数量:<%=Cargo.count%></li> 
-  <li> 正在配车:<%=Cargo.where(:status=>"正在配车").count%></li> 
-</ul>
-<ul> 
-   <li> 车源数量:<%=Truck.count%></li> 
-   <li> 正在配货:<%=Truck.where(:status=>"正在配货").count%></li> 
- </ul>
+<h1>网站数据一览</h1>
 
-<ul> 
-   <li> 过期货源:<%=ExpiredCargo.count%></li> 
-   <li> 过期车源:<%=ExpiredTruck.count%></li> 
- </ul>
-</div>
+ <table class="admin_index">
+<tr><td> 用户数量</td><td><%=User.count%></td></tr> 
+<tr> <td>公司数量</td><td><%=Company.count%></td></tr> 
+<tr>
+  <td> 货源数量</td><td><%=Cargo.count%></td> </tr>
+ <tr> <td> 过期货源</td><td><%=ExpiredCargo.count%></td> </tr>
+ <tr> <td> 正在配车</td><td><%=Cargo.where(:status=>"正在配车").count%></td> </tr>
 
-<h1>Today Statistic</h1>
-<ul>
-<li>今日货源:<%=@today["huo"]%></li>
-<li>今日车源:<%=@today["che"]%></li>
-<li>今日报价:<%=@today["quote"]%></li>
-<li>今日询价:<%=@today["inquery"]%></li>
-<li>今日用户:<%=@today["user"]%></li>
-<li>今日公司:<%=@today["company"]%></li>
-</ul>
 
-<h1>Yesterday Statistic</h1>
-<ul>
-<li>今日货源:<%=@yesterday["huo"]%></li>
-<li>今日车源:<%=@yesterday["che"]%></li>
-<li>今日报价:<%=@yesterday["quote"]%></li>
-<li>今日询价:<%=@yesterday["inquery"]%></li>
-<li>今日用户:<%=@yesterday["user"]%></li>
-<li>今日公司:<%=@yesterday["company"]%></li>
-</ul>
+  <tr> <td> 车源数量</td><td><%=Truck.count%></td>  </tr>
+   <tr> <td> 正在配货</td><td><%=Truck.where(:status=>"正在配货").count%></td>  </tr>
+   <tr> <td> 过期车源</td><td><%=ExpiredTruck.count%></td>  </tr>
+
+</table>
+

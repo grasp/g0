@@ -7,7 +7,7 @@ class W090NewStockTruckTest < ActiveSupport::TestCase
   def create_stock_truck(paizhao,weight,length,usage,chexiang,gps,jiaoche_person,
       jiaoche_phone,driver_person,driver_phone,owner,owner_phone,brand,xinghao,year)
     
-        assert $browser.link(:id, "fabu_che").click; sleep 1
+    assert $browser.link(:id, "fabu_che").click; sleep 1
     ["新增车子","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
     
     assert $browser.link(:text, "新增车子").click; sleep 0.5   #first click 发布货源 
@@ -47,25 +47,24 @@ class W090NewStockTruckTest < ActiveSupport::TestCase
     
   end
 
-  test "user create a stock truck" do
+  def test_user_create_a_stock_truck
     puts "user create a stock truck"
     logout_and_login
 
-
-     create_stock_truck("浙#{$paizhao}","15","12","普通运输","平板","有","张三",
+    create_stock_truck("浙#{$paizhao}","15","12","普通运输","平板","有","张三",
       "16578987654","李四","18765431234","王五","18765421258","东风货车","EST1000","2011")
     
-     create_stock_truck("冀#{$paizhao}","25","11","大件运输","平板","无","张三",
-      "16578987651","李四","18765431233","王五","18765421259","江淮货车","EST1001","2009")    
+    # create_stock_truck("冀#{$paizhao}","25","11","大件运输","平板","无","张三",
+    # "16578987651","李四","18765431233","王五","18765421259","江淮货车","EST1001","2009")    
 
-     create_stock_truck("豫#{$paizhao}","15","15","危险品专用","厢式车","无","张三",
-      "16578987652","李四","18765431232","王五","18765421250","江淮货车","EST1002","2008") 
+    #  create_stock_truck("豫#{$paizhao}","15","15","危险品专用","厢式车","无","张三",
+    #  "16578987652","李四","18765431232","王五","18765421250","江淮货车","EST1002","2008") 
     
-       create_stock_truck("鲁#{$paizhao}","15","15","冷藏保温","高栏","有","张三",
-      "16578987655","李四","18765431231","王五","18765421257","福田货车","EST1002","2008") 
+    #  create_stock_truck("鲁#{$paizhao}","15","15","冷藏保温","高栏","有","张三",
+    #  "16578987655","李四","18765431231","王五","18765421257","福田货车","EST1002","2008") 
     
     all_links=Array.new
-    #now 发布货源
+    #now 发布车源
     $browser.links.each do |link|
       all_links << link.href.to_s if link.href.match("/trucks/new")
     end
@@ -85,5 +84,62 @@ class W090NewStockTruckTest < ActiveSupport::TestCase
       ["请选择出发地","请选择到达地","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
       create_truck( "河南","宝丰县","湖北","广水市","二天","本地车")
     end
+    
+    #now do some quote operation
+    $browser.goto("#{$site_root}");sleep 1
+    counter=0
+    if $browser.text.include?("报价")
+      $browser.links.each do |link|
+        if link.text=="报价"
+          counter+=1
+          break if counter >2         
+          link.click;sleep 0.4         
+          ["报价(元)","报价车源","或面议"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+        
+          $browser.text_field(:id,"quote_price").set("2000")
+          $browser.select_list(:id,"quote_truck_id").set("浙#{$paizhao}(浙江杭州市<=>浙江绍兴市)")
+          $browser.button(:id,"quote_submit").click;sleep 0.4         
+          ["创建报价成功"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+         
+          $browser.link(:text,"关闭").click;sleep 0.2          
+          link.click;sleep 0.4 
+         
+          $browser.text_field(:id,"quote_price").set("2000")
+          $browser.select_list(:id,"quote_truck_id").set("浙#{$paizhao}(浙江杭州市<=>浙江绍兴市)")
+          $browser.button(:id,"quote_submit").click;sleep 0.4        
+          ["不能重复报价！"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+         
+          $browser.link(:text,"关闭").click;sleep 0.2         
+          link.click;sleep 0.5
+         
+          #second line
+          $browser.text_field(:id,"quote_price").set("2000")
+          $browser.select_list(:id,"quote_truck_id").set("浙#{$paizhao}(河南平顶山市宝丰县<=>湖北随州市广水市)")
+          $browser.button(:id,"quote_submit").click;sleep 0.4         
+          ["创建报价成功"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+         
+          $browser.link(:text,"关闭").click;sleep 0.2          
+          link.click;sleep 0.4 
+         
+          $browser.text_field(:id,"quote_price").set("2000")
+          $browser.select_list(:id,"quote_truck_id").set("浙#{$paizhao}(河南平顶山市宝丰县<=>湖北随州市广水市)")
+          $browser.button(:id,"quote_submit").click;sleep 0.3         
+          ["不能重复报价！"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+          $browser.link(:text,"关闭").click;sleep 0.2
+        end
+      end 
+    end
+    #now click my che
+    $browser.link(:id,"my_che").click;sleep 0.3
+    ["河南平顶山市宝丰县","湖北随州市广水市","浙江杭州市","浙江绍兴市","货主询价/我已报价","新增车子"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+        
+    $browser.links.each do |link|
+      $browser.link(:id,"my_che").click;sleep 0.3
+      if link.text.include?("条询价")
+        link.click;sleep 0.5
+        ["河南平顶山市宝丰县","湖北随州市广水市","浙江杭州市","浙江绍兴市","该车子和线路报价的货物","货物出发","货物到达"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+      end
+    end
+   
   end
 end

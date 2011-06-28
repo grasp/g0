@@ -24,11 +24,11 @@ class W090NewContactTest < ActiveSupport::TestCase
   def test_private_user_create_contact 
     puts "private user create contact"
     logout_and_login
-    create_contact("张三","18976541234","021","98761234","179876541")
+    create_contact("张三","#{$mobile_phone}","021","98761234","179876541")
     
     #now check information is there
     assert $browser.link(:id, "my_contact").click;sleep 0.5
-    ["张三","18976541234","021","98761234","179876541"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    ["张三","#{$mobile_phone}","021","98761234","179876541"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
     
   end
   

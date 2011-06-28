@@ -9,7 +9,7 @@ class TrucksController < ApplicationController
   protect_from_forgery :except => [:tip,:login]
   # layout "public"
  # caches_page :search,:show
-  layout nil
+   layout 'public' ,:except => [:show,:search]
 
   def public
     @trucks =  Truck.all(:user_id =>session[:user_id])
@@ -81,6 +81,13 @@ class TrucksController < ApplicationController
     @action_suffix="#{@search.fcity_code}#{@search.tcity_code}#{params[:page]}"
   
     @search.save
+    respond_to do |format|
+    if params[:layout]     
+      format.html  
+    else
+     format.html {render :layout=>"public"}
+    end
+    end
   end
   
   def part
@@ -264,7 +271,7 @@ class TrucksController < ApplicationController
      # @stock_truck.inc(:sent_bulk,@cargo.cargo_bulk.to_f)
         expire_line_truck(@truck.fcity_code,@truck.tcity_code)
         
-        format.html { redirect_to(@truck)}
+        format.html { redirect_to :action=>"index"}
         format.xml  { render :xml => @truck, :status => :created, :location => @truck }
       else
         flash[:notice] = '车源创建失败，重复发布'

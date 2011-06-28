@@ -51,8 +51,10 @@ function float_load_layer1(){
         var corordiate= $(this).offset();
         var cord_left=corordiate.left;
         var cord_top=corordiate.top;
-        selected=$('#float_show');        
+        selected=$('#float_show');  
+        
         var select_parent=$(this).parent().parent();
+        var parent_coordiate=select_parent.offset();
        $('tr').css("background-color","white");
        $('#float_load').empty();
        $('#float_load').load(this.href,function(){     
@@ -92,14 +94,19 @@ function float_load_layer1(){
           
        //   selected.css("left",$("#show").offset().left);
        
-       selected.css("left",corordiate.left);
+         selected.css("left",corordiate.left);
 
          if ((this.href.match(/cargos\/show/))||(this.href.match(/trucks\/show/)))
           {
               selected.css("top",corordiate.top+$(this).height()+10);
               selected.css("left",corordiate.left);
-          }          
-              
+          }   
+         
+         if ((this.href.match(/quotes/))||(this.href.match(/inqueries/)))
+          {
+           selected.css("top",corordiate.top+$(this).height()+10);
+            selected.css("left",parent_coordiate.left);  
+           }
          if($.browser.msie) {
                 event.returnValue = false;
                 event.preventDefault();

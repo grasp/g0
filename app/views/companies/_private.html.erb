@@ -1,72 +1,76 @@
-<div id="notice"><%= notice %></div>
+<p id="notice"><%= notice %></p>
+
 <div  class="companyshow">
   <h3>我的公司信息</h3>
-<div>
-  <label>公司名称:</label>
-  <%= @company.name %>
-</div>
+  </div>
 
-<div class="companyabout">
-  <label>公司介绍:</label>
-  <p> <%= @company.about %></p>
-</div>
+<table class="company_private_show">
 
-<div>
-  <label>公司联系人:</label>
-  <%= @company.contact_name %>
-</div>
+<tr>
+  <td class="label_td">公司名称:</td>
+ <td> <%= @company.name %></td>
+</tr>
 
-<div>
-  <label>所在城市:</label>
-  <%= @company.city_name %>
-</div>
+<tr class="companyabout">
+  <td  class="label_td">公司介绍:</td>
+  <td style="height: 200px; width:500px;"> <%= @company.about %></td>
+</tr>
 
+<tr>
+  <td class="label_td">公司联系人:</td>
+ <td> <%= @company.contact_name %></td>
+</tr>
 
-<div>
-  <label>公司地址:</label>
-  <%= @company.address %>
-</div>
-
-<div>
-  <label>固定电话:</label>
-  <%= @company.fix_phone %>
-</div>
-
-<div>
-  <label>移动电话:</label>
-  <%= @company.mobile_phone %>
-</div>
-
-<div>
-  <label>公司邮件:</label>
-  <%= @company.email %>
-</div>
-
-<div>
-  <label>自有车辆:</label>
-  <%= @company.self_che %>
-</div>
-
-<div>
-  <label>挂靠车辆:</label>
-  <%= @company.signed_che %>
-</div>
-
-<div>
-  <label>员工数量:</label>
-  <%= @company.num_employ %>
-</div>
+<tr>
+  <td class="label_td">所在城市:</td>
+  <td><%= @company.city_name %></td>
+</tr>
 
 
+<tr>
+  <td class="label_td">公司地址:</td>
+ <td> <%= @company.address %></td>
+</tr>
 
-<div >
-  <label>该信息由
-<%= User.find(@company.user_id).name %>
+<tr>
+  <td class="label_td">固定电话:</td>
+ <td> <%= @company.quhao+"-"+@company.fix_phone %></td>
+</tr>
 
- 创建</label>
-</div>
+<tr>
+  <td class="label_td">移动电话:</td>
+ <td> <%= @company.mobile_phone %></td>
+</tr>
 
-</div>
+<tr>
+  <td class="label_td">公司邮件:</td>
+ <td> <%= @company.email %></td>
+</tr>
 
+<tr>
+  <td class="label_td">自有车辆:</td>
+ <td> <%= @company.self_che %></td>
+</tr>
+
+<tr>
+  <td class="label_td">挂靠车辆:</td>
+ <td> <%= @company.signed_che %></td>
+</tr>
+
+<tr>
+  <td class="label_td">员工数量:</td>
+  <td> <%= @company.num_employ %></td>
+</tr>
+
+</table>
+
+  <p>该信息由
+    <%if @company.created_at.to_s==@company.updated_at.to_s%>
+   <%= User.find(@company.user_id).name %> 创建于<%=@company.created_at.to_s%>
+   <%else%>
+   <%= User.find(@company.user_id).name %> 更新于<%=@company.updated_at.to_s%>
+   <%end%>
+  </p>
+  
 <%#= link_to 'Edit', edit_company_path(@company) %> 
 <%#= link_to 'Back', companies_path %>

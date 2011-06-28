@@ -52,18 +52,18 @@ class W090NewStockCargoTest < ActiveSupport::TestCase
      $browser.text_field(:id,"cargo_cargo_bulk").set(bulk)
      $browser.select_list(:id,"cargo_send_date").set(day)
      $browser.select_list(:id,"cargo_cargo_zuhuo").set(zuhuo)
-     $browser.button(:id,"cargo_submit").click;sleep 0.5
+     $browser.button(:id,"cargo_submit").click;sleep 0.6
       ["货物","出发","到达","继续发布货源",].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
    end
 
-  test "user create a stock cargo" do
+  def test_user_create_a_stock_cargo
     puts "user create a stock cargo"
     logout_and_login
     assert $browser.link(:id, "fabu_huo").click; sleep 0.5
     ["请先添加货物","添加新的货物","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
 
     create_stock_cargo("普通货物","石油天然气及制品","煤 油","特殊包装","其他包装")
-    create_stock_cargo("普通货物","非金属矿石","磷矿石","袋装","麻袋")
+  #  create_stock_cargo("普通货物","非金属矿石","磷矿石","袋装","麻袋")
   #  create_stock_cargo("大件货物","木 材","原 木","特殊包装","裸装")
   #  create_stock_cargo("普通货物","粮 食","小 麦","袋装","麻袋")
   #  create_stock_cargo("普通货物","机械设备电器","农林牧渔业机械","特殊包装","挂装")
@@ -90,6 +90,52 @@ class W090NewStockCargoTest < ActiveSupport::TestCase
       assert  $browser.link(:href, "#{old_link}").click;;sleep 0.4 #click each links we remembered
      ["请选择出发地","请选择到达地","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
      create_cargo( "河南","宝丰县","湖北","广水市","12","12","二天","整车")
-    end
+        end
+         counter=0
+      #click che_info
+      $browser.link(:id,"che_info").click;sleep 0.5
+      if $browser.links.each do |link|
+          counter +=1
+          break if counter>3
+          if link.text.include?("询价")
+            link.click;sleep 0.3
+           ["出价","我的货物及其线路","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+           $browser.text_field(:id,"inquery_price").set("2000")
+           $browser.select_list(:id,"inquery_cargo_id").set("煤 油(河南平顶山市宝丰县<=>湖北随州市广水市)")
+           $browser.button(:id,"inquery_submit").click;sleep 0.4         
+           ["询价创建成功"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+            $browser.link(:text,"关闭").click;sleep 0.2   
+            
+           link.click;sleep 0.4 
+          ["出价","我的货物及其线路","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+           $browser.text_field(:id,"inquery_price").set("2000")
+           $browser.select_list(:id,"inquery_cargo_id").set("煤 油(浙江杭州市<=>浙江绍兴市)")
+           $browser.button(:id,"inquery_submit").click;sleep 0.4  
+            ["询价创建成功"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+            $browser.link(:text,"关闭").click;sleep 0.2 
+            
+                        link.click;sleep 0.3
+           ["出价","我的货物及其线路","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+           $browser.text_field(:id,"inquery_price").set("2000")
+           $browser.select_list(:id,"inquery_cargo_id").set("煤 油(河南平顶山市宝丰县<=>湖北随州市广水市)")
+           $browser.button(:id,"inquery_submit").click;sleep 0.4         
+           ["重复询价"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+            $browser.link(:text,"关闭").click;sleep 0.2   
+            
+           link.click;sleep 0.4 
+          ["出价","我的货物及其线路","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+           $browser.text_field(:id,"inquery_price").set("2000")
+           $browser.select_list(:id,"inquery_cargo_id").set("煤 油(浙江杭州市<=>浙江绍兴市)")
+           $browser.button(:id,"inquery_submit").click;sleep 0.4  
+            ["重复询价"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+            $browser.link(:text,"关闭").click;sleep 0.2
+            
+          end
+      end
+      
+      end
+       $browser.link(:id,"my_huo").click ;sleep 0.5
+       ["车源速配","车主报价/货主询价","继续发布货源"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+ 
   end
 end

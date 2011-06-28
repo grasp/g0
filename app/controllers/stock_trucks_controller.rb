@@ -6,7 +6,7 @@ class StockTrucksController < ApplicationController
   protect_from_forgery :except => [:tip,:login]
   include StockTrucksHelper
   #layout "public", :except => [:oper]
-  layout nil
+  layout 'public'
   def index
    @stock_trucks = StockTruck.where(:user_id =>session[:user_id]).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>5)
     respond_to do |format|
@@ -72,7 +72,7 @@ class StockTrucksController < ApplicationController
         flash[:notice] = '成功创建车辆'
         Ustatistic.collection.update({'user_id'=>session[:user_id]},
         {'$inc' => {"total_stock_truck" => 1}},{:upsert =>true})
-        format.html { redirect_to(@stock_truck) }
+        format.html { redirect_to :action=>"index"}
         format.xml  { render :xml => @stock_truck, :status => :created, :location => @stock_truck }
       else
         flash[:notice] = '创建车辆失败,该牌照已经存在'

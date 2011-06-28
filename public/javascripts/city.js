@@ -126,7 +126,7 @@ function city_load(){
             lastindex=action2.toString().lastIndexOf('/')
             lastcode =action2.toString().substring(lastindex+1);//fro recover the last number
             new_action=action2.replace(/\/\d+\/\d$/,"/"+code+"/"+lastcode)
-           $("#search").attr("href",new_action)     
+            $("#search").attr("href",new_action)     
             }
             else
             {
@@ -194,6 +194,8 @@ function city_load(){
         }
         else   return false;
     });
+    
 
 
-};
+
+}

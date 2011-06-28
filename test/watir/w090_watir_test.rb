@@ -25,14 +25,14 @@ class ActiveSupport::TestCase
   $browser =Watir::IE.new
   $browser.speed = :fast
   $browser.minimize
- #$browser.maximize
+  #$browser.maximize
  
   $site_root= "http://localhost:5678"
   $user_name=Time.now.to_s.gsub(/\s|:|\+/,"").to_s
  
   $user_email="#{$user_name}@gmail.com"
   $mobile_phone=$user_name.slice(9,18)
-   $paizhao=$mobile_phone.slice(0,6)
+  $paizhao=$mobile_phone.slice(0,6)
   $browser.goto("#{$site_root}")
   #each time run test, new a user
   
@@ -52,7 +52,7 @@ class ActiveSupport::TestCase
   #log out test
   sleep(2)  #need wait 1 sec after register
 
-  $browser.link(:href, "#{$site_root}/users/logout").click
+  $browser.link(:href, "#{$site_root}/users/logout").click;sleep 0.2
     
   def logout_and_login
     logout

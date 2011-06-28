@@ -15,8 +15,12 @@
       <th>发布日期</th>
       <th>货源状态</th>    
       <th>车主操作</th>
-  <th>
-     <a id ="search"  href=<%="/cargos/search/#{@search.fcity_code}/#{@search.tcity_code}/1"%>>搜索</a>
+  <th style="background-color:#F2F2F2;" class="search">
+    
+   <input value="查询" class="cargo_search" type="submit" name="asss">
+   
+   <!--  <a id="search"  href=<%="/cargos/search/#{@search.fcity_code}/#{@search.tcity_code}/1"%>>查询</a>-->
+     
   </th>
 
  <% unless @cargos.blank? %>
@@ -40,7 +44,7 @@
           <td>
             <%if cargo[:from_site]=="local"%>
             <%unless session[:user_id].nil?%>
-            <%if cargo.user_id.to_s==session[:user_id].to_s%>
+            <%if cargo.user_id==session[:user_id]%>
              货主
             <%else%>
                 <a class="baojia" href="/cargos/<%=cargo.id%>/quotes/new">报价</a>
@@ -57,7 +61,7 @@
     <% end %>
   </table>
 
-<%= will_paginate @cargos ,:class=>"page_navi_link",:action=>"search",:params=>{:from=>@search.fcity_code, :to=>@search.tcity_code}%>
+<%= will_paginate @cargos ,:action=>"search",:params=>{:from=>@search.fcity_code, :to=>@search.tcity_code}%>
 
 <%else%>
   <p>

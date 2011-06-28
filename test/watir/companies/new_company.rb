@@ -41,10 +41,12 @@ class W090NewCompanyTest < ActiveSupport::TestCase
   def test_private_user_create_company 
     puts "private user create company"
     logout_and_login
-    create_company("#{$user_name}_汉江物流有限公司","我们是一家很棒的物流公司","20","5","张三丰","浙江","杭州市","石大路市场123号","0571","82876543","17898761234","hu@gmail.com")
+    create_company("#{$user_name}_汉江物流有限公司","我们是一家很棒的物流公司,\r\n我们是一家很棒的物流公司我们是一家很棒的,\r\n物流公司我们是一家很棒的物流公司我们是一家很棒的物流公司 \
+      我们是一家很棒的物流公司我们是一家很棒的物流\r\n公司我们是一家很棒的物流公司我们是一家很棒的\n物流公司我们是一家很棒的物流公司我们是一家很棒的物流公司我们是一家很棒的\
+     物流公司我们是一家很棒的物流公司我们是一家很棒的物流公司\n我们是一家很棒的物流公司我们是一家很棒的物流公司","20","5","张三丰","浙江","杭州市","石大路市场123号","0571","82876543","17898761234","#{$user_name}hu@gmail.com")
    #now check information is there
     assert $browser.link(:text, "我的公司").click;sleep 0.5
-    ["#{$user_name}_汉江物流有限公司","我们是一家很棒的物流公司","20","5","张三丰","浙江","杭州市","石大路市场123号","0571","82876543","17898761234","hu@gmail.com"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    ["#{$user_name}_汉江物流有限公司","我们是一家很棒的物流公司我们是一家很棒的物流公司我们是一家很棒的物流公司我们是一家很棒的物流公司我们是一家很棒的物流公司","20","5","张三丰","浙江","杭州市","石大路市场123号","0571","82876543","17898761234","hu@gmail.com"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
     
   end
   

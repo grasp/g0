@@ -12,8 +12,8 @@ class TruckCargoPageTest < ActiveSupport::TestCase
     ["车辆","出发地","到达地","有效期"].each { |text|  assert result.include?(text),"#{text} 不存在 !!"}  
     
    #click page 2
-   7.downto(2).each do |i|
-   assert $browser.link(:href, "#{$site_root}/trucks/search/100000000000/100000000000/#{i}?fcity_code=100000000000&tcity_code=100000000000").click;  sleep 1  
+   2.downto(1).each do |i|
+   assert assert $browser.button(:value, "查询").click;  sleep 1  
    result=$browser.text.force_encoding('utf-8')
    ["关于物流零距离","货源信息","车源信息"].each { |text|  assert result.include?(text),"#{text} 不存在 !!"} 
    end

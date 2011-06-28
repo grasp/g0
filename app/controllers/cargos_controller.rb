@@ -5,11 +5,11 @@ class CargosController < ApplicationController
   # GET /cargos
   # GET /cargos.xml
   include CargosHelper
-  before_filter:authorize, :except => [:search,:show]
-  before_filter:authorize_public, :only => [:search]
+   before_filter:authorize, :except => [:search,:show]
+   before_filter:authorize_public, :only => [:search]
  # caches_page :search,:show
-  protect_from_forgery :except => [:tip,:login]
-  layout nil  
+   protect_from_forgery :except => [:tip,:login]
+   layout 'public' ,:except => [:show,:search]
 
   #
   def public
@@ -59,10 +59,10 @@ class CargosController < ApplicationController
     @search.save
     
     respond_to do |format|
-    if params[:page]     
-      format.html 
+    if params[:layout]     
+      format.html  
     else
-      format.html {render :layout=>"public"}
+     format.html {render :layout=>"public"}
     end
     end
   end

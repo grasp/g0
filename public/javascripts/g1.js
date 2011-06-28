@@ -14,9 +14,9 @@ $(document).ready(function() {
     };
     
 navi_js();
-
+line_search();
 float_load_layer1();
-form_submit();
+//form_submit();
     $(".delete").live("click",function()
     {
         var answer = confirm('删除吗？');
@@ -37,12 +37,14 @@ form_submit();
 
      
     general_data_load();
-     city_load();
+    city_load();
      
      $('.quick_match ').live("click",function(){
          $("#show").load(this.href);
          return false;
-     })
+     });
+     
+
   
 });
 

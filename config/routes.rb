@@ -32,7 +32,7 @@ G0::Application.routes.draw do
   match 'admin/hourly_trends/day/:day/table/:table(/field/:field/condition/:condition/value/:value)' =>'admin#hourly_trends' ,:as=>:admin_daily_trends
   match '/admin/request_log_analysis((/all/:all)(/logfile/:logfile))' =>'admin#request_log_analysis' ,:as=>:admin_request_log_analysis
   match '/admin/show_log(/logfile/:logfile)' =>'admin#show_log' ,:as=>:admin_show_log
- match '/admin/backup_db' =>'admin#backup_db' ,:as=>:admin_backup_db
+  match '/admin/backup_db' =>'admin#backup_db' ,:as=>:admin_backup_db
   get "admin/index"
 
   resources :citystatistics

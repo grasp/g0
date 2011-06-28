@@ -175,3 +175,17 @@ div.city_title {text-align: left;}
 #login label,#login .field,#login .actions{text-align: left;}
 
 div.stock_cargolist,div.stock_trucklist{margin-right: 20%;}
+
+td.label_td {font-size:large;font:bold;text-align: left;background-color:#E6EEF7;}
+table.company_private_show td{text-align: left;}
+
+/*a:hover {position:relative;left:1px;top:1px;clip:rect;}*/
+input.truck_search,input.cargo_search {
+font-weight:bolder;
+background-color:#e5e0e9;
+font-size:larger;
+color: black;
+cursor: pointer;
+height: 27px;
+width: 65px;}
+

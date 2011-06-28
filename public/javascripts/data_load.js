@@ -9,9 +9,14 @@ function general_data_load(){
      //this is for panel data load toggle
     $("a.data_load" ).live("click",function()
     {
+        
+        var corordiate= $(this).offset();    
+
+        var parent_coordiate=$(this).parent().parent().offset();
+        
         selected=$(this).next();
          $("a.data_load").css("background-color","#D4E4FF");
-   $(this).css("background-color","#ffcc00");
+        $(this).css("background-color","#ffcc00");
         if(selected.css("display")=="none")
         {
             selected.css("display","inline");
@@ -19,6 +24,9 @@ function general_data_load(){
 
         }
         else  selected.css("display","none");
+        selected.css("top",corordiate.top+$(this).height()+10);
+        selected.css("left",corordiate.left -100);
+        
 
         if($.browser.msie) {
             event.returnValue = false;
