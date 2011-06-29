@@ -47,7 +47,7 @@ class W090NewCompanyTest < ActiveSupport::TestCase
     
      $browser.button(:id, "company_submit").click;sleep 1
     ["名字没有填写","介绍不能为空","联系人没有提供","没有选择所在城市","需要提供公司地址",""].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
-   
+   $browser.goto("#{$site_root}");sleep 0.5
     puts "private user create company"
     create_company("#{$user_name}_汉江物流有限公司","我们是一家很棒的物流公司,\r\n我们是一家很棒的物流公司我们是一家很棒的,\r\n物流公司我们是一家很棒的物流公司我们是一家很棒的物流公司 \
       我们是一家很棒的物流公司我们是一家很棒的物流\r\n公司我们是一家很棒的物流公司我们是一家很棒的\n物流公司我们是一家很棒的物流公司我们是一家很棒的物流公司我们是一家很棒的\

@@ -79,7 +79,7 @@ class W090NewStockCargoTest < ActiveSupport::TestCase
     all_links.each do |old_link|       
       assert $browser.link(:id, "fabu_huo").click; sleep 0.5   #first click 发布货源 
       ["添加新的货物","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
-    
+      
       assert  $browser.link(:href, "#{old_link}").click;;sleep 0.5 #click each links we remembered
       ["请选择出发地","请选择到达地","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
       create_cargo("浙江","杭州市","浙江","绍兴市","12","12","一天","零整不限")

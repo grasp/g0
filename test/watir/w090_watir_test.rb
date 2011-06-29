@@ -8,7 +8,7 @@ start_time=Time.now
 require 'watir'
 require  'rubygems'
 require 'active_support/all'
-require 'test/unit/notify'
+#require 'test/unit/notify'
 require "test/unit"
 puts "load test env cost #{Time.now-start_time} sec"
 #end

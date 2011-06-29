@@ -23,7 +23,7 @@ class TruckCargoPageTest < ActiveSupport::TestCase
     
     #
     #click search
-   assert $browser.link(:id, "search").click;  sleep 1  
+   assert $browser.button(:value, "查询").click;  sleep 1
    result=$browser.text.force_encoding('utf-8')
    ["车辆","浙江","关于物流零距离","货源信息","车源信息"].each { |text|  assert result.include?(text),"#{text} 不存在 !!"} 
 

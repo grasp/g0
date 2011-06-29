@@ -135,7 +135,7 @@ class W090NewStockTruckTest < ActiveSupport::TestCase
         
     $browser.link(:id,"my_che").click;sleep 0.5
     $browser.links.each do |link|      
-      if link.text.include?("条询价")
+      if link.text.match("条询价")
         link.click;sleep 0.5
         ["河南平顶山市宝丰县","湖北随州市广水市","浙江杭州市","浙江绍兴市","该车子和线路报价的货物","货物出发","货物到达"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
       end

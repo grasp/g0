@@ -180,11 +180,14 @@ class CargosController < ApplicationController
 
     if @user.user_contact_id.blank?
       flash[:notice]="填写更多的联系信息，可以增加成交机会"
-
     end
-
     if @user.company_id.blank?
-      flash[:notice]<<";填写公司信息能够增加成交机会"
+      if flash[:notice].blank?
+              flash[:notice]="填写公司信息能够增加成交机会"
+      else
+              flash[:notice]<<";填写公司信息能够增加成交机会"
+      end
+
     end
 
     respond_to do |format|

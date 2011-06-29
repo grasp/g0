@@ -25,7 +25,7 @@ class W090CargoPageTest < ActiveSupport::TestCase
    #click search
    assert $browser.button(:value, "查询").click;  sleep 1  
    result=$browser.text.force_encoding('utf-8')
-   ["货物","浙江","关于物流零距离","货源信息","车源信息"].each { |text|  assert result.include?(text),"#{text} 不存在 !!"} 
+   ["货物","关于物流零距离","货源信息","车源信息"].each { |text|  assert result.include?(text),"#{text} 不存在 !!"} 
 
    
   end

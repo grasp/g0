@@ -278,7 +278,7 @@ margin-top:20px;margin-left: auto; margin-right: auto; text-align:center
 /*already define in #login*/
 div#login { width:50%;}
 
-div.user_new{  width:60%;}
+div.user_new{  width:60%;margin-left: 10%;}
 
 div#login form label{ width: 100%;}
 
@@ -347,6 +347,63 @@ table.admin_index tr td {font-size:large; border-bottom:1px;border-bottom-style:
 
 
 /*city select*/
-div.province,div.city_line{text-align: left;}
-div.province div, div.city_line {margin-top: 5px;}
-a.city_region{font:bolder;}
+#cheyuan_sel{
+    color:blue;
+}
+#huoyuan_sel{
+    color: blue;
+}
+
+.highlight {
+    border: 1px solid #888;
+    padding: 0.5em;
+    background-color:silver;
+}
+
+div.province {
+text-align: left;
+
+}
+
+/* for IE use float and display*/
+.city_province{
+    font-size: larger;
+    display: inline;
+
+ }
+
+div.region,a.city{
+text-align: left;
+text-decoration: none;
+}
+a.city_region{width:auto;}
+
+
+div.city_line {padding-top: 4px;}
+
+.city_region{
+  font-weight: bold;
+  text-align: left;
+}
+
+div.line{
+    background-color: rgb(213,214,255);
+    /*float:left;*/
+}
+
+#from_data_load ,#to_data_load,.line_from_label,.line_to_label{
+    padding-left: 15px;
+   /* float:left;*/
+    display: inline;
+}
+.truck_area2
+{
+       float:left;
+}
+.selected_province,.selected_region,.selected_city{
+    background-color:#ffcc00;
+    /*
+    font-weight: bold;
+    font-size: larger;*/
+}
+
