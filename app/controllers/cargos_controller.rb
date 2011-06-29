@@ -266,7 +266,7 @@ class CargosController < ApplicationController
        # StockCargo.collection.update({:_id => @cargo.stock_cargo_id},
        #  {'$inc'=>{:valid_cargo=>1,:total_cargo=>1,:sent_weight=>@cargo.cargo_weight.to_f,:sent_bulk=>@cargo.cargo_bulk.to_f}},{:upsert =>true})
       
-        format.html { redirect_to(:controller=>"cargos",:action => "index",:stock_cargo_id=>@cargo.stock_cargo_id)}
+        format.html { redirect_to :action => "index"}
       #  format.xml  { render :xml => @cargo, :status => :created, :location => @cargo }
       else
         flash[:notice] = '创建货源失败,重复发布货源'

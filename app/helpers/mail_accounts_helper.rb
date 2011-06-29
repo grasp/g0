@@ -7,6 +7,7 @@ module MailAccountsHelper
         :subject => "#{account} test",
         :body=>"This is test mail account work!")
     end
+    
     def tuiguang_email(from,to,company_name)
       @company_name=company_name
       mail(:to => to,

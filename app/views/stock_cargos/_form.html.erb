@@ -12,12 +12,12 @@
   <% end %>
 
     <div  class="sc_field">
-      <label>货物大类:</label>
+      <label>货物大类*:</label>
      <%= f.select(:big_category,options_for_select($cargo_big_category_reverse.to_a,@stock_cargo.big_category) ) %>
     </div>
 
    <div  class="sc_field">
-      <label>货物类别:</label>
+      <label>货物类别*:</label>
       <a class="data_load"  style="width:150px;display:inline-block" href="/cargo_categories/show/<%=get_cate_code%>" ><%=get_cate_name%> </a>
       <span class="data_list" style="display:none"></span>
       <%= f.hidden_field(:cate_code, :value=>@stock_cargo.cate_code) %>
@@ -25,7 +25,7 @@
     </div>
 
    <div  class="sc_field">
-      <label>货物包装:</label>
+      <label>货物包装*:</label>
       <a class="data_load" style="width:150px;display:inline-block" href="/package_categories/show/<%=get_package_code%>"><%=get_package_name%></a>
       <span class="data_list" style="display:none">  </span>
         <%= f.hidden_field(:package_code, :value=>@stock_cargo.package_code) %>
@@ -54,4 +54,5 @@
   <div class="actions">
     <%= f.submit(:value=>"确定") %>
   </div>
+<p>*号为必填项</p>
 <% end %>

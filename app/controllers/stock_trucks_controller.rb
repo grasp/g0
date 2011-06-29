@@ -51,6 +51,7 @@ class StockTrucksController < ApplicationController
   # GET /stock_trucks/1/edit
   def edit
     @stock_truck = StockTruck.find(params[:id])
+    
   end
 
   # POST /stock_trucks

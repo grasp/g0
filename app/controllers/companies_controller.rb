@@ -2,14 +2,14 @@
 class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.xml
-  before_filter :choose_layout
+ 
   before_filter:admin_authorize,:only=>[:index] #for debug purpose
   before_filter:authorize
   protect_from_forgery :except => [:tip,:login]
   include CompaniesHelper
-#  layout  "users",:except => [:show,:index,:search,:showf]
+
 layout 'public'
- # layout :choose_layout
+ layout :choose_layout
   
     def choose_layout
       return 'admin'  if action_name =='admin'      
@@ -104,8 +104,10 @@ layout 'public'
   def new
 
     @company = Company.new
-    @user=User.find(session[:user_id])
+    if session[:user_id]
+    @user=User.find(session[:user_id]) 
     @contact=UserContact.where(:user_id=>@user.id).first
+    end
      if params[:who]=="personal"
        @company.ispersonal=1
      else
@@ -113,12 +115,13 @@ layout 'public'
      end
 
 
-    if @user
+    unless @user.blank?
     @company.user_id=@user.id
     @company.user_name=@user.name
     else
-      flash[:notice]="非法用户，不能创建公司"
+      flash[:notice]="非注册用户，不能创建公司"
       redirect_to root_path
+      return 
     end
 
     respond_to do |format|
@@ -128,7 +131,7 @@ layout 'public'
       format.html # new.html.erb
       end
    
-      format.xml  { render :xml => @company }
+    #  format.xml  { render :xml => @company }
     end
   end
 

@@ -11,48 +11,17 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
-root { 
-    display: block;
-    border-right-width:1px;
-}
+root { display: block;   border-right-width:1px;}
 
-body {
-    font-size: 16px;
-    margin:0px auto;
-    text-align: center;
-}
+body {font-size: 16px;  margin:0px auto; text-align: center;}
 
-#sheader {
-    padding: 5px;    
-    width:100%;
-float:left;
-        text-align: left;
-}
-/*
-#guser {
-    margin-top:10px;
-    padding: 5px;
-}
-*/
+#sheader { padding: 5px; width:100%;float:left; text-align: left;}
 
+h1,h2,h3{ margin-top:5px;    margin-left:5px;}
 
-h1,h2,h3{
-    margin-top:5px;
-    margin-left:5px;
-}
+div.content {width:100%;}
 
-
-div.content {
-    width:100%;
-  
-}
-
-#show {
-    background-color: #F2F2F2;
-    width:100%;
-    padding-top: 10px;
- 
-}
+#show {background-color: #F2F2F2;width:100%;padding-top: 10px;}
 
 .data_list{
     padding: 3px;
@@ -63,11 +32,7 @@ div.content {
     z-index: 1001;
 }
 
-
-.highlight_background {
-    background-color:#ffcc00;
-    font-size:120%;
-}
+.highlight_background { background-color:#ffcc00; font-size:120%;}
 
 div.user_announce{
     float:left;
@@ -78,48 +43,20 @@ div.user_announce{
 
 }
 
-
-#user_form{
-    float:left;
-    width: 50%;
-    height: 600px;
-}
-
-
-.form_error{
-    border-color:red;
-}
-
-#notice{
-    color:red;
-    top:5px;
-}
-
-td a {
-    font-weight:normal;
-}
-
-a.menu
-{
-    font-weight: normal;
-}
+#user_form{float:left; width: 65%; height: 600px;}
+.form_error{  border-color:red;}
+#notice{ color:red; top:5px;}
+td a {font-weight:normal;}
+a.menu{font-weight: normal;}
 
 
-#footer {
-    display:inline;
-    /*
-    margin-top:50px;
-    margin-bottom: 50px;
-    float:left;*/
-    text-align:center;
-}
+#footer { display:inline; text-align:center;}
+
 /*not work*/
 #footer a {
-
     margin-left:10px;
     margin-right:10px; 
 
-    /* text-align:center;*/
 }
 
 
@@ -189,3 +126,227 @@ cursor: pointer;
 height: 27px;
 width: 65px;}
 
+
+.show_form {
+    background-color:rgb(236,245,255);
+    padding-top:  1em;
+}
+
+.stock_truck_new{
+    margin-left: 20%;
+    width:60%;
+    text-align: left;
+}
+
+.show_form .field,.actions { width: 95%;  clear: left;  margin: 0;   padding: 5px 0 8px 0;   padding-left: 15px;  margin-right: 15px; }
+.show_form .actions{   padding-top: 20px;}
+.show_form .actions input{ width:120px;  height: 50px;  /* margin-left: 120px;*/font-weight: bold; font-size:larger; margin-top: 20px;}
+.show_form .field select{width:120px; }
+.show_form  .field label{  font-weight: bold;   display:-moz-inline-stack;  width:20%;  display:inline-block;  margin-left:10px;}
+
+#cargo_new .field label,#truck_new .field label{
+      font-weight: bold;
+      display:-moz-inline-stack;
+      width:15%;
+      display:inline-block;
+      margin-left:10px;
+}
+
+
+.show_form textarea {
+    display:-moz-inline-stack;
+    width: 70%; 
+    display:inline-block;
+}
+
+.show_form input,.show_form select {  margin-left: 10px;  height:20px;}
+
+div.field select {height:25px;}
+.stock_truck_new field select {height:30px;}
+#quote_truck_id {height:30px;}
+
+#login #email,#login #password{width:50%;}
+div.stockcargo_new .field input{width:50%;}
+.show_form .login_button {margin-left: 30%;}
+
+
+* html .threepxfix{ 
+    margin-left: 3px; 
+}
+
+
+.form_main { border: 0px solid #666666;}
+
+.form_notes { border: 0px solid #666666;}
+.show_form  label.error {font-weight: bold;color: #b80000;width: 210px;}
+
+
+/* 浮动模块设置*/
+#float_show {
+    background-color:#D4E4FF;
+    border: 1px solid;
+    border-color:blue;
+    position:absolute;
+    z-index: 100;
+    margin-right: -3px;
+}
+
+#float_load {
+ display: inline;
+ margin-right: -3px; 
+}
+
+#float_show2 {
+    padding: 3px;
+    border: 1px solid;
+    border-color:blue;
+    background:white;
+    position:absolute;
+    z-index: 101;
+}
+
+.float_close,.float_close2 {
+    margin-bottom: 5px;
+    font-size: larger;
+   /* float:left;*/
+    display:block;
+    background-color:#D4E4FF;    
+}
+
+div.form_header{
+ background-color:#D4E4FF;
+ margin-top:20px;margin-left: auto; margin-right: auto; text-align:center;
+}
+
+.show_header{ background-color:#D4E4FF;
+margin-top:20px;margin-left: auto; margin-right: auto; text-align:center
+}
+
+
+/*new form  style*/
+#login,.user_new{
+    margin: 50px;
+    background-color:#D4E4FF;
+    font-size:110%;
+    width:40%;
+    border-color:blue;
+    margin-left:10px;
+    border: 1px solid;
+    border-color:hsl(218, 100%, 88%);
+}
+
+.company_new,.user_contact_new{text-align: left;}
+
+.company_new,.user_contact_new{
+    width:60%;
+}
+.user_contact_new{margin-left: 20%;}
+.stock_cargo_new,#cargo_new,#truck_new{
+    width:60%;
+    background-color:#D4E4FF;
+    text-align: left;
+    margin-left:20%;
+}
+
+/*show  common*/
+.show_stock_cargo{
+     background-color:rgb(236,245,255);
+   /*  width:100%;*/
+}
+
+.title{
+    margin-top: 3em;
+    font-size:larger;
+}
+/*cargo show*/
+
+#cargo_show,.stock_truck_show,#pw_reset_request{
+    background-color:rgb(236,245,255);
+}
+
+#cargo_show p label,#truck_show p label{
+ color:inherit;
+ font-size: larger;
+ font-weight: bold;
+}
+
+
+
+/*for form header*/
+
+/*for user login form*/
+/*already define in #login*/
+div#login { width:50%;}
+
+div.user_new{  width:60%;}
+
+div#login form label{ width: 100%;}
+
+div#login form label[for="remember_me"]{  color:blue;   width:80%;}
+div#login form input#remember_me{width:20px;;margin-left: 10px;display:inline;text-align: left;}
+
+#pw_reset_request{width:50%;}
+
+.form_header h2{margin:0px;padding: 0px;}
+
+#cargo_cargo_weight,#cargo_cargo_bulk{width: 50px;}
+#stocktruck_edit .field2 input,#inquery_price,#quote_price { width: 80px;   }
+
+#error_explanation{color:red;}
+
+#stockcargo_big_category{width: 150px;border: 1px;border-style: solid;}
+div.sc_field{margin-top:10px;}
+.data_list li {list-style-type:none;text-align: left;}
+
+/* navi css*/
+
+#navi {
+    text-align:center;
+    border-color: #cb8ef7;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding-top: 10px;
+ }
+
+
+#navi a{
+    color:white;
+    font-size:large;
+    font-weight:bold;
+    text-decoration: none;
+}
+table.navi tr{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+table.navi tr td{
+padding: 5px;
+}
+
+.navi_hover{ background-color:#D4E4FF;}
+
+.navi_active {  background-color:inherit;  font-weight: bold;}
+
+.navi_active div { background-color:#6B90DA;  color:white;}
+
+#head_line{border:1px solid #9AAFE5;}
+
+#show table {width:auto;margin: auto;}  /* this is important*/
+
+#show table tr,#float_show table tr { background:white;;border:none;border-bottom: 1px solid silver;}
+#show table th{text-align:center;margin-left: 20px;margin-top: 0px;padding-top: 0px;background:#E6EEF7;}
+#show table tr td {text-align:center;margin-left: 20px;padding:.5em;margin-top: 20px;border:none;}
+
+#navi table tr td.navi_huo{background-color: #9b18fb;}
+#navi table tr td.navi_che{background-color:#7913c4;}
+#navi table tr td.navi_user{background-color:#440c6c;}
+table.navi tr td {background-color:#440c6c;}
+
+table.admin_index tr td {font-size:large; border-bottom:1px;border-bottom-style: solid;}
+
+
+/*city select*/
+div.province,div.city_line{text-align: left;}
+div.province div, div.city_line {margin-top: 5px;}
+a.city_region{font:bolder;}

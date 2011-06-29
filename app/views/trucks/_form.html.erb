@@ -15,7 +15,7 @@
  <div class="line" >
    <h3>发布车源：<%=@stock_truck.paizhao%>,<%=$truck_pinpai[@stock_truck.truck_pinpai]%>,<%=@stock_truck.truck_xinghao%>,<%=@stock_truck.dun_wei%>吨,<%=@stock_truck.che_length%>米</h3>
   <!-- do not change below  format -->
-      <label  class="line_from_label" >出发地:</label>
+      <label  class="line_from_label" >出发地*:</label>
       <a id="from_data_load"  href="/cities/from"><%=(@truck.fcity_name.nil?||@truck.fcity_name.empty?) ?"请选择出发地":@truck.fcity_name%></a>
       <%= f.hidden_field(:fcity_code) %>
       <%= f.hidden_field(:fcity_name) %>
@@ -41,22 +41,22 @@
  <%= f.hidden_field :status%>
 
   <div class="field">
-    <label>有效天数</label>
+    <label>有效天数*</label>
     <%= f.select(:send_date,options_for_select([["一天","1"],["二天","2"],["三天","3"]],@truck.send_date) )%>
  </div>
   <div class="field">
-    <label>回程或本地车</label>
+    <label>回程或本地车*</label>
     <%= f.select(:huicheng,options_for_select($truck_huicheng_reverse.to_a,@truck.huicheng) ) %>
     </div>
-  <div class="field">
-     <label>业务联系</label>
-    <%=  @stock_truck.bis_name %>
-  </div>
+   <div class="field">
+    <label >联系人：</label>
+    <%=(@user_contact||@user).name%>
+   </div>
 
-  <div class="field">
-     <label>业务联系电话</label>
-    <%=  @stock_truck.bis_phone %>
-  </div>
+   <div class="field">
+    <label >联系电话：</label>
+    <%=(@user_contact||@user).mobilephone||"无"%>
+   </div>
 
   <div class="actions">
     <%= f.submit("确定")%>

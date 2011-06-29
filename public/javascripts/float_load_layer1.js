@@ -58,12 +58,12 @@ function float_load_layer1(){
        $('tr').css("background-color","white");
        $('#float_load').empty();
        $('#float_load').load(this.href,function(){     
-           stock_cargo_new_validation();
-           cargo_new_validation();
-           truck_new_validation();
+          // stock_cargo_new_validation();
+
            inquery_new_validation();
            quote_new_validation();
-           stock_truck_update_validation();
+
+          
        });  
 
        css_class= $(this).attr("class");  

@@ -10956,18 +10956,6 @@ function cargo_new_validation(){
 
     $("#cargo_new").validate(
     {
-        submitHandler: function(form) {
-       $('#cargo_new').ajaxSubmit({
-      // target: '#show',
-       success: function() {
-       $("#show").load($("a.navi_cargo").attr("href"));
-       $('#navi').load("/public/navibar");
-       $('a.navi_link').removeClass("navi_active");
-       $("a.navi_cargo").addClass('navi_active');
-        }
-            });
-            return false;
-        },
 
         rules: {
             "cargo[fcity_name]":{
@@ -11003,19 +10991,7 @@ function truck_new_validation(){
 
     $("#truck_new").validate(
     {
-        submitHandler: function(form) {
-         $('#truck_new').ajaxSubmit({
-       //  target: '#float_load',
 
-       success: function() {
-       $("#show").load($("a.navi_truck").attr("href"));
-       $('#navi').load("/public/navibar");
-       $('a.navi_link').removeClass("navi_active");
-       $("a.navi_truck").addClass('navi_active');
-        }
-          });
-            return false;
-        },
 
         rules: {
             "truck[fcity_name]":{

@@ -47,7 +47,7 @@ class W090NewStockTruckTest < ActiveSupport::TestCase
     
   end
 
-  def test_user_create_a_stock_truck
+  def test_user_create_a_stock_truck_and_truck
     puts "user create a stock truck"
     logout_and_login
 
@@ -133,13 +133,37 @@ class W090NewStockTruckTest < ActiveSupport::TestCase
     $browser.link(:id,"my_che").click;sleep 0.3
     ["河南平顶山市宝丰县","湖北随州市广水市","浙江杭州市","浙江绍兴市","货主询价/我已报价","新增车子"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
         
-    $browser.links.each do |link|
-      $browser.link(:id,"my_che").click;sleep 0.3
+    $browser.link(:id,"my_che").click;sleep 0.5
+    $browser.links.each do |link|      
       if link.text.include?("条询价")
         link.click;sleep 0.5
         ["河南平顶山市宝丰县","湖北随州市广水市","浙江杭州市","浙江绍兴市","该车子和线路报价的货物","货物出发","货物到达"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
       end
     end
+   #test valiation of stocktruck and truck
    
+    puts "test validation of stocktruck and truck"
+    assert $browser.link(:id, "fabu_che").click; sleep 0.5
+    ["新增车子","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    
+       assert $browser.link(:text, "新增车子").click; sleep 0.5
+       ["创建车辆","车辆牌照","核定载重(吨)","车厢长度(米)"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+       
+       assert $browser.button(:id, "stocktruck_submit").click; sleep 0.5
+       ["没有填写牌照","没有填写吨位","没有填写车主名称","没有填写车主联系电话"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    
+      assert $browser.link(:id, "fabu_che").click; sleep 0.5
+    ["新增车子","状态","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+    
+      $browser.links.each do |link|
+       if link.text=="发布车源" && link.href.to_s.match(/new/)
+         link.click;sleep 0.5;
+        ["请选择出发地","请选择到达地","有效天数"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+        break;
+       end      
+      end
+    
+     assert $browser.button(:id, "truck_submit").click; sleep 0.5
+    ["你还没有选择出发地","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
   end
 end

@@ -3,28 +3,23 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   #include UsersHelper
-  before_filter :choose_layout
-  before_filter:admin_authorize,:only=>[:index] #for debug purpose
-  # layout "users",:except => [:index]
-  #layout "users"
+   before_filter:admin_authorize,:only=>[:index] #for debug purpose
+
   layout :choose_layout
   
   
   def choose_layout
-    if action_name =='index'
-       return 'admin'
-     else
-       return 'users'
-     end
+     action_name =='index'?'admin':'users'
   end
 
   def index
-    @users = User.all
-
+    
+    @users = User.all.desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
     end
+    
   end
 
   # GET /users/1
@@ -50,21 +45,21 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]) #is this work?
   end
 
   # POST /users
   # POST /users.xml
   def create
     @user = User.new
-    logger.info "paramsuser=#{params[:user][:name]}"
-    @user.name=params[:user][:name]
-    @user.email=params[:user][:email]
-    @user.password=params[:user][:password]
+  #  logger.info "paramsuser=#{params[:user][:name]}"
+  #  @user.name=params[:user][:name]
+  #  @user.email=params[:user][:email]
+  #  @user.password=params[:user][:password]
+  #  @user.mobilephone=params[:user][:mobilephone]
+    @user = User.new(params[:user])
     @user.activate=rand(Time.now.to_i).to_s
     @user.status="new_register"
-
-     @user.mobilephone=params[:user][:mobilephone]
     
     respond_to do |format|
       if @user.save
@@ -76,9 +71,8 @@ class UsersController < ApplicationController
           :valid_truck=>0,:user_id=>@user.id);
         
         #update statistic for user
-       # User.collection.update({:_id=>@user.id},{'$set'=>{:ustatistic_id=>@ustatistic.id}})
-        @user.update_attributes({:ustatistic_id=>@ustatistic.id})
-        # User.update({'_id'=> @user.id,:ustatistic_id=>@ustatistic.id}) # is a bug 
+        @user.update_attribute("ustatistic_id",@ustatistic.id) #it is not attributesSS
+
         begin    
           url=url_for("users#activate")
           url=url+"/#{@user.name}/#{@user.activate}"
@@ -90,12 +84,12 @@ class UsersController < ApplicationController
          # puts $@
           flash[:notice] = '邮件发送失败'
           #应该标记邮件状态，发送失败
-          # @user.destroy
+          # @user.destroy 
           format.html { render :action => "new" }
         end
 
         # create contact is next
-        flash[:notice]="恭喜你，注册成功！"
+        flash[:notice]="恭喜您,注册成功了！"
       #  format.html { redirect_to(:controller=>"user_contacts",:action=>"new",:email=>"#{@user.email}")}
         format.html { redirect_to root_path}
         #User create fail
@@ -248,7 +242,7 @@ class UsersController < ApplicationController
     @user=User.first(:conditions=>{:name=>name})
     if (code==@user.activate)
       #@user.status="actived"
-      @user.update_attributes(:status=>"actived")
+      @user.update_attribute("activate","verified")
       flash[:notice] = "用户邮箱确认成功"
       respond_to do |format|
         format.html { redirect_to(:action=>"login") }
@@ -267,11 +261,9 @@ class UsersController < ApplicationController
     #use ajax to update user bar
 
     @user=User.find(session[:user_id])
-
-   reset_session
+     reset_session
 
      #authenticate with cookie
-
      @user.update_attributes({:preference=>"0"})
      cookies.permanent.signed[:remember_me] = [@user.id, @user.salt,0]
 
@@ -279,16 +271,6 @@ class UsersController < ApplicationController
       format.html { redirect_to("/") }
     end
   end
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(users_url) }
-      format.xml  { head :ok }
-    end
-  end
 end
 

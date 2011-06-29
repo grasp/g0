@@ -22,8 +22,15 @@ class W090NewContactTest < ActiveSupport::TestCase
   
   
   def test_private_user_create_contact 
-    puts "private user create contact"
+    
     logout_and_login
+    puts "test validate user contact"
+    assert $browser.link(:text, "完善联系方式").click;sleep 0.5
+    ["用户联系信息","移动电话","Qq"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+     $browser.button(:id, "usercontact_submit").click;sleep 1
+     ["真实姓名没有填写"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
+     
+    puts "private user create contact"
     create_contact("张三","#{$mobile_phone}","021","98761234","179876541")
     
     #now check information is there

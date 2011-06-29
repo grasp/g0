@@ -21,11 +21,11 @@ class User
   field  :ustatistic_id
   field  :company_id
   #field  :stock_cargo_ids
-  # field  :cargo_ids
+  #field  :cargo_ids
   # field  :stock_truck_ids
-  #  field  :truck_ids
- #field :inquery_ids
- # field :quote_ids
+  # field  :truck_ids
+  #field :inquery_ids
+  # field :quote_ids
   
   validates_presence_of :email,:name,:message=>"用户名和email必须填写."
   validates_presence_of :mobilephone,:message=>"手机必须填写."
@@ -34,7 +34,6 @@ class User
   validates_uniqueness_of :mobilephone ,:message=>"该手机已经存在."
   
    def self.authenticated_with_token(user_id, stored_salt)
-    # u = self.criteria.id(user_id)
     begin
      u = self.find(user_id)
      u && u.salt == stored_salt ? u : nil
@@ -55,7 +54,6 @@ class User
         user= nil
         message="密码不对"
       end
-
     else
     message="#{email_or_name}用户不存在"
     user=nil
@@ -86,7 +84,6 @@ class User
     string_to_hash=password+ "wibble" +salt
     Digest::SHA1.hexdigest(string_to_hash)
   end
-
 
   def create_new_salt
     self.salt= self.object_id.to_s+rand.to_s

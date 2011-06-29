@@ -13,12 +13,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :公司名称 %>
+    <%= f.label "公司名称*" %>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :公司介绍 %>
+    <%= f.label "公司介绍*" %>
     <%= f.text_area :about %>
   </div>
 
@@ -40,7 +40,7 @@
 
 <h3>公司的联系信息 </h3>
 <div class="field">
-    <%= f.label :联系人 %>
+    <%= f.label "联系人*" %>
     <%= f.text_field :contact_name %>
 </div>
 
@@ -48,14 +48,14 @@
 <div class="field"  style="display:inline">
 
   <!-- do not change below  format -->
-      <label class="line_from_label">所在城市:</label>
+      <label class="line_from_label">所在城市*:</label>
       <a id="from_data_load"  class="company_city" href="/cities/from"><%=@company.city_name ||"选择"%></a>
       <%= f.hidden_field(:city_code) %>
       <%= f.hidden_field(:city_name) %>
 </div>
 
   <div class="field">
-    <%= f.label :公司地址 %>
+    <%= f.label "公司地址*" %>
     <%= f.text_field :address %>
   </div>
 
@@ -68,7 +68,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :联系人移动电话 %>
+    <%= f.label "联系人移动电话*" %>
     <%= f.text_field :mobile_phone %>
   </div>
 

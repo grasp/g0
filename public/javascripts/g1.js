@@ -30,11 +30,12 @@ float_load_layer1();
     login_validation();
     company_new_validation();
     usercontacts_new_validation();
-   // stock_truck_new_validation();
-   // stock_cargo_new_validation();
-   //stock_truck_new_validation();
-   
 
+  stock_cargo_new_validation();
+  stock_truck_new_validation();
+ cargo_new_validation();
+ truck_new_validation();
+ stock_truck_update_validation();
      
     general_data_load();
     city_load();

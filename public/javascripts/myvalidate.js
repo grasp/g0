@@ -515,7 +515,7 @@ function usercontacts_new_validation()
                 maxlength:15
 
             },
-            "usercontact[mphone]":{
+            "usercontact[mobilephone]":{
                 required:true,
                 minlength:11,
                 maxlength:11
@@ -527,6 +527,9 @@ function usercontacts_new_validation()
             "usercontact[fixphone]":{ 
                 minlength:7,
                 maxlength:13
+            },
+                "usercontact[email]":{ 
+               required: true
             }
 
         },
@@ -546,7 +549,7 @@ function usercontacts_new_validation()
                 maxlength:"长度太长不对"
 
             },
-            "usercontact[mphone]":{
+            "usercontact[mobilephone]":{
                 required:"手机没有填写",
                 minlength:"长度不是11位",
                 maxlength:"长度不是11位"
@@ -558,6 +561,9 @@ function usercontacts_new_validation()
             "usercontact[fixphone]":{
                 minlength:"电话号码太短",
                 maxlength:"电话号码太长"
+            },
+             "usercontact[email]":{ 
+               required: "email不能为空"
             }
 
         }
@@ -571,17 +577,6 @@ function stock_cargo_new_validation(){
 
     $("#stockcargo_new").validate(
     {
-        submitHandler: function(form) {
-            $('#stockcargo_new').ajaxSubmit({
-                // beforeSubmit:function(){ (stock_cargo_new_validation());},
-              //  target: '#float_load',
-                success: function() {
-                   // $("#show").load($("a.navi_stock_cargo").attr("href"));
-                  //  $('#navi').load("/public/navibar");
-                }
-            });
-            return false;
-        },
 
         rules: {
             "stockcargo[cate_code]":{
@@ -608,17 +603,6 @@ function stock_truck_new_validation(){
 
     $("#stocktruck_new").validate(
     {
-        submitHandler: function(form) {
-            $('#stocktruck_new').ajaxSubmit({
-                // beforeSubmit:function(){ (stock_cargo_new_validation());},
-                target: '#float_load',
-                success: function() {
-                    $("#show").load($("a.navi_stock_truck").attr("href"));
-                    $('#navi').load("/public/navibar");
-                }
-            });
-            return false;
-        },
 
         rules: {
             "stocktruck[paizhao]":{
@@ -718,11 +702,11 @@ function stock_truck_new_validation(){
                 number:"电话号码必须是数字"
             },
                "stocktruck[owner_name]":{
-                required: " 没有填写 联系人名称",
+                required: " 没有填写车主名称",
                 maxlength:"长度太长不对"
             },
             "stocktruck[owner_phone]":{
-                required: " 没有填写联系人电话",
+                required: " 没有填写车主联系电话",
                 maxlength:"长度太长不对",
                 number:"电话号码必须是数字"
             }
@@ -734,18 +718,6 @@ function cargo_new_validation(){
 
     $("#cargo_new").validate(
     {
-        submitHandler: function(form) {
-       $('#cargo_new').ajaxSubmit({
-      // target: '#show',
-       success: function() {
-       $("#show").load($("a.navi_cargo").attr("href"));
-       $('#navi').load("/public/navibar");
-       $('a.navi_link').removeClass("navi_active");
-       $("a.navi_cargo").addClass('navi_active');
-        }
-            });
-            return false;
-        },
 
         rules: {
             "cargo[fcity_name]":{
@@ -781,19 +753,6 @@ function truck_new_validation(){
 
     $("#truck_new").validate(
     {
-        submitHandler: function(form) {
-         $('#truck_new').ajaxSubmit({
-       //  target: '#float_load',
-
-       success: function() {
-       $("#show").load($("a.navi_truck").attr("href"));
-       $('#navi').load("/public/navibar");
-       $('a.navi_link').removeClass("navi_active");
-       $("a.navi_truck").addClass('navi_active');
-        }
-          });
-            return false;
-        },
 
         rules: {
             "truck[fcity_name]":{

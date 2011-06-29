@@ -131,6 +131,7 @@ class UserContactsController < ApplicationController
       format.xml  { render :xml => @user_contact }
     end
    else
+      @user_contact=UserContact.where(:user_id=>session[:user_id]).first
       respond_to do |format|
         flash[:notice]="用户联系方式已经创建"
         format.html { render :layout=>'public',:action => "show"}

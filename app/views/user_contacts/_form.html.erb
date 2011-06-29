@@ -13,11 +13,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :真实姓名 %>
+    <%= f.label "真实姓名*" %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :移动电话 %>
+    <%= f.label "移动电话*" %>
     <%= f.text_field :mobilephone %>
   </div>
 
@@ -32,8 +32,10 @@
     <%= f.label :QQ %>
     <%= f.text_field :QQ %>
   </div>
-
- <%= f.hidden_field :email %>
+  <div class="field">
+    <%= f.label "email*" %>
+    <%= f.text_field :email %>
+  </div>
 
   <div class="actions">
     <%= f.submit(:value=>"确定") %>

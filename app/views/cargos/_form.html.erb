@@ -15,12 +15,12 @@
   <div class="line">
       <h3><%=@stock_cargo.cate_name%>,<%=@stock_cargo.package_name%>包装, 货源发布</h3>
   <!-- do not change below  format -->
-      <label class="line_from_label" >出发地:</label>
+      <label class="line_from_label" >出发地*:</label>
       <a id="from_data_load" style="display:inline;" href="/cities/from"><%=(@cargo.fcity_name.nil?||@cargo.fcity_name.empty?) ?"请选择出发地":@cargo.fcity_name%></a>
       <%= f.hidden_field(:fcity_code) %>
       <%= f.hidden_field(:fcity_name) %>
       
-      <label style="margin-left:20px;display:inline;" class="line_to_label " >到达地:</label>
+      <label style="margin-left:20px;display:inline;" class="line_to_label " >到达地*:</label>
        <a id="to_data_load" style="display:inline;" href="/cities/to" ><%=(@cargo.tcity_name.nil?||@cargo.tcity_name.empty?) ?"请选择到达地":@cargo.tcity_name%></a>
       <%= f.hidden_field(:tcity_code) %>
       <%= f.hidden_field(:tcity_name) %>
@@ -35,7 +35,7 @@
 
    <%= f.hidden_field :status%>
      <div class="field">
-      <label >重量(吨)</label>
+      <label >重量(吨)*</label>
       <%= f.text_field :cargo_weight %> 
      </div>
     
@@ -45,11 +45,11 @@
      </div>
     
      <div class="field">
-     <label>有效天数</label>
+     <label>有效天数*</label>
      <%= f.select(:send_date,options_for_select([["一天","1"],["当天","0"],["二天","2"]],@cargo.send_date) )%>
      </div>
      <div class="field">
-     <label for="cargo_option">组货方式：</label>
+     <label for="cargo_option">组货方式*：</label>
      <%= f.select(:cargo_zuhuo,options_for_select($cargo_option_reverse.to_a,@cargo.cargo_zuhuo) )%>
      </div>
 
@@ -68,7 +68,7 @@
     </div>   
 
     <%= f.hidden_field :stock_cargo_id%>
-
+<p>*号为必填项</p>
   <% end %>
 
 <div>
