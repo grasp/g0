@@ -300,8 +300,39 @@ class CargosController < ApplicationController
     end
   end
 
-  def chenjiao
+  def request_chenjiao
+     @user=User.find(session[:user_id])
+     @cargo = Cargo.find(params[:id])
 
+
+
+    @cargo.update_attribute("status","请求成交")
+
+
+     Quote.where(:cargo_id=>@cargo.id).each do |quote|
+      quote.update_attribute("status","成交过期")
+    end
+    Inquery.where(:cargo_id=>@cargo.id).each do |inquery|
+      inquery.update_attribute("status","成交过期")
+    end
+
+     @quote=Quote.where(:cargo_id=>@cargo.id,:status=>"成交过期").first #should be only one
+    @inquery=Inquery.where(:cargo_id=>@cargo.id , :status=>"成交过期").first#should be only one
+    @quote.update_attribute("status","请求成交") unless @quote.blank?
+    @inquery.update_attribute("status","请求成交") unless @inquery.blank?
+
+    @ustatistic=Ustatistic.where(:user_id=>@user.id).first
+    @ustatistic.inc(:valid_cargo,-1) if @ustatistic.valid_cargo>0
+    @ustatistic.inc(:total_cargo,-1) if @ustatistic.total_cargo>0
+
+
+    #change stockcargo to idle
+    @stock_cargo=StockCargo.find(@cargo.stock_cargo_id)
+    @stock_cargo.update_attribute("status","请求成交")
+
+   respond_to do |format|
+      format.html { redirect_to(:controller=>"cargos",:action=>"index" )}
+    end
   end
 
   # DELETE /cargos/1

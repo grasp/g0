@@ -92,7 +92,7 @@ class W090NewStockTruckTest < ActiveSupport::TestCase
       $browser.links.each do |link|
         if link.text=="报价"
           counter+=1
-          break if counter >2         
+          break if counter >4
           link.click;sleep 0.4         
           ["报价(元)","报价车源","或面议"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
         
@@ -176,7 +176,7 @@ class W090NewStockTruckTest < ActiveSupport::TestCase
   def test_user_create_a_stock_truck_and_truck    
      user_create_a_stock_truck_and_truck($user_name1,$paizhao1)
      user_create_a_stock_truck_and_truck($user_name2,$paizhao2)
-     
+     logout_login($user_name1)
     
   end
 

@@ -27,10 +27,10 @@
     <% @cargos.each do |cargo| %>
       <%unless cargo.nil? %>
         <tr>
-          <td><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
+          <td ><a class ="show_float" href="/cargos/show/<%=cargo.id%>">
            <%= cargo.cate_name ||"未知货物"%></a> </td>
-          <td><%= cargo.fcity_name %></td>
-          <td><%= cargo.tcity_name %></td>
+          <td ><%= cargo.fcity_name %></td>
+          <td ><%= cargo.tcity_name %></td>
           <td><%= cargo.cargo_weight || "0" %>吨/<%= cargo.cargo_bulk ||0 %>方</td>
           <td><%= cargo.send_date %>天</td>
           <!--

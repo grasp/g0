@@ -94,7 +94,7 @@ class W090NewStockCargoTest < ActiveSupport::TestCase
     $browser.link(:id,"che_info").click;sleep 0.5
     if $browser.links.each do |link|
         counter +=1
-        break if counter>3
+        break if counter>5
         if link.text.include?("询价")
           link.click;sleep 0.3
           ["出价","我的货物及其线路","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}

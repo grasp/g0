@@ -23,11 +23,13 @@
       <%unless truck.blank?%>
         <tr>
           <td>
-            <a class="show_float" href="/user_contacts/showf/<%=truck.user_contact_id%>"> <%="#{UserContact.find(truck.user_contact_id).name}"%>
+
+            <a class="show_float" href="/user_contacts/showf/<%=truck.user_contact_id%>"> <%=  "#{UserContact.find(truck.user_contact_id).name unless truck.user_contact_id.blank?}"%>
             </a>
+
           </td> 
           <td>
-            <a class="show_float" href="/companies/showf/<%= truck.company_id%>"><%="#{Company.find(truck.company_id).name}"%></a>
+            <a class="show_float" href="/companies/showf/<%= truck.company_id%>"><%="#{Company.find(truck.company_id).name unless truck.company_id.blank?}"%></a>
           </td>
           <td>
             <a class="show_float" href="/trucks/show/<%=truck.id%>">
@@ -48,12 +50,12 @@
             <td>
                 <%if record.cargo_user_id==session[:user_id]%>  <!-- I am HuoZhu-->          
                 <%if @cargo.status=="正在配车" && record.truck_user_id!=session[:user_id] && truck.status=="正在配货"%>
-                   <a class="request_chenjiao" href="/quotes/request_chenjiao/<%=record.id%>">点击成交</a> 
+                   <a class="request_chenjiao" href="/cargos/request_chenjiao/<%=record.cargo_id%>">点击成交</a>
                  <%end%>
               <%end%> 
              <%if record.truck_user_id==session[:user_id] && record.cargo_user_id!=session[:user_id].to_s%>
                 <%if truck.status=="正在成交" %>
-                  <a class="confirm_chenjiao" href="/quotes/confirm_chenjiao/<%=record.id%>">确认成交</a>               
+                  <a class="confirm_chenjiao" href="/quotes/confirm_chenjiao/<%=record.cargo_id%>">确认成交</a>
                <%end%>
             <%end%>
            </td>
@@ -86,11 +88,11 @@
       <%unless truck.blank?%>
         <tr>
           <td>
-            <a class="show_float" href="/user_contacts/showf/<%=truck.user_contact_id%>"> <%="#{UserContact.find(truck.user_contact_id).name}"%>
+            <a class="show_float" href="/user_contacts/showf/<%=truck.user_contact_id%>"> <%="#{UserContact.find(truck.user_contact_id).name unless truck.user_contact_id.blank?}"%>
             </a>
           </td> 
           <td>
-            <a class="show_float" href="/companies/showf/<%= truck.company_id%>"><%="#{Company.find(truck.company_id).name}"%></a>
+            <a class="show_float" href="/companies/showf/<%= truck.company_id%>"><%="#{Company.find(truck.company_id).name unless truck.company_id.blank?}"%></a>
           </td>
           <td>
             <a class="show_float" href="/trucks/show/<%=truck.id%>">
@@ -111,12 +113,12 @@
              <td>
             <%if record.cargo_user_id.to_s==session[:user_id].to_s%>            
                  <%if @cargo.status=="正在配车" && record.truck_user_id.to_s!=session[:user_id].to_s && truck.status=="正在配货"%>
-                    <a class="request_chenjiao" href="/quotes/request_chenjiao/<%=record.id%>">点击成交</a> 
+                    <a class="request_chenjiao" href="/cargos/request_chenjiao/<%=record.cargo_id%>">点击成交</a>
                  <%end%>  
              <%end%>
           <%if record.truck_user_id.to_s==session[:user_id].to_s && record.cargo_user_id.to_s!=session[:user_id].to_s%>
                  <%if truck.status=="正在成交"%>
-                     <a class="confirm_chenjiao" href="/quotes/confirm_chenjiao/<%=record.id%>">确认成交</a>
+                     <a class="confirm_chenjiao" href="/quotes/confirm_chenjiao/<%=record.cargo_id%>">确认成交</a>
                   <%end%>
            <%end%>             
            </td>

@@ -36,10 +36,10 @@
                  <td><%=truck.status%></td>
                 <%end%>
                   
-          <td><a class="link_show" href="/trucks/quoteinquery/<%=truck.id%>"><%= truck.total_xunjia||0 %>条询价/<%= truck.total_baojia||0 %>条报价</a></td>
+          <td><a  href="/trucks/quoteinquery/<%=truck.id%>"><%= truck.total_xunjia||0 %>条询价/<%= truck.total_baojia||0 %>条报价</a></td>
 
           <%if truck.status=="正在配货"%>
-            <td><a class="quick_match" href="/cargos/search/<%=truck.fcity_code%>/<%=truck.tcity_code%>/1">货源速配</a></td>
+            <td><a href="/cargos/search/<%=truck.fcity_code%>/<%=truck.tcity_code%>/1">货源速配</a></td>
           <%else%>
            <td><%=truck.status%></td>
              

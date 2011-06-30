@@ -13,11 +13,11 @@ function request_chenjiao(){
             $('#float_show').css("display","none");
             $('tr').css("background-color","white");             
          }
-            if($.browser.msie) {
-            event.returnValue = false;
-            event.preventDefault();
-            return false;
-        }
+           // if($.browser.msie) {
+          //  event.returnValue = false;
+         //   event.preventDefault();
+         //   return false;
+      //  }
         else   return false;
                 
     });
@@ -34,9 +34,9 @@ function confirm_chenjiao(){
          }
     
            // if($.browser.msie) {
-           // event.returnValue = false;
-           // event.preventDefault();
-           // return false;
+          //  event.returnValue = false;
+         //   event.preventDefault();
+          //  return false;
        // }
         else   return false;
                 

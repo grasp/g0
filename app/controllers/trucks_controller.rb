@@ -302,9 +302,7 @@ class TrucksController < ApplicationController
   def confirm_chenjiao
     
      @user=User.find(session[:user_id])
-     @truck = Truck.find(params[:id])
-     
-    
+     @truck = Truck.find(params[:id])     
     #all other truck with same paizhao , need expire also
    Truck.where(:paizhao=>@truck.paizhao).each do |truck|
       truck.update_attribute("status","已成交")
@@ -324,8 +322,8 @@ class TrucksController < ApplicationController
 
     #need update statistics
     @ustatistic=Ustatistic.where(:user_id=>@user.id).first
-    @ustatistic.inc(:valid_truck,-1)
-    @ustatistic.inc(:total_truck,-1)
+    @ustatistic.inc(:valid_truck,-1) if @ustatistic.valid_truck>0
+    @ustatistic.inc(:total_truck,-1) if @ustatistic.total_truck>0
     
     
     #change stocktruck to idle

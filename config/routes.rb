@@ -62,10 +62,11 @@ G0::Application.routes.draw do
   match '/trucks/:truck_id/cargos/:cargo_id/inqueries/new'  =>'inqueries#new',:as=>:inquerienew
   match '/trucks/:truck_id/inqueries/truck' =>'inqueries#truck', :as=>:inquerietruck
   match '/cargos/:cargo_id/inqueries/cargo' =>'inqueries#cargo', :as=>:inqueriescargo
-  match 'users/:user_id/inqueries/tome/:to' =>'inqueries#index',:as=>:inqueriesto
-  match "inqueries/request_chenjiao/:id" =>'inqueries#request_chenjiao',:as=>:inqueriesrequest_chenjiao
-  match "inqueries/confirm_chenjiao/:id" =>'inqueries#confirm_chenjiao',:as=>:inqueriesconfirm_chenjiao
-  match "trucks/confirm_chenjiao/:id" =>'trucks#confirm_chenjiao',:as=>:trucksconfirm_chenjiao
+  match '/users/:user_id/inqueries/tome/:to' =>'inqueries#index',:as=>:inqueriesto
+ # match "inqueries/request_chenjiao/:id" =>'inqueries#request_chenjiao',:as=>:inqueriesrequest_chenjiao
+ # match "inqueries/confirm_chenjiao/:id" =>'inqueries#confirm_chenjiao',:as=>:inqueriesconfirm_chenjiao
+    match "/cargos/request_chenjiao/:id" =>'cargos#request_chenjiao',:as=>:cargorequest_chenjiao
+  match "/trucks/confirm_chenjiao/:id" =>'trucks#confirm_chenjiao',:as=>:trucksconfirm_chenjiao
   resources :inqueries
   #map.connect '/cargos/search/from/:from/to/:to/page/:page',:controller=>"cargos",:action=>"search"
   match '/cargos/search(/:from/:to(/:page))'  =>'cargos#search',:as=>:cargossearchline
@@ -74,8 +75,8 @@ G0::Application.routes.draw do
   match '/cargos/:cargo_id/quotes/cargo' =>'quotes#cargo', :as=>:quotescargo
   match '/trucks/:truck_id/quotes/truck' =>'quotes#truck', :as=>:quotestruck
   match 'users/:user_id/quotes/tome/:to' =>'quotes#index',:as=>:quotesto
-  match "quotes/request_chenjiao/:id" =>'quotes#request_chenjiao',:as=>:quotesrequest_chenjiao
-  match "quotes/confirm_chenjiao/:id" =>'quotes#confirm_chenjiao',:as=>:quotesconfirm_chenjiao
+ # match "quotes/request_chenjiao/:id" =>'quotes#request_chenjiao',:as=>:quotesrequest_chenjiao
+#  match "quotes/confirm_chenjiao/:id" =>'quotes#confirm_chenjiao',:as=>:quotesconfirm_chenjiao
   resources :quotes
 
   resources :line_ads
