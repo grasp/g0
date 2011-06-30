@@ -44,8 +44,6 @@ class W090NewStockCargoTest < ActiveSupport::TestCase
     
   end
   
-
-  
   def create_cargo(from_province,from_city,to_province,to_city,weight,bulk,day,zuhuo)
     line_select(from_province,from_city,to_province,to_city)
     $browser.text_field(:id,"cargo_cargo_weight").set(weight)
@@ -56,9 +54,9 @@ class W090NewStockCargoTest < ActiveSupport::TestCase
     ["货物","出发","到达","继续发布货源",].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
   end
 
-  def test_user_create_a_stock_cargo
-    puts "user create a stock cargo"
-    logout_and_login
+  def user_create_a_stock_cargo(username)
+    puts "user #{username} create a stock cargo"
+    logout_and_login(username)
     assert $browser.link(:id, "fabu_huo").click; sleep 0.5
     ["请先添加货物","添加新的货物","关于物流零距离"].each { |text| assert $browser.text.include?(text),"#{text} 不存在 !!"}
 
@@ -164,5 +162,9 @@ class W090NewStockCargoTest < ActiveSupport::TestCase
     
   end
   
+    def test_user_create_a_stock_cargo
+      user_create_a_stock_cargo($user_name1)
+      user_create_a_stock_cargo($user_name2)
+    end
  
 end

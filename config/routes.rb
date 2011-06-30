@@ -56,7 +56,7 @@ G0::Application.routes.draw do
 
   resources :cstatistics
 
-  get "public/index"
+#  get "public/index"
   match '/trucks/quoteinquery/:truck_id' =>'trucks#quoteinquery',:as=>:truckquoteinquery
   match '/cargos/quoteinquery/:cargo_id' =>'cargos#quoteinquery',:as=>:cargoquoteinquery
   match '/trucks/:truck_id/cargos/:cargo_id/inqueries/new'  =>'inqueries#new',:as=>:inquerienew
@@ -65,6 +65,7 @@ G0::Application.routes.draw do
   match 'users/:user_id/inqueries/tome/:to' =>'inqueries#index',:as=>:inqueriesto
   match "inqueries/request_chenjiao/:id" =>'inqueries#request_chenjiao',:as=>:inqueriesrequest_chenjiao
   match "inqueries/confirm_chenjiao/:id" =>'inqueries#confirm_chenjiao',:as=>:inqueriesconfirm_chenjiao
+  match "trucks/confirm_chenjiao/:id" =>'trucks#confirm_chenjiao',:as=>:trucksconfirm_chenjiao
   resources :inqueries
   #map.connect '/cargos/search/from/:from/to/:to/page/:page',:controller=>"cargos",:action=>"search"
   match '/cargos/search(/:from/:to(/:page))'  =>'cargos#search',:as=>:cargossearchline

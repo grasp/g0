@@ -139,6 +139,7 @@ class UsersController < ApplicationController
   end
 
   def pw_reset_request
+    
   end
 
   def pwreset
@@ -258,15 +259,14 @@ class UsersController < ApplicationController
   end
 
   def logout
-    #use ajax to update user bar
-
-    @user=User.find(session[:user_id])
+   
+     @user=User.find(session[:user_id])  if session[:user_id]
      reset_session
-
+if @user
      #authenticate with cookie
-     @user.update_attributes({:preference=>"0"})
+     @user.update_attribute("preference","0")
      cookies.permanent.signed[:remember_me] = [@user.id, @user.salt,0]
-
+end
     respond_to do |format|
       format.html { redirect_to("/") }
     end

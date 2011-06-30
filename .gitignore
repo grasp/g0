@@ -6,5 +6,5 @@ tmp/**/*
 thin
 public/*.html
 *.html
-vendor
+vendor/*.zip
 /nbproject/private/

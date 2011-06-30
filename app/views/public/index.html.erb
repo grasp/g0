@@ -1,6 +1,0 @@
-
-
- <% cache(:controller=>"public",:action=>"index", :layout=>nil,:action_suffix =>"public_cargo#{params[:page]}") do %>
-<% @cargos=Cargo.where(:status=>"正在配车").order(:created_at.desc).paginate(:page=>params[:page]||1,:per_page=>20)%>
-<%= render '/cargos/cargolist' %>
-<%end%>

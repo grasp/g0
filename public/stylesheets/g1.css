@@ -233,6 +233,7 @@ margin-top:20px;margin-left: auto; margin-right: auto; text-align:center
     margin-left:10px;
     border: 1px solid;
     border-color:hsl(218, 100%, 88%);
+    text-align: left;
 }
 
 .company_new,.user_contact_new{text-align: left;}

@@ -300,22 +300,40 @@ class TrucksController < ApplicationController
     end
   end
   def confirm_chenjiao
+    
+     @user=User.find(session[:user_id])
      @truck = Truck.find(params[:id])
      
-    #find quote or inquery
+    
+    #all other truck with same paizhao , need expire also
+   Truck.where(:paizhao=>@truck.paizhao).each do |truck|
+      truck.update_attribute("status","已成交")
+    end
+    
+    Quote.where(:truck_id=>@truck.id).each do |quote|
+      quote.update_attribute("status","成交过期")
+    end
+    Inquery.where(:truck_id=>@truck.id).each do |inquery|
+      inquery.update_attribute("status","成交过期")
+    end
+    
     @quote=Quote.where(:truck_id=>@truck.id,:status=>"请求成交").first #should be only one
     @inquery=Inquery.where(:truck_id=>@truck.id , status=>"请求成交").first#should be only one
-
-  
-    #change truck status to 已成交
-    @truck.update_attributes(:status=>"已成交")
-    @quote.update_attributes(:status=>"已成交") unless @quote.blank?
-    @inquery.update_attributes(:status=>"已成交") unless @inquery.blank?
+    @quote.update_attribute("status","已成交") unless @quote.blank?
+    @inquery.update_attribute("status","已成交") unless @inquery.blank?
 
     #need update statistics
-
-         respond_to do |format|
-        format.html { redirect_to(:controller=>"trucks",:action=>"index" )}
+    @ustatistic=Ustatistic.where(:user_id=>@user.id).first
+    @ustatistic.inc(:valid_truck,-1)
+    @ustatistic.inc(:total_truck,-1)
+    
+    
+    #change stocktruck to idle
+    @stock_truck=StockTruck.where(:paizhao=>@truck.paizhao).first
+    @stock_truck.update_attribute("status","车辆闲置")
+    
+     respond_to do |format|
+      format.html { redirect_to(:controller=>"trucks",:action=>"index" )}
     end
 
 

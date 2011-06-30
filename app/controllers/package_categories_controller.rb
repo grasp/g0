@@ -6,7 +6,6 @@ class PackageCategoriesController < ApplicationController
   
   def index
     @package_categories = PackageCategory.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @package_categories }

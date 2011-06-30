@@ -48,7 +48,7 @@
 
             <%if record.truck_user_id.to_s==session[:user_id].to_s && record.cargo_user_id.to_s!=session[:user_id].to_s%>
               <%if cargo.status=="正在成交" && @truck.status=="正在成交" && @truck.cj_cargo_id.to_s==cargo.id.to_s%>
-                <a class="confirm_chenjiao" href="quotes/confirm_chenjiao/<%=record.id%>">确认成交</a>
+                <a class="confirm_chenjiao" href="/trucks/confirm_chenjiao/<%=record.truck_id%>">确认成交</a>
               <%else%>
                 <%=cargo.status%>
               <%end%>
@@ -115,7 +115,7 @@
           <td>
             <%if record.truck_user_id.to_s==session[:user_id].to_s && record.cargo_user_id.to_s!=session[:user_id].to_s%>
               <%if cargo.status=="正在成交" && @truck.status=="正在成交" && @truck.cj_cargo_id.to_s==cargo.id.to_s%>
-                <a class="confirm_chenjiao" href="quotes/confirm_chenjiao/<%=record.id%>">确认成交</a>
+                <a class="confirm_chenjiao" href="/trucks/confirm_chenjiao/<%=record.truck_id%>">确认成交</a>
               <%else%>
                 <%=cargo.status%>
               <%end%>

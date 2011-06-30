@@ -16,6 +16,9 @@ $(document).ready(function() {
 navi_js();
 line_search();
 float_load_layer1();
+
+request_chenjiao();
+confirm_chenjiao();
 //form_submit();
     $(".delete").live("click",function()
     {

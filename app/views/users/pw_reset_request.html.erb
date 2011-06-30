@@ -8,7 +8,7 @@ form_tag(url_for_options = {}, options = {}, *parameters_for_url, &block)
 <form class="show_form" action="/users/pw_sent_confirm">
   <div class="field">
     <label for="email">你的邮箱:</label>
-    <input id="email" name="email" type="text" />
+    <input id="email" name="email" type="text" value="" />
   </div>
   <div class="actions">
     <input type="submit" class="submit_button_pw_reset " value="确认"  />
@@ -19,6 +19,6 @@ form_tag(url_for_options = {}, options = {}, *parameters_for_url, &block)
   </p>
 </form>
 
-<div>请到你的Email邮箱接收邮件，点击邮件里面的密码重置链接，然后可重置密码</div>
+<div>点击确认后,请到你的Email邮箱接收邮件，点击密码重置链接，然后可重置密码</div>
 
 </div>

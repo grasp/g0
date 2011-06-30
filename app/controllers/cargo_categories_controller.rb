@@ -14,9 +14,7 @@ class CargoCategoriesController < ApplicationController
   # GET /cargo_categories/1
   # GET /cargo_categories/1.xml
   def show
-   # @cargo_category = CargoCategory.find_by_code(params[:code])
     code=params[:code]
-   # puts code
      if (code.match(/\d\d0000/))
            @cargo_category_two=$catetree[code]
      elsif(code.match(/\d\d\d\d00/))

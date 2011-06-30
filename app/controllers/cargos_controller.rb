@@ -6,8 +6,9 @@ class CargosController < ApplicationController
   # GET /cargos.xml
   include CargosHelper
    before_filter:authorize, :except => [:search,:show]
-   before_filter:authorize_public, :only => [:search]
+  # before_filter:authorize_public, :only => [:search]
  # caches_page :search,:show
+ 
    protect_from_forgery :except => [:tip,:login]
    layout 'public' ,:except => [:show,:search]
 
@@ -19,9 +20,7 @@ class CargosController < ApplicationController
     else
       @cargos=nil
     end
-
     # if this is line search
-
     #render view here
     respond_to do |format|
       format.html # show.html.erb
@@ -76,7 +75,6 @@ class CargosController < ApplicationController
   end
   
   def index
-
 
     unless params[:stock_cargo_id].blank?
        @cargos=Cargo.where({:user_id =>session[:user_id], :stock_cargo_id =>params[:stock_cargo_id]}).desc(:created_at).paginate(:page=>params[:page]||1,:per_page=>20)

@@ -8,7 +8,7 @@ function request_chenjiao(){
         var answer=confirm("注意:该条货源将改为已成交状态,成交的货源和车源不能再接收新报价，请确保你已经联系并核实过该条车源,对方同意成交后再点击OK .确认请点击OK,取消请点Cancel"); 
         if(answer)
          { 
-            $('#show').load(this.href); 
+           // $('#show').load(this.href); 
             $('#float_load').empty();
             $('#float_show').css("display","none");
             $('tr').css("background-color","white");             
@@ -28,16 +28,16 @@ function confirm_chenjiao(){
         var answer=confirm("确认成交表示你和货主已经成功协商,货主或将可以评价你提供的服务"); 
         if(answer)
          { 
-              $('#show').load(this.href); 
+            //  $('#show').load(this.href); 
               $('#float_load').empty();
               $('#float_show').css("display","none");              
          }
     
-            if($.browser.msie) {
-            event.returnValue = false;
-            event.preventDefault();
-            return false;
-        }
+           // if($.browser.msie) {
+           // event.returnValue = false;
+           // event.preventDefault();
+           // return false;
+       // }
         else   return false;
                 
     });
