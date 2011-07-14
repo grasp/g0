@@ -160,7 +160,10 @@ G0::Application.routes.draw do
 
   match '/cities/:dir(/:code)'=>'cities#index',:as=>:citiesindex
   resources :cities
-
+  
+  match 'users/contact' =>'users#contact',:as=>:userscontact
+  match 'users/about' =>'users#about',:as=>:usersabout
+  match 'users/mianze' =>'users#mianze',:as=>:usersmianze
   match 'users/login' =>'users#login',:as=>:userslogin
   match 'users/logout' =>'users#logout',:as=>:userslogout
   match 'users/pwreset' =>'users#pwreset',:as=>:userspwreset

@@ -40,7 +40,7 @@ class StockTrucksController < ApplicationController
     end
   end
 
-    def oper
+  def oper
     @stock_truck_id =params[:id]
      respond_to do |format|
       format.html # oper.html.erb
@@ -50,8 +50,7 @@ class StockTrucksController < ApplicationController
 
   # GET /stock_trucks/1/edit
   def edit
-    @stock_truck = StockTruck.find(params[:id])
-    
+    @stock_truck = StockTruck.find(params[:id])    
   end
 
   # POST /stock_trucks

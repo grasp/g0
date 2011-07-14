@@ -4,10 +4,11 @@ class CargosController < ApplicationController
   # include Soku
   # GET /cargos
   # GET /cargos.xml
-  include CargosHelper
+   include CargosHelper
    before_filter:authorize, :except => [:search,:show]
   # before_filter:authorize_public, :only => [:search]
  # caches_page :search,:show
+  caches_page :show
  
    protect_from_forgery :except => [:tip,:login]
    layout 'public' ,:except => [:show,:search]
@@ -54,8 +55,9 @@ class CargosController < ApplicationController
 
     #puts "@search.fcity_code=#{@search.fcity_code},@search.tcity_code=#{@search.tcity_code}";
     @line=@search.fcity_code+"#"+@search.tcity_code
-  #  @action_suffix="#{@line}#{params[:page]}"        
+   #  @action_suffix="#{@line}#{params[:page]}"        
     @search.save
+    #add search times
     
     respond_to do |format|
     if params[:layout]     

@@ -9,6 +9,7 @@ class TrucksController < ApplicationController
   protect_from_forgery :except => [:tip,:login]
   # layout "public"
  # caches_page :search,:show
+   caches_page :show
    layout 'public' ,:except => [:show,:search]
 
   def public
@@ -18,8 +19,6 @@ class TrucksController < ApplicationController
 
   def index
     unless params[:id].nil?
-     # @stock_truck=StockTruck.find(params[:id])
-     # @stock_truck=StockTruck.find(params[:id])
      @stock_truck=StockTruck.find(params[:id])
     end
     unless @stock_truck.nil?
@@ -49,7 +48,7 @@ class TrucksController < ApplicationController
     @baojia=Quote.where(:truck_id =>BSON::ObjectId(params[:truck_id]), :user_id =>session[:user_id])
     @xunjia=Inquery.where(:truck_id => BSON::ObjectId(params[:truck_id]))
 
-    logger.info "@xunjia.size=#{@xunjia.size}"
+  #  logger.info "@xunjia.size=#{@xunjia.size}"
   end
   
   def search

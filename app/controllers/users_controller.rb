@@ -271,6 +271,18 @@ end
       format.html { redirect_to("/") }
     end
   end
+  
+  def mianze
+    
+  end
+  
+  def contact
+    
+  end
+  
+  def about
+    
+  end
 
 end
 

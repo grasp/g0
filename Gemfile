@@ -11,6 +11,9 @@ gem "mechanize"
 #gem 'will_paginate',:git => 'http://github.com/mislav/will_paginate.git',:branch=>'rails3'
 gem "will_paginate", "~> 3.0.pre2"
 
+gem 'redis', '2.2.1'
+gem 'redis-store', '1.0.0.rc1'
+
 #gem 'unicorn'
 gem "mongoid", "2.0.1"
 
